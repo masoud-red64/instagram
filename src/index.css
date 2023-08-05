@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .hover-item {
+    @apply bg-black/5 dark:bg-white/10 rounded-lg transition-all;
+  }
+}
