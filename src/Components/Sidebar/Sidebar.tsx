@@ -48,7 +48,7 @@ function Sidebar() {
       <ul className="flex flex-row md:flex-col justify-evenly md:justify-normal child:leading-5 child:p-3 md:child:my-1 child-hover:hover-item">
         {/* Home */}
         <li className="inline-block xl:block font-[700] group">
-          <a href="#" className="inline-flex gap-x-4">
+          <a href="#" className="inline-flex gap-x-4 p-3 -m-3">
             <svg className="hidden w-6 h-6 group-hover:scale-105 transition-all">
               <use href="#home"></use>
             </svg>
@@ -69,18 +69,18 @@ function Sidebar() {
         {/* Search */}
         <li className="hidden md:inline-block xl:block group">
           <button
-            className="flex gap-x-4"
+            className={`flex gap-x-4 p-3 -m-3 ${
+              slideShowSelector.isShowSearch && "border rounded-lg"
+            }`}
             onClick={() => {
               dispatch(toggleSearchSlideShow());
               dispatch(hideNotificationSlideShow());
             }}
           >
             {slideShowSelector.isShowSearch ? (
-              <span className="block p-3 -m-3 border rounded-lg">
-                <svg className="w-6 h-6 group-hover:scale-105 transition-all">
-                  <use href="#search-active"></use>
-                </svg>
-              </span>
+              <svg className="w-6 h-6 group-hover:scale-105 transition-all">
+                <use href="#search-active"></use>
+              </svg>
             ) : (
               <svg className="w-6 h-6 group-hover:scale-105 transition-all">
                 <use href="#search"></use>
@@ -100,7 +100,7 @@ function Sidebar() {
         </li>
         {/* Explore */}
         <li className="inline-block xl:block group">
-          <a href="#" className="inline-flex gap-x-4">
+          <a href="#" className="inline-flex gap-x-4 p-3 -m-3">
             <svg className="w-6 h-6 group-hover:scale-105 transition-all">
               <use href="#explore"></use>
             </svg>
@@ -120,7 +120,7 @@ function Sidebar() {
         </li>
         {/* Reels */}
         <li className="inline-block xl:block group">
-          <a href="#" className="inline-flex gap-x-4">
+          <a href="#" className="inline-flex gap-x-4 p-3 -m-3">
             <svg className="w-6 h-6 group-hover:scale-105 transition-all">
               <use href="#reels"></use>
             </svg>
@@ -140,7 +140,7 @@ function Sidebar() {
         </li>
         {/* Messages */}
         <li className="inline-block xl:block group order-7 md:order-none">
-          <a href="#" className="inline-flex gap-x-4">
+          <a href="#" className="inline-flex gap-x-4 p-3 -m-3">
             <svg className="w-6 h-6 group-hover:scale-105 transition-all">
               <use href="#messages"></use>
             </svg>
@@ -161,18 +161,18 @@ function Sidebar() {
         {/* Notifications */}
         <li className="hidden md:inline-block xl:block group">
           <button
-            className="flex gap-x-4"
+            className={`flex gap-x-4 p-3 -m-3 ${
+              slideShowSelector.isShowNotif && "border rounded-lg"
+            }`}
             onClick={() => {
               dispatch(toggleNotificationSlideShow());
               dispatch(hideSearchSlideShow());
             }}
           >
             {slideShowSelector.isShowNotif ? (
-              <span className="block p-3 -m-3 border rounded-lg">
-                <svg className="w-6 h-6 group-hover:scale-105 transition-all">
-                  <use href="#notifications-active"></use>
-                </svg>
-              </span>
+              <svg className="w-6 h-6 group-hover:scale-105 transition-all">
+                <use href="#notifications-active"></use>
+              </svg>
             ) : (
               <svg className="w-6 h-6 group-hover:scale-105 transition-all">
                 <use href="#notifications"></use>
@@ -191,7 +191,7 @@ function Sidebar() {
         </li>
         {/* Creates */}
         <li className="inline-block xl:block group order-5 md:order-none">
-          <button className="flex gap-x-4">
+          <button className="flex gap-x-4 p-3 -m-3">
             <svg className="w-6 h-6 group-hover:scale-105 transition-all">
               <use href="#create"></use>
             </svg>
@@ -211,7 +211,7 @@ function Sidebar() {
         </li>
         {/* Profile */}
         <li className="inline-block xl:block shrink-0 group order-last md:order-none">
-          <a href="#" className="inline-flex gap-x-4">
+          <a href="#" className="inline-flex gap-x-4 p-3 -m-3">
             <img
               src="/images/users/user1.jpg"
               alt=""
@@ -231,7 +231,7 @@ function Sidebar() {
       </ul>
       {/* More */}
       <div className="hidden md:block mt-auto leading-5 p-3 mb-1 hover:bg-black/5 hover:rounded-lg transition-all">
-        <button className="flex gap-x-4 group">
+        <button className="flex gap-x-4 group p-3 -m-3">
           <svg className="w-6 h-6 group-hover:scale-105 transition-all">
             <use href="#more"></use>
           </svg>

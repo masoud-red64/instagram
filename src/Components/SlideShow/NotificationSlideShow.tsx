@@ -19,7 +19,7 @@ function NotificationSlideShow() {
   return (
     <div
       className={`hidden md:block fixed ${
-        SlideShowSelector.isShowNotif ? "left-[72px]" : "-left-[325px]"
+        SlideShowSelector.isShowNotif ? "left-[72px]" : "-left-[400px]"
       } transition-all duration-500 delay-100 top-0 bottom-0 w-[397px] min-h-screen bg-red-300 ${
         isVisible ? "z-0" : "z-30"
       }`}
