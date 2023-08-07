@@ -6,11 +6,13 @@ import {
   toggleNotificationSlideShow,
   toggleSearchSlideShow,
 } from "../../store/slideShowSlice";
-import { slideShowSliceTypes } from "../../store/types/slideShowSlice.types";
+import { RootState } from "../../store/store";
 
 function Sidebar() {
   const dispatch = useDispatch();
-  const slideShowSelector = useSelector((state: slideShowSliceTypes) => state);
+  const slideShowSelector = useSelector(
+    (state: RootState) => state.slideShowReducer
+  );
 
   return (
     <div

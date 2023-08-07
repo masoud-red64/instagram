@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { slideShowSliceTypes } from "../../store/types/slideShowSlice.types";
 import SearchInput from "../SearchInput/SearchInput";
-import Story from "../Story/Story";
 import TransparentOverlay from "../TransparentOverlay/TransparentOverlay";
 import SearchBox from "../SearchBox/SearchBox";
+import { RootState } from "../../store/store";
 
 function SearchSlideShow() {
-  const SlideShowSelector = useSelector((state: slideShowSliceTypes) => state);
+  const SlideShowSelector = useSelector(
+    (state: RootState) => state.slideShowReducer
+  );
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

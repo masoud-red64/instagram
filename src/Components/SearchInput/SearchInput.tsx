@@ -1,8 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setInputValue } from "../../store/searchInputValueSlice";
 
 function SearchInput() {
   const [isFocus, setIsFocus] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <div className="h-9 min-w-[268px] flex items-center justify-center gap-x-3 bg-[#efefef] dark:bg-[#262626] rounded-lg px-2 sm:px-4">
@@ -19,6 +22,9 @@ function SearchInput() {
         placeholder="Search"
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
+        onChange={(e) => {
+          dispatch(setInputValue(e.target.value));
+        }}
       />
       {/* Close Search Icon */}
       {isFocus && (
