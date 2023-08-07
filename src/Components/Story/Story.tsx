@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type StoryProps = {
   img: string;
@@ -7,15 +8,25 @@ type StoryProps = {
 };
 
 const Story = ({ img, hasStory, hasNewStory }: StoryProps) => {
+  const [isShowLoading, setIsShowLoading] = useState(false);
+
+  const navigate = useNavigate();
+
   return (
-    <a
-      href="#"
+    <button
       className="w-full h-full relative flex items-center justify-center"
+      onClick={() => {
+        setIsShowLoading(true);
+        setTimeout(() => {
+          setIsShowLoading(false);
+          navigate("/");
+        }, 4500);
+      }}
     >
       <img className="w-3/4 rounded-full" src={`images/users/${img}`} alt="" />
       {hasStory && (
         <svg
-          className="absolute animate-loading-story"
+          className={`absolute ${isShowLoading && "animate-loading-story"}`}
           viewBox="0 0 100 100"
           fill="none"
           stroke={`url(#${hasNewStory ? "gradient1" : "gradient2"})`}
@@ -52,7 +63,7 @@ const Story = ({ img, hasStory, hasNewStory }: StoryProps) => {
           <circle cx={50} cy={50} r={40} />
         </svg>
       )}
-    </a>
+    </button>
   );
 };
 

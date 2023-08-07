@@ -6,4 +6,24 @@
   .hover-item {
     @apply bg-black/5 dark:bg-white/10 rounded-lg transition-all;
   }
+
+  .scrollbar::-webkit-scrollbar {
+    width: 18px;
+    height: 18px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    @apply bg-white dark:bg-[#424242] rounded-lg;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-[#c1c1c1] dark:bg-[#7b7b7b] rounded-lg;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-[#aaaaaa] dark:bg-[#9c9b9b];
+  }
+  .scrollbar::-webkit-scrollbar-thumb:active {
+    @apply bg-[#7c7c7c] dark:bg-[#adadad];
+  }
 }

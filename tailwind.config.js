@@ -18,6 +18,9 @@ export default {
       },
       keyframes: {
         "loading-story": {
+          "10%": {
+            "stroke-dasharray": "5",
+          },
           "100%": {
             "stroke-dasharray": "10",
             transform: "rotate(250deg)",

@@ -5,7 +5,7 @@ function SearchInput() {
   const [isFocus, setIsFocus] = useState(false);
 
   return (
-    <div className="h-9 w-[268px] flex items-center justify-center gap-x-3 bg-[#efefef] dark:bg-[#262626] rounded-lg px-2 sm:px-4">
+    <div className="h-9 min-w-[268px] flex items-center justify-center gap-x-3 bg-[#efefef] dark:bg-[#262626] rounded-lg px-2 sm:px-4">
       {/* Search Icon */}
       {!isFocus && (
         <svg className="w-4 h-4 text-[#8e8e8e] dark:text-[#a8a8a8]">
