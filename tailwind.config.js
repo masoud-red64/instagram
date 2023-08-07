@@ -13,6 +13,17 @@ export default {
       backgroundImage: {
         icons: "url(images/bg-icons.png)",
       },
+      animation: {
+        "loading-story": "loading-story 3500ms ease-in-out alternate infinite",
+      },
+      keyframes: {
+        "loading-story": {
+          "100%": {
+            "stroke-dasharray": "10",
+            transform: "rotate(250deg)",
+          },
+        },
+      },
     },
   },
   darkMode: "class",
