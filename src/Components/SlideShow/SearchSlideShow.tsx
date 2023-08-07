@@ -23,9 +23,7 @@ function SearchSlideShow() {
       } transition-all duration-500 delay-100 top-0 bottom-0 w-[397px] min-h-screen bg-blue-200 ${
         isVisible ? "z-0" : "z-30"
       }`}
-    >
-      search
-    </div>
+    ></div>
   );
 }
 
