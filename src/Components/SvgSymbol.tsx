@@ -373,6 +373,37 @@ function SvgSymbol() {
       >
         <path d="M3.5 6.5h17a1.5 1.5 0 0 0 0-3h-17a1.5 1.5 0 0 0 0 3Zm17 4h-17a1.5 1.5 0 0 0 0 3h17a1.5 1.5 0 0 0 0-3Zm0 7h-17a1.5 1.5 0 0 0 0 3h17a1.5 1.5 0 0 0 0-3Z"></path>
       </symbol>
+      <symbol
+        id="close"
+        aria-label="Close"
+        className="x1lliihq x1n2onr6"
+        color="currentColor"
+        fill="currentColor"
+        height="16"
+        role="img"
+        viewBox="0 0 24 24"
+      >
+        <title>Close</title>
+        <polyline
+          fill="none"
+          points="20.643 3.357 12 12 3.353 20.647"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="3"
+        ></polyline>
+        <line
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="3"
+          x1="20.649"
+          x2="3.354"
+          y1="20.649"
+          y2="3.354"
+        ></line>
+      </symbol>
     </svg>
   );
 }
