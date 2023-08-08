@@ -44,8 +44,7 @@ function SearchSlideShow() {
       </div>
 
       {/* Overlay */}
-      {slideShowSelector.isShowNotif ||
-        (slideShowSelector.isShowSearch && <TransparentOverlay />)}
+      {(slideShowSelector.isShowSearch && <TransparentOverlay />)}
     </>
   );
 }

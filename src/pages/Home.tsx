@@ -3,7 +3,6 @@ import SearchInput from "../Components/SearchInput/SearchInput";
 import SearchBox from "../Components/SearchBox/SearchBox";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import TransparentOverlay from "../Components/TransparentOverlay/TransparentOverlay";
 
 function Home() {
   const serachBoxSelector = useSelector(
@@ -39,9 +38,6 @@ function Home() {
           </a>
         </div>
       </header>
-
-      {/* Overlay */}
-      {serachBoxSelector.isShow && <TransparentOverlay />}
     </div>
   );
 }
