@@ -1,14 +1,13 @@
-import { current } from "@reduxjs/toolkit";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-type StoryProps = {
+type StoryPropsTypes = {
   img: string;
   hasNewStory?: boolean;
   hasStory: boolean;
 };
 
-const Story = ({ img, hasStory, hasNewStory }: StoryProps) => {
+const Story = ({ img, hasStory, hasNewStory }: StoryPropsTypes) => {
   const [isShowLoading, setIsShowLoading] = useState(false);
 
   const navigate = useNavigate();
