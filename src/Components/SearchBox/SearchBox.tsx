@@ -14,10 +14,9 @@ type itemListTypes = {
 };
 
 function SearchBox() {
-  //   const [fillteredItems, setFilteredItems] = useState<itemListTypes[] | null>(
-  //     []
-  //   );
-  const [sortedItems, setSortedItems] = useState<itemListTypes[] | null>([]);
+  const [fillteredItems, setFilteredItems] = useState<itemListTypes[] | null>(
+    []
+  );
 
   const searchInputValueSelector = useSelector(
     (state: RootState) => state.searchInputValueReducer
@@ -81,51 +80,79 @@ function SearchBox() {
       name: " فروشگاه آنلاین کتاب ",
     },
     {
-      id: 8,
+      id: 9,
       img: "user8.jpg",
       hasStory: true,
       hasNewStory: true,
       username: "mobonews",
       name: "Mobonews | موبونیوز ",
     },
+    {
+      id: 10,
+      img: "user8.jpg",
+      hasStory: true,
+      hasNewStory: true,
+      username: "mas.oud",
+      name: "Mobonews | موبونیوز ",
+    },
+    {
+      id: 11,
+      img: "user8.jpg",
+      hasStory: true,
+      hasNewStory: true,
+      username: "masoudr3423",
+      name: "Mobonews | موبونیوز ",
+    },
+    {
+      id: 12,
+      img: "user8.jpg",
+      hasStory: true,
+      hasNewStory: true,
+      username: "mohammad",
+      name: "Mobonews | موبونیوز ",
+    },
   ];
 
   useEffect(() => {
-    // const filtered = itemsList.filter(
-    //   (item) =>
-    //     item.name
-    //       .toLowerCase()
-    //       .includes(searchInputValueSelector.inputValue.toLowerCase()) ||
-    //     item.username
-    //       .toLowerCase()
-    //       .includes(searchInputValueSelector.inputValue.toLowerCase())
-    // );
+    const filtered = itemsList.filter((item) => {
+      const searchValue = searchInputValueSelector.inputValue.toLowerCase();
+      const itemValues = (item.name + item.username).toLowerCase();
 
-    // setFilteredItems(filtered);
-
-    // Another Feature Search
-    const searchValue = searchInputValueSelector.inputValue.toLowerCase();
-
-    // Reorder the items based on search value
-    const sortedItemsList = [...itemsList].sort((a, b) => {
-      const aMatch =
-        a.username.toLowerCase().includes(searchValue) ||
-        a.name.toLowerCase().includes(searchValue);
-
-      const bMatch =
-        b.username.toLowerCase().includes(searchValue) ||
-        b.name.toLowerCase().includes(searchValue);
-
-      if (aMatch && !bMatch) {
-        return -1;
-      } else if (!aMatch && bMatch) {
-        return 1;
-      } else {
-        return 0;
+      // Check if each character in the searchValue is present in the itemValues
+      for (const char of searchValue) {
+        if (!itemValues.includes(char)) {
+          return false; // If any character is not found, exclude the item
+        }
+        itemValues.replace(char, ""); // Remove the character to avoid duplicate matches
       }
+
+      return true; // If all characters are found, include the item
     });
 
-    setSortedItems(sortedItemsList);
+    setFilteredItems(filtered);
+
+    // Another Feature Search
+    // const searchValue = searchInputValueSelector.inputValue.toLowerCase();
+
+    // Reorder the items based on search value
+    // const sortedItemsList = [...itemsList].sort((a, b) => {
+    //   const aMatch =
+    //     a.username.toLowerCase().includes(searchValue) ||
+    //     a.name.toLowerCase().includes(searchValue);
+
+    //   const bMatch =
+    //     b.username.toLowerCase().includes(searchValue) ||
+    //     b.name.toLowerCase().includes(searchValue);
+
+    //   if (aMatch && !bMatch) {
+    //     return -1;
+    //   } else if (!aMatch && bMatch) {
+    //     return 1;
+    //   } else {
+    //     return 0;
+    //   }
+    // });
+    // setSortedItems(filtered);
   }, [searchInputValueSelector]);
 
   return (
@@ -140,7 +167,7 @@ function SearchBox() {
 
       {/* Content */}
       <ul className="my-2">
-        {sortedItems?.map((item) => (
+        {fillteredItems?.map((item) => (
           <li key={item.id} className="hover:hover-item transition-colors">
             <div className="flex items-center justify-between px-6 py-2">
               <button className="flex items-center gap-x-3">
