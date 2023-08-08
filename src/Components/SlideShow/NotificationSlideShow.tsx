@@ -12,6 +12,7 @@ function NotificationSlideShow() {
 
   const [isFollow1, setIsFollow1] = useState(false);
   const [isFollow2, setIsFollow2] = useState(true);
+  const [isFollow3, setIsFollow3] = useState(true);
 
   useEffect(() => {
     if (slideShowSelector.isShowNotif) {
@@ -58,6 +59,30 @@ function NotificationSlideShow() {
             </svg>
           </div>
         </button>
+
+        {/* New */}
+        <div className="pb-2 border-b-2 border-[#dbdbdb] dark:border-[#262626]">
+          <h4 className="notification-section-title">امروز</h4>
+          <div>
+            <button className="w-full flex items-center justify-between py-2 px-6">
+              <div className="flex items-center gap-x-[14px]">
+                <div className="w-11 h-11">
+                  <Story img="user15.jpg" hasStory={true} hasNewStory />
+                </div>
+                <span className="w-40 text-sm text-left dark:text-gray-100 dir-rtl line-clamp-3">
+                  <span className="font-[600]">j_zare12</span> شما را دنبال کرد.{" "}
+                  <span className="text-gray-500 dark:text-[#a8a8a8]">39m</span>
+                </span>
+              </div>
+              <button
+                className={`${isFollow3 ? "secondary-btn " : "primary-btn"}  `}
+                onClick={() => setIsFollow3(!isFollow3)}
+              >
+                {isFollow3 ? "Following" : "Follow"}
+              </button>
+            </button>
+          </div>
+        </div>
 
         {/* This Week */}
         <div className="pb-2 border-b-2 border-[#dbdbdb] dark:border-[#262626]">
