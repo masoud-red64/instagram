@@ -111,6 +111,14 @@ function SearchBox() {
       username: "mohammad",
       name: "Mobonews | موبونیوز ",
     },
+    {
+      id: 13,
+      img: "user8.jpg",
+      hasStory: true,
+      hasNewStory: true,
+      username: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      name: "Mobonews | موبونیوز ",
+    },
   ];
 
   useEffect(() => {
@@ -118,15 +126,24 @@ function SearchBox() {
       const searchValue = searchInputValueSelector.inputValue.toLowerCase();
       const itemValues = (item.name + item.username).toLowerCase();
 
-      // Check if each character in the searchValue is present in the itemValues
-      for (const char of searchValue) {
-        if (!itemValues.includes(char)) {
-          return false; // If any character is not found, exclude the item
-        }
-        itemValues.replace(char, ""); // Remove the character to avoid duplicate matches
+      let searchIndex = 0; // Index to track the current character in the searchValue
+
+      //Show all users when search input is empty
+      if (searchValue === "") {
+        return true;
       }
 
-      return true; // If all characters are found, include the item
+      // Loop through each character in the itemValues
+      for (const char of itemValues) {
+        if (char === searchValue[searchIndex]) {
+          searchIndex++; // Move to the next character in searchValue
+          if (searchIndex === searchValue.length) {
+            return true; // Found consecutive letters, include the item
+          }
+        }
+      }
+
+      return false; // Consecutive letters not found, exclude the item
     });
 
     setFilteredItems(filtered);
@@ -153,7 +170,7 @@ function SearchBox() {
     //   }
     // });
     // setSortedItems(filtered);
-  }, [searchInputValueSelector]);
+  }, [searchInputValueSelector.inputValue]);
 
   return (
     <div className="h-3/4 mt-3 overflow-auto scrollbar">
