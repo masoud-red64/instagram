@@ -38,7 +38,7 @@ function Sidebar() {
             slideShowSelector.isShowNotif || slideShowSelector.isShowSearch
               ? "inline-block"
               : "inline-block xl:hidden"
-          } hover:hover-item p-3 -m-3`}
+          } hover:hover-item rounded-lg p-3 -m-3`}
         >
           <svg className="w-6 h-6 group-hover:scale-105 transition-all">
             <use xlinkHref="#logo"></use>
@@ -47,7 +47,7 @@ function Sidebar() {
       </button>
 
       {/* Menu */}
-      <ul className="flex flex-row md:flex-col justify-evenly md:justify-normal child:leading-5 child:p-3 md:child:my-1 child-hover:hover-item">
+      <ul className="flex flex-row md:flex-col justify-evenly md:justify-normal child:leading-5 child:p-3 md:child:my-1 child-hover:hover-item child:rounded-lg ">
         {/* Home */}
         <li className="inline-block xl:block font-[700] group">
           <a href="#" className="inline-flex gap-x-4 p-3 -m-3">

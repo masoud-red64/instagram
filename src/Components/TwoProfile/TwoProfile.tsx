@@ -3,7 +3,7 @@ import Story from "../Story/Story";
 
 function TwoProfile({ img1, img2 }: { img1: string; img2: string }) {
   return (
-    <div className="relative w-11 h-11">
+    <div className="relative w-12 h-12">
       <div className="absolute bottom-0 right-0 w-9 h-9 border-2 border-white rounded-full z-[1]">
         <Story img={img1} hasStory={false} />
       </div>
