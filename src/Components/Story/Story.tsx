@@ -1,3 +1,4 @@
+import { current } from "@reduxjs/toolkit";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -23,7 +24,7 @@ const Story = ({ img, hasStory, hasNewStory }: StoryProps) => {
         }, 4500);
       }}
     >
-      <img className="w-3/4 rounded-full" src={`images/users/${img}`} alt="" />
+      <img className="w-full rounded-full" src={`images/users/${img}`} alt="" />
       {hasStory && (
         <svg
           className={`absolute ${isShowLoading && "animate-loading-story"}`}
@@ -60,7 +61,7 @@ const Story = ({ img, hasStory, hasNewStory }: StoryProps) => {
               </linearGradient>
             )}
           </defs>
-          <circle cx={50} cy={50} r={40} />
+          <circle cx={50} cy={50} r={47.8} />
         </svg>
       )}
     </button>
