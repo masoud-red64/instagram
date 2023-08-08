@@ -13,7 +13,7 @@ type itemListTypes = {
   name: string;
 };
 
-function SearchBox() {
+function SearchBox({ className }: { className: string }) {
   const [fillteredItems, setFilteredItems] = useState<itemListTypes[] | null>(
     []
   );
@@ -185,7 +185,7 @@ function SearchBox() {
   }
 
   return (
-    <div className="h-3/4 mt-3 overflow-auto scrollbar">
+    <div className={`${className} pt-3 scrollbar`}>
       {/* Top */}
       <div className="flex justify-between items-center text-left font-[600] mt-1.5 mb-2 mx-6 pt-1">
         <span className="text-black dark:text-neutral-100">Recent</span>
@@ -212,7 +212,7 @@ function SearchBox() {
                 </div>
 
                 <a href="#" className="block text-sm text-left">
-                  <span className="text-black dark:text-neutral-100 line-clamp-1">
+                  <span className="text-black dark:text-neutral-100 line-clamp-1 break-words w-28">
                     {item.username}
                   </span>
                   <span className="text-[#737373] line-clamp-1">

@@ -40,11 +40,12 @@ function SearchSlideShow() {
           </div>
         </div>
         {/* Body */}
-        <SearchBox />
+        <SearchBox className={"h-[77%] overflow-auto"} />
       </div>
 
       {/* Overlay */}
-      <TransparentOverlay />
+      {SlideShowSelector.isShowNotif ||
+        (SlideShowSelector.isShowSearch && <TransparentOverlay />)}
     </>
   );
 }

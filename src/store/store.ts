@@ -2,11 +2,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import slideShowReducer from "./slideShowSlice";
 import searchInputValueReducer from "./searchInputValueSlice";
+import searchBoxReducer from './searchBoxSlice'
 
 export const store = configureStore({
     reducer: {
-         slideShowReducer,
-         searchInputValueReducer,
+        slideShowReducer,
+        searchInputValueReducer,
+        searchBoxReducer
     },
 });
 

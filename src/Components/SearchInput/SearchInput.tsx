@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setInputValue } from "../../store/searchInputValueSlice";
 import { RootState } from "../../store/store";
+import { hideSearchBox, showSearchBox } from "../../store/searchBoxSlice";
 
 function SearchInput() {
   const [isFocus, setIsFocus] = useState(false);
@@ -25,7 +26,10 @@ function SearchInput() {
         className="w-full h-full dark:text-[#a8a8a8] font-[300] bg-transparent outline-none border-none placeholder-[#a8a8a8]"
         placeholder="Search"
         value={searchInputValueSelector.inputValue}
-        onFocus={() => setIsFocus(true)}
+        onFocus={() => {
+          setIsFocus(true);
+          dispatch(showSearchBox());
+        }}
         onBlur={() => {
           setTimeout(() => {
             setIsFocus(false);
@@ -40,7 +44,10 @@ function SearchInput() {
         <button
           className="w-5 h-5 bg-icons bg-no-repeat bg-[-320px_-333px]"
           aria-label="Close Searchbar"
-          onClick={() => dispatch(setInputValue(""))}
+          onClick={() => {
+            dispatch(setInputValue(""));
+            dispatch(hideSearchBox());
+          }}
         ></button>
       )}
     </div>

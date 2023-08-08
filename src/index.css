@@ -13,7 +13,7 @@
   }
 
   .scrollbar::-webkit-scrollbar-track {
-    @apply bg-white dark:bg-[#424242] rounded-lg;
+    @apply bg-[#f1f1f1] dark:bg-[#424242] rounded-lg mt-3;
   }
 
   .scrollbar::-webkit-scrollbar-thumb {
