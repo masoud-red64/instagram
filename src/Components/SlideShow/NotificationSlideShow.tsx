@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import NotificationBox from "../NotificationBox/NotificationBox";
 import TransparentOverlay from "../TransparentOverlay/TransparentOverlay";
+import FollowRequests from "../FollowRequests/FollowRequests";
+import { hideFollowRequestsInSlide } from "../../store/followRequestsSlice";
 
 function NotificationSlideShow() {
   const slideShowSelector = useSelector(
     (state: RootState) => state.slideShowReducer
   );
+
+  const followRequestsSelector = useSelector(
+    (state: RootState) => state.followRequestsReducer
+  );
+
   const [isVisible, setIsVisible] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (slideShowSelector.isShowNotif) {
@@ -29,12 +38,40 @@ function NotificationSlideShow() {
           isVisible ? "z-10" : "z-30"
         }`}
       >
-        {/* Header */}
-        <h2 className="text-black dark:text-neutral-100 text-2xl font-[700] pt-4 pb-2 pl-6">
-          Notifications
-        </h2>
-        {/* Body */}
-        <NotificationBox />
+        {followRequestsSelector.isShowFollowRequestsInSlide ? (
+          <>
+            {/* FollowRequests */}
+            <div className="h-[45px] flex items-center justify-between dark:text-gray-100 px-4">
+              <button
+                className="hover:bg-gray-100 transition-all rounded-full p-3"
+                onClick={() => {
+                  dispatch(hideFollowRequestsInSlide());
+                }}
+              >
+                <svg className="w-6 h-6 -rotate-90">
+                  <use href="#arrow-top"></use>
+                </svg>
+              </button>
+              <h3 className="font-[700] grow text-center dark:">
+                Follow requests
+              </h3>
+              <div className="w-1"></div>
+            </div>
+            <FollowRequests />
+          </>
+        ) : (
+          <>
+            {/* Notifications */}
+            <div>
+              {/* Header */}
+              <h2 className="text-black dark:text-neutral-100 text-2xl font-[700] pt-4 pb-2 pl-6">
+                Notifications
+              </h2>
+              {/* Body */}
+              <NotificationBox />
+            </div>
+          </>
+        )}
       </div>
 
       {/* Overlay */}

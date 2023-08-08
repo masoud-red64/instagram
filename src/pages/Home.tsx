@@ -3,6 +3,7 @@ import SearchInput from "../Components/SearchInput/SearchInput";
 import SearchBox from "../Components/SearchBox/SearchBox";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import { Link } from "react-router-dom";
 
 function Home() {
   const serachBoxSelector = useSelector(
@@ -31,11 +32,11 @@ function Home() {
             )}
           </div>
           {/* Notifications */}
-          <a href="#" title="notifications">
+          <Link to={"/notifications"} title="notifications">
             <svg className="w-6 h-6 text-black dark:text-white group-hover:scale-105 transition-all">
               <use href="#notifications"></use>
             </svg>
-          </a>
+          </Link>
         </div>
       </header>
     </div>

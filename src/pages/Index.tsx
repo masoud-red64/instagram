@@ -1,27 +1,14 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../Components/Sidebar/Sidebar";
-import SearchSlideShow from "../Components/SlideShow/SearchSlideShow";
-import NotificationSlideShow from "../Components/SlideShow/NotificationSlideShow";
-import { RootState } from "../store/store";
-import { useSelector } from "react-redux";
-import TransparentOverlay from "../Components/TransparentOverlay/TransparentOverlay";
-
 function Index() {
-  const serachBoxSelector = useSelector(
-    (state: RootState) => state.searchBoxReducer
-  );
   return (
-    <div>
+    <div className="flex">
       {/* Sidebar */}
       <div>
         <Sidebar />
       </div>
-      <div>
-        <SearchSlideShow />
-        <NotificationSlideShow />
-      </div>
-      <div>
+      <div className="flex-1">
         <Outlet />
       </div>
     </div>

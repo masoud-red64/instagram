@@ -3,18 +3,10 @@ import Story from "../Story/Story";
 import { RootState } from "../../store/store";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-
-type itemListTypes = {
-  id: number;
-  img: string;
-  hasStory: boolean;
-  hasNewStory: boolean;
-  username: string;
-  name: string;
-};
+import { userListTypes, usersList } from "../../Data/users";
 
 function SearchBox({ className }: { className: string }) {
-  const [fillteredItems, setFilteredItems] = useState<itemListTypes[] | null>(
+  const [fillteredItems, setFilteredItems] = useState<userListTypes[] | null>(
     []
   );
 
@@ -22,107 +14,8 @@ function SearchBox({ className }: { className: string }) {
     (state: RootState) => state.searchInputValueReducer
   );
 
-  const itemsList: itemListTypes[] = [
-    {
-      id: 1,
-      img: "user1.jpg",
-      hasStory: true,
-      hasNewStory: true,
-      username: "masoud_red64",
-      name: "Masoud",
-    },
-    {
-      id: 2,
-      img: "user2.jpg",
-      hasStory: false,
-      hasNewStory: false,
-      username: "m2.designing",
-      name: "M2 D E S I G N",
-    },
-    {
-      id: 3,
-      img: "user3.jpg",
-      hasStory: true,
-      hasNewStory: false,
-      username: "nikolausofpersia",
-      name: "Nikolaus",
-    },
-    {
-      id: 4,
-      img: "user4.jpg",
-      hasStory: true,
-      hasNewStory: false,
-      username: "bbcpersian",
-      name: "BBC NEWS فارسی 19.4M",
-    },
-    {
-      id: 5,
-      img: "user5.jpg",
-      hasStory: true,
-      hasNewStory: true,
-      username: " marzieh_d64",
-      name: "Marzieh",
-    },
-    {
-      id: 6,
-      img: "user6.jpg",
-      hasStory: true,
-      hasNewStory: true,
-      username: " arash_times",
-      name: "Arash",
-    },
-    {
-      id: 7,
-      img: "user7.jpg",
-      hasStory: false,
-      hasNewStory: false,
-      username: " ketab20.ir",
-      name: " فروشگاه آنلاین کتاب ",
-    },
-    {
-      id: 9,
-      img: "user8.jpg",
-      hasStory: true,
-      hasNewStory: true,
-      username: "mobonews",
-      name: "Mobonews | موبونیوز ",
-    },
-    {
-      id: 10,
-      img: "user8.jpg",
-      hasStory: true,
-      hasNewStory: true,
-      username: "mas.oud",
-      name: "Mobonews | موبونیوز ",
-    },
-    {
-      id: 11,
-      img: "user8.jpg",
-      hasStory: true,
-      hasNewStory: true,
-      username: "masoudr3423",
-      name: "Mobonews | موبونیوز ",
-    },
-    {
-      id: 12,
-      img: "user8.jpg",
-      hasStory: true,
-      hasNewStory: true,
-      username: "mohammad",
-      name: "Mobonews | موبونیوز ",
-    },
-    {
-      id: 13,
-      img: "user8.jpg",
-      hasStory: true,
-      hasNewStory: true,
-      username: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      name: "Mobonews | موبونیوز ",
-    },
-  ];
-
   useEffect(() => {
-    const filtered = itemsList.filter((item) => {
+    const filtered = usersList.filter((item) => {
       const searchValue = searchInputValueSelector.inputValue.toLowerCase();
       const itemValues = (item.name + item.username).toLowerCase();
 

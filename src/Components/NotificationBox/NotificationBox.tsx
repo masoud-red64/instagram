@@ -1,16 +1,29 @@
 import React, { useState } from "react";
 import Story from "../Story/Story";
 import TwoProfile from "../TwoProfile/TwoProfile";
+import { useDispatch } from "react-redux";
+import {
+  showFollowRequestsInPage,
+  showFollowRequestsInSlide,
+} from "../../store/followRequestsSlice";
 
 function NotificationBox() {
   const [isFollow1, setIsFollow1] = useState(false);
   const [isFollow2, setIsFollow2] = useState(true);
   const [isFollow3, setIsFollow3] = useState(true);
 
+  const dispatch = useDispatch();
+
   return (
-    <div className="max-w-[600px] mx-auto pb-12 mt-5 md:pb-0">
+    <div className="pb-12 mt-5 md:pb-0">
       {/* Top */}
-      <button className="w-full flex items-center justify-between px-6 pt-2 pb-5 border-b-2 border-[#dbdbdb] dark:border-[#262626] hover:bg-gray-100 dark:hover:bg-[#121212] transition-all">
+      <button
+        className="w-full flex items-center justify-between px-6 pt-2 pb-5 border-b-2 border-[#dbdbdb] dark:border-[#262626] hover:bg-gray-100 dark:hover:bg-[#121212] transition-all"
+        onClick={() => {
+          dispatch(showFollowRequestsInSlide());
+          dispatch(showFollowRequestsInPage());
+        }}
+      >
         <div className="flex items-center gap-x-[14px]">
           <TwoProfile img1="user1.jpg" img2="user3.jpg" />
           <div className="flex flex-col items-start">
