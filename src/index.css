@@ -4,12 +4,12 @@
 
 @layer utilities {
   .hover-item {
-    @apply bg-black/5 dark:bg-white/10 rounded-lg transition-all;
+    @apply bg-black/5 dark:bg-white/10 transition-all;
   }
 
   .scrollbar::-webkit-scrollbar {
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
   }
 
   .scrollbar::-webkit-scrollbar-track {
@@ -25,5 +25,27 @@
   }
   .scrollbar::-webkit-scrollbar-thumb:active {
     @apply bg-[#7c7c7c] dark:bg-[#adadad];
+  }
+
+  .dir-rtl {
+    direction: rtl;
+  }
+}
+
+@layer components {
+  .notification-section-title {
+    @apply font-[700] pt-[22px] pb-[18px] px-6;
+  }
+
+  .btn {
+    @apply h-8 text-sm/[18px] font-[600] px-5 border-none outline-none rounded-lg;
+  }
+
+  .primary-btn {
+    @apply btn  bg-[#0095f6] hover:bg-[#1877F2] transition-all;
+  }
+
+  .secondary-btn {
+    @apply btn bg-[#efefef] hover:bg-[#dbdbdb] transition-all;
   }
 }
