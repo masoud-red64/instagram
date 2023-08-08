@@ -172,12 +172,27 @@ function SearchBox() {
     // setSortedItems(filtered);
   }, [searchInputValueSelector.inputValue]);
 
+  function removeItem(itemID: number) {
+    setFilteredItems(
+      fillteredItems?.length
+        ? fillteredItems.filter((item) => item.id !== itemID)
+        : null
+    );
+  }
+
+  function clearAllItems() {
+    setFilteredItems([]);
+  }
+
   return (
     <div className="h-3/4 mt-3 overflow-auto scrollbar">
       {/* Top */}
       <div className="flex justify-between items-center text-left font-[600] mt-1.5 mb-2 mx-6 pt-1">
         <span className="text-black dark:text-neutral-100">Recent</span>
-        <button className="text-sm text-[#0095f6] hover:text-[#00376b] transition-colors">
+        <button
+          className="text-sm text-[#0095f6] hover:text-[#00376b] dark:hover:text-neutral-100 transition-colors"
+          onClick={clearAllItems}
+        >
           Clear all
         </button>
       </div>
@@ -205,7 +220,7 @@ function SearchBox() {
                   </span>
                 </a>
               </button>
-              <button>
+              <button onClick={() => removeItem(item.id)}>
                 <svg className="w-4 h-4 text-[#737373]">
                   <use href="#close"></use>
                 </svg>
