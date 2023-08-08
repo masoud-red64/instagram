@@ -6,26 +6,26 @@ import SearchBox from "../SearchBox/SearchBox";
 import { RootState } from "../../store/store";
 
 function SearchSlideShow() {
-  const SlideShowSelector = useSelector(
+  const slideShowSelector = useSelector(
     (state: RootState) => state.slideShowReducer
   );
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (SlideShowSelector.isShowSearch) {
+    if (slideShowSelector.isShowSearch) {
       setTimeout(() => {
         setIsVisible(true);
       }, 300); // Adjust the delay time as needed
     } else {
       setIsVisible(false);
     }
-  }, [SlideShowSelector.isShowSearch]);
+  }, [slideShowSelector.isShowSearch]);
 
   return (
     <>
       <div
         className={`hidden md:block fixed ${
-          SlideShowSelector.isShowSearch ? "left-[72px]" : "-left-[400px]"
+          slideShowSelector.isShowSearch ? "left-[72px]" : "-left-[400px]"
         } transition-all duration-500 delay-100 top-0 bottom-0 w-[397px] bg-white dark:bg-black pt-2 border-r border-[#dbdbdb] dark:border-[#262626] rounded-tr-2xl rounded-br-2xl shadow-[4px_0_24px_rgba(0,0,0,.15)] ${
           isVisible ? "z-10" : "z-30"
         }`}
@@ -44,8 +44,8 @@ function SearchSlideShow() {
       </div>
 
       {/* Overlay */}
-      {SlideShowSelector.isShowNotif ||
-        (SlideShowSelector.isShowSearch && <TransparentOverlay />)}
+      {slideShowSelector.isShowNotif ||
+        (slideShowSelector.isShowSearch && <TransparentOverlay />)}
     </>
   );
 }
