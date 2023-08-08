@@ -20,7 +20,7 @@ function Sidebar() {
         slideShowSelector.isShowNotif || slideShowSelector.isShowSearch
           ? "xl:w-[72px]"
           : ""
-      } xl:w-[244px] transition-all duration-500 md:flex flex-col text-black dark:text-[#f5f5f5] bg-white dark:bg-black md:px-3 md:pt-2 md:pb-5 border-t border-t-[#DBDBDB] dark:border-t-[#363636] md:border-r border-r-[#dbdbdb] dark:border-r-[#262626]`}
+      } xl:w-[244px] transition-all duration-500 md:flex flex-col text-black dark:text-[#f5f5f5] bg-white dark:bg-black md:px-3 md:pt-2 md:pb-5 border-t border-t-[#DBDBDB] dark:border-t-[#363636] md:border-r border-r-[#dbdbdb] dark:border-r-[#262626] overflow-hidden`}
     >
       {/* Logo */}
       <button className="hidden md:flex pt-[25px] px-3 pb-4 mb-[19px]">
@@ -232,7 +232,7 @@ function Sidebar() {
         </li>
       </ul>
       {/* More */}
-      <div className="hidden md:block mt-auto leading-5 p-3 mb-1 hover:bg-black/5 hover:rounded-lg transition-all">
+      <div className="hidden md:block mt-auto leading-5 p-3 mb-1 hover:hover-item hover:rounded-lg transition-all">
         <button className="flex gap-x-4 group p-3 -m-3">
           <svg className="w-6 h-6 group-hover:scale-105 transition-all">
             <use href="#more"></use>
