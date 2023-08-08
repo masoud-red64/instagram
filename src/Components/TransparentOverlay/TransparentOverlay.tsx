@@ -1,13 +1,14 @@
 import React from "react";
-import { slideShowSliceTypes } from "../../store/types/slideShowSlice.types";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 import {
   hideNotificationSlideShow,
   hideSearchSlideShow,
 } from "../../store/slideShowSlice";
+import { RootState } from "../../store/store";
 function TransparentOverlay() {
-  const SlideShowSelector = useSelector((state: slideShowSliceTypes) => state);
+  const SlideShowSelector = useSelector(
+    (state: RootState) => state.slideShowReducer
+  );
   const dispatch = useDispatch();
 
   return (
