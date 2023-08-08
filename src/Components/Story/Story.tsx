@@ -13,8 +13,9 @@ const Story = ({ img, hasStory, hasNewStory }: StoryPropsTypes) => {
   const navigate = useNavigate();
 
   return (
-    <button
-      className="w-full h-full relative flex items-center justify-center"
+    <a
+      href="#"
+      className="w-full h-full relative flex items-center justify-center border rounded-full"
       onClick={() => {
         setIsShowLoading(true);
         setTimeout(() => {
@@ -63,7 +64,7 @@ const Story = ({ img, hasStory, hasNewStory }: StoryPropsTypes) => {
           <circle cx={50} cy={50} r={47.8} />
         </svg>
       )}
-    </button>
+    </a>
   );
 };
 
