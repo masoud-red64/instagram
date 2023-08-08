@@ -16,7 +16,7 @@ function Sidebar() {
 
   return (
     <div
-      className={`fixed top-0 bottom-0 right-0 md:bottom-auto md:right-auto left-0 z-40 h-12 md:h-screen w-full md:w-[72px] ${
+      className={`fixed md:top-0 bottom-0 right-0 md:bottom-auto md:right-auto left-0 z-40 h-12 md:h-screen w-full md:w-[72px] ${
         slideShowSelector.isShowNotif || slideShowSelector.isShowSearch
           ? "xl:w-[72px]"
           : ""
