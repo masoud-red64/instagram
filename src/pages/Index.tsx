@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../Components/Sidebar/Sidebar";
 import Overlay from "../Components/Overlay/Overlay";
+import CreateNewPost from "../Components/CreateNewPost/CreateNewPost";
 function Index() {
   return (
     <>
@@ -14,6 +15,9 @@ function Index() {
           <Outlet />
         </div>
       </div>
+
+      {/* Create New Post */}
+      <CreateNewPost/>
 
       {/* overlay */}
       <Overlay />

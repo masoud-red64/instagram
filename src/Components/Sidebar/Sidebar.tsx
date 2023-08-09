@@ -10,11 +10,16 @@ import { RootState } from "../../store/store";
 import SearchSlideShow from "../SlideShow/SearchSlideShow";
 import NotificationSlideShow from "../SlideShow/NotificationSlideShow";
 import { hideFollowRequestsInSlide } from "../../store/followRequestsSlice";
+import { showCreateNewPost } from "../../store/createNewPostSlice";
 
 function Sidebar() {
   const dispatch = useDispatch();
   const slideShowSelector = useSelector(
     (state: RootState) => state.slideShowReducer
+  );
+
+  const createNewPostSelector = useSelector(
+    (state: RootState) => state.overlayReducer
   );
 
   return (
@@ -203,13 +208,22 @@ function Sidebar() {
           </li>
           {/* Creates */}
           <li className="inline-block xl:block group order-5 md:order-none">
-            <button className="flex gap-x-4 p-3 -m-3">
-              <svg className="w-6 h-6 group-hover:scale-105 transition-all">
-                <use href="#create"></use>
-              </svg>
-              <svg className="hidden w-6 h-6 group-hover:scale-105 transition-all">
-                <use href="#create-active"></use>
-              </svg>
+            <button
+              className="flex gap-x-4 p-3 -m-3"
+              onClick={() => {
+                dispatch(showCreateNewPost());
+              }}
+            >
+              {createNewPostSelector.isShowCreateNewPost ? (
+                <svg className="w-6 h-6 group-hover:scale-105 transition-all">
+                  <use href="#create-active"></use>
+                </svg>
+              ) : (
+                <svg className="w-6 h-6 group-hover:scale-105 transition-all">
+                  <use href="#create"></use>
+                </svg>
+              )}
+
               <span
                 className={`${
                   slideShowSelector.isShowNotif ||
