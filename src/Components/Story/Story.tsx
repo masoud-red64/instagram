@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 type StoryPropsTypes = {
@@ -9,47 +9,122 @@ type StoryPropsTypes = {
 
 const Story = ({ img, hasStory, hasNewStory }: StoryPropsTypes) => {
   const [isShowLoading, setIsShowLoading] = useState(false);
-
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas?.getContext("2d");
+
+    if (canvas && context) {
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const radius = 47.8;
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      const gradient = context.createLinearGradient(
+        centerX - radius,
+        centerY + radius,
+        centerX + radius,
+        centerY - radius
+      );
+
+      if (hasNewStory) {
+        gradient.addColorStop(0, "rgb(255, 182, 10)");
+        gradient.addColorStop(1, "rgb(254, 1, 200)");
+      } else {
+        gradient.addColorStop(0, "rgb(209, 212, 219)");
+        gradient.addColorStop(1, "rgb(209, 212, 219)");
+      }
+
+      context.strokeStyle = gradient;
+      context.lineWidth = 5;
+      context.lineCap = "round";
+
+      context.beginPath();
+      context.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      context.stroke();
+
+      if (isShowLoading) {
+        let dashArray = 0;
+        let dashOffset = 0;
+        let increasing = true;
+        let rotationAngle = 0;
+
+        const animationInterval = setInterval(() => {
+          context.clearRect(0, 0, canvas.width, canvas.height);
+
+          context.strokeStyle = gradient;
+          context.lineWidth = 5;
+          context.lineCap = "round";
+
+          context.translate(centerX, centerY);
+          context.rotate((rotationAngle * Math.PI) / 250);
+          context.translate(-centerX, -centerY);
+          rotationAngle += 1;
+
+          context.beginPath();
+          context.arc(centerX, centerY, radius, 0, Math.PI * 2);
+          context.stroke();
+
+          context.setLineDash([dashArray, 20 - dashArray]);
+          dashArray = dashArray + 1;
+
+          if (increasing) {
+            dashOffset -= 1;
+            if (dashOffset <= 0) {
+              increasing = false;
+            }
+          } else {
+            dashOffset += 1;
+            if (dashOffset >= 20) {
+              increasing = true;
+            }
+          }
+
+          if (dashArray >= 15) {
+            clearInterval(animationInterval);
+            context.setLineDash([]); // Remove dashes and spaces
+          }
+        }, 100);
+
+        setTimeout(() => {
+          setIsShowLoading(false); // Stop the loading animation
+          navigate("/");
+        }, 5500); // Total animation duration
+      }
+    }
+  }, [isShowLoading, hasNewStory, navigate]);
 
   return (
     <a
       href="#"
       className="w-full h-full relative flex items-center justify-center border rounded-full"
-      onClick={() => {
+      onClick={(e) => {
+        e.preventDefault();
         setIsShowLoading(true);
         setTimeout(() => {
-          setIsShowLoading(false);
+          setIsShowLoading(false); // Stop the loading animation
           navigate("/");
-        }, 4500);
+        }, 7000); // Total animation duration
       }}
     >
-      <img className="w-full rounded-full" src={`images/users/${img}`} alt="" />
       {hasStory && (
-        <svg
-          className={`absolute ${isShowLoading && "animate-loading-story"}`}
-          viewBox="0 0 100 100"
-          fill="none"
-          stroke={`url(#${hasNewStory ? "gradient1" : "gradient2"})`}
-          strokeWidth={5}
-          strokeDasharray={1}
-          strokeDashoffset={0}
-          strokeLinecap="round"
-        >
-          <defs>
-            <linearGradient id="gradient1" x1="10%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="rgb(255, 182, 10)" />
-              <stop offset="100%" stop-color="rgb(254, 1, 200)" />
-            </linearGradient>
-
-            <linearGradient id="gradient2" x1="10%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="rgb(209, 212, 219)" />
-              <stop offset="100%" stop-color="rgb(209, 212, 219)" />
-            </linearGradient>
-          </defs>
-          <circle cx={50} cy={50} r={47.8} />
-        </svg>
+        <canvas
+          ref={canvasRef}
+          className={`absolute w-full rounded-full ${
+            isShowLoading ? "animate-loading-story" : ""
+          }`}
+          width={100}
+          height={100}
+        />
       )}
+      <img
+        className="w-[95%] rounded-full"
+        src={`images/users/${img}`}
+        alt=""
+      />
     </a>
   );
 };
