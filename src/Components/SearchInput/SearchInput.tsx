@@ -33,7 +33,7 @@ function SearchInput() {
         onBlur={() => {
           setTimeout(() => {
             setIsFocus(false);
-          }, 100);
+          }, 200);
         }}
         onChange={(e) => {
           dispatch(setInputValue(e.target.value));

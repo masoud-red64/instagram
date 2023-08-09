@@ -37,29 +37,15 @@ const Story = ({ img, hasStory, hasNewStory }: StoryPropsTypes) => {
           strokeLinecap="round"
         >
           <defs>
-            {hasNewStory ? (
-              <linearGradient
-                id="gradient1"
-                x1="10%"
-                y1="100%"
-                x2="100%"
-                y2="0%"
-              >
-                <stop offset="0%" stop-color="rgb(255, 182, 10)" />
-                <stop offset="100%" stop-color="rgb(254, 1, 200)" />
-              </linearGradient>
-            ) : (
-              <linearGradient
-                id="gradient2"
-                x1="10%"
-                y1="100%"
-                x2="100%"
-                y2="0%"
-              >
-                <stop offset="0%" stop-color="rgb(209, 212, 219)" />
-                <stop offset="100%" stop-color="rgb(209, 212, 219)" />
-              </linearGradient>
-            )}
+            <linearGradient id="gradient1" x1="10%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="rgb(255, 182, 10)" />
+              <stop offset="100%" stop-color="rgb(254, 1, 200)" />
+            </linearGradient>
+
+            <linearGradient id="gradient2" x1="10%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="rgb(209, 212, 219)" />
+              <stop offset="100%" stop-color="rgb(209, 212, 219)" />
+            </linearGradient>
           </defs>
           <circle cx={50} cy={50} r={47.8} />
         </svg>
