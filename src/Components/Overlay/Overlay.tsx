@@ -6,7 +6,7 @@ import { hideCreateNewPost } from "../../store/createNewPostSlice";
 const Overlay = () => {
   const dispatch = useDispatch();
   const createNewPostSelector = useSelector(
-    (state: RootState) => state.overlayReducer
+    (state: RootState) => state.createNewPostReducer
   );
 
   return (

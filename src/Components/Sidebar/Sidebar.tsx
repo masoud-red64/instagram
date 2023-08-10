@@ -25,7 +25,7 @@ function Sidebar() {
   );
 
   const createNewPostSelector = useSelector(
-    (state: RootState) => state.overlayReducer
+    (state: RootState) => state.createNewPostReducer
   );
 
   return (
