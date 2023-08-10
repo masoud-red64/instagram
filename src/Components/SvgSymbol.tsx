@@ -417,7 +417,7 @@ function SvgSymbol() {
         ></path>
       </symbol>
       <symbol
-        id="arrow-top"
+        id="chevron-top"
         aria-label=""
         className="x1lliihq x1n2onr6"
         color="currentColor"
@@ -502,6 +502,36 @@ function SvgSymbol() {
       >
         <title>Plus icon</title>
         <path d="M21 11.3h-8.2V3c0-.4-.3-.8-.8-.8s-.8.4-.8.8v8.2H3c-.4 0-.8.3-.8.8s.3.8.8.8h8.2V21c0 .4.3.8.8.8s.8-.3.8-.8v-8.2H21c.4 0 .8-.3.8-.8s-.4-.7-.8-.7z"></path>
+      </symbol>
+      <symbol
+        id="arrow-left"
+        aria-label="Back"
+        className="x1lliihq x1n2onr6"
+        color="currentColor"
+        fill="currentColor"
+        role="img"
+        viewBox="0 0 24 24"
+      >
+        <title>Back</title>
+        <line
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          x1="2.909"
+          x2="22.001"
+          y1="12.004"
+          y2="12.004"
+        ></line>
+        <polyline
+          fill="none"
+          points="9.276 4.726 2.001 12.004 9.276 19.274"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        ></polyline>
       </symbol>
     </svg>
   );

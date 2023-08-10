@@ -4,7 +4,7 @@ import slideShowReducer from "./slideShowSlice";
 import searchInputValueReducer from "./searchInputValueSlice";
 import searchBoxReducer from './searchBoxSlice'
 import followRequestsReducer from "./followRequestsSlice";
-import overlayReducer from "./createNewPostSlice";
+import createNewPostReducer from "./createNewPostSlice";
 
 
 export const store = configureStore({
@@ -13,7 +13,7 @@ export const store = configureStore({
         searchInputValueReducer,
         searchBoxReducer,
         followRequestsReducer,
-        overlayReducer
+        createNewPostReducer
     },
 });
 

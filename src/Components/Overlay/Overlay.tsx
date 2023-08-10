@@ -1,7 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { hideCreateNewPost } from "../../store/createNewPostSlice";
+import {
+  hideCreateNewPost,
+  setStepOfCreateNewPost,
+} from "../../store/createNewPostSlice";
 
 const Overlay = () => {
   const dispatch = useDispatch();
@@ -13,7 +16,10 @@ const Overlay = () => {
     createNewPostSelector.isShowCreateNewPost && (
       <div
         className="absolute inset-0 bg-black/60 z-50"
-        onClick={() => dispatch(hideCreateNewPost())}
+        onClick={() => {
+          dispatch(hideCreateNewPost());
+          dispatch(setStepOfCreateNewPost("first"));
+        }}
       >
         <div className="relative h-full">
           <button className="p-2 absolute right-2 top-2">
