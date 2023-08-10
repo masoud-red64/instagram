@@ -49,7 +49,7 @@ function NotificationSlideShow() {
                 }}
               >
                 <svg className="w-6 h-6 -rotate-90">
-                  <use href="#arrow-top"></use>
+                  <use href="#chevron-top"></use>
                 </svg>
               </button>
               <h3 className="font-[700] grow text-center dark:">

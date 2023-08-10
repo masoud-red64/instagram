@@ -23,7 +23,7 @@ function Notifications() {
           }}
         >
           <svg className="w-6 h-6 -rotate-90">
-            <use href="#arrow-top"></use>
+            <use href="#chevron-top"></use>
           </svg>
         </button>
         <h3 className="font-[600] grow text-center dark:">

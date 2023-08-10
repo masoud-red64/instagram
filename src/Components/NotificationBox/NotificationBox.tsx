@@ -39,7 +39,7 @@ function NotificationBox() {
         <div className="flex items-center gap-x-3">
           <div className="w-2 h-2 bg-[#0095f6] rounded-full"></div>
           <svg className="w-4 h-4 text-gray-500 dark:text-[#a8a8a8] rotate-90">
-            <use href="#arrow-top"></use>
+            <use href="#chevron-top"></use>
           </svg>
         </div>
       </button>
