@@ -4,14 +4,16 @@ const createNewPostSlice = createSlice({
     name: 'overlay',
     initialState: {
         isShowCreateNewPost: false,
-        step: 'first'
+        step: 'first',
+        isOpenModal: false
     },
     reducers: {
         showCreateNewPost: (state) => { state.isShowCreateNewPost = true },
         hideCreateNewPost: (state) => { state.isShowCreateNewPost = false },
-        setStepOfCreateNewPost: (state, action) => { state.step = action.payload }
+        setStepOfCreateNewPost: (state, action) => { state.step = action.payload },
+        setIsOpenModal: (state, action) => { state.isOpenModal = action.payload },
     }
 })
 
-export const { showCreateNewPost, hideCreateNewPost, setStepOfCreateNewPost } = createNewPostSlice.actions
+export const { showCreateNewPost, hideCreateNewPost, setStepOfCreateNewPost, setIsOpenModal } = createNewPostSlice.actions
 export default createNewPostSlice.reducer

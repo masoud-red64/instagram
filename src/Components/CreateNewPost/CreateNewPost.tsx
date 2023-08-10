@@ -13,11 +13,16 @@ import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperType from "swiper";
-import { setStepOfCreateNewPost } from "../../store/createNewPostSlice";
+import {
+  setIsOpenModal,
+  setStepOfCreateNewPost,
+} from "../../store/createNewPostSlice";
+import TransparentOverlay from "../TransparentOverlay/TransparentOverlay";
 
-type imagesType = {
+type NewPostsType = {
   id: string;
   img: string;
+  video: string;
 };
 
 function CreateNewPost() {
@@ -27,8 +32,7 @@ function CreateNewPost() {
   );
   const [file, setFile] = useState<File | null>(null);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
-  const [imgages, setImages] = useState<imagesType[] | null>(null);
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [newPosts, setNewPosts] = useState<NewPostsType[] | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -45,10 +49,32 @@ function CreateNewPost() {
       const selectedFile = event.target.files[0];
       dispatch(setStepOfCreateNewPost("second"));
 
+      // Clear the input value
+      event.target.value = "";
+
       if (
         selectedFile.type.startsWith("image/") ||
         selectedFile.type.startsWith("video/")
       ) {
+        if (selectedFile.type.startsWith("image/")) {
+          setNewPosts([
+            ...(newPosts || []),
+            {
+              id: crypto.randomUUID(),
+              img: URL.createObjectURL(selectedFile),
+              video: "",
+            },
+          ]);
+        } else if (selectedFile.type.startsWith("video/")) {
+          setNewPosts([
+            ...(newPosts || []),
+            {
+              id: crypto.randomUUID(),
+              video: URL.createObjectURL(selectedFile),
+              img: "",
+            },
+          ]);
+        }
         setFile(selectedFile);
       } else {
         // Handle unsupported file type
@@ -56,6 +82,12 @@ function CreateNewPost() {
       }
     }
   };
+
+  console.log(newPosts);
+
+  function removeNewPost(newPostID: string) {
+    setNewPosts((newPosts ?? []).filter((newPost) => newPost.id !== newPostID));
+  }
 
   return (
     createNewPostSelector.isShowCreateNewPost && (
@@ -73,7 +105,7 @@ function CreateNewPost() {
               <div className="flex justify-between items-center">
                 <button
                   onClick={() => {
-                    setIsOpenModal(true);
+                    dispatch(setIsOpenModal(true));
                   }}
                 >
                   <svg className="w-6 h-6">
@@ -99,32 +131,7 @@ function CreateNewPost() {
                   <button className="primary-btn" onClick={handleClick}>
                     Select from computer
                   </button>
-                  {/* {file && (
-                  <div>
-                    {file.type.startsWith("image/") ? (
-                      <img
-                        src={URL.createObjectURL(file)}
-                        alt="Selected Image"
-                      />
-                    ) : (
-                      <video autoPlay>
-                        <source
-                          src={URL.createObjectURL(file)}
-                          type={file.type}
-                        />
-                        Your browser does not support the video tag.
-                      </video>
-                    )}
-                  </div>
-                )} */}
                 </div>
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  style={{ display: "none" }}
-                  onChange={handleFileChange}
-                  accept="image/*,video/*"
-                />
               </div>
             </div>
           )}
@@ -140,24 +147,28 @@ function CreateNewPost() {
                   modules={[FreeMode, Navigation, Pagination, Thumbs]}
                   className="create-new-post-mySwiper2 h-full"
                 >
-                  <SwiperSlide>
-                    <div>
-                      <img
-                        src="images/users/user9.jpg"
-                        alt=""
-                        className=" w-full h-full"
-                      />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div>
-                      <img
-                        src="images/users/user10.jpg"
-                        alt=""
-                        className=" w-full h-full"
-                      />
-                    </div>
-                  </SwiperSlide>
+                  {newPosts?.map((newPost) => (
+                    <SwiperSlide key={newPost.id}>
+                      <div>
+                        {file && (
+                          <div className="h-[29rem]">
+                            {newPost.img ? (
+                              <img
+                                src={newPost.img}
+                                alt=""
+                                className="w-full h-full"
+                              />
+                            ) : (
+                              <video autoPlay className="h-full object-cover">
+                                <source src={newPost.video} type={file.type} />
+                                Your browser does not support the video tag.
+                              </video>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </SwiperSlide>
+                  ))}
                 </Swiper>
               </div>
               <div className="absolute bottom-4 right-6 left-6 flex justify-between items-center z-10">
@@ -189,7 +200,7 @@ function CreateNewPost() {
                       {/* Slides */}
                       <Swiper
                         onSwiper={(swiper) => setThumbsSwiper(swiper)}
-                        spaceBetween={10}
+                        spaceBetween={20}
                         slidesPerView={4}
                         freeMode={true}
                         watchSlidesProgress={true}
@@ -197,7 +208,41 @@ function CreateNewPost() {
                         modules={[FreeMode, Navigation, Thumbs]}
                         className="create-new-post-mySwiper w-96"
                       >
-                        <SwiperSlide>
+                        {newPosts?.map((newPost) => (
+                          <SwiperSlide key={newPost.id}>
+                            {file && (
+                              <div>
+                                <div className="relative w-[94px] h-[94px]">
+                                  <button
+                                    className="remove-new-post-icon absolute top-2 right-2 text-white hover:opacity-70 "
+                                    onClick={() => removeNewPost(newPost.id)}
+                                  >
+                                    <svg className="w-3 h-3">
+                                      <use href="#close"></use>
+                                    </svg>
+                                  </button>
+                                  {newPost.img ? (
+                                    <img
+                                      src={newPost.img}
+                                      alt=""
+                                      className="h-full"
+                                    />
+                                  ) : (
+                                    <video autoPlay className="h-full ">
+                                      <source
+                                        src={newPost.video}
+                                        type={file.type}
+                                      />
+                                      Your browser does not support the video
+                                      tag.
+                                    </video>
+                                  )}
+                                </div>
+                              </div>
+                            )}
+                          </SwiperSlide>
+                        ))}
+                        {/* <SwiperSlide>
                           <div className="relative w-[94px] h-[94px]">
                             <button className="absolute top-2 right-2 text-white hover:opacity-70 ">
                               <svg className="w-3 h-3">
@@ -206,20 +251,13 @@ function CreateNewPost() {
                             </button>
                             <img src="images/users/user9.jpg" alt="" />
                           </div>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                          <div className="relative w-[94px] h-[94px]">
-                            <button className="absolute top-2 right-2 text-white hover:opacity-70 ">
-                              <svg className="w-3 h-3">
-                                <use href="#close"></use>
-                              </svg>
-                            </button>
-                            <img src="images/users/user10.jpg" alt="" />
-                          </div>
-                        </SwiperSlide>
+                        </SwiperSlide> */}
                       </Swiper>
                       <div>
-                        <button className="w-12 h-12 flex items-center justify-center border rounded-full">
+                        <button
+                          className="w-12 h-12 flex items-center justify-center border rounded-full"
+                          onClick={handleClick}
+                        >
                           <svg className="w-[22px] h-[22px] text-neutral-300">
                             <use href="#plus"></use>
                           </svg>
@@ -233,12 +271,25 @@ function CreateNewPost() {
           )}
         </div>
 
+        {/* Input File */}
+        <input
+          type="file"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          onChange={handleFileChange}
+          accept="image/*,video/*"
+        />
+
+        {createNewPostSelector.step === "second" && (
+          <TransparentOverlay className="z-[51]" />
+        )}
+
         {/* Modal */}
-        {isOpenModal && (
+        {createNewPostSelector.isOpenModal && (
           <div
             className="absolute inset-0 bg-black/70 z-[55]"
             onClick={() => {
-              setIsOpenModal(false);
+              dispatch(setIsOpenModal(false));
             }}
           >
             <div className="w-[400px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col z-[55] bg-white p-3 text-center rounded-xl">
@@ -251,13 +302,14 @@ function CreateNewPost() {
                 onClick={() => {
                   dispatch(setStepOfCreateNewPost("first"));
                   setThumbsSwiper(null);
+                  setNewPosts([]);
                 }}
               >
                 Discard
               </button>
               <button
                 className="block h-12 text-sm py-1 px-2 border-t border-[#dbdbdb]"
-                onClick={() => setIsOpenModal(false)}
+                onClick={() => dispatch(setIsOpenModal(false))}
               >
                 Cancel
               </button>

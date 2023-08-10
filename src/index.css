@@ -92,4 +92,12 @@
   .create-new-post-mySwiper2 .swiper-pagination-bullet-active {
     @apply bg-[#0095f6];
   }
+
+  .remove-new-post-icon {
+    @apply hidden;
+  }
+
+  .swiper-slide-thumb-active .remove-new-post-icon {
+    @apply inline;
+  }
 }
