@@ -154,6 +154,11 @@ function CreateNewPost() {
             <div className="relative w-full h-[91%]">
               <div className="absolute inset-0">
                 <Swiper
+                  onSliderMove={() => {
+                    setIsActiveMultiplePostTool(false);
+                    setIsActiveRatioPostTool(false);
+                    setIsActiveZoomPostTool(false);
+                  }}
                   navigation={true}
                   pagination={true}
                   thumbs={{ swiper: thumbsSwiper }}
@@ -162,7 +167,15 @@ function CreateNewPost() {
                 >
                   {newPosts?.map((newPost, index) => (
                     <>
-                      <SwiperSlide key={newPost.id} style={{ width: "100rem" }}>
+                      <SwiperSlide
+                        key={newPost.id}
+                        style={{ width: "100rem" }}
+                        onClick={() => {
+                          setIsActiveMultiplePostTool(false);
+                          setIsActiveRatioPostTool(false);
+                          setIsActiveZoomPostTool(false);
+                        }}
+                      >
                         <div className="relative overflow-hidden">
                           {file && (
                             <div className="h-[29rem] flex items-center justify-center">
