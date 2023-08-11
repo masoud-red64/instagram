@@ -33,6 +33,8 @@ function CreateNewPost() {
   const [file, setFile] = useState<File | null>(null);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const [newPosts, setNewPosts] = useState<NewPostsType[] | null>(null);
+  const [isActiveMultiplePostTool, setIsActiveMultiplePostTool] =
+    useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -87,6 +89,7 @@ function CreateNewPost() {
 
   function removeNewPost(newPostID: string) {
     setNewPosts((newPosts ?? []).filter((newPost) => newPost.id !== newPostID));
+    setIsActiveMultiplePostTool(false);
   }
 
   return (
@@ -189,82 +192,79 @@ function CreateNewPost() {
                   </div>
                 </div>
                 <div className="relative">
-                  <button className="text-white hover:opacity-70 transition-all">
+                  <button
+                    className="text-white hover:opacity-70 transition-all"
+                    onClick={() =>
+                      setIsActiveMultiplePostTool(!isActiveMultiplePostTool)
+                    }
+                  >
                     <svg className="w-4 h-4">
                       <use href="#multiple-post"></use>
                     </svg>
                   </button>
 
-                  <div className="absolute -top-32 right-0 h-[118px] bg-[#1a1a1a] opacity-80 p-2 rounded-lg">
-                    <div className="flex gap-x-2">
-                      {/* Slides */}
-                      <Swiper
-                        onSwiper={(swiper) => setThumbsSwiper(swiper)}
-                        spaceBetween={20}
-                        slidesPerView={4}
-                        freeMode={true}
-                        watchSlidesProgress={true}
-                        navigation={true}
-                        modules={[FreeMode, Navigation, Thumbs]}
-                        className="create-new-post-mySwiper w-96"
-                      >
-                        {newPosts?.map((newPost) => (
-                          <SwiperSlide key={newPost.id}>
-                            {file && (
-                              <div>
-                                <div className="relative w-[94px] h-[94px]">
-                                  <button
-                                    className="remove-new-post-icon absolute top-2 right-2 text-white hover:opacity-70 "
-                                    onClick={() => removeNewPost(newPost.id)}
-                                  >
-                                    <svg className="w-3 h-3">
-                                      <use href="#close"></use>
-                                    </svg>
-                                  </button>
-                                  {newPost.img ? (
-                                    <img
-                                      src={newPost.img}
-                                      alt=""
-                                      className="h-full"
-                                    />
-                                  ) : (
-                                    <video autoPlay className="h-full ">
-                                      <source
-                                        src={newPost.video}
-                                        type={file.type}
-                                      />
-                                      Your browser does not support the video
-                                      tag.
-                                    </video>
-                                  )}
-                                </div>
-                              </div>
-                            )}
-                          </SwiperSlide>
-                        ))}
-                        {/* <SwiperSlide>
-                          <div className="relative w-[94px] h-[94px]">
-                            <button className="absolute top-2 right-2 text-white hover:opacity-70 ">
-                              <svg className="w-3 h-3">
-                                <use href="#close"></use>
-                              </svg>
-                            </button>
-                            <img src="images/users/user9.jpg" alt="" />
-                          </div>
-                        </SwiperSlide> */}
-                      </Swiper>
-                      <div>
-                        <button
-                          className="w-12 h-12 flex items-center justify-center border rounded-full"
-                          onClick={handleClick}
+                  {isActiveMultiplePostTool && (
+                    <div className="absolute -top-32 right-0 h-[118px] bg-[#1a1a1a] opacity-80 p-2 rounded-lg">
+                      <div className="flex gap-x-2">
+                        {/* Slides */}
+                        <Swiper
+                          onSwiper={(swiper) => setThumbsSwiper(swiper)}
+                          spaceBetween={20}
+                          slidesPerView={4}
+                          freeMode={true}
+                          watchSlidesProgress={true}
+                          navigation={true}
+                          modules={[FreeMode, Navigation, Thumbs]}
+                          className="create-new-post-mySwiper w-96"
                         >
-                          <svg className="w-[22px] h-[22px] text-neutral-300">
-                            <use href="#plus"></use>
-                          </svg>
-                        </button>
+                          {newPosts?.map((newPost) => (
+                            <SwiperSlide key={newPost.id}>
+                              {file && (
+                                <div>
+                                  <div className="relative w-[94px] h-[94px]">
+                                    <button
+                                      className="remove-new-post-icon absolute top-2 right-2 text-white hover:opacity-70 "
+                                      onClick={() => removeNewPost(newPost.id)}
+                                    >
+                                      <svg className="w-3 h-3">
+                                        <use href="#close"></use>
+                                      </svg>
+                                    </button>
+                                    {newPost.img ? (
+                                      <img
+                                        src={newPost.img}
+                                        alt=""
+                                        className="h-full"
+                                      />
+                                    ) : (
+                                      <video autoPlay className="h-full ">
+                                        <source
+                                          src={newPost.video}
+                                          type={file.type}
+                                        />
+                                        Your browser does not support the video
+                                        tag.
+                                      </video>
+                                    )}
+                                  </div>
+                                </div>
+                              )}
+                            </SwiperSlide>
+                          ))}
+                        </Swiper>
+                        <div>
+                          <button
+                            className="w-12 h-12 flex items-center justify-center border rounded-full"
+                            onClick={handleClick}
+                          >
+                            <svg className="w-[22px] h-[22px] text-neutral-300">
+                              <use href="#plus"></use>
+                            </svg>
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
