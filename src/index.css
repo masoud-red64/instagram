@@ -100,4 +100,34 @@
   .swiper-slide-thumb-active .remove-new-post-icon {
     @apply inline;
   }
+
+  .input-range-zoom {
+    /* Remove default styles */
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%; /* Set the width of the slider */
+    height: 2px; /* Set the height of the slider */
+    background: #fff; /* Set the background color of the slider track */
+    outline: none; /* Remove outline */
+
+    /* Style the thumb (slider handle) */
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px; /* Set the width of the thumb */
+      height: 16px; /* Set the height of the thumb */
+      background: #fff; /* Set the background color of the thumb */
+      cursor: pointer; /* Set cursor on hover */
+      border-radius: 50%; /* Make the thumb circular */
+    }
+
+    /* Firefox */
+    &::-moz-range-thumb {
+      width: 16px; /* Set the width of the thumb */
+      height: 16px; /* Set the height of the thumb */
+      background: #fff;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+  }
 }

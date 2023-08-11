@@ -35,6 +35,7 @@ function CreateNewPost() {
   const [newPosts, setNewPosts] = useState<NewPostsType[] | null>(null);
   const [isActiveMultiplePostTool, setIsActiveMultiplePostTool] =
     useState(false);
+  const [inputRangeZoom, setInputRangeZoom] = useState("0");
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -183,12 +184,30 @@ function CreateNewPost() {
                       </svg>
                     </button>
                   </div>
-                  <div>
+                  <div className="relative">
                     <button className="text-white hover:opacity-70 transition-all">
                       <svg className="w-4 h-4">
                         <use href="#zoom"></use>
                       </svg>
                     </button>
+
+                    <div className="flex items-center justify-center w-[132px] h-8  absolute bg-[#1a1a1a] -top-10 py-2 px-3 rounded-lg">
+                      <input
+                        className="input-range-zoom"
+                        value={inputRangeZoom}
+                        onChange={(e) => setInputRangeZoom(e.target.value)}
+                        type="range"
+                        name=""
+                        id=""
+                        style={{
+                          backgroundImage: `linear-gradient(to right,rgb(255, 255, 255) 0%,rgb(255, 255, 255) ${Number(
+                            inputRangeZoom
+                          )}% ,rgb(0, 0, 0) ${Number(
+                            inputRangeZoom
+                          )}% ,rgb(0, 0, 0) 100%`,
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="relative">
