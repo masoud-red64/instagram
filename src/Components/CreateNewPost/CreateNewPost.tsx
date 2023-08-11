@@ -37,6 +37,7 @@ function CreateNewPost() {
     useState(false);
   const [inputRangeZoomValue, setInputRangeZoomValue] = useState("0");
   const [isActiveZoomPostTool, setIsActiveZoomPostTool] = useState(false);
+  const [isActiveRatioPostTool, setIsActiveRatioPostTool] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -189,12 +190,48 @@ function CreateNewPost() {
               </div>
               <div className="absolute bottom-4 right-6 left-6 flex justify-between items-center z-10">
                 <div className="flex items-center gap-x-6">
-                  <div>
-                    <button className="text-white hover:opacity-70 transition-all">
+                  <div className="relative">
+                    <button
+                      className="text-white hover:opacity-70 transition-all"
+                      onClick={() => {
+                        setIsActiveRatioPostTool(!isActiveRatioPostTool);
+                        setIsActiveMultiplePostTool(false);
+                        setIsActiveZoomPostTool(false);
+                      }}
+                    >
                       <svg className="w-4 h-4">
                         <use href="#aspect-ratio"></use>
                       </svg>
                     </button>
+
+                    {isActiveRatioPostTool && (
+                      <div className="w-[120px] h-[195px]  absolute bg-[#1a1a1a] -top-52 py-2 rounded-lg divide-y">
+                        <div className="h-12 flex items-center justify-center gap-x-3 text-neutral-500">
+                          <span className="text-sm">Original</span>
+                          <svg className="w-6 h-6">
+                            <use href="#image"></use>
+                          </svg>
+                        </div>
+                        <div className="h-12 flex items-center justify-center gap-x-3 text-neutral-500">
+                          <span className="text-sm">1:1</span>
+                          <svg className="w-6 h-6">
+                            <use href="#1-1"></use>
+                          </svg>
+                        </div>
+                        <div className="h-12 flex items-center justify-center gap-x-3 text-neutral-500">
+                          <span className="text-sm">4:5</span>
+                          <svg className="w-6 h-6">
+                            <use href="#4-5"></use>
+                          </svg>
+                        </div>
+                        <div className="h-12 flex items-center justify-center gap-x-3 text-neutral-500">
+                          <span className="text-sm">16-9</span>
+                          <svg className="w-6 h-6">
+                            <use href="#16-9"></use>
+                          </svg>
+                        </div>
+                      </div>
+                    )}
                   </div>
                   <div className="relative">
                     <button
@@ -202,6 +239,7 @@ function CreateNewPost() {
                       onClick={() => {
                         setIsActiveZoomPostTool(!isActiveZoomPostTool);
                         setIsActiveMultiplePostTool(false);
+                        setIsActiveRatioPostTool(false);
                       }}
                     >
                       <svg className="w-4 h-4">
@@ -238,6 +276,7 @@ function CreateNewPost() {
                     onClick={() => {
                       setIsActiveMultiplePostTool(!isActiveMultiplePostTool);
                       setIsActiveZoomPostTool(false);
+                      setIsActiveRatioPostTool(false);
                     }}
                   >
                     <svg className="w-4 h-4">
