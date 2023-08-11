@@ -38,6 +38,7 @@ function CreateNewPost() {
   const [inputRangeZoomValue, setInputRangeZoomValue] = useState("0");
   const [isActiveZoomPostTool, setIsActiveZoomPostTool] = useState(false);
   const [isActiveRatioPostTool, setIsActiveRatioPostTool] = useState(false);
+  const [aspectRatioValue, setAspectRatioValue] = useState("");
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -155,26 +156,26 @@ function CreateNewPost() {
                     <SwiperSlide key={newPost.id} style={{ width: "100rem" }}>
                       <div className="overflow-hidden">
                         {file && (
-                          <div className="h-[29rem]">
+                          <div className="flex items-center justify-center h-[29rem]">
                             {newPost.img ? (
                               <img
                                 src={newPost.img}
                                 alt=""
-                                className={`w-full h-full`}
                                 style={{
                                   transform: `scale(${
                                     1 + Number(inputRangeZoomValue) / 100
                                   })`,
+                                  aspectRatio: aspectRatioValue,
                                 }}
                               />
                             ) : (
                               <video
                                 autoPlay
-                                className="h-full object-cover"
                                 style={{
                                   transform: `scale(${
                                     1 + Number(inputRangeZoomValue) / 100
                                   })`,
+                                  aspectRatio: aspectRatioValue,
                                 }}
                               >
                                 <source src={newPost.video} type={file.type} />
@@ -206,29 +207,61 @@ function CreateNewPost() {
 
                     {isActiveRatioPostTool && (
                       <div className="w-[120px] h-[195px]  absolute bg-[#1a1a1a] -top-52 py-2 rounded-lg divide-y">
-                        <div className="h-12 flex items-center justify-center gap-x-3 text-neutral-500">
+                        <div
+                          className={`h-12 flex items-center justify-center gap-x-3 ${
+                            aspectRatioValue === ""
+                              ? "text-white"
+                              : "text-neutral-500"
+                          }`}
+                        >
                           <span className="text-sm">Original</span>
-                          <svg className="w-6 h-6">
-                            <use href="#image"></use>
-                          </svg>
+                          <button onClick={() => setAspectRatioValue("")}>
+                            <svg className="w-6 h-6">
+                              <use href="#image"></use>
+                            </svg>
+                          </button>
                         </div>
-                        <div className="h-12 flex items-center justify-center gap-x-3 text-neutral-500">
+                        <div
+                          className={`h-12 flex items-center justify-center gap-x-3 ${
+                            aspectRatioValue === "1/1"
+                              ? "text-white"
+                              : "text-neutral-500"
+                          }`}
+                        >
                           <span className="text-sm">1:1</span>
-                          <svg className="w-6 h-6">
-                            <use href="#1-1"></use>
-                          </svg>
+                          <button onClick={() => setAspectRatioValue("1/1")}>
+                            <svg className="w-6 h-6">
+                              <use href="#1-1"></use>
+                            </svg>
+                          </button>
                         </div>
-                        <div className="h-12 flex items-center justify-center gap-x-3 text-neutral-500">
+                        <div
+                          className={`h-12 flex items-center justify-center gap-x-3 ${
+                            aspectRatioValue === "4/5"
+                              ? "text-white"
+                              : "text-neutral-500"
+                          }`}
+                        >
                           <span className="text-sm">4:5</span>
-                          <svg className="w-6 h-6">
-                            <use href="#4-5"></use>
-                          </svg>
+                          <button onClick={() => setAspectRatioValue("4/5")}>
+                            <svg className="w-6 h-6">
+                              <use href="#4-5"></use>
+                            </svg>
+                          </button>
                         </div>
-                        <div className="h-12 flex items-center justify-center gap-x-3 text-neutral-500">
+                        <div
+                          className={`h-12 flex items-center justify-center gap-x-3 ${
+                            aspectRatioValue === "16/9"
+                              ? "text-white"
+                              : "text-neutral-500"
+                          }`}
+                        >
                           <span className="text-sm">16-9</span>
-                          <svg className="w-6 h-6">
-                            <use href="#16-9"></use>
-                          </svg>
+                          <button onClick={() => setAspectRatioValue("16/9")}>
+                            <svg className="w-6 h-6">
+                              <use href="#16-9"></use>
+                            </svg>
+                          </button>
                         </div>
                       </div>
                     )}
