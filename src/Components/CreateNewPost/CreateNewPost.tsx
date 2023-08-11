@@ -35,7 +35,7 @@ function CreateNewPost() {
   const [newPosts, setNewPosts] = useState<NewPostsType[] | null>(null);
   const [isActiveMultiplePostTool, setIsActiveMultiplePostTool] =
     useState(false);
-  const [inputRangeZoom, setInputRangeZoom] = useState("0");
+  const [inputRangeZoomValue, setInputRangeZoomValue] = useState("0");
   const [isActiveZoomPostTool, setIsActiveZoomPostTool] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -86,8 +86,6 @@ function CreateNewPost() {
       }
     }
   };
-
-  console.log(newPosts);
 
   function removeNewPost(newPostID: string) {
     setNewPosts((newPosts ?? []).filter((newPost) => newPost.id !== newPostID));
@@ -161,10 +159,23 @@ function CreateNewPost() {
                               <img
                                 src={newPost.img}
                                 alt=""
-                                className="w-full h-full"
+                                className={`w-full h-full`}
+                                style={{
+                                  transform: `scale(${
+                                    1 + Number(inputRangeZoomValue) / 100
+                                  })`,
+                                }}
                               />
                             ) : (
-                              <video autoPlay className="h-full object-cover">
+                              <video
+                                autoPlay
+                                className="h-full object-cover"
+                                style={{
+                                  transform: `scale(${
+                                    1 + Number(inputRangeZoomValue) / 100
+                                  })`,
+                                }}
+                              >
                                 <source src={newPost.video} type={file.type} />
                                 Your browser does not support the video tag.
                               </video>
@@ -202,16 +213,18 @@ function CreateNewPost() {
                       <div className="flex items-center justify-center w-[132px] h-8  absolute bg-[#1a1a1a] -top-10 py-2 px-3 rounded-lg">
                         <input
                           className="input-range-zoom"
-                          value={inputRangeZoom}
-                          onChange={(e) => setInputRangeZoom(e.target.value)}
+                          value={inputRangeZoomValue}
+                          onChange={(e) =>
+                            setInputRangeZoomValue(e.target.value)
+                          }
                           type="range"
                           name=""
                           id=""
                           style={{
                             backgroundImage: `linear-gradient(to right,rgb(255, 255, 255) 0%,rgb(255, 255, 255) ${Number(
-                              inputRangeZoom
+                              inputRangeZoomValue
                             )}% ,rgb(0, 0, 0) ${Number(
-                              inputRangeZoom
+                              inputRangeZoomValue
                             )}% ,rgb(0, 0, 0) 100%`,
                           }}
                         />
