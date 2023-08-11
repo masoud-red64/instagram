@@ -36,6 +36,7 @@ function CreateNewPost() {
   const [isActiveMultiplePostTool, setIsActiveMultiplePostTool] =
     useState(false);
   const [inputRangeZoom, setInputRangeZoom] = useState("0");
+  const [isActiveZoomPostTool, setIsActiveZoomPostTool] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -185,37 +186,46 @@ function CreateNewPost() {
                     </button>
                   </div>
                   <div className="relative">
-                    <button className="text-white hover:opacity-70 transition-all">
+                    <button
+                      className="text-white hover:opacity-70 transition-all"
+                      onClick={() => {
+                        setIsActiveZoomPostTool(!isActiveZoomPostTool);
+                        setIsActiveMultiplePostTool(false);
+                      }}
+                    >
                       <svg className="w-4 h-4">
                         <use href="#zoom"></use>
                       </svg>
                     </button>
 
-                    <div className="flex items-center justify-center w-[132px] h-8  absolute bg-[#1a1a1a] -top-10 py-2 px-3 rounded-lg">
-                      <input
-                        className="input-range-zoom"
-                        value={inputRangeZoom}
-                        onChange={(e) => setInputRangeZoom(e.target.value)}
-                        type="range"
-                        name=""
-                        id=""
-                        style={{
-                          backgroundImage: `linear-gradient(to right,rgb(255, 255, 255) 0%,rgb(255, 255, 255) ${Number(
-                            inputRangeZoom
-                          )}% ,rgb(0, 0, 0) ${Number(
-                            inputRangeZoom
-                          )}% ,rgb(0, 0, 0) 100%`,
-                        }}
-                      />
-                    </div>
+                    {isActiveZoomPostTool && (
+                      <div className="flex items-center justify-center w-[132px] h-8  absolute bg-[#1a1a1a] -top-10 py-2 px-3 rounded-lg">
+                        <input
+                          className="input-range-zoom"
+                          value={inputRangeZoom}
+                          onChange={(e) => setInputRangeZoom(e.target.value)}
+                          type="range"
+                          name=""
+                          id=""
+                          style={{
+                            backgroundImage: `linear-gradient(to right,rgb(255, 255, 255) 0%,rgb(255, 255, 255) ${Number(
+                              inputRangeZoom
+                            )}% ,rgb(0, 0, 0) ${Number(
+                              inputRangeZoom
+                            )}% ,rgb(0, 0, 0) 100%`,
+                          }}
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="relative">
                   <button
                     className="text-white hover:opacity-70 transition-all"
-                    onClick={() =>
-                      setIsActiveMultiplePostTool(!isActiveMultiplePostTool)
-                    }
+                    onClick={() => {
+                      setIsActiveMultiplePostTool(!isActiveMultiplePostTool);
+                      setIsActiveZoomPostTool(false);
+                    }}
                   >
                     <svg className="w-4 h-4">
                       <use href="#multiple-post"></use>
