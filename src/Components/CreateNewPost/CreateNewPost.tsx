@@ -151,8 +151,8 @@ function CreateNewPost() {
                   className="create-new-post-mySwiper2 h-full"
                 >
                   {newPosts?.map((newPost) => (
-                    <SwiperSlide key={newPost.id}>
-                      <div>
+                    <SwiperSlide key={newPost.id} style={{ width: "100rem" }}>
+                      <div className="overflow-hidden">
                         {file && (
                           <div className="h-[29rem]">
                             {newPost.img ? (
