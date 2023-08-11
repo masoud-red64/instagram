@@ -35,7 +35,9 @@ function CreateNewPost() {
   const [newPosts, setNewPosts] = useState<NewPostsType[] | null>(null);
   const [isActiveMultiplePostTool, setIsActiveMultiplePostTool] =
     useState(false);
-  const [inputRangeZoomValue, setInputRangeZoomValue] = useState("0");
+  const [inputRangeZoomValues, setInputRangeZoomValues] = useState<number[]>(
+    []
+  );
   const [isActiveZoomPostTool, setIsActiveZoomPostTool] = useState(false);
   const [isActiveRatioPostTool, setIsActiveRatioPostTool] = useState(false);
   const [aspectRatioValue, setAspectRatioValue] = useState("");
@@ -93,6 +95,12 @@ function CreateNewPost() {
     setNewPosts((newPosts ?? []).filter((newPost) => newPost.id !== newPostID));
     setIsActiveMultiplePostTool(false);
   }
+
+  const handleZoomChange = (index: number, value: string) => {
+    const updatedZoomValues = [...inputRangeZoomValues];
+    updatedZoomValues[index] = Number(value);
+    setInputRangeZoomValues(updatedZoomValues);
+  };
 
   return (
     createNewPostSelector.isShowCreateNewPost && (
@@ -152,40 +160,68 @@ function CreateNewPost() {
                   modules={[FreeMode, Navigation, Pagination, Thumbs]}
                   className="create-new-post-mySwiper2 h-full"
                 >
-                  {newPosts?.map((newPost) => (
-                    <SwiperSlide key={newPost.id} style={{ width: "100rem" }}>
-                      <div className="overflow-hidden">
-                        {file && (
-                          <div className="flex items-center justify-center h-[29rem]">
-                            {newPost.img ? (
-                              <img
-                                src={newPost.img}
-                                alt=""
+                  {newPosts?.map((newPost, index) => (
+                    <>
+                      <SwiperSlide key={newPost.id} style={{ width: "100rem" }}>
+                        <div className="relative overflow-hidden">
+                          {file && (
+                            <div className="h-[29rem] flex items-center justify-center">
+                              {newPost.img ? (
+                                <img
+                                  src={newPost.img}
+                                  alt=""
+                                  style={{
+                                    transform: `scale(${
+                                      1 +
+                                      Number(inputRangeZoomValues[index]) / 100
+                                    })`,
+                                    aspectRatio: aspectRatioValue,
+                                  }}
+                                />
+                              ) : (
+                                <video
+                                  autoPlay
+                                  className="h-full object-cover"
+                                  style={{
+                                    transform: `scale(${
+                                      1 +
+                                      Number(inputRangeZoomValues[index]) / 100
+                                    })`,
+                                  }}
+                                >
+                                  <source
+                                    src={newPost.video}
+                                    type={file.type}
+                                  />
+                                  Your browser does not support the video tag.
+                                </video>
+                              )}
+                            </div>
+                          )}
+                          {isActiveZoomPostTool && (
+                            <div className="flex items-center justify-center w-[132px] h-8  absolute bg-[#1a1a1a] bottom-16 left-20 py-2 px-3 rounded-lg">
+                              <input
+                                className="input-range-zoom"
+                                value={inputRangeZoomValues[index] || 0}
+                                onChange={(e) =>
+                                  handleZoomChange(index, e.target.value)
+                                }
+                                type="range"
+                                name=""
+                                id=""
                                 style={{
-                                  transform: `scale(${
-                                    1 + Number(inputRangeZoomValue) / 100
-                                  })`,
-                                  aspectRatio: aspectRatioValue,
+                                  backgroundImage: `linear-gradient(to right,rgb(255, 255, 255) 0%,rgb(255, 255, 255) ${Number(
+                                    inputRangeZoomValues[index] || 0
+                                  )}% ,rgb(0, 0, 0) ${Number(
+                                    inputRangeZoomValues[index] || 0
+                                  )}% ,rgb(0, 0, 0) 100%)`,
                                 }}
                               />
-                            ) : (
-                              <video
-                                autoPlay
-                                style={{
-                                  transform: `scale(${
-                                    1 + Number(inputRangeZoomValue) / 100
-                                  })`,
-                                  aspectRatio: aspectRatioValue,
-                                }}
-                              >
-                                <source src={newPost.video} type={file.type} />
-                                Your browser does not support the video tag.
-                              </video>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </SwiperSlide>
+                            </div>
+                          )}
+                        </div>
+                      </SwiperSlide>
+                    </>
                   ))}
                 </Swiper>
               </div>
@@ -275,28 +311,6 @@ function CreateNewPost() {
                         <use href="#zoom"></use>
                       </svg>
                     </button>
-
-                    {isActiveZoomPostTool && (
-                      <div className="flex items-center justify-center w-[132px] h-8  absolute bg-[#1a1a1a] -top-10 py-2 px-3 rounded-lg">
-                        <input
-                          className="input-range-zoom"
-                          value={inputRangeZoomValue}
-                          onChange={(e) =>
-                            setInputRangeZoomValue(e.target.value)
-                          }
-                          type="range"
-                          name=""
-                          id=""
-                          style={{
-                            backgroundImage: `linear-gradient(to right,rgb(255, 255, 255) 0%,rgb(255, 255, 255) ${Number(
-                              inputRangeZoomValue
-                            )}% ,rgb(0, 0, 0) ${Number(
-                              inputRangeZoomValue
-                            )}% ,rgb(0, 0, 0) 100%`,
-                          }}
-                        />
-                      </div>
-                    )}
                   </div>
                 </div>
                 <div className="relative">
