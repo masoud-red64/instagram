@@ -193,7 +193,7 @@ function CreateNewPost() {
                 <div className="flex items-center gap-x-6">
                   <div className="relative">
                     <button
-                      className="text-white hover:opacity-70 transition-all"
+                      className="text-white bg-black/50 p-2 rounded-full hover:opacity-70 transition-all"
                       onClick={() => {
                         setIsActiveRatioPostTool(!isActiveRatioPostTool);
                         setIsActiveMultiplePostTool(false);
@@ -206,69 +206,65 @@ function CreateNewPost() {
                     </button>
 
                     {isActiveRatioPostTool && (
-                      <div className="w-[120px] h-[195px]  absolute bg-[#1a1a1a] -top-52 py-2 rounded-lg divide-y">
-                        <div
-                          className={`h-12 flex items-center justify-center gap-x-3 ${
+                      <div className="w-[120px] h-[195px]  absolute bg-[#1a1a1a] -top-52 rounded-lg divide-y">
+                        <button
+                          onClick={() => setAspectRatioValue("")}
+                          className={`w-full h-12 flex items-center justify-center gap-x-3 ${
                             aspectRatioValue === ""
                               ? "text-white"
                               : "text-neutral-500"
                           }`}
                         >
                           <span className="text-sm">Original</span>
-                          <button onClick={() => setAspectRatioValue("")}>
-                            <svg className="w-6 h-6">
-                              <use href="#image"></use>
-                            </svg>
-                          </button>
-                        </div>
-                        <div
-                          className={`h-12 flex items-center justify-center gap-x-3 ${
+                          <svg className="w-6 h-6">
+                            <use href="#image"></use>
+                          </svg>
+                        </button>
+                        <button
+                          onClick={() => setAspectRatioValue("1/1")}
+                          className={`w-full h-12 flex items-center justify-center gap-x-3 ${
                             aspectRatioValue === "1/1"
                               ? "text-white"
                               : "text-neutral-500"
                           }`}
                         >
                           <span className="text-sm">1:1</span>
-                          <button onClick={() => setAspectRatioValue("1/1")}>
-                            <svg className="w-6 h-6">
-                              <use href="#1-1"></use>
-                            </svg>
-                          </button>
-                        </div>
-                        <div
-                          className={`h-12 flex items-center justify-center gap-x-3 ${
+                          <svg className="w-6 h-6">
+                            <use href="#1-1"></use>
+                          </svg>
+                        </button>
+                        <button
+                          onClick={() => setAspectRatioValue("4/5")}
+                          className={`w-full h-12 flex items-center justify-center gap-x-3 ${
                             aspectRatioValue === "4/5"
                               ? "text-white"
                               : "text-neutral-500"
                           }`}
                         >
                           <span className="text-sm">4:5</span>
-                          <button onClick={() => setAspectRatioValue("4/5")}>
-                            <svg className="w-6 h-6">
-                              <use href="#4-5"></use>
-                            </svg>
-                          </button>
-                        </div>
-                        <div
-                          className={`h-12 flex items-center justify-center gap-x-3 ${
+                          <svg className="w-6 h-6">
+                            <use href="#4-5"></use>
+                          </svg>
+                        </button>
+                        <button
+                          onClick={() => setAspectRatioValue("16/9")}
+                          className={`w-full h-12 flex items-center justify-center gap-x-3 ${
                             aspectRatioValue === "16/9"
                               ? "text-white"
                               : "text-neutral-500"
                           }`}
                         >
                           <span className="text-sm">16-9</span>
-                          <button onClick={() => setAspectRatioValue("16/9")}>
-                            <svg className="w-6 h-6">
-                              <use href="#16-9"></use>
-                            </svg>
-                          </button>
-                        </div>
+                          <svg className="w-6 h-6">
+                            <use href="#16-9"></use>
+                          </svg>
+                        </button>
                       </div>
                     )}
                   </div>
                   <div className="relative">
                     <button
-                      className="text-white hover:opacity-70 transition-all"
+                      className="text-white bg-black/50 p-2 rounded-full hover:opacity-70 transition-all"
                       onClick={() => {
                         setIsActiveZoomPostTool(!isActiveZoomPostTool);
                         setIsActiveMultiplePostTool(false);
@@ -305,7 +301,7 @@ function CreateNewPost() {
                 </div>
                 <div className="relative">
                   <button
-                    className="text-white hover:opacity-70 transition-all"
+                    className="text-white bg-black/50 p-2 rounded-full hover:opacity-70 transition-all"
                     onClick={() => {
                       setIsActiveMultiplePostTool(!isActiveMultiplePostTool);
                       setIsActiveZoomPostTool(false);

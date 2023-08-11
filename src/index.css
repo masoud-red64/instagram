@@ -87,7 +87,7 @@
   }
 
   .create-new-post-mySwiper2 .swiper-pagination-bullet {
-    @apply bg-white opacity-50;
+    @apply bg-neutral-500 opacity-50;
   }
   .create-new-post-mySwiper2 .swiper-pagination-bullet-active {
     @apply bg-[#0095f6];
