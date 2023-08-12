@@ -19,6 +19,16 @@ const createNewPostSlice = createSlice({
             { id: 10, name: 'Perpetua', filter: 'contrast(1.1) brightness(1.25) saturate(1.1)' },
             { id: 11, name: 'Reyes', filter: 'sepia(.75) contrast(.75) brightness(1.25) saturate(1.4)' },
             { id: 12, name: 'Slumber', filter: 'sepia(.35) contrast(1.25) saturate(1.25)' },
+        ],
+        adjustments: [
+            { id: 1, name: 'Blur' },
+            { id: 2, name: 'Brightness' },
+            { id: 3, name: 'Contrast' },
+            { id: 4, name: 'Grayscale' },
+            { id: 5, name: 'Invert' },
+            { id: 6, name: 'Opacity' },
+            { id: 7, name: 'Saturate' },
+            { id: 8, name: 'Sepia' },
         ]
     },
     reducers: {
