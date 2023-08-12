@@ -101,7 +101,8 @@
     @apply inline;
   }
 
-  .input-range-zoom {
+  .input-range-zoom,
+  .input-adjustments {
     /* Remove default styles */
     -webkit-appearance: none;
     appearance: none;
@@ -128,6 +129,20 @@
       background: #fff;
       cursor: pointer;
       border-radius: 50%;
+    }
+  }
+
+  .input-adjustments {
+    background: #000; /* Set the background color of the slider track */
+
+    /* Style the thumb (slider handle) */
+    &::-webkit-slider-thumb {
+      background: #000; /* Set the background color of the thumb */
+    }
+
+    /* Firefox */
+    &::-moz-range-thumb {
+      background: #000;
     }
   }
 }
