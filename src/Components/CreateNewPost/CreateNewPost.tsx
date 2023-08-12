@@ -42,6 +42,7 @@ function CreateNewPost() {
   const [isActiveRatioPostTool, setIsActiveRatioPostTool] = useState(false);
   const [aspectRatioValue, setAspectRatioValue] = useState("");
   const [filter, setFilter] = useState<string | undefined>("");
+  const [editNav, setEditNav] = useState("filters");
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -441,39 +442,61 @@ function CreateNewPost() {
                   <div>
                     {/* Header */}
                     <div className="flex items-center justify-between child:grow child:text-sm/[18px] text-center child:py-2 border-b border-black/30">
-                      <button className="border-b border-black/70 font-[600]">
+                      <button
+                        className={`${
+                          editNav === "filters"
+                            ? "border-b border-black/70 font-[600]"
+                            : "opacity-30"
+                        }`}
+                        onClick={() => setEditNav("filters")}
+                      >
                         Filters
                       </button>
-                      <button className="opacity-30">Adjustments</button>
+                      <button
+                        className={`${
+                          editNav === "adjustments"
+                            ? "border-b border-black/70 font-[600]"
+                            : "opacity-30"
+                        }`}
+                        onClick={() => setEditNav("adjustments")}
+                      >
+                        Adjustments
+                      </button>
                     </div>
 
-                    {/* Filters */}
-                    <div className="h-[25.6rem] flex flex-wrap child:grow gap-4 p-4 overflow-y-auto">
-                      {createNewPostSelector.filters.map((filter) => (
-                        <div
-                          className="flex flex-col items-center gap-y-1 cursor-pointer"
-                          onClick={() => setFilter(filter.filter)}
-                        >
-                          <img
-                            src={`images/filters/${filter.name}.jpg`}
-                            alt=""
-                            className={`w-[88px] h-[88px] ${
-                              false && "border-2 border-[#0096f6]"
-                            } rounded-sm`}
-                          />
-                          <span
-                            className={`text-xs text-neutral-500 ${
-                              false && "text-[#0096f6] font-[600]"
-                            }`}
-                          >
-                            {filter.name}
-                          </span>
+                    {editNav === "filters" ? (
+                      <>
+                        {/* Filters */}
+                        <div className="h-[25.6rem] flex flex-wrap child:grow gap-4 p-4 overflow-y-auto">
+                          {createNewPostSelector.filters.map((filter) => (
+                            <div
+                              className="flex flex-col items-center gap-y-1 cursor-pointer"
+                              onClick={() => setFilter(filter.filter)}
+                            >
+                              <img
+                                src={`images/filters/${filter.name}.jpg`}
+                                alt=""
+                                className={`w-[88px] h-[88px] ${
+                                  false && "border-2 border-[#0096f6]"
+                                } rounded-sm`}
+                              />
+                              <span
+                                className={`text-xs text-neutral-500 ${
+                                  false && "text-[#0096f6] font-[600]"
+                                }`}
+                              >
+                                {filter.name}
+                              </span>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-
-                    {/* Adjustments */}
-                    <div></div>
+                      </>
+                    ) : (
+                      <>
+                        {/* Adjustments */}
+                        <div></div>
+                      </>
+                    )}
                   </div>
 
                   {/* Fourth Step */}
