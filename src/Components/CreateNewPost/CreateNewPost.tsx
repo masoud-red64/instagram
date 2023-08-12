@@ -448,126 +448,24 @@ function CreateNewPost() {
 
                     {/* Filters */}
                     <div className="h-[24rem] flex flex-wrap child:grow gap-4 p-4 overflow-y-auto">
-                      <div className="flex flex-col items-center gap-y-1">
-                        <img
-                          src="images/filters/Aden.jpg"
-                          alt=""
-                          className="w-[88px] h-[88px] border-2 border-[#0096f6] rounded-sm"
-                        />
-                        <span className="text-xs text-[#0096f6] font-[600]">
-                          Aden
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center gap-y-1">
-                        <img
-                          src="images/filters/Clarendon.jpg"
-                          alt=""
-                          className="w-[88px] h-[88px] rounded-sm"
-                        />
-                        <span className="text-xs text-neutral-500 font-[600]">
-                          Clarendon
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center gap-y-1">
-                        <img
-                          src="images/filters/Crema.jpg"
-                          alt=""
-                          className="w-[88px] h-[88px] rounded-sm"
-                        />
-                        <span className="text-xs text-neutral-500 font-[600]">
-                          Crema
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center gap-y-1">
-                        <img
-                          src="images/filters/Gingham.jpg"
-                          alt=""
-                          className="w-[88px] h-[88px] rounded-sm"
-                        />
-                        <span className="text-xs text-neutral-500 font-[600]">
-                          Gingham
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center gap-y-1">
-                        <img
-                          src="images/filters/Juno.jpg"
-                          alt=""
-                          className="w-[88px] h-[88px] rounded-sm"
-                        />
-                        <span className="text-xs text-neutral-500 font-[600]">
-                          Juno
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center gap-y-1">
-                        <img
-                          src="images/filters/Lark.jpg"
-                          alt=""
-                          className="w-[88px] h-[88px] rounded-sm"
-                        />
-                        <span className="text-xs text-neutral-500 font-[600]">
-                          Lark
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center gap-y-1">
-                        <img
-                          src="images/filters/Ludwig.jpg"
-                          alt=""
-                          className="w-[88px] h-[88px] rounded-sm"
-                        />
-                        <span className="text-xs text-neutral-500 font-[600]">
-                          Ludwig
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center gap-y-1">
-                        <img
-                          src="images/filters/Moon.jpg"
-                          alt=""
-                          className="w-[88px] h-[88px] rounded-sm"
-                        />
-                        <span className="text-xs text-neutral-500 font-[600]">
-                          Moon
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center gap-y-1">
-                        <img
-                          src="images/filters/Original.jpg"
-                          alt=""
-                          className="w-[88px] h-[88px] rounded-sm"
-                        />
-                        <span className="text-xs text-neutral-500 font-[600]">
-                          Original
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center gap-y-1">
-                        <img
-                          src="images/filters/Perpetua.jpg"
-                          alt=""
-                          className="w-[88px] h-[88px] rounded-sm"
-                        />
-                        <span className="text-xs text-neutral-500 font-[600]">
-                          Perpetua
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center gap-y-1">
-                        <img
-                          src="images/filters/Reyes.jpg"
-                          alt=""
-                          className="w-[88px] h-[88px] rounded-sm"
-                        />
-                        <span className="text-xs text-neutral-500 font-[600]">
-                          Reyes
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center gap-y-1">
-                        <img
-                          src="images/filters/Slumber.jpg"
-                          alt=""
-                          className="w-[88px] h-[88px] rounded-sm"
-                        />
-                        <span className="text-xs text-neutral-500 font-[600]">
-                          Slumber
-                        </span>
-                      </div>
+                      {createNewPostSelector.filters.map((filter) => (
+                        <div className="flex flex-col items-center gap-y-1">
+                          <img
+                            src={`images/filters/${filter.name}.jpg`}
+                            alt=""
+                            className={`w-[88px] h-[88px] ${
+                              false && "border-2 border-[#0096f6]"
+                            } rounded-sm`}
+                          />
+                          <span
+                            className={`text-xs text-neutral-500 ${
+                              false && "text-[#0096f6] font-[600]"
+                            }`}
+                          >
+                            {filter.name}
+                          </span>
+                        </div>
+                      ))}
                     </div>
 
                     {/* Adjustments */}

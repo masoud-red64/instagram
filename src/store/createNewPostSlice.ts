@@ -8,7 +8,7 @@ const createNewPostSlice = createSlice({
         isOpenModal: false,
         filters: [
             { id: 1, name: 'Aden', filter: 'hue-rotate(-20deg) contrast(.9) saturate(.85) brightness(1.2)' },
-            { id: 2, name: 'Clarendon ', filter: 'sepia(.15) contrast(1.25) brightness(1.25) hue-rotate(5deg)' },
+            { id: 2, name: 'Clarendon', filter: 'sepia(.15) contrast(1.25) brightness(1.25) hue-rotate(5deg)' },
             { id: 3, name: 'Crema', filter: 'sepia(.5) contrast(1.25) brightness(1.15) saturate(.9) hue-rotate(-2deg)' },
             { id: 4, name: 'Gingham', filter: 'contrast(1.1) brightness(1.1)' },
             { id: 5, name: 'Juno', filter: 'sepia(.35) contrast(1.15) brightness(1.15) saturate(1.8)' },
