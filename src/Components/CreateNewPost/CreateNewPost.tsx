@@ -41,6 +41,7 @@ function CreateNewPost() {
   const [isActiveZoomPostTool, setIsActiveZoomPostTool] = useState(false);
   const [isActiveRatioPostTool, setIsActiveRatioPostTool] = useState(false);
   const [aspectRatioValue, setAspectRatioValue] = useState("");
+  const [filter, setFilter] = useState<string | undefined>("");
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -208,7 +209,7 @@ function CreateNewPost() {
                                           100
                                       })`,
                                       aspectRatio: aspectRatioValue,
-                                      filter: `hue-rotate(-20deg) contrast(.9) saturate(.85) brightness(1.2)`,
+                                      filter: filter,
                                     }}
                                   />
                                 ) : (
@@ -449,7 +450,10 @@ function CreateNewPost() {
                     {/* Filters */}
                     <div className="h-[24rem] flex flex-wrap child:grow gap-4 p-4 overflow-y-auto">
                       {createNewPostSelector.filters.map((filter) => (
-                        <div className="flex flex-col items-center gap-y-1">
+                        <div
+                          className="flex flex-col items-center gap-y-1 cursor-pointer"
+                          onClick={() => setFilter(filter.filter)}
+                        >
                           <img
                             src={`images/filters/${filter.name}.jpg`}
                             alt=""
