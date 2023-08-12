@@ -440,15 +440,15 @@ function CreateNewPost() {
                   {/* Third Step */}
                   <div>
                     {/* Header */}
-                    <div className="flex items-center justify-between child:grow text-center child:py-[14px] border-b border-black/30">
-                      <button className="border-b border-black/70">
+                    <div className="flex items-center justify-between child:grow child:text-sm/[18px] text-center child:py-2 border-b border-black/30">
+                      <button className="border-b border-black/70 font-[600]">
                         Filters
                       </button>
                       <button className="opacity-30">Adjustments</button>
                     </div>
 
                     {/* Filters */}
-                    <div className="h-[24rem] flex flex-wrap child:grow gap-4 p-4 overflow-y-auto">
+                    <div className="h-[25.6rem] flex flex-wrap child:grow gap-4 p-4 overflow-y-auto">
                       {createNewPostSelector.filters.map((filter) => (
                         <div
                           className="flex flex-col items-center gap-y-1 cursor-pointer"
