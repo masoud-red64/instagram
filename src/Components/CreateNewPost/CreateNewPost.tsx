@@ -208,6 +208,7 @@ function CreateNewPost() {
                                           100
                                       })`,
                                       aspectRatio: aspectRatioValue,
+                                      filter: `hue-rotate(-20deg) contrast(.9) saturate(.85) brightness(1.2)`,
                                     }}
                                   />
                                 ) : (
