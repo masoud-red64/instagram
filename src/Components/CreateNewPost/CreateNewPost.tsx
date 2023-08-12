@@ -105,28 +105,44 @@ function CreateNewPost() {
   return (
     createNewPostSelector.isShowCreateNewPost && (
       <>
-        <div className="absolute select-none top-1/2 right-1/2 w-[496px] h-[calc(67%+27px)] translate-x-1/2 -translate-y-1/2 z-[55] bg-white rounded-xl overflow-hidden">
+        <div className="absolute select-none top-1/2 right-1/2 w-fit h-[496px] translate-x-1/2 -translate-y-1/2 z-[55] bg-white rounded-xl overflow-hidden">
           {/* Top */}
-          <div className="p-3">
+          <div className="p-3 border-b border-[#dbdbdb]">
             {createNewPostSelector.step === "first" && (
-              <h4 className="font-[600] text-center py-3 border-b border-[#dbdbdb]">
-                Create new post
-              </h4>
+              <h4 className="font-[600] text-center">Create new post</h4>
             )}
 
-            {createNewPostSelector.step === "second" && (
+            {(createNewPostSelector.step === "second" ||
+              createNewPostSelector.step === "third") && (
               <div className="flex justify-between items-center">
                 <button
                   onClick={() => {
-                    dispatch(setIsOpenModal(true));
+                    if (createNewPostSelector.step === "second") {
+                      dispatch(setIsOpenModal(true));
+                    } else if (createNewPostSelector.step === "third") {
+                      dispatch(setStepOfCreateNewPost("second"));
+                    }
                   }}
                 >
                   <svg className="w-6 h-6">
                     <use href="#arrow-left"></use>
                   </svg>
                 </button>
-                <span className="font-[600]">Crop</span>
-                <button className="font-[600] text-[#0095f6]">Next</button>
+                <span className="font-[600]">
+                  {createNewPostSelector.step === "second"
+                    ? "Crop"
+                    : createNewPostSelector.step === "third" && "Edit"}
+                </span>
+                <button
+                  className="font-[600] text-[#0095f6]"
+                  onClick={() => {
+                    if (createNewPostSelector.step === "second") {
+                      dispatch(setStepOfCreateNewPost("third"));
+                    }
+                  }}
+                >
+                  Next
+                </button>
               </div>
             )}
           </div>
@@ -134,7 +150,7 @@ function CreateNewPost() {
           {/* Body */}
           {/* First Step */}
           {createNewPostSelector.step === "first" && (
-            <div className="w-full h-[91%] flex flex-col gap-y-4 items-center justify-center p-6 ">
+            <div className="w-[496px] h-[91%] flex flex-col gap-y-4 items-center justify-center p-6 ">
               <svg className="w-24 h-[77px]">
                 <use href="#create-new-post"></use>
               </svg>
@@ -149,261 +165,277 @@ function CreateNewPost() {
             </div>
           )}
 
-          {/* Second Step */}
-          {createNewPostSelector.step === "second" && (
-            <div className="relative w-full h-[91%]">
-              <div className="absolute inset-0">
-                <Swiper
-                  onSliderMove={() => {
-                    setIsActiveMultiplePostTool(false);
-                    setIsActiveRatioPostTool(false);
-                    setIsActiveZoomPostTool(false);
-                  }}
-                  navigation={true}
-                  pagination={true}
-                  thumbs={{ swiper: thumbsSwiper }}
-                  modules={[FreeMode, Navigation, Pagination, Thumbs]}
-                  className="create-new-post-mySwiper2 h-full"
-                >
-                  {newPosts?.map((newPost, index) => (
-                    <>
-                      <SwiperSlide
-                        key={newPost.id}
-                        style={{ width: "100rem" }}
-                        onClick={() => {
-                          setIsActiveMultiplePostTool(false);
-                          setIsActiveRatioPostTool(false);
-                          setIsActiveZoomPostTool(false);
-                        }}
-                      >
-                        <div className="relative overflow-hidden">
-                          {file && (
-                            <div className="h-[29rem] flex items-center justify-center">
-                              {newPost.img ? (
-                                <img
-                                  src={newPost.img}
-                                  alt=""
+          {(createNewPostSelector.step === "second" ||
+            createNewPostSelector.step === "third") && (
+            <div className="relative w-fit h-[91%] flex">
+              {/* Second Step */}
+              <div className="w-[8rem] xs:w-[10rem] sm:w-[22rem] md:w-[25rem] lg:w-[30rem]">
+                <div>
+                  <Swiper
+                    onSliderMove={() => {
+                      setIsActiveMultiplePostTool(false);
+                      setIsActiveRatioPostTool(false);
+                      setIsActiveZoomPostTool(false);
+                    }}
+                    navigation={true}
+                    pagination={true}
+                    thumbs={{ swiper: thumbsSwiper }}
+                    modules={[FreeMode, Navigation, Pagination, Thumbs]}
+                    className="create-new-post-mySwiper2 h-full"
+                  >
+                    {newPosts?.map((newPost, index) => (
+                      <>
+                        <SwiperSlide
+                          key={newPost.id}
+                          style={{ width: "100rem" }}
+                          onClick={() => {
+                            setIsActiveMultiplePostTool(false);
+                            setIsActiveRatioPostTool(false);
+                            setIsActiveZoomPostTool(false);
+                          }}
+                        >
+                          <div className="relative overflow-hidden">
+                            {file && (
+                              <div className="h-[29rem] flex items-center justify-center">
+                                {newPost.img ? (
+                                  <img
+                                    src={newPost.img}
+                                    alt=""
+                                    style={{
+                                      transform: `scale(${
+                                        1 +
+                                        Number(inputRangeZoomValues[index]) /
+                                          100
+                                      })`,
+                                      aspectRatio: aspectRatioValue,
+                                    }}
+                                  />
+                                ) : (
+                                  <video
+                                    autoPlay
+                                    className="h-full object-cover"
+                                    style={{
+                                      transform: `scale(${
+                                        1 +
+                                        Number(inputRangeZoomValues[index]) /
+                                          100
+                                      })`,
+                                    }}
+                                  >
+                                    <source
+                                      src={newPost.video}
+                                      type={file.type}
+                                    />
+                                    Your browser does not support the video tag.
+                                  </video>
+                                )}
+                              </div>
+                            )}
+                            {isActiveZoomPostTool && (
+                              <div className="flex items-center justify-center w-[132px] h-8  absolute bg-[#1a1a1a] bottom-16 left-20 py-2 px-3 rounded-lg">
+                                <input
+                                  className="input-range-zoom"
+                                  value={inputRangeZoomValues[index] || 0}
+                                  onChange={(e) =>
+                                    handleZoomChange(index, e.target.value)
+                                  }
+                                  type="range"
+                                  name=""
+                                  id=""
                                   style={{
-                                    transform: `scale(${
-                                      1 +
-                                      Number(inputRangeZoomValues[index]) / 100
-                                    })`,
-                                    aspectRatio: aspectRatioValue,
+                                    backgroundImage: `linear-gradient(to right,rgb(255, 255, 255) 0%,rgb(255, 255, 255) ${Number(
+                                      inputRangeZoomValues[index] || 0
+                                    )}% ,rgb(0, 0, 0) ${Number(
+                                      inputRangeZoomValues[index] || 0
+                                    )}% ,rgb(0, 0, 0) 100%)`,
                                   }}
                                 />
-                              ) : (
-                                <video
-                                  autoPlay
-                                  className="h-full object-cover"
-                                  style={{
-                                    transform: `scale(${
-                                      1 +
-                                      Number(inputRangeZoomValues[index]) / 100
-                                    })`,
-                                  }}
-                                >
-                                  <source
-                                    src={newPost.video}
-                                    type={file.type}
-                                  />
-                                  Your browser does not support the video tag.
-                                </video>
-                              )}
-                            </div>
-                          )}
-                          {isActiveZoomPostTool && (
-                            <div className="flex items-center justify-center w-[132px] h-8  absolute bg-[#1a1a1a] bottom-16 left-20 py-2 px-3 rounded-lg">
-                              <input
-                                className="input-range-zoom"
-                                value={inputRangeZoomValues[index] || 0}
-                                onChange={(e) =>
-                                  handleZoomChange(index, e.target.value)
-                                }
-                                type="range"
-                                name=""
-                                id=""
-                                style={{
-                                  backgroundImage: `linear-gradient(to right,rgb(255, 255, 255) 0%,rgb(255, 255, 255) ${Number(
-                                    inputRangeZoomValues[index] || 0
-                                  )}% ,rgb(0, 0, 0) ${Number(
-                                    inputRangeZoomValues[index] || 0
-                                  )}% ,rgb(0, 0, 0) 100%)`,
-                                }}
-                              />
-                            </div>
-                          )}
-                        </div>
-                      </SwiperSlide>
-                    </>
-                  ))}
-                </Swiper>
-              </div>
-              <div className="absolute bottom-4 right-6 left-6 flex justify-between items-center z-10">
-                <div className="flex items-center gap-x-6">
-                  <div className="relative">
-                    <button
-                      className="text-white bg-black/50 p-2 rounded-full hover:opacity-70 transition-all"
-                      onClick={() => {
-                        setIsActiveRatioPostTool(!isActiveRatioPostTool);
-                        setIsActiveMultiplePostTool(false);
-                        setIsActiveZoomPostTool(false);
-                      }}
-                    >
-                      <svg className="w-4 h-4">
-                        <use href="#aspect-ratio"></use>
-                      </svg>
-                    </button>
-
-                    {isActiveRatioPostTool && (
-                      <div className="w-[120px] h-[195px]  absolute bg-[#1a1a1a] -top-52 rounded-lg divide-y">
-                        <button
-                          onClick={() => setAspectRatioValue("")}
-                          className={`w-full h-12 flex items-center justify-center gap-x-3 ${
-                            aspectRatioValue === ""
-                              ? "text-white"
-                              : "text-neutral-500"
-                          }`}
-                        >
-                          <span className="text-sm">Original</span>
-                          <svg className="w-6 h-6">
-                            <use href="#image"></use>
-                          </svg>
-                        </button>
-                        <button
-                          onClick={() => setAspectRatioValue("1/1")}
-                          className={`w-full h-12 flex items-center justify-center gap-x-3 ${
-                            aspectRatioValue === "1/1"
-                              ? "text-white"
-                              : "text-neutral-500"
-                          }`}
-                        >
-                          <span className="text-sm">1:1</span>
-                          <svg className="w-6 h-6">
-                            <use href="#1-1"></use>
-                          </svg>
-                        </button>
-                        <button
-                          onClick={() => setAspectRatioValue("4/5")}
-                          className={`w-full h-12 flex items-center justify-center gap-x-3 ${
-                            aspectRatioValue === "4/5"
-                              ? "text-white"
-                              : "text-neutral-500"
-                          }`}
-                        >
-                          <span className="text-sm">4:5</span>
-                          <svg className="w-6 h-6">
-                            <use href="#4-5"></use>
-                          </svg>
-                        </button>
-                        <button
-                          onClick={() => setAspectRatioValue("16/9")}
-                          className={`w-full h-12 flex items-center justify-center gap-x-3 ${
-                            aspectRatioValue === "16/9"
-                              ? "text-white"
-                              : "text-neutral-500"
-                          }`}
-                        >
-                          <span className="text-sm">16-9</span>
-                          <svg className="w-6 h-6">
-                            <use href="#16-9"></use>
-                          </svg>
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                  <div className="relative">
-                    <button
-                      className="text-white bg-black/50 p-2 rounded-full hover:opacity-70 transition-all"
-                      onClick={() => {
-                        setIsActiveZoomPostTool(!isActiveZoomPostTool);
-                        setIsActiveMultiplePostTool(false);
-                        setIsActiveRatioPostTool(false);
-                      }}
-                    >
-                      <svg className="w-4 h-4">
-                        <use href="#zoom"></use>
-                      </svg>
-                    </button>
-                  </div>
+                              </div>
+                            )}
+                          </div>
+                        </SwiperSlide>
+                      </>
+                    ))}
+                  </Swiper>
                 </div>
-                <div className="relative">
-                  <button
-                    className="text-white bg-black/50 p-2 rounded-full hover:opacity-70 transition-all"
-                    onClick={() => {
-                      setIsActiveMultiplePostTool(!isActiveMultiplePostTool);
-                      setIsActiveZoomPostTool(false);
-                      setIsActiveRatioPostTool(false);
-                    }}
-                  >
-                    <svg className="w-4 h-4">
-                      <use href="#multiple-post"></use>
-                    </svg>
-                  </button>
-
-                  {isActiveMultiplePostTool && (
-                    <div className="absolute -top-32 right-0 h-[118px] bg-[#1a1a1a] opacity-80 p-2 rounded-lg">
-                      <div className="flex gap-x-2">
-                        {/* Slides */}
-                        <Swiper
-                          onSwiper={(swiper) => setThumbsSwiper(swiper)}
-                          spaceBetween={20}
-                          slidesPerView={4}
-                          freeMode={true}
-                          watchSlidesProgress={true}
-                          navigation={true}
-                          modules={[FreeMode, Navigation, Thumbs]}
-                          className="create-new-post-mySwiper w-96"
+                {createNewPostSelector.step === "second" && (
+                  <div className="absolute bottom-4 right-6 left-6 flex justify-between items-center z-10">
+                    <div className="flex items-center gap-x-6">
+                      <div className="relative">
+                        <button
+                          className="text-white bg-black/50 p-2 rounded-full hover:opacity-70 transition-all"
+                          onClick={() => {
+                            setIsActiveRatioPostTool(!isActiveRatioPostTool);
+                            setIsActiveMultiplePostTool(false);
+                            setIsActiveZoomPostTool(false);
+                          }}
                         >
-                          {newPosts?.map((newPost) => (
-                            <SwiperSlide key={newPost.id}>
-                              {file && (
-                                <div>
-                                  <div className="relative w-[94px] h-[94px]">
-                                    <button
-                                      className="remove-new-post-icon absolute top-2 right-2 text-white hover:opacity-70 "
-                                      onClick={() => removeNewPost(newPost.id)}
-                                    >
-                                      <svg className="w-3 h-3">
-                                        <use href="#close"></use>
-                                      </svg>
-                                    </button>
-                                    {newPost.img ? (
-                                      <img
-                                        src={newPost.img}
-                                        alt=""
-                                        className="h-full"
-                                      />
-                                    ) : (
-                                      <video autoPlay className="h-full ">
-                                        <source
-                                          src={newPost.video}
-                                          type={file.type}
-                                        />
-                                        Your browser does not support the video
-                                        tag.
-                                      </video>
-                                    )}
-                                  </div>
-                                </div>
-                              )}
-                            </SwiperSlide>
-                          ))}
-                        </Swiper>
-                        <div>
-                          <button
-                            className="w-12 h-12 flex items-center justify-center border rounded-full"
-                            onClick={handleClick}
-                          >
-                            <svg className="w-[22px] h-[22px] text-neutral-300">
-                              <use href="#plus"></use>
-                            </svg>
-                          </button>
-                        </div>
+                          <svg className="w-4 h-4">
+                            <use href="#aspect-ratio"></use>
+                          </svg>
+                        </button>
+
+                        {isActiveRatioPostTool && (
+                          <div className="w-[120px] h-[195px]  absolute bg-[#1a1a1a] -top-52 rounded-lg divide-y">
+                            <button
+                              onClick={() => setAspectRatioValue("")}
+                              className={`w-full h-12 flex items-center justify-center gap-x-3 ${
+                                aspectRatioValue === ""
+                                  ? "text-white"
+                                  : "text-neutral-500"
+                              }`}
+                            >
+                              <span className="text-sm">Original</span>
+                              <svg className="w-6 h-6">
+                                <use href="#image"></use>
+                              </svg>
+                            </button>
+                            <button
+                              onClick={() => setAspectRatioValue("1/1")}
+                              className={`w-full h-12 flex items-center justify-center gap-x-3 ${
+                                aspectRatioValue === "1/1"
+                                  ? "text-white"
+                                  : "text-neutral-500"
+                              }`}
+                            >
+                              <span className="text-sm">1:1</span>
+                              <svg className="w-6 h-6">
+                                <use href="#1-1"></use>
+                              </svg>
+                            </button>
+                            <button
+                              onClick={() => setAspectRatioValue("4/5")}
+                              className={`w-full h-12 flex items-center justify-center gap-x-3 ${
+                                aspectRatioValue === "4/5"
+                                  ? "text-white"
+                                  : "text-neutral-500"
+                              }`}
+                            >
+                              <span className="text-sm">4:5</span>
+                              <svg className="w-6 h-6">
+                                <use href="#4-5"></use>
+                              </svg>
+                            </button>
+                            <button
+                              onClick={() => setAspectRatioValue("16/9")}
+                              className={`w-full h-12 flex items-center justify-center gap-x-3 ${
+                                aspectRatioValue === "16/9"
+                                  ? "text-white"
+                                  : "text-neutral-500"
+                              }`}
+                            >
+                              <span className="text-sm">16-9</span>
+                              <svg className="w-6 h-6">
+                                <use href="#16-9"></use>
+                              </svg>
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                      <div className="relative">
+                        <button
+                          className="text-white bg-black/50 p-2 rounded-full hover:opacity-70 transition-all"
+                          onClick={() => {
+                            setIsActiveZoomPostTool(!isActiveZoomPostTool);
+                            setIsActiveMultiplePostTool(false);
+                            setIsActiveRatioPostTool(false);
+                          }}
+                        >
+                          <svg className="w-4 h-4">
+                            <use href="#zoom"></use>
+                          </svg>
+                        </button>
                       </div>
                     </div>
-                  )}
-                </div>
+                    <div className="relative">
+                      <button
+                        className="text-white bg-black/50 p-2 rounded-full hover:opacity-70 transition-all"
+                        onClick={() => {
+                          setIsActiveMultiplePostTool(
+                            !isActiveMultiplePostTool
+                          );
+                          setIsActiveZoomPostTool(false);
+                          setIsActiveRatioPostTool(false);
+                        }}
+                      >
+                        <svg className="w-4 h-4">
+                          <use href="#multiple-post"></use>
+                        </svg>
+                      </button>
+
+                      {isActiveMultiplePostTool && (
+                        <div className="absolute -top-32 right-0 h-[118px] bg-[#1a1a1a] opacity-80 p-2 rounded-lg">
+                          <div className="flex gap-x-2">
+                            {/* Slides */}
+                            <Swiper
+                              onSwiper={(swiper) => setThumbsSwiper(swiper)}
+                              spaceBetween={20}
+                              slidesPerView={4}
+                              freeMode={true}
+                              watchSlidesProgress={true}
+                              navigation={true}
+                              modules={[FreeMode, Navigation, Thumbs]}
+                              className="create-new-post-mySwiper w-96"
+                            >
+                              {newPosts?.map((newPost) => (
+                                <SwiperSlide key={newPost.id}>
+                                  {file && (
+                                    <div>
+                                      <div className="relative w-[94px] h-[94px]">
+                                        <button
+                                          className="remove-new-post-icon absolute top-2 right-2 text-white hover:opacity-70 "
+                                          onClick={() =>
+                                            removeNewPost(newPost.id)
+                                          }
+                                        >
+                                          <svg className="w-3 h-3">
+                                            <use href="#close"></use>
+                                          </svg>
+                                        </button>
+                                        {newPost.img ? (
+                                          <img
+                                            src={newPost.img}
+                                            alt=""
+                                            className="h-full"
+                                          />
+                                        ) : (
+                                          <video autoPlay className="h-full ">
+                                            <source
+                                              src={newPost.video}
+                                              type={file.type}
+                                            />
+                                            Your browser does not support the
+                                            video tag.
+                                          </video>
+                                        )}
+                                      </div>
+                                    </div>
+                                  )}
+                                </SwiperSlide>
+                              ))}
+                            </Swiper>
+                            <div>
+                              <button
+                                className="w-12 h-12 flex items-center justify-center border rounded-full"
+                                onClick={handleClick}
+                              >
+                                <svg className="w-[22px] h-[22px] text-neutral-300">
+                                  <use href="#plus"></use>
+                                </svg>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
+
+              {/* Third Step */}
+              {createNewPostSelector.step === "third" && (
+                <div className="h-full w-[10rem] xs:w-[12rem] sm:w-[16rem] md:w-[18rem] lg:w-[20rem] bg-red-400"></div>
+              )}
             </div>
           )}
         </div>
