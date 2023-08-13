@@ -175,6 +175,7 @@ function CreateNewPost() {
                   onClick={() => {
                     if (createNewPostSelector.step === "second") {
                       dispatch(setStepOfCreateNewPost("third"));
+                      setIsActiveZoomPostTool(false);
                     }
                   }}
                 >
@@ -187,7 +188,7 @@ function CreateNewPost() {
           {/* Body */}
           {/* First Step */}
           {createNewPostSelector.step === "first" && (
-            <div className="w-[496px] h-[91%] flex flex-col gap-y-4 items-center justify-center p-6 ">
+            <div className="w-72 xs:w-80 sm:w-[496px] h-[91%] flex flex-col gap-y-4 items-center justify-center p-6 ">
               <svg className="w-24 h-[77px]">
                 <use href="#create-new-post"></use>
               </svg>
@@ -206,7 +207,13 @@ function CreateNewPost() {
             createNewPostSelector.step === "third") && (
             <div className="relative w-fit h-[91%] flex">
               {/* Second Step */}
-              <div className="w-[8rem] xs:w-[10rem] sm:w-[22rem] md:w-[25rem] lg:w-[30rem]">
+              <div
+                className={`${
+                  createNewPostSelector.step === "second"
+                    ? "w-72 xs:w-80 sm:w-[496px]"
+                    : "w-[8rem] xs:w-[10rem] sm:w-[22rem] md:w-[25rem] lg:w-[30rem]"
+                } `}
+              >
                 <div>
                   <Swiper
                     onSliderMove={() => {
@@ -424,23 +431,28 @@ function CreateNewPost() {
                       </button>
 
                       {isActiveMultiplePostTool && (
-                        <div className="absolute -top-32 right-0 h-[118px] bg-[#1a1a1a] opacity-80 p-2 rounded-lg">
+                        <div className="w-64 sm:w-[400px] absolute -top-32 right-0 h-[118px] bg-[#1a1a1a] opacity-80 p-2 rounded-lg">
                           <div className="flex gap-x-2">
                             {/* Slides */}
                             <Swiper
                               onSwiper={(swiper) => setThumbsSwiper(swiper)}
-                              spaceBetween={20}
-                              slidesPerView={4}
+                              slidesPerView={1}
+                              breakpoints={{
+                                664: {
+                                  spaceBetween: 5,
+                                  slidesPerView: 3,
+                                },
+                              }}
                               freeMode={true}
                               watchSlidesProgress={true}
                               navigation={true}
                               modules={[FreeMode, Navigation, Thumbs]}
-                              className="create-new-post-mySwiper w-96"
+                              className="create-new-post-mySwiper"
                             >
                               {newPosts?.map((newPost) => (
                                 <SwiperSlide key={newPost.id}>
                                   {file && (
-                                    <div>
+                                    <div className="flex items-center justify-center">
                                       <div className="relative w-[94px] h-[94px]">
                                         <button
                                           className="remove-new-post-icon absolute top-2 right-2 text-white hover:opacity-70 "
