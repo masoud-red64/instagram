@@ -18,6 +18,7 @@ import {
   setStepOfCreateNewPost,
 } from "../../store/createNewPostSlice";
 import TransparentOverlay from "../TransparentOverlay/TransparentOverlay";
+import Story from "../Story/Story";
 
 type NewPostsType = {
   id: string;
@@ -149,8 +150,7 @@ function CreateNewPost() {
               <h4 className="font-[600] text-center">Create new post</h4>
             )}
 
-            {(createNewPostSelector.step === "second" ||
-              createNewPostSelector.step === "third") && (
+            {createNewPostSelector.step !== "first" && (
               <div className="flex justify-between items-center">
                 <button
                   onClick={() => {
@@ -158,6 +158,8 @@ function CreateNewPost() {
                       dispatch(setIsOpenModal(true));
                     } else if (createNewPostSelector.step === "third") {
                       dispatch(setStepOfCreateNewPost("second"));
+                    } else if (createNewPostSelector.step === "fourth") {
+                      dispatch(setStepOfCreateNewPost("third"));
                     }
                   }}
                 >
@@ -168,7 +170,10 @@ function CreateNewPost() {
                 <span className="font-[600]">
                   {createNewPostSelector.step === "second"
                     ? "Crop"
-                    : createNewPostSelector.step === "third" && "Edit"}
+                    : createNewPostSelector.step === "third"
+                    ? "Edit"
+                    : createNewPostSelector.step === "fourth" &&
+                      "Create new post"}
                 </span>
                 <button
                   className="font-[600] text-[#0095f6]"
@@ -176,10 +181,15 @@ function CreateNewPost() {
                     if (createNewPostSelector.step === "second") {
                       dispatch(setStepOfCreateNewPost("third"));
                       setIsActiveZoomPostTool(false);
+                    } else if (createNewPostSelector.step === "third") {
+                      dispatch(setStepOfCreateNewPost("fourth"));
                     }
                   }}
                 >
-                  Next
+                  {createNewPostSelector.step === "second" ||
+                  createNewPostSelector.step === "third"
+                    ? "Next"
+                    : createNewPostSelector.step === "fourth" && "Share"}
                 </button>
               </div>
             )}
@@ -204,7 +214,8 @@ function CreateNewPost() {
           )}
 
           {(createNewPostSelector.step === "second" ||
-            createNewPostSelector.step === "third") && (
+            createNewPostSelector.step === "third" ||
+            createNewPostSelector.step === "fourth") && (
             <div className="relative w-fit h-[91%] flex">
               {/* Second Step */}
               <div
@@ -505,184 +516,211 @@ function CreateNewPost() {
               </div>
 
               {/* Third Step */}
-              {createNewPostSelector.step === "third" && (
+              {(createNewPostSelector.step === "third" ||
+                createNewPostSelector.step === "fourth") && (
                 <div className="h-full w-[10rem] xs:w-[12rem] sm:w-[16rem] md:w-[18rem] lg:w-[20rem] bg-white border-l">
                   {/* Third Step */}
-                  <div>
-                    {/* Header */}
-                    <div className="flex items-center justify-between child:grow child:text-sm/[18px] text-center child:py-2 border-b border-black/30">
-                      <button
-                        className={`${
-                          editNav === "filters"
-                            ? "border-b border-black/70 font-[600]"
-                            : "opacity-30"
-                        }`}
-                        onClick={() => setEditNav("filters")}
-                      >
-                        Filters
-                      </button>
-                      <button
-                        className={`${
-                          editNav === "adjustments"
-                            ? "border-b border-black/70 font-[600]"
-                            : "opacity-30"
-                        }`}
-                        onClick={() => setEditNav("adjustments")}
-                      >
-                        Adjustments
-                      </button>
-                    </div>
+                  {createNewPostSelector.step === "third" && (
+                    <div>
+                      {/* Header */}
+                      <div className="flex items-center justify-between child:grow child:text-sm/[18px] text-center child:py-2 border-b border-black/30">
+                        <button
+                          className={`${
+                            editNav === "filters"
+                              ? "border-b border-black/70 font-[600]"
+                              : "opacity-30"
+                          }`}
+                          onClick={() => setEditNav("filters")}
+                        >
+                          Filters
+                        </button>
+                        <button
+                          className={`${
+                            editNav === "adjustments"
+                              ? "border-b border-black/70 font-[600]"
+                              : "opacity-30"
+                          }`}
+                          onClick={() => setEditNav("adjustments")}
+                        >
+                          Adjustments
+                        </button>
+                      </div>
 
-                    {editNav === "filters" ? (
-                      <>
-                        {/* Filters */}
-                        <div className="h-[25.6rem] flex flex-wrap child:grow gap-4 p-4 overflow-y-auto">
-                          {createNewPostSelector.filters.map((filter) => (
-                            <div
-                              className="flex flex-col items-center gap-y-1 cursor-pointer"
-                              onClick={() => setFilterValue(filter.filter)}
-                            >
-                              <img
-                                src={`images/filters/${filter.name}.jpg`}
-                                alt=""
-                                className={`w-[88px] h-[88px] ${
-                                  filter.filter === filterValue &&
-                                  "border-[3px] border-[#0096f6]"
-                                } rounded-sm`}
-                              />
-                              <span
-                                className={`text-xs ${
-                                  filter.filter === filterValue
-                                    ? "text-[#0096f6] font-[600]"
-                                    : "text-neutral-500"
-                                }`}
+                      {editNav === "filters" ? (
+                        <>
+                          {/* Filters */}
+                          <div className="h-[25.6rem] flex flex-wrap child:grow gap-4 p-4 overflow-y-auto">
+                            {createNewPostSelector.filters.map((filter) => (
+                              <div
+                                className="flex flex-col items-center gap-y-1 cursor-pointer"
+                                onClick={() => setFilterValue(filter.filter)}
                               >
-                                {filter.name}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        {/* Adjustments */}
-                        <div className="px-4 pb-4 h-[25.6rem] overflow-y-auto">
-                          {createNewPostSelector.adjustments.map(
-                            (adjustment) => (
-                              <div>
-                                <div className="flex items-center justify-between py-[14px]">
-                                  <span>{adjustment.name}</span>
+                                <img
+                                  src={`images/filters/${filter.name}.jpg`}
+                                  alt=""
+                                  className={`w-[88px] h-[88px] ${
+                                    filter.filter === filterValue &&
+                                    "border-[3px] border-[#0096f6]"
+                                  } rounded-sm`}
+                                />
+                                <span
+                                  className={`text-xs ${
+                                    filter.filter === filterValue
+                                      ? "text-[#0096f6] font-[600]"
+                                      : "text-neutral-500"
+                                  }`}
+                                >
+                                  {filter.name}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          {/* Adjustments */}
+                          <div className="px-4 pb-4 h-[25.6rem] overflow-y-auto">
+                            {createNewPostSelector.adjustments.map(
+                              (adjustment) => (
+                                <div>
+                                  <div className="flex items-center justify-between py-[14px]">
+                                    <span>{adjustment.name}</span>
 
-                                  {inputRangeAdjustmentValues[
-                                    adjustment.name
-                                  ] !==
-                                    defaultAdjustmentValues[
+                                    {inputRangeAdjustmentValues[
                                       adjustment.name
-                                    ] && (
-                                    <button
-                                      className="font-[600] text-sm text-[#0095f6]"
-                                      onClick={() => {
-                                        setInputRangeAdjustmentValues(
-                                          (
-                                            prevAdjustments: inputRangeAdjustmentValuesType
-                                          ) => ({
-                                            ...prevAdjustments,
-                                            [adjustment.name]:
-                                              defaultAdjustmentValues[
-                                                adjustment.name
-                                              ],
-                                          })
+                                    ] !==
+                                      defaultAdjustmentValues[
+                                        adjustment.name
+                                      ] && (
+                                      <button
+                                        className="font-[600] text-sm text-[#0095f6]"
+                                        onClick={() => {
+                                          setInputRangeAdjustmentValues(
+                                            (
+                                              prevAdjustments: inputRangeAdjustmentValuesType
+                                            ) => ({
+                                              ...prevAdjustments,
+                                              [adjustment.name]:
+                                                defaultAdjustmentValues[
+                                                  adjustment.name
+                                                ],
+                                            })
+                                          );
+                                        }}
+                                      >
+                                        Reset
+                                      </button>
+                                    )}
+                                  </div>
+
+                                  <div className="flex items-center justify-between gap-x-3">
+                                    <input
+                                      type="range"
+                                      value={
+                                        inputRangeAdjustmentValues[
+                                          adjustment.name
+                                        ]
+                                      }
+                                      min={-100}
+                                      max={100}
+                                      name=""
+                                      id=""
+                                      className="input-adjustments grow"
+                                      onInput={(e) => {
+                                        const target =
+                                          e.target as HTMLInputElement;
+                                        handleChangeAdjustmentsInput(
+                                          adjustment.name,
+                                          Number(target.value)
                                         );
                                       }}
-                                    >
-                                      Reset
-                                    </button>
-                                  )}
+                                      style={{
+                                        backgroundImage: `linear-gradient(to right, rgb(219, 219, 219) 0%, rgb(219, 219, 219) ${
+                                          inputRangeAdjustmentValues[
+                                            adjustment.name
+                                          ] < 0
+                                            ? inputRangeAdjustmentValues[
+                                                adjustment.name
+                                              ] /
+                                                2 +
+                                              50
+                                            : "50"
+                                        }%, rgb(38, 38, 38) ${
+                                          inputRangeAdjustmentValues[
+                                            adjustment.name
+                                          ] < 0
+                                            ? inputRangeAdjustmentValues[
+                                                adjustment.name
+                                              ] /
+                                                2 +
+                                              50
+                                            : "50"
+                                        }%, rgb(38, 38, 38) ${
+                                          inputRangeAdjustmentValues[
+                                            adjustment.name
+                                          ] > 0
+                                            ? inputRangeAdjustmentValues[
+                                                adjustment.name
+                                              ] /
+                                                2 +
+                                              50
+                                            : "50"
+                                        }%, rgb(219, 219, 219) ${
+                                          inputRangeAdjustmentValues[
+                                            adjustment.name
+                                          ] > 0
+                                            ? inputRangeAdjustmentValues[
+                                                adjustment.name
+                                              ] /
+                                                2 +
+                                              50
+                                            : "50"
+                                        }%, rgb(219, 219, 219) 100%)`,
+                                      }}
+                                    />
+                                    <span className="block w-6 text-xs">
+                                      {
+                                        inputRangeAdjustmentValues[
+                                          adjustment.name
+                                        ]
+                                      }
+                                    </span>
+                                  </div>
                                 </div>
-
-                                <div className="flex items-center justify-between gap-x-3">
-                                  <input
-                                    type="range"
-                                    value={
-                                      inputRangeAdjustmentValues[
-                                        adjustment.name
-                                      ]
-                                    }
-                                    min={-100}
-                                    max={100}
-                                    name=""
-                                    id=""
-                                    className="input-adjustments grow"
-                                    onInput={(e) => {
-                                      const target =
-                                        e.target as HTMLInputElement;
-                                      handleChangeAdjustmentsInput(
-                                        adjustment.name,
-                                        Number(target.value)
-                                      );
-                                    }}
-                                    style={{
-                                      backgroundImage: `linear-gradient(to right, rgb(219, 219, 219) 0%, rgb(219, 219, 219) ${
-                                        inputRangeAdjustmentValues[
-                                          adjustment.name
-                                        ] < 0
-                                          ? inputRangeAdjustmentValues[
-                                              adjustment.name
-                                            ] /
-                                              2 +
-                                            50
-                                          : "50"
-                                      }%, rgb(38, 38, 38) ${
-                                        inputRangeAdjustmentValues[
-                                          adjustment.name
-                                        ] < 0
-                                          ? inputRangeAdjustmentValues[
-                                              adjustment.name
-                                            ] /
-                                              2 +
-                                            50
-                                          : "50"
-                                      }%, rgb(38, 38, 38) ${
-                                        inputRangeAdjustmentValues[
-                                          adjustment.name
-                                        ] > 0
-                                          ? inputRangeAdjustmentValues[
-                                              adjustment.name
-                                            ] /
-                                              2 +
-                                            50
-                                          : "50"
-                                      }%, rgb(219, 219, 219) ${
-                                        inputRangeAdjustmentValues[
-                                          adjustment.name
-                                        ] > 0
-                                          ? inputRangeAdjustmentValues[
-                                              adjustment.name
-                                            ] /
-                                              2 +
-                                            50
-                                          : "50"
-                                      }%, rgb(219, 219, 219) 100%)`,
-                                    }}
-                                  />
-                                  <span className="block w-6 text-xs">
-                                    {
-                                      inputRangeAdjustmentValues[
-                                        adjustment.name
-                                      ]
-                                    }
-                                  </span>
-                                </div>
-                              </div>
-                            )
-                          )}
-                        </div>
-                      </>
-                    )}
-                  </div>
+                              )
+                            )}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  )}
 
                   {/* Fourth Step */}
-                  <div></div>
+                  {createNewPostSelector.step === "fourth" && (
+                    <div>
+                      <div className="flex items-center gap-x-3 p-4">
+                        <div className="w-8 h-8">
+                          <Story img="user1.jpg" hasStory={false} />
+                        </div>
+                        <span className="font-[600] text-sm">masoud_red64</span>
+                      </div>
+                      <div>
+                        <textarea
+                          maxLength={2200}
+                          className="w-full h-[168px] px-4 outline-none border-0 resize-none overflow-y-auto placeholder:text-gray-300"
+                          placeholder="Write a caption..."
+                        ></textarea>
+                      </div>
+                      <div className="flex items-center justify-between p-4">
+                        <svg className="w-5 h-5 text-neutral-500">
+                          <use href="#emoji"></use>
+                        </svg>
+                        <span className="text-xs text-[#c7c7c7]">
+                          800/2,200
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
