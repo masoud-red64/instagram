@@ -20,6 +20,7 @@ import {
 import TransparentOverlay from "../TransparentOverlay/TransparentOverlay";
 import Story from "../Story/Story";
 import countries from "countries-list";
+import SwitchInput from "../SwitchInput/SwitchInput";
 
 type NewPostsType = {
   id: string;
@@ -80,6 +81,10 @@ function CreateNewPost() {
   );
   const [locationInputValue, setLocationInputValue] = useState("");
   const [isShowLocationBox, setIsShowLocationBox] = useState(false);
+  const [isShowAccessibilityAccordion, setIsShowAccessibilityAccordion] =
+    useState(false);
+  const [isShowAdvancedSettingsAccordion, setIsShowAdvancedSettingsAccordion] =
+    useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -752,7 +757,7 @@ function CreateNewPost() {
 
                   {/* Fourth Step */}
                   {createNewPostSelector.step === "fourth" && (
-                    <div>
+                    <div className="h-full overflow-y-scroll pb-2">
                       <div className="flex items-center gap-x-3 p-4">
                         <div className="w-8 h-8">
                           <Story img="user1.jpg" hasStory={false} />
@@ -890,6 +895,145 @@ function CreateNewPost() {
                             </ul>
                           </div>
                         )}
+                      </div>
+
+                      {/* Accordion */}
+                      <div>
+                        <div className="child:px-4 py-2 border-b border-[#dbdbdb]">
+                          <div
+                            className="flex items-center justify-between cursor-pointer"
+                            onClick={() =>
+                              setIsShowAccessibilityAccordion(
+                                !isShowAccessibilityAccordion
+                              )
+                            }
+                          >
+                            <span
+                              className={`${
+                                isShowAccessibilityAccordion && "font-[600]"
+                              }`}
+                            >
+                              Accessibility
+                            </span>
+                            <button>
+                              <svg
+                                className={`w-4 h-4 ${
+                                  isShowAccessibilityAccordion
+                                    ? ""
+                                    : "rotate-180"
+                                }`}
+                              >
+                                <use href="#chevron-top"></use>
+                              </svg>
+                            </button>
+                          </div>
+
+                          {isShowAccessibilityAccordion && (
+                            <div className="pt-1.5">
+                              <p className="text-xs text-neutral-500">
+                                Alt text describes your photos for people with
+                                visual impairments. Alt text will be
+                                automatically created for your photos or you can
+                                choose to write your own.
+                              </p>
+
+                              <div>
+                                {newPosts?.map((newPost) => (
+                                  <div className="flex items-center gap-x-2 my-3">
+                                    <div className="w-11 h-11">
+                                      {newPost.img ? (
+                                        <img
+                                          src={newPost.img}
+                                          alt=""
+                                          className="w-full h-full object-cover"
+                                        />
+                                      ) : (
+                                        <video
+                                          autoPlay
+                                          className="w-full h-full object-cover"
+                                        >
+                                          <source src={newPost.video} />
+                                          Your browser does not support the
+                                          video tag.
+                                        </video>
+                                      )}
+                                    </div>
+                                    <input
+                                      className="h-11 grow text-sm placeholder:text-neutral-300 px-3 py-1 outline-none border border-[#dbdbdb] rounded-md"
+                                      type="text"
+                                      placeholder="Write alt text..."
+                                    />
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        <div
+                          className={`child:px-4 py-2 ${
+                            !isShowAdvancedSettingsAccordion &&
+                            "border-b border-[#dbdbdb]"
+                          }`}
+                        >
+                          <div
+                            className="flex items-center justify-between cursor-pointer"
+                            onClick={() =>
+                              setIsShowAdvancedSettingsAccordion(
+                                !isShowAdvancedSettingsAccordion
+                              )
+                            }
+                          >
+                            <span
+                              className={`${
+                                isShowAdvancedSettingsAccordion && "font-[600]"
+                              }`}
+                            >
+                              Advanced Settings
+                            </span>
+                            <button>
+                              <svg
+                                className={`w-4 h-4 ${
+                                  isShowAdvancedSettingsAccordion
+                                    ? ""
+                                    : "rotate-180"
+                                }`}
+                              >
+                                <use href="#chevron-top"></use>
+                              </svg>
+                            </button>
+                          </div>
+
+                          {isShowAdvancedSettingsAccordion && (
+                            <div className="pt-1.5">
+                              <div>
+                                <div className="flex items-center justify-between">
+                                  <h5>
+                                    Hide like and view counts on this post
+                                  </h5>
+                                  <SwitchInput />
+                                </div>
+                                <p className="text-xs text-neutral-500 py-2">
+                                  Only you will see the total number of likes
+                                  and views on this post. You can change this
+                                  later by going to the ··· menu at the top of
+                                  the post. To hide like counts on other
+                                  people's posts, go to your account settings.
+                                </p>
+                              </div>
+                              <div>
+                                <div className="flex items-center justify-between">
+                                  <h5>Turn off commenting</h5>
+                                  <SwitchInput />
+                                </div>
+                                <p className="text-xs text-neutral-500 py-2">
+                                  You can change this later by going to the ···
+                                  menu at the top of your post.
+                                </p>
+                              </div>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   )}
