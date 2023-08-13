@@ -19,6 +19,7 @@ import {
 } from "../../store/createNewPostSlice";
 import TransparentOverlay from "../TransparentOverlay/TransparentOverlay";
 import Story from "../Story/Story";
+import countries from "countries-list";
 
 type NewPostsType = {
   id: string;
@@ -72,13 +73,36 @@ function CreateNewPost() {
   );
   const [isShowEmojiBox, setIsShowEmojiBox] = useState(false);
   const [captionTextAreaValue, setCaptionTextAreaValue] = useState("");
+  const [filteredCountries, setFilteredCountries] = useState<string[]>([]);
+  const countryCodes: string[] = Object.keys(countries.countries);
+  const countryNames: string[] = countryCodes.map(
+    (code: string) => countries.countries[code].name
+  );
+  const [locationInputValue, setLocationInputValue] = useState("");
+  const [isShowLocationBox, setIsShowLocationBox] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+  const locationBoxRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setThumbsSwiper(null);
   }, [createNewPostSelector.step]);
+
+  useEffect(() => {
+    const handleDocumentClick = (event: MouseEvent) => {
+      if (
+        locationBoxRef.current &&
+        !locationBoxRef.current.contains(event.target as Node)
+      ) {
+        setIsShowLocationBox(false);
+      }
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+
+    return () => document.removeEventListener("click", handleDocumentClick);
+  }, []);
 
   const handleClick = () => {
     fileInputRef.current?.click();
@@ -150,6 +174,25 @@ function CreateNewPost() {
       emoji +
       captionTextAreaValue.substring(cursorPosition as number);
     setCaptionTextAreaValue(newValue);
+  };
+
+  const handleChangeLocationInputValue = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setLocationInputValue(event.target.value);
+
+    const filtered = countryNames.filter((countryName) =>
+      countryName
+        .toLocaleLowerCase()
+        .includes(event.target.value.toLocaleLowerCase())
+    );
+
+    setFilteredCountries(filtered);
+
+    setIsShowLocationBox(true);
+    if (!event.target.value.length) {
+      setIsShowLocationBox(false);
+    }
   };
 
   return (
@@ -729,7 +772,7 @@ function CreateNewPost() {
                           }}
                         ></textarea>
                       </div>
-                      <div className="flex items-center justify-between p-4">
+                      <div className="flex items-center justify-between px-4 py-2">
                         <div
                           className="relative"
                           onClick={() => textAreaRef.current?.focus()}
@@ -752,8 +795,8 @@ function CreateNewPost() {
                           </button>
                           {isShowEmojiBox && (
                             <>
-                              <div className="absolute top-6 left-0.5 w-3 h-3 bg-white rotate-[225deg] drop-shadow-[1px_1px_1px_rgba(0,0,0,.09)] z-10"></div>
-                              <div className="absolute top-7 -left-2 w-[265px] h-[140px] bg-white text-neutral-500 text-sm font-[600] rounded-md drop-shadow-[0_0_5px_rgba(0,0,0,.0975)] overflow-y-auto">
+                              <div className="absolute top-6 left-0.5 w-3 h-3 bg-white rotate-[225deg] drop-shadow-[1px_1px_1px_rgba(0,0,0,.09)] z-20"></div>
+                              <div className="absolute top-7 -left-2 w-[265px] h-[140px] bg-white text-neutral-500 text-sm font-[600] rounded-md drop-shadow-[0_0_5px_rgba(0,0,0,.0975)] overflow-y-auto z-10">
                                 <div className="p-3">
                                   <span>Most Popular</span>
                                   <div className="flex gap-1 flex-wrap">
@@ -795,6 +838,58 @@ function CreateNewPost() {
                         <span className="text-xs text-[#c7c7c7]">
                           {captionTextAreaValue.length}/2,200
                         </span>
+                      </div>
+
+                      <div className="relative flex items-center justify-between gap-x-1 px-4 border border-[#dbdbdb">
+                        <input
+                          type="text"
+                          placeholder="Add location"
+                          className="grow py-2 outline-none"
+                          value={locationInputValue}
+                          onChange={handleChangeLocationInputValue}
+                          onBlur={() => setLocationInputValue("")}
+                        />
+                        <div className="text-black">
+                          {!isShowLocationBox ? (
+                            <svg className="w-4 h-4">
+                              <use href="#location"></use>
+                            </svg>
+                          ) : (
+                            <button>
+                              <svg className="w-4 h-4">
+                                <use href="#close"></use>
+                              </svg>
+                            </button>
+                          )}
+                        </div>
+
+                        {/* Locations */}
+                        {isShowLocationBox && (
+                          <div
+                            ref={locationBoxRef}
+                            className="absolute top-10 left-0 w-full h-28 p-4 bg-white overflow-y-auto rounded-md drop-shadow-[0px_0px_5px_rgba(0,0,0,.0975)]"
+                          >
+                            <ul className="flex flex-col gap-1">
+                              {filteredCountries.length ? (
+                                filteredCountries.map((country) => (
+                                  <li
+                                    className="font-[600] cursor-pointer"
+                                    onClick={() => {
+                                      setLocationInputValue(country);
+                                      setIsShowLocationBox(false);
+                                    }}
+                                  >
+                                    {country}
+                                  </li>
+                                ))
+                              ) : (
+                                <span className="text-neutral-500">
+                                  Not found
+                                </span>
+                              )}
+                            </ul>
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
