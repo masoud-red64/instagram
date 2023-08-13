@@ -70,8 +70,11 @@ function CreateNewPost() {
   const [inputRangeAdjustmentValues, setInputRangeAdjustmentValues] = useState(
     defaultAdjustmentValues
   );
+  const [isShowEmojiBox, setIsShowEmojiBox] = useState(false);
+  const [captionTextAreaValue, setCaptionTextAreaValue] = useState("");
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
     setThumbsSwiper(null);
@@ -139,6 +142,15 @@ function CreateNewPost() {
       })
     );
   }
+
+  const handleEmojiClick = (emoji: string) => {
+    const cursorPosition = textAreaRef.current?.selectionStart;
+    const newValue =
+      captionTextAreaValue.substring(0, cursorPosition) +
+      emoji +
+      captionTextAreaValue.substring(cursorPosition as number);
+    setCaptionTextAreaValue(newValue);
+  };
 
   return (
     createNewPostSelector.isShowCreateNewPost && (
@@ -706,17 +718,82 @@ function CreateNewPost() {
                       </div>
                       <div>
                         <textarea
+                          onClick={() => setIsShowEmojiBox(false)}
                           maxLength={2200}
                           className="w-full h-[168px] px-4 outline-none border-0 resize-none overflow-y-auto placeholder:text-gray-300"
                           placeholder="Write a caption..."
+                          value={captionTextAreaValue}
+                          ref={textAreaRef}
+                          onChange={(e) => {
+                            setCaptionTextAreaValue(e.target.value);
+                          }}
                         ></textarea>
                       </div>
                       <div className="flex items-center justify-between p-4">
-                        <svg className="w-5 h-5 text-neutral-500">
-                          <use href="#emoji"></use>
-                        </svg>
+                        <div
+                          className="relative"
+                          onClick={() => textAreaRef.current?.focus()}
+                        >
+                          <button
+                            onClick={() => {
+                              setIsShowEmojiBox(!isShowEmojiBox);
+                              // textAreaRef.current?.focus()
+                            }}
+                          >
+                            <svg
+                              className={`w-5 h-5 ${
+                                isShowEmojiBox
+                                  ? "text-[#0095f6]"
+                                  : "text-neutral-500"
+                              }`}
+                            >
+                              <use href="#emoji"></use>
+                            </svg>
+                          </button>
+                          {isShowEmojiBox && (
+                            <>
+                              <div className="absolute top-6 left-0.5 w-3 h-3 bg-white rotate-[225deg] drop-shadow-[1px_1px_1px_rgba(0,0,0,.09)] z-10"></div>
+                              <div className="absolute top-7 -left-2 w-[265px] h-[140px] bg-white text-neutral-500 text-sm font-[600] rounded-md drop-shadow-[0_0_5px_rgba(0,0,0,.0975)] overflow-y-auto">
+                                <div className="p-3">
+                                  <span>Most Popular</span>
+                                  <div className="flex gap-1 flex-wrap">
+                                    {createNewPostSelector.emojis.popular.map(
+                                      (emoji) => (
+                                        <div
+                                          onClick={() => {
+                                            handleEmojiClick(emoji.emoji);
+                                            setIsShowEmojiBox(false);
+                                          }}
+                                        >
+                                          {emoji.emoji}
+                                        </div>
+                                      )
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="p-3">
+                                  <span>Activities</span>
+                                  <div className="flex flex-wrap gap-1">
+                                    {createNewPostSelector.emojis.activities.map(
+                                      (emoji) => (
+                                        <div
+                                          onClick={() => {
+                                            handleEmojiClick(emoji.emoji);
+                                            setIsShowEmojiBox(false);
+                                          }}
+                                        >
+                                          {emoji.emoji}
+                                        </div>
+                                      )
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </>
+                          )}
+                        </div>
                         <span className="text-xs text-[#c7c7c7]">
-                          800/2,200
+                          {captionTextAreaValue.length}/2,200
                         </span>
                       </div>
                     </div>
