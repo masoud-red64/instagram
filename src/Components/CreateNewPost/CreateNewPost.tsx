@@ -25,6 +25,18 @@ type NewPostsType = {
   video: string;
 };
 
+type inputRangeAdjustmentValuesType = {
+  Blur: number;
+  Brightness: number;
+  Contrast: number;
+  Grayscale: number;
+  Invert: number;
+  Opacity: number;
+  Saturate: number;
+  Sepia: number;
+  HueRotate: number;
+};
+
 function CreateNewPost() {
   const dispatch = useDispatch();
   const createNewPostSelector = useSelector(
@@ -43,7 +55,20 @@ function CreateNewPost() {
   const [aspectRatioValue, setAspectRatioValue] = useState("");
   const [filter, setFilter] = useState<string | undefined>("");
   const [editNav, setEditNav] = useState("filters");
-  const [inputRangeAdjustmentValue, setInputRangeAdjustmentValue] = useState(0);
+  const defaultAdjustmentValues: any = {
+    Blur: 0,
+    Brightness: 1,
+    Contrast: 1,
+    Grayscale: 0,
+    Invert: 0,
+    Opacity: 100,
+    Saturate: 100,
+    Sepia: 0,
+    HueRotate: 0,
+  };
+  const [inputRangeAdjustmentValues, setInputRangeAdjustmentValues] = useState(
+    defaultAdjustmentValues
+  );
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -104,6 +129,15 @@ function CreateNewPost() {
     updatedZoomValues[index] = Number(value);
     setInputRangeZoomValues(updatedZoomValues);
   };
+
+  function handleChangeAdjustmentsInput(name: string, value: number) {
+    setInputRangeAdjustmentValues(
+      (prevAdjustments: inputRangeAdjustmentValuesType) => ({
+        ...prevAdjustments,
+        [name]: value,
+      })
+    );
+  }
 
   return (
     createNewPostSelector.isShowCreateNewPost && (
@@ -211,7 +245,29 @@ function CreateNewPost() {
                                           100
                                       })`,
                                       aspectRatio: aspectRatioValue,
-                                      filter: filter,
+                                      filter:
+                                        editNav === "filters"
+                                          ? filter
+                                          : `blur(${
+                                              inputRangeAdjustmentValues.Blur
+                                            }px) brightness(${
+                                              inputRangeAdjustmentValues.Brightness
+                                            }) contrast(${
+                                              inputRangeAdjustmentValues.Contrast
+                                            }) grayscale(${
+                                              inputRangeAdjustmentValues.Grayscale
+                                            }%) invert(${
+                                              inputRangeAdjustmentValues.Invert
+                                            }%) opacity(${
+                                              inputRangeAdjustmentValues.Opacity /
+                                              100
+                                            }) saturate(${
+                                              inputRangeAdjustmentValues.Saturate
+                                            }%) sepia(${
+                                              inputRangeAdjustmentValues.Sepia
+                                            }%) hue-rotate(${
+                                              inputRangeAdjustmentValues.HueRotate
+                                            }deg)`,
                                     }}
                                   />
                                 ) : (
@@ -495,18 +551,34 @@ function CreateNewPost() {
                     ) : (
                       <>
                         {/* Adjustments */}
-                        <div className="px-4">
+                        <div className="px-4 pb-4 h-[25.6rem] overflow-y-auto">
                           {createNewPostSelector.adjustments.map(
                             (adjustment) => (
                               <div>
                                 <div className="flex items-center justify-between py-[14px]">
                                   <span>{adjustment.name}</span>
-                                  {inputRangeAdjustmentValue !== 0 && (
+
+                                  {inputRangeAdjustmentValues[
+                                    adjustment.name
+                                  ] !==
+                                    defaultAdjustmentValues[
+                                      adjustment.name
+                                    ] && (
                                     <button
                                       className="font-[600] text-sm text-[#0095f6]"
-                                      onClick={() =>
-                                        setInputRangeAdjustmentValue(0)
-                                      }
+                                      onClick={() => {
+                                        setInputRangeAdjustmentValues(
+                                          (
+                                            prevAdjustments: inputRangeAdjustmentValuesType
+                                          ) => ({
+                                            ...prevAdjustments,
+                                            [adjustment.name]:
+                                              defaultAdjustmentValues[
+                                                adjustment.name
+                                              ],
+                                          })
+                                        );
+                                      }}
                                     >
                                       Reset
                                     </button>
@@ -516,39 +588,74 @@ function CreateNewPost() {
                                 <div className="flex items-center justify-between gap-x-3">
                                   <input
                                     type="range"
-                                    value={inputRangeAdjustmentValue}
+                                    value={
+                                      inputRangeAdjustmentValues[
+                                        adjustment.name
+                                      ]
+                                    }
                                     min={-100}
                                     max={100}
                                     name=""
                                     id=""
                                     className="input-adjustments grow"
-                                    onChange={(e) =>
-                                      setInputRangeAdjustmentValue(
-                                        Number(e.target.value)
-                                      )
-                                    }
+                                    onInput={(e) => {
+                                      const target =
+                                        e.target as HTMLInputElement;
+                                      handleChangeAdjustmentsInput(
+                                        adjustment.name,
+                                        Number(target.value)
+                                      );
+                                    }}
                                     style={{
                                       backgroundImage: `linear-gradient(to right, rgb(219, 219, 219) 0%, rgb(219, 219, 219) ${
-                                        inputRangeAdjustmentValue < 0
-                                          ? inputRangeAdjustmentValue / 2 + 50
+                                        inputRangeAdjustmentValues[
+                                          adjustment.name
+                                        ] < 0
+                                          ? inputRangeAdjustmentValues[
+                                              adjustment.name
+                                            ] /
+                                              2 +
+                                            50
                                           : "50"
                                       }%, rgb(38, 38, 38) ${
-                                        inputRangeAdjustmentValue < 0
-                                          ? inputRangeAdjustmentValue / 2 + 50
+                                        inputRangeAdjustmentValues[
+                                          adjustment.name
+                                        ] < 0
+                                          ? inputRangeAdjustmentValues[
+                                              adjustment.name
+                                            ] /
+                                              2 +
+                                            50
                                           : "50"
                                       }%, rgb(38, 38, 38) ${
-                                        inputRangeAdjustmentValue > 0
-                                          ? inputRangeAdjustmentValue / 2 + 50
+                                        inputRangeAdjustmentValues[
+                                          adjustment.name
+                                        ] > 0
+                                          ? inputRangeAdjustmentValues[
+                                              adjustment.name
+                                            ] /
+                                              2 +
+                                            50
                                           : "50"
                                       }%, rgb(219, 219, 219) ${
-                                        inputRangeAdjustmentValue > 0
-                                          ? inputRangeAdjustmentValue / 2 + 50
+                                        inputRangeAdjustmentValues[
+                                          adjustment.name
+                                        ] > 0
+                                          ? inputRangeAdjustmentValues[
+                                              adjustment.name
+                                            ] /
+                                              2 +
+                                            50
                                           : "50"
                                       }%, rgb(219, 219, 219) 100%)`,
                                     }}
                                   />
                                   <span className="block w-6 text-xs">
-                                    {inputRangeAdjustmentValue}
+                                    {
+                                      inputRangeAdjustmentValues[
+                                        adjustment.name
+                                      ]
+                                    }
                                   </span>
                                 </div>
                               </div>

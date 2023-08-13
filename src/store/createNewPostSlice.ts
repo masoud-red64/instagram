@@ -29,6 +29,7 @@ const createNewPostSlice = createSlice({
             { id: 6, name: 'Opacity' },
             { id: 7, name: 'Saturate' },
             { id: 8, name: 'Sepia' },
+            { id: 9, name: 'HueRotate' },
         ]
     },
     reducers: {
