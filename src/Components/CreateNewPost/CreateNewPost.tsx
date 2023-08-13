@@ -502,28 +502,29 @@ function CreateNewPost() {
                       </button>
 
                       {isActiveMultiplePostTool && (
-                        <div className="w-64 sm:w-[400px] absolute -top-32 right-0 h-[118px] bg-[#1a1a1a] opacity-80 p-2 rounded-lg">
+                        <div className="w-60 sm:w-[400px] absolute -top-32 right-0 h-[118px] bg-[#1a1a1a] opacity-80 p-2 rounded-lg">
                           <div className="flex gap-x-2">
                             {/* Slides */}
                             <Swiper
                               onSwiper={(swiper) => setThumbsSwiper(swiper)}
                               slidesPerView={1}
+                              spaceBetween={10}
                               breakpoints={{
                                 664: {
-                                  spaceBetween: 5,
                                   slidesPerView: 3,
+                                  spaceBetween: 5,
                                 },
                               }}
                               freeMode={true}
                               watchSlidesProgress={true}
                               navigation={true}
                               modules={[FreeMode, Navigation, Thumbs]}
-                              className="create-new-post-mySwiper"
+                              className="create-new-post-mySwiper w-full"
                             >
                               {newPosts?.map((newPost) => (
                                 <SwiperSlide key={newPost.id}>
                                   {file && (
-                                    <div className="flex items-center justify-center">
+                                    <div>
                                       <div className="relative w-[94px] h-[94px]">
                                         <button
                                           className="remove-new-post-icon absolute top-2 right-2 text-white hover:opacity-70 "
