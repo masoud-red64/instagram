@@ -53,7 +53,7 @@ function CreateNewPost() {
   const [isActiveZoomPostTool, setIsActiveZoomPostTool] = useState(false);
   const [isActiveRatioPostTool, setIsActiveRatioPostTool] = useState(false);
   const [aspectRatioValue, setAspectRatioValue] = useState("");
-  const [filter, setFilter] = useState<string | undefined>("");
+  const [filterValue, setFilterValue] = useState<string | undefined>("");
   const [editNav, setEditNav] = useState("filters");
   const defaultAdjustmentValues: any = {
     Blur: 0,
@@ -247,7 +247,7 @@ function CreateNewPost() {
                                       aspectRatio: aspectRatioValue,
                                       filter:
                                         editNav === "filters"
-                                          ? filter
+                                          ? filterValue
                                           : `blur(${
                                               inputRangeAdjustmentValues.Blur
                                             }px) brightness(${
@@ -528,18 +528,21 @@ function CreateNewPost() {
                           {createNewPostSelector.filters.map((filter) => (
                             <div
                               className="flex flex-col items-center gap-y-1 cursor-pointer"
-                              onClick={() => setFilter(filter.filter)}
+                              onClick={() => setFilterValue(filter.filter)}
                             >
                               <img
                                 src={`images/filters/${filter.name}.jpg`}
                                 alt=""
                                 className={`w-[88px] h-[88px] ${
-                                  false && "border-2 border-[#0096f6]"
+                                  filter.filter === filterValue &&
+                                  "border-[3px] border-[#0096f6]"
                                 } rounded-sm`}
                               />
                               <span
-                                className={`text-xs text-neutral-500 ${
-                                  false && "text-[#0096f6] font-[600]"
+                                className={`text-xs ${
+                                  filter.filter === filterValue
+                                    ? "text-[#0096f6] font-[600]"
+                                    : "text-neutral-500"
                                 }`}
                               >
                                 {filter.name}
