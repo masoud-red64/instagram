@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   hideNotificationSlideShow,
@@ -22,8 +22,10 @@ function Sidebar() {
     localStorage.getItem("theme") === "dark" ? true : false
   );
 
+  const contentOfMoreItemRef = useRef<HTMLDivElement | null>(null);
+  const moreBtnRef = useRef<HTMLButtonElement | null>(null);
+
   const location = useLocation();
-  console.log(location.pathname);
 
   const dispatch = useDispatch();
   const slideShowSelector = useSelector(
@@ -33,6 +35,22 @@ function Sidebar() {
   const createNewPostSelector = useSelector(
     (state: RootState) => state.createNewPostReducer
   );
+
+  useEffect(() => {
+    const handleDocumentClick = (event: MouseEvent) => {
+      if (
+        contentOfMoreItemRef.current &&
+        moreBtnRef.current !== event.target &&
+        !contentOfMoreItemRef.current.contains(event.target as Node)
+      ) {
+        setIsActiveMore(false);
+      }
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+
+    return () => document.removeEventListener("click", handleDocumentClick);
+  }, []);
 
   useEffect(() => {
     const preferredTheme = isSwitchInputChecked ? "dark" : "";
@@ -323,23 +341,24 @@ function Sidebar() {
         {/* More */}
         <div className="relative hidden md:block mt-auto leading-5 mb-1">
           <button
+            ref={moreBtnRef}
             className={`w-full flex gap-x-4 group ${
               isActiveMore && "font-[700]"
             } p-3 hover:hover-item hover:rounded-lg transition-all`}
             onClick={() => setIsActiveMore(!isActiveMore)}
           >
             {isActiveMore ? (
-              <svg className="w-6 h-6 group-hover:scale-105 transition-transform">
+              <svg className="w-6 h-6 group-hover:scale-105 transition-transform pointer-events-none">
                 <use href="#more-active"></use>
               </svg>
             ) : (
-              <svg className="w-6 h-6 group-hover:scale-105 transition-transform">
+              <svg className="w-6 h-6 group-hover:scale-105 transition-transform pointer-events-none">
                 <use href="#more"></use>
               </svg>
             )}
 
             <span
-              className={`${
+              className={`pointer-events-none ${
                 slideShowSelector.isShowNotif || slideShowSelector.isShowSearch
                   ? "hidden"
                   : "hidden xl:block"
@@ -355,7 +374,7 @@ function Sidebar() {
               {!isSwitchAppearanceActive ? (
                 <>
                   {/* Content Of More Item */}
-                  <div>
+                  <div ref={contentOfMoreItemRef}>
                     <ul>
                       <li className=" hover:bg-[#f8f8f8] dark:hover:bg-[#3c3c3c] transition-all rounded-lg">
                         <a href="#" className="flex items-center gap-x-3 p-4">
