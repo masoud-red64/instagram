@@ -351,13 +351,13 @@ function Sidebar() {
 
           {/* Content */}
           {isActiveMore && (
-            <div className="absolute left-12 bottom-0 xl:left-0 xl:bottom-14 w-[266px] p-2 bg-white rounded-2xl drop-shadow-[0_4px_12px_rgba(0,0,0,.15)]">
+            <div className="absolute left-12 bottom-0 xl:left-0 xl:bottom-14 w-[266px] p-2 bg-white dark:bg-neutral-800 rounded-2xl drop-shadow-[0_4px_12px_rgba(0,0,0,.15)]">
               {!isSwitchAppearanceActive ? (
                 <>
                   {/* Content Of More Item */}
                   <div>
                     <ul>
-                      <li className=" hover:bg-[#f8f8f8] transition-all rounded-lg">
+                      <li className=" hover:bg-[#f8f8f8] dark:hover:bg-[#3c3c3c] transition-all rounded-lg">
                         <a href="#" className="flex items-center gap-x-3 p-4">
                           <svg className="w-[18px] h-[18px]">
                             <use href="#setting"></use>
@@ -365,7 +365,7 @@ function Sidebar() {
                           <span className="text-sm">Setting</span>
                         </a>
                       </li>
-                      <li className=" hover:bg-[#f8f8f8] transition-all rounded-lg">
+                      <li className=" hover:bg-[#f8f8f8] dark:hover:bg-[#3c3c3c] transition-all rounded-lg">
                         <a href="#" className="flex items-center gap-x-3 p-4">
                           <svg className="w-[18px] h-[18px]">
                             <use href="#your-activity"></use>
@@ -373,7 +373,7 @@ function Sidebar() {
                           <span className="text-sm">Your activity</span>
                         </a>
                       </li>
-                      <li className=" hover:bg-[#f8f8f8] transition-all rounded-lg">
+                      <li className=" hover:bg-[#f8f8f8] dark:hover:bg-[#3c3c3c] transition-all rounded-lg">
                         <a href="#" className="flex items-center gap-x-3 p-4">
                           <svg className="w-[18px] h-[18px]">
                             <use href="#saved"></use>
@@ -381,7 +381,7 @@ function Sidebar() {
                           <span className="text-sm">Saved</span>
                         </a>
                       </li>
-                      <li className=" hover:bg-[#f8f8f8] transition-all rounded-lg">
+                      <li className=" hover:bg-[#f8f8f8] dark:hover:bg-[#3c3c3c] transition-all rounded-lg">
                         <button className="w-full flex items-center gap-x-3 p-4">
                           <svg className="w-[18px] h-[18px]">
                             <use href="#keyboard-shortcuts"></use>
@@ -389,7 +389,7 @@ function Sidebar() {
                           <span className="text-sm">Keyboard shortcuts</span>
                         </button>
                       </li>
-                      <li className=" hover:bg-[#f8f8f8] transition-all rounded-lg">
+                      <li className=" hover:bg-[#f8f8f8] dark:hover:bg-[#3c3c3c] transition-all rounded-lg">
                         <button
                           className="w-full flex items-center gap-x-3 p-4"
                           onClick={() => setIsSwitchAppearanceActive(true)}
@@ -400,7 +400,7 @@ function Sidebar() {
                           <span className="text-sm">Switch appearance</span>
                         </button>
                       </li>
-                      <li className=" hover:bg-[#f8f8f8] transition-all rounded-lg">
+                      <li className=" hover:bg-[#f8f8f8] dark:hover:bg-[#3c3c3c] transition-all rounded-lg">
                         <button className="w-full flex items-center gap-x-3 p-4">
                           <svg className="w-[18px] h-[18px]">
                             <use href="#report-problem"></use>
@@ -413,13 +413,13 @@ function Sidebar() {
                     <div className="h-1.5 bg-[#dbdbdb]/30 -mx-2 my-2"></div>
 
                     <div>
-                      <div className=" hover:bg-[#f8f8f8] transition-all rounded-lg">
+                      <div className=" hover:bg-[#f8f8f8] dark:hover:bg-[#3c3c3c] transition-all rounded-lg">
                         <button className="w-full text-left text-sm p-4">
                           Switch accounts
                         </button>
                       </div>
                       <div className="h-0.5 bg-[#dbdbdb]/30 -mx-2 my-2"></div>
-                      <div className=" hover:bg-[#f8f8f8] transition-all rounded-lg">
+                      <div className=" hover:bg-[#f8f8f8] dark:hover:bg-[#3c3c3c] transition-all rounded-lg">
                         <button className="w-full text-left text-sm p-4">
                           Log out
                         </button>
@@ -453,7 +453,7 @@ function Sidebar() {
                       )}
                     </div>
 
-                    <div className="hover:bg-[#f8f8f8] transition-all rounded-lg">
+                    <div className="hover:bg-[#f8f8f8] dark:hover:bg-[#3c3c3c] transition-all rounded-lg">
                       <button className="w-full flex items-center justify-between text-sm p-4">
                         <span>Dark mode</span>
                         <SwitchInput
