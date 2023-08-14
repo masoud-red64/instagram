@@ -1035,7 +1035,10 @@ function CreateNewPost() {
                                   <h5 className="dark:text-white">
                                     Hide like and view counts on this post
                                   </h5>
-                                  <SwitchInput />
+                                  <SwitchInput
+                                    switchClassName="w-[56px] h-[28px]"
+                                    sliderClassName="slider bg-neutral-500 before:left-1 before:bottom-1 before:bg-white before:w-5 before:h-5"
+                                  />
                                 </div>
                                 <p className="text-xs text-neutral-500 py-2">
                                   Only you will see the total number of likes
@@ -1050,7 +1053,10 @@ function CreateNewPost() {
                                   <h5 className="dark:text-white">
                                     Turn off commenting
                                   </h5>
-                                  <SwitchInput />
+                                  <SwitchInput
+                                    switchClassName="w-[56px] h-[28px]"
+                                    sliderClassName="slider bg-neutral-500 before:left-1 before:bottom-1 before:bg-white before:w-5 before:h-5"
+                                  />
                                 </div>
                                 <p className="text-xs text-neutral-500 py-2">
                                   You can change this later by going to the ···
