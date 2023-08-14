@@ -3,8 +3,8 @@ import React, { useState } from "react";
 type SwitchInputPropsType = {
   switchClassName: string;
   sliderClassName: string;
-  setIsSwitchInputChecked: (isSwitchInputChecked: boolean) => void;
-  isSwitchInputChecked: boolean;
+  setIsSwitchInputChecked?: (isSwitchInputChecked: boolean) => void;
+  isSwitchInputChecked?: boolean;
 };
 
 function SwitchInput({
@@ -20,7 +20,9 @@ function SwitchInput({
       <input
         type="checkbox"
         className="switch-input opacity-0"
-        onChange={(e) => setIsSwitchInputChecked(e.target.checked)}
+        onChange={(e) =>
+          setIsSwitchInputChecked && setIsSwitchInputChecked(e.target.checked)
+        }
         checked={isSwitchInputChecked}
       />
       <span

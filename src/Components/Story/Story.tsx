@@ -100,7 +100,7 @@ const Story = ({ img, hasStory, hasNewStory }: StoryPropsTypes) => {
   return (
     <a
       href="#"
-      className="w-full h-full relative flex items-center justify-center border rounded-full"
+      className="w-full h-full relative flex items-center justify-center rounded-full"
       onClick={(e) => {
         e.preventDefault();
         setIsShowLoading(true);
