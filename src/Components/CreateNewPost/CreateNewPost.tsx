@@ -19,7 +19,7 @@ import {
 } from "../../store/createNewPostSlice";
 import TransparentOverlay from "../TransparentOverlay/TransparentOverlay";
 import Story from "../Story/Story";
-import countries from "countries-list";
+import locations from "countries-list";
 import SwitchInput from "../SwitchInput/SwitchInput";
 
 type NewPostsType = {
@@ -75,6 +75,8 @@ function CreateNewPost() {
   const [isShowEmojiBox, setIsShowEmojiBox] = useState(false);
   const [captionTextAreaValue, setCaptionTextAreaValue] = useState("");
   const [filteredCountries, setFilteredCountries] = useState<string[]>([]);
+
+  const countries: Record<string, any> = locations;
   const countryCodes: string[] = Object.keys(countries.countries);
   const countryNames: string[] = countryCodes.map(
     (code: string) => countries.countries[code].name
