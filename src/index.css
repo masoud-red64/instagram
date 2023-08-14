@@ -137,12 +137,12 @@
 
     /* Style the thumb (slider handle) */
     &::-webkit-slider-thumb {
-      background: #000; /* Set the background color of the thumb */
+      @apply bg-black dark:bg-white /* Set the background color of the thumb */;
     }
 
     /* Firefox */
     &::-moz-range-thumb {
-      background: #000;
+      @apply bg-black dark:bg-white;
     }
   }
 

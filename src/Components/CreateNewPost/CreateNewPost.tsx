@@ -205,11 +205,13 @@ function CreateNewPost() {
   return (
     createNewPostSelector.isShowCreateNewPost && (
       <>
-        <div className="absolute select-none top-1/2 right-1/2 w-fit h-[496px] translate-x-1/2 -translate-y-1/2 z-[55] bg-white rounded-xl overflow-hidden">
+        <div className="absolute select-none top-1/2 right-1/2 w-fit h-[496px] translate-x-1/2 -translate-y-1/2 z-[55] bg-white dark:bg-neutral-800 rounded-xl overflow-hidden">
           {/* Top */}
-          <div className="p-3 border-b border-[#dbdbdb]">
+          <div className="p-3 border-b border-[#dbdbdb] dark:border-[#363636]">
             {createNewPostSelector.step === "first" && (
-              <h4 className="font-[600] text-center">Create new post</h4>
+              <h4 className="font-[600] text-center dark:text-white">
+                Create new post
+              </h4>
             )}
 
             {createNewPostSelector.step !== "first" && (
@@ -225,11 +227,11 @@ function CreateNewPost() {
                     }
                   }}
                 >
-                  <svg className="w-6 h-6">
+                  <svg className="w-6 h-6 dark:text-white">
                     <use href="#arrow-left"></use>
                   </svg>
                 </button>
-                <span className="font-[600]">
+                <span className="font-[600] dark:text-white">
                   {createNewPostSelector.step === "second"
                     ? "Crop"
                     : createNewPostSelector.step === "third"
@@ -261,10 +263,12 @@ function CreateNewPost() {
           {/* First Step */}
           {createNewPostSelector.step === "first" && (
             <div className="w-72 xs:w-80 sm:w-[496px] h-[91%] flex flex-col gap-y-4 items-center justify-center p-6 ">
-              <svg className="w-24 h-[77px]">
+              <svg className="w-24 h-[77px] dark:text-white">
                 <use href="#create-new-post"></use>
               </svg>
-              <span className="text-xl">Drag photos and videos here</span>
+              <span className="text-xl dark:text-white">
+                Drag photos and videos here
+              </span>
               <div>
                 <div className="flex flex-col items-center">
                   <button className="primary-btn" onClick={handleClick}>
@@ -581,17 +585,17 @@ function CreateNewPost() {
               {/* Third Step */}
               {(createNewPostSelector.step === "third" ||
                 createNewPostSelector.step === "fourth") && (
-                <div className="h-full w-[10rem] xs:w-[12rem] sm:w-[16rem] md:w-[18rem] lg:w-[20rem] bg-white border-l">
+                <div className="h-full w-[10rem] xs:w-[12rem] sm:w-[16rem] md:w-[18rem] lg:w-[20rem] bg-white dark:bg-neutral-800 border-l dark:border-[#363636]">
                   {/* Third Step */}
                   {createNewPostSelector.step === "third" && (
                     <div>
                       {/* Header */}
-                      <div className="flex items-center justify-between child:grow child:text-sm/[18px] text-center child:py-2 border-b border-black/30">
+                      <div className="flex items-center justify-between child:grow child:text-sm/[18px] text-center child:py-2 border-b border-black/30 dark:border-white/30">
                         <button
                           className={`${
                             editNav === "filters"
-                              ? "border-b border-black/70 font-[600]"
-                              : "opacity-30"
+                              ? "border-b border-black/70 dark:border-white dark:text-white font-[600]"
+                              : "opacity-30 dark:text-[#e0f1ff]"
                           }`}
                           onClick={() => setEditNav("filters")}
                         >
@@ -600,8 +604,8 @@ function CreateNewPost() {
                         <button
                           className={`${
                             editNav === "adjustments"
-                              ? "border-b border-black/70 font-[600]"
-                              : "opacity-30"
+                              ? "border-b border-black/70 dark:border-white dark:text-white font-[600]"
+                              : "opacity-30 dark:text-[#e0f1ff]"
                           }`}
                           onClick={() => setEditNav("adjustments")}
                         >
@@ -630,7 +634,7 @@ function CreateNewPost() {
                                   className={`text-xs ${
                                     filter.filter === filterValue
                                       ? "text-[#0096f6] font-[600]"
-                                      : "text-neutral-500"
+                                      : "text-neutral-500 dark:text-neutral-400"
                                   }`}
                                 >
                                   {filter.name}
@@ -647,7 +651,9 @@ function CreateNewPost() {
                               (adjustment) => (
                                 <div>
                                   <div className="flex items-center justify-between py-[14px]">
-                                    <span>{adjustment.name}</span>
+                                    <span className="dark:text-white">
+                                      {adjustment.name}
+                                    </span>
 
                                     {inputRangeAdjustmentValues[
                                       adjustment.name
@@ -741,7 +747,16 @@ function CreateNewPost() {
                                         }%, rgb(219, 219, 219) 100%)`,
                                       }}
                                     />
-                                    <span className="block w-6 text-xs">
+                                    <span
+                                      className={`block w-6 text-xs ${
+                                        inputRangeAdjustmentValues[
+                                          adjustment.name
+                                        ] !==
+                                        defaultAdjustmentValues[adjustment.name]
+                                          ? "text-black dark:text-white"
+                                          : "text-neutral-500  dark:text-[#a8a8a8]"
+                                      }`}
+                                    >
                                       {
                                         inputRangeAdjustmentValues[
                                           adjustment.name
@@ -760,18 +775,20 @@ function CreateNewPost() {
 
                   {/* Fourth Step */}
                   {createNewPostSelector.step === "fourth" && (
-                    <div className="h-full overflow-y-scroll pb-2">
+                    <div className="h-full overflow-y-scroll scrollbar pb-2">
                       <div className="flex items-center gap-x-3 p-4">
                         <div className="w-8 h-8">
                           <Story img="user1.jpg" hasStory={false} />
                         </div>
-                        <span className="font-[600] text-sm">masoud_red64</span>
+                        <span className="font-[600] text-sm dark:text-white">
+                          masoud_red64
+                        </span>
                       </div>
                       <div>
                         <textarea
                           onClick={() => setIsShowEmojiBox(false)}
                           maxLength={2200}
-                          className="w-full h-[168px] px-4 outline-none border-0 resize-none overflow-y-auto placeholder:text-gray-300"
+                          className="w-full h-[168px] dark:text-white bg-white dark:bg-neutral-800 px-4 outline-none border-0 resize-none overflow-y-auto placeholder:text-gray-300 dark:placeholder:text-neutral-500"
                           placeholder="Write a caption..."
                           value={captionTextAreaValue}
                           ref={textAreaRef}
@@ -792,10 +809,10 @@ function CreateNewPost() {
                             }}
                           >
                             <svg
-                              className={`w-5 h-5 ${
+                              className={`w-5 h-5  ${
                                 isShowEmojiBox
                                   ? "text-[#0095f6]"
-                                  : "text-neutral-500"
+                                  : "text-neutral-500 dark:text-[#a8a8a8]"
                               }`}
                             >
                               <use href="#emoji"></use>
@@ -803,11 +820,13 @@ function CreateNewPost() {
                           </button>
                           {isShowEmojiBox && (
                             <>
-                              <div className="absolute top-6 left-0.5 w-3 h-3 bg-white rotate-[225deg] drop-shadow-[1px_1px_1px_rgba(0,0,0,.09)] z-20"></div>
-                              <div className="absolute top-7 -left-2 w-[265px] h-[140px] bg-white text-neutral-500 text-sm font-[600] rounded-md drop-shadow-[0_0_5px_rgba(0,0,0,.0975)] overflow-y-auto z-10">
+                              <div className="absolute top-6 left-0.5 w-3 h-3 bg-white dark:bg-neutral-800 rotate-[225deg] drop-shadow-[1px_1px_1px_rgba(0,0,0,.09)] z-20"></div>
+                              <div className="absolute top-7 -left-2 w-[265px] h-[140px] bg-white dark:bg-neutral-800 text-neutral-500 text-sm font-[600] rounded-md drop-shadow-[0_0_5px_rgba(0,0,0,.0975)] overflow-y-auto scrollbar z-10">
                                 <div className="p-3">
-                                  <span>Most Popular</span>
-                                  <div className="flex gap-1 flex-wrap">
+                                  <span className="dark:text-neutral-400">
+                                    Most Popular
+                                  </span>
+                                  <div className="flex gap-2 flex-wrap pt-2">
                                     {createNewPostSelector.emojis.popular.map(
                                       (emoji) => (
                                         <div
@@ -823,8 +842,10 @@ function CreateNewPost() {
                                   </div>
                                 </div>
                                 <div className="p-3">
-                                  <span>Activities</span>
-                                  <div className="flex flex-wrap gap-1">
+                                  <span className="dark:text-neutral-400">
+                                    Activities
+                                  </span>
+                                  <div className="flex flex-wrap gap-2 pt-2">
                                     {createNewPostSelector.emojis.activities.map(
                                       (emoji) => (
                                         <div
@@ -843,21 +864,21 @@ function CreateNewPost() {
                             </>
                           )}
                         </div>
-                        <span className="text-xs text-[#c7c7c7]">
+                        <span className="text-xs text-[#c7c7c7] dark:text-neutral-500">
                           {captionTextAreaValue.length}/2,200
                         </span>
                       </div>
 
-                      <div className="relative flex items-center justify-between gap-x-1 px-4 border border-[#dbdbdb">
+                      <div className="relative flex items-center justify-between gap-x-1 px-4 border-y border-[#dbdbdb dark:border-neutral-700">
                         <input
                           type="text"
                           placeholder="Add location"
-                          className="grow py-2 outline-none"
+                          className="grow dark:text-white bg-white dark:bg-neutral-800 placeholder:text-neutral-400 py-2 outline-none"
                           value={locationInputValue}
                           onChange={handleChangeLocationInputValue}
                           onBlur={() => setLocationInputValue("")}
                         />
-                        <div className="text-black">
+                        <div className="text-black dark:text-white">
                           {!isShowLocationBox ? (
                             <svg className="w-4 h-4">
                               <use href="#location"></use>
@@ -875,13 +896,13 @@ function CreateNewPost() {
                         {isShowLocationBox && (
                           <div
                             ref={locationBoxRef}
-                            className="absolute top-10 left-0 w-full h-28 p-4 bg-white overflow-y-auto rounded-md drop-shadow-[0px_0px_5px_rgba(0,0,0,.0975)]"
+                            className="absolute top-10 left-0 w-full h-28 p-4 bg-white dark:bg-black overflow-y-auto rounded-md drop-shadow-[0px_0px_5px_rgba(0,0,0,.0975)] z-10"
                           >
-                            <ul className="flex flex-col gap-1">
+                            <ul className="flex flex-col gap-2">
                               {filteredCountries.length ? (
                                 filteredCountries.map((country) => (
                                   <li
-                                    className="font-[600] cursor-pointer"
+                                    className="font-[600] dark:text-white cursor-pointer"
                                     onClick={() => {
                                       setLocationInputValue(country);
                                       setIsShowLocationBox(false);
@@ -902,7 +923,7 @@ function CreateNewPost() {
 
                       {/* Accordion */}
                       <div>
-                        <div className="child:px-4 py-2 border-b border-[#dbdbdb]">
+                        <div className="child:px-4 py-2 border-b border-[#dbdbdb] dark:border-neutral-700">
                           <div
                             className="flex items-center justify-between cursor-pointer"
                             onClick={() =>
@@ -912,7 +933,7 @@ function CreateNewPost() {
                             }
                           >
                             <span
-                              className={`${
+                              className={`dark:text-white ${
                                 isShowAccessibilityAccordion && "font-[600]"
                               }`}
                             >
@@ -920,7 +941,7 @@ function CreateNewPost() {
                             </span>
                             <button>
                               <svg
-                                className={`w-4 h-4 ${
+                                className={`w-4 h-4 dark:text-white ${
                                   isShowAccessibilityAccordion
                                     ? ""
                                     : "rotate-180"
@@ -962,7 +983,7 @@ function CreateNewPost() {
                                       )}
                                     </div>
                                     <input
-                                      className="h-11 grow text-sm placeholder:text-neutral-300 px-3 py-1 outline-none border border-[#dbdbdb] rounded-md"
+                                      className="h-11 grow dark:text-white bg-white dark:bg-neutral-800 text-sm placeholder:text-neutral-300 dark:placeholder:text-neutral-500 px-3 py-1 outline-none focus:border border-[#dbdbdb] dark:border-neutral-600 rounded-md"
                                       type="text"
                                       placeholder="Write alt text..."
                                     />
@@ -976,7 +997,7 @@ function CreateNewPost() {
                         <div
                           className={`child:px-4 py-2 ${
                             !isShowAdvancedSettingsAccordion &&
-                            "border-b border-[#dbdbdb]"
+                            "border-b border-[#dbdbdb] dark:border-neutral-700"
                           }`}
                         >
                           <div
@@ -988,7 +1009,7 @@ function CreateNewPost() {
                             }
                           >
                             <span
-                              className={`${
+                              className={`dark:text-white ${
                                 isShowAdvancedSettingsAccordion && "font-[600]"
                               }`}
                             >
@@ -996,7 +1017,7 @@ function CreateNewPost() {
                             </span>
                             <button>
                               <svg
-                                className={`w-4 h-4 ${
+                                className={`w-4 h-4 dark:text-white ${
                                   isShowAdvancedSettingsAccordion
                                     ? ""
                                     : "rotate-180"
@@ -1011,7 +1032,7 @@ function CreateNewPost() {
                             <div className="pt-1.5">
                               <div>
                                 <div className="flex items-center justify-between">
-                                  <h5>
+                                  <h5 className="dark:text-white">
                                     Hide like and view counts on this post
                                   </h5>
                                   <SwitchInput />
@@ -1026,7 +1047,9 @@ function CreateNewPost() {
                               </div>
                               <div>
                                 <div className="flex items-center justify-between">
-                                  <h5>Turn off commenting</h5>
+                                  <h5 className="dark:text-white">
+                                    Turn off commenting
+                                  </h5>
                                   <SwitchInput />
                                 </div>
                                 <p className="text-xs text-neutral-500 py-2">
@@ -1067,13 +1090,13 @@ function CreateNewPost() {
               dispatch(setIsOpenModal(false));
             }}
           >
-            <div className="w-[400px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col z-[55] bg-white p-3 text-center rounded-xl">
-              <h4 className="text-xl">Discard post?</h4>
-              <span className="text-sm text-neutral-500 pt-2 pb-6">
+            <div className="w-[400px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col z-[55] bg-white dark:bg-neutral-800 p-3 text-center rounded-xl">
+              <h4 className="text-xl dark:text-white">Discard post?</h4>
+              <span className="text-sm text-neutral-500 dark:text-neutral-400 pt-2 pb-6">
                 If you leave, your edits won't be saved.
               </span>
               <button
-                className="block h-12 text-sm text-[#ed4996] font-[700] py-1 px-2 border-t border-[#dbdbdb]"
+                className="block h-12 text-sm text-[#ed4956] font-[700] py-1 px-2 border-t border-[#dbdbdb] dark:border-neutral-700"
                 onClick={() => {
                   dispatch(setStepOfCreateNewPost("first"));
                   setThumbsSwiper(null);
@@ -1083,7 +1106,7 @@ function CreateNewPost() {
                 Discard
               </button>
               <button
-                className="block h-12 text-sm py-1 px-2 border-t border-[#dbdbdb]"
+                className="block h-12 text-sm dark:text-white py-1 px-2 border-t border-[#dbdbdb] dark:border-neutral-700"
                 onClick={() => dispatch(setIsOpenModal(false))}
               >
                 Cancel
