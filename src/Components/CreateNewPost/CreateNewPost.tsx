@@ -1055,7 +1055,7 @@ function CreateNewPost() {
           accept="image/*,video/*"
         />
 
-        {createNewPostSelector.step === "second" && (
+        {createNewPostSelector.step !== "first" && (
           <TransparentOverlay className="z-[51]" />
         )}
 
