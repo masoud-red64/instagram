@@ -166,4 +166,19 @@
     -ms-transform: translateX(10px);
     transform: translateX(10px);
   }
+
+  .stories-swiper .swiper-button-next,
+  .stories-swiper .swiper-button-prev {
+    @apply w-6 h-6 top-10 bg-white rounded-full;
+  }
+  .stories-swiper .swiper-button-next {
+    @apply right-5;
+  }
+  .stories-swiper .swiper-button-prev {
+    @apply left-5;
+  }
+  .stories-swiper .swiper-button-next::after,
+  .stories-swiper .swiper-button-prev::after {
+    @apply text-sm text-black;
+  }
 }

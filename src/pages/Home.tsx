@@ -4,6 +4,16 @@ import SearchBox from "../Components/SearchBox/SearchBox";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { Link } from "react-router-dom";
+import Story from "../Components/Story/Story";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+// import required modules
+import { Navigation } from "swiper/modules";
+import { usersList } from "../Data/users";
 
 function Home() {
   const serachBoxSelector = useSelector(
@@ -39,6 +49,52 @@ function Home() {
           </Link>
         </div>
       </header>
+
+      <div className="grid grid-cols-2 lg:grid-cols-3 w-full h-10 mt-[90px] md:mt-[46px]">
+        <div className="col-span-2">
+          {/* Stories */}
+          <div>
+            <Swiper
+              slidesPerView={4}
+              spaceBetween={10}
+              breakpoints={{
+                400: {
+                  slidesPerView: 5,
+                },
+                500: {
+                  slidesPerView: 6,
+                },
+                600: {
+                  slidesPerView: 7,
+                },
+                700: {
+                  slidesPerView: 8,
+                },
+                768: {
+                  slidesPerView: 9,
+                },
+              }}
+              navigation={true}
+              modules={[Navigation]}
+              className="stories-swiper"
+            >
+              {usersList.map((user) => (
+                <SwiperSlide>
+                  <div className="flex flex-col items-center gap-y-1">
+                    <div className="w-[66px] h-[66px]">
+                      <Story img={user.img} hasStory hasNewStory />
+                    </div>
+                    <span className="block max-w-[66px] text-xs overflow-hidden overflow-ellipsis">
+                      {user.username}
+                    </span>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+        <div className="hidden lg:block col-span-1"></div>
+      </div>
     </div>
   );
 }
