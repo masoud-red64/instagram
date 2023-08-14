@@ -22,9 +22,6 @@ function Sidebar() {
     localStorage.getItem("theme") === "dark" ? true : false
   );
 
-  const contentOfMoreItemRef = useRef<HTMLDivElement | null>(null);
-  const moreBtnRef = useRef<HTMLButtonElement | null>(null);
-
   const location = useLocation();
 
   const dispatch = useDispatch();
@@ -35,22 +32,6 @@ function Sidebar() {
   const createNewPostSelector = useSelector(
     (state: RootState) => state.createNewPostReducer
   );
-
-  useEffect(() => {
-    const handleDocumentClick = (event: MouseEvent) => {
-      if (
-        contentOfMoreItemRef.current &&
-        moreBtnRef.current !== event.target &&
-        !contentOfMoreItemRef.current.contains(event.target as Node)
-      ) {
-        setIsActiveMore(false);
-      }
-    };
-
-    document.addEventListener("click", handleDocumentClick);
-
-    return () => document.removeEventListener("click", handleDocumentClick);
-  }, []);
 
   useEffect(() => {
     const preferredTheme = isSwitchInputChecked ? "dark" : "";
@@ -341,7 +322,6 @@ function Sidebar() {
         {/* More */}
         <div className="relative hidden md:block mt-auto leading-5 mb-1">
           <button
-            ref={moreBtnRef}
             className={`w-full flex gap-x-4 group ${
               isActiveMore && "font-[700]"
             } p-3 hover:hover-item hover:rounded-lg transition-all`}
@@ -374,7 +354,7 @@ function Sidebar() {
               {!isSwitchAppearanceActive ? (
                 <>
                   {/* Content Of More Item */}
-                  <div ref={contentOfMoreItemRef}>
+                  <div>
                     <ul>
                       <li className=" hover:bg-[#f8f8f8] dark:hover:bg-[#3c3c3c] transition-all rounded-lg">
                         <a href="#" className="flex items-center gap-x-3 p-4">
