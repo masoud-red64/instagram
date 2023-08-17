@@ -16,6 +16,7 @@ import {
 } from "swiper/modules";
 import Story from "../Components/Story/Story";
 import { usersList } from "../Data/users";
+import { useNavigate } from "react-router-dom";
 
 function Stories() {
   const [isMutedVideo, setIsMutedVideo] = useState(true);
@@ -24,15 +25,19 @@ function Stories() {
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
+  const navigate = useNavigate();
+
   return (
     <div className="relative w-screen h-screen flex items-center justify-center bg-[#1a1a1a] overflow-hidden">
       <div className="absolute top-5 left-5 right-5 flex items-center justify-between text-white">
         <svg className="w-[102px] h-7">
           <use href="#logo-instagram"></use>
         </svg>
-        <svg className="w-6 h-6">
-          <use href="#close"></use>
-        </svg>
+        <button onClick={() => navigate("/")}>
+          <svg className="w-6 h-6">
+            <use href="#close"></use>
+          </svg>
+        </button>
       </div>
 
       <div>

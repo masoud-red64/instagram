@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type StoryPropsTypes = {
   img: string;
@@ -91,23 +91,19 @@ const Story = ({ img, hasStory, hasNewStory }: StoryPropsTypes) => {
 
         setTimeout(() => {
           setIsShowLoading(false); // Stop the loading animation
-          navigate("/");
+          navigate("/stories");
         }, 5500); // Total animation duration
       }
     }
   }, [isShowLoading, hasNewStory, navigate]);
 
   return (
-    <a
-      href="#"
+    <Link
+      to={"/stories"}
       className="w-full h-full relative flex items-center justify-center rounded-full"
       onClick={(e) => {
         e.preventDefault();
         setIsShowLoading(true);
-        setTimeout(() => {
-          setIsShowLoading(false); // Stop the loading animation
-          navigate("/");
-        }, 7000); // Total animation duration
       }}
     >
       {hasStory && (
@@ -125,7 +121,7 @@ const Story = ({ img, hasStory, hasNewStory }: StoryPropsTypes) => {
         src={`images/users/${img}`}
         alt=""
       />
-    </a>
+    </Link>
   );
 };
 
