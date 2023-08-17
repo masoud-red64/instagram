@@ -1,6 +1,7 @@
 import Home from "./pages/Home";
 import Index from "./pages/Index";
 import Notifications from "./pages/Notifications";
+import Stories from "./pages/Stories";
 
 const routes = [
   {
@@ -10,6 +11,10 @@ const routes = [
       { path: "", element: <Home /> },
       { path: "notifications", element: <Notifications /> },
     ],
+  },
+  {
+    path: "/stories",
+    element: <Stories />,
   },
 ];
 
