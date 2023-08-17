@@ -20,7 +20,9 @@ export const usersList: userListTypes[] = [
         username: "masoud_red64",
         name: "Masoud",
         stories: [
-            { id: 1, img: 'df', video: 'sf' }
+            { id: 1, img: 'img1.jfif', video: '' },
+            { id: 2, img: '', video: 'video1.mp4' },
+            { id: 3, img: 'img2.jfif', video: '' },
         ]
 
     },
@@ -32,7 +34,9 @@ export const usersList: userListTypes[] = [
         username: "m2.designing",
         name: "M2 D E S I G N",
         stories: [
-            { id: 1, img: '', video: '' }
+            { id: 1, img: 'img3.jfif', video: '' },
+            { id: 2, img: '', video: 'video2.mp4' },
+            { id: 3, img: 'img4.jfif', video: '' },
         ]
     },
     {
@@ -43,7 +47,9 @@ export const usersList: userListTypes[] = [
         username: "nikolausofpersia",
         name: "Nikolaus",
         stories: [
-            { id: 1, img: '', video: '' }
+            { id: 1, img: 'img5.jfif', video: '' },
+            { id: 2, img: '', video: 'video3.mp4' },
+            { id: 3, img: 'img6.jpg', video: '' },
         ]
     },
     {
@@ -54,7 +60,9 @@ export const usersList: userListTypes[] = [
         username: "bbcpersian",
         name: "BBC NEWS فارسی 19.4M",
         stories: [
-            { id: 1, img: '', video: '' }
+            { id: 1, img: 'img7.jpg', video: '' },
+            { id: 2, img: '', video: 'video4.mp4' },
+            { id: 3, img: 'img8.jpg', video: '' },
         ]
     },
     {
@@ -65,7 +73,9 @@ export const usersList: userListTypes[] = [
         username: " marzieh_d64",
         name: "Marzieh",
         stories: [
-            { id: 1, img: '', video: '' }
+            { id: 1, img: 'img9.jpg', video: '' },
+            { id: 2, img: '', video: 'video5.mp4' },
+            { id: 3, img: 'img10.jpg', video: '' },
         ]
     },
     {
@@ -76,7 +86,9 @@ export const usersList: userListTypes[] = [
         username: " arash_times",
         name: "Arash",
         stories: [
-            { id: 1, img: '', video: '' }
+            { id: 1, img: 'img11.jpg', video: '' },
+            { id: 2, img: '', video: 'video6.mp4' },
+            { id: 3, img: 'img12.jpg', video: '' },
         ]
     },
     {
@@ -87,7 +99,9 @@ export const usersList: userListTypes[] = [
         username: " ketab20.ir",
         name: " فروشگاه آنلاین کتاب ",
         stories: [
-            { id: 1, img: '', video: '' }
+            { id: 1, img: 'img13.jpg', video: '' },
+            { id: 2, img: '', video: 'video7.mp4' },
+            { id: 3, img: 'img14.jpg', video: '' },
         ]
     },
     {
@@ -98,7 +112,9 @@ export const usersList: userListTypes[] = [
         username: "mobonews",
         name: "Mobonews | موبونیوز ",
         stories: [
-            { id: 1, img: '', video: '' }
+            { id: 1, img: 'img15.jpg', video: '' },
+            { id: 2, img: '', video: 'video8.mp4' },
+            { id: 3, img: 'img16.jpg', video: '' },
         ]
     },
     {
@@ -109,7 +125,9 @@ export const usersList: userListTypes[] = [
         username: "mahdeih",
         name: "mahdieh_123  ",
         stories: [
-            { id: 1, img: '', video: '' }
+            { id: 1, img: 'img17.jpg', video: '' },
+            { id: 2, img: '', video: 'video9.mp4' },
+            { id: 3, img: 'img18.jpg', video: '' },
         ]
     },
     {
@@ -120,7 +138,9 @@ export const usersList: userListTypes[] = [
         username: "masoudr3423",
         name: "movie | فیلم ",
         stories: [
-            { id: 1, img: '', video: '' }
+            { id: 1, img: 'img19.jpg', video: '' },
+            { id: 2, img: '', video: 'video10.mp4' },
+            { id: 3, img: 'img20.jpg', video: '' },
         ]
     },
     {
@@ -131,7 +151,9 @@ export const usersList: userListTypes[] = [
         username: "mohammad",
         name: "mohammad_231 ",
         stories: [
-            { id: 1, img: '', video: '' }
+            { id: 1, img: 'img21.jpg', video: '' },
+            { id: 2, img: '', video: 'video11.mp4' },
+            { id: 3, img: 'img22.jpg', video: '' },
         ]
     },
     {
@@ -142,7 +164,9 @@ export const usersList: userListTypes[] = [
         username: "ali",
         name: "ali_2312",
         stories: [
-            { id: 1, img: '', video: '' }
+            { id: 1, img: 'img23.jpg', video: '' },
+            { id: 2, img: '', video: 'video12.mp4' },
+            { id: 3, img: 'img24.jpg', video: '' },
         ]
     },
 ];
