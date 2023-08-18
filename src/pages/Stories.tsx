@@ -23,6 +23,9 @@ function Stories() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [parentSwiper, setParentSwiper] = useState();
   const [isPauseSwiper, setIsPauseSwiper] = useState(false);
+  const [storyLikeStatus, setStoryLikeStatus] = useState<{
+    [key: number]: boolean;
+  }>({});
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [activeVideoRef, setActiveVideoRef] = useState<HTMLVideoElement | null>(
@@ -36,6 +39,13 @@ function Stories() {
   useEffect(() => {
     parentSwiper && parentSwiper.slideTo(Number(userID) - 1);
   }, [userID]);
+
+  const handleLikeClick = (userID: number) => {
+    setStoryLikeStatus((prevStatus) => ({
+      ...prevStatus,
+      [userID]: !prevStatus[userID],
+    }));
+  };
 
   return (
     <div className="relative w-screen h-screen flex items-center justify-center bg-[#1a1a1a] overflow-hidden">
@@ -173,13 +183,16 @@ function Stories() {
                             placeholder={`Reply to ${user.username}`}
                             className="py-2 px-4 grow bg-transparent border rounded-full text-[#dbdbdb] outline-none placeholder:text-[#dbdbdb]"
                           />
-                          <button>
-                            {/* <svg className="w-6 h-6 text-white">
-                <use href="#notifications"></use>
-              </svg> */}
-                            <svg className="w-6 h-6 text-white">
-                              <use href="#fill-heart"></use>
-                            </svg>
+                          <button onClick={() => handleLikeClick(user.id)}>
+                            {storyLikeStatus[user.id] ? (
+                              <svg className="w-6 h-6 text-white">
+                                <use href="#fill-heart"></use>
+                              </svg>
+                            ) : (
+                              <svg className="w-6 h-6 text-white">
+                                <use href="#notifications"></use>
+                              </svg>
+                            )}
                           </button>
                           <button>
                             <svg className="w-6 h-6 text-white">
