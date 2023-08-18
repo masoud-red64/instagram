@@ -105,7 +105,7 @@ export const usersList: userListTypes[] = [
         ]
     },
     {
-        id: 9,
+        id: 8,
         img: "user8.jpg",
         hasStory: true,
         hasNewStory: true,
@@ -118,7 +118,7 @@ export const usersList: userListTypes[] = [
         ]
     },
     {
-        id: 10,
+        id: 9,
         img: "user9.jpg",
         hasStory: true,
         hasNewStory: true,
@@ -131,7 +131,7 @@ export const usersList: userListTypes[] = [
         ]
     },
     {
-        id: 11,
+        id: 10,
         img: "user10.jpg",
         hasStory: true,
         hasNewStory: true,
@@ -144,7 +144,7 @@ export const usersList: userListTypes[] = [
         ]
     },
     {
-        id: 12,
+        id: 11,
         img: "user11.jpg",
         hasStory: true,
         hasNewStory: true,
@@ -157,7 +157,7 @@ export const usersList: userListTypes[] = [
         ]
     },
     {
-        id: 13,
+        id: 12,
         img: "user12.jpg",
         hasStory: true,
         hasNewStory: true,
