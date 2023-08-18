@@ -118,7 +118,7 @@ const Story = ({ img, hasStory, hasNewStory }: StoryPropsTypes) => {
       )}
       <img
         className="w-[95%] rounded-full"
-        src={`images/users/${img}`}
+        src={`/images/users/${img}`}
         alt=""
       />
     </Link>
