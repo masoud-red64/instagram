@@ -13,7 +13,7 @@ const routes = [
     ],
   },
   {
-    path: "/stories",
+    path: "/stories/:userID",
     element: <Stories />,
   },
 ];

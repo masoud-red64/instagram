@@ -82,7 +82,7 @@ function Home() {
                 <SwiperSlide>
                   <div className="flex flex-col items-center gap-y-1">
                     <div className="w-[66px] h-[66px]">
-                      <Story img={user.img} hasStory hasNewStory />
+                      <Story id={user.id} img={user.img} hasStory hasNewStory />
                     </div>
                     <span className="block max-w-[66px] text-xs overflow-hidden overflow-ellipsis">
                       {user.username}
