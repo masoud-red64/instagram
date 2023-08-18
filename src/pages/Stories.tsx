@@ -16,16 +16,26 @@ import {
 } from "swiper/modules";
 import Story from "../Components/Story/Story";
 import { usersList } from "../Data/users";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function Stories() {
   const [isMutedVideo, setIsMutedVideo] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [parentSwiper, setParentSwiper] = useState();
+  const [isPauseSwiper, setIsPauseSwiper] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [activeVideoRef, setActiveVideoRef] = useState<HTMLVideoElement | null>(
+    null
+  );
 
   const navigate = useNavigate();
+
+  const { userID } = useParams();
+
+  useEffect(() => {
+    parentSwiper && parentSwiper.slideTo(Number(userID) - 1);
+  }, [userID]);
 
   return (
     <div className="relative w-screen h-screen flex items-center justify-center bg-[#1a1a1a] overflow-hidden">
@@ -56,12 +66,14 @@ function Stories() {
           navigation={true}
           modules={[EffectCoverflow, Navigation]}
           className="story-content-swiper"
-          slideToClickedSlide={true}
+          // slideToClickedSlide={true}
           onSlideChange={(swiper) => {
             setActiveIndex(swiper.activeIndex);
-            console.log(activeIndex);
           }}
-          onSwiper={(swiper) => setParentSwiper(swiper)}
+          onSwiper={(swiper) => {
+            setParentSwiper(swiper);
+            swiper.slideTo(Number(userID) - 1);
+          }}
         >
           {usersList.map((user, index) => (
             <>
@@ -70,34 +82,28 @@ function Stories() {
                 <Swiper
                   spaceBetween={30}
                   centeredSlides={true}
-                  // autoplay={
-                  //   true&& {
-                  //     delay: 5000,
-                  //   }
-                  // }
                   pagination={{
                     clickable: true,
                   }}
                   navigation={activeIndex === index}
                   modules={[Autoplay, Pagination, Navigation]}
-                  className="story-user-swiper"
+                  className={`story-user-swiper ${
+                    isPauseSwiper ? "swiper-paused" : ""
+                  }`}
                   watchSlidesProgress={true}
-                  // onSlidePrevTransitionEnd={(swiper) => {
-                  //   parentSwiper.slideNext();
-                  // }}
+                  onSlidePrevTransitionEnd={(swiper) => {
+                    parentSwiper.slideNext();
+                  }}
                 >
                   {user.stories.map((story, index) => (
-                    <SwiperSlide key={story.id}>
-                      <div
-                        className="relative -z-10 w-full h-full rounded-lg bg-no-repeat bg-cover"
-                        style={
-                          story.img
-                            ? {
-                                backgroundImage: `url(images/stories/images/${story.img})`,
-                              }
-                            : {}
-                        }
-                      >
+                    <SwiperSlide
+                      key={story.id}
+                      onMouseDown={() => {
+                        setIsPauseSwiper(true);
+                      }}
+                      onMouseUp={() => setIsPauseSwiper(false)}
+                    >
+                      <div className="relative -z-10 w-full h-full rounded-lg">
                         {/* Top */}
                         <div className="flex items-center justify-between bg-gradient-to-b from-[rgba(38,38,38,.8)] to-[rgba(38, 38, 38,0)] pt-5 px-4 pb-8">
                           <div className="flex items-center gap-x-2">
@@ -111,21 +117,20 @@ function Stories() {
                           </div>
                           <div className="flex items-center gap-x-4 text-white">
                             <div>
-                              {false ? (
-                                <button>
-                                  <svg
-                                    className="w-4 h-4"
-                                    onClick={() => {
-                                      videoRef.current?.play();
-                                    }}
-                                  >
+                              {isPauseSwiper ? (
+                                <button
+                                  onClick={() => {
+                                    setIsPauseSwiper(false);
+                                  }}
+                                >
+                                  <svg className="w-4 h-4">
                                     <use href="#play"></use>
                                   </svg>
                                 </button>
                               ) : (
                                 <button
                                   onClick={() => {
-                                    videoRef.current?.pause();
+                                    setIsPauseSwiper(true);
                                   }}
                                 >
                                   <svg className="w-4 h-4">
@@ -135,12 +140,14 @@ function Stories() {
                               )}
                             </div>
                             <button
-                              onClick={() => {
-                                videoRef.current!.muted = !isMutedVideo;
-                                setIsMutedVideo(!isMutedVideo);
-                              }}
+                            // onClick={() => {
+                            //   if (story.video) {
+                            //     videoRef.current!.muted = !isMutedVideo;
+                            //     setIsMutedVideo(!isMutedVideo);
+                            //   }
+                            // }}
                             >
-                              {isMutedVideo ? (
+                              {isMutedVideo || story.img ? (
                                 <svg className="w-4 h-4">
                                   <use href="#muted"></use>
                                 </svg>
@@ -163,7 +170,7 @@ function Stories() {
                         <div className="absolute bottom-0 right-0 left-0 p-4 flex items-center justify-between gap-x-4 bg-gradient-to-t from-[rgba(38,38,38,.6)] to-[rgba(38, 38, 38,0)]">
                           <input
                             type="text"
-                            placeholder="Reply to barnamenevisiinsta"
+                            placeholder={`Reply to ${user.username}`}
                             className="py-2 px-4 grow bg-transparent border rounded-full text-[#dbdbdb] outline-none placeholder:text-[#dbdbdb]"
                           />
                           <button>
@@ -181,34 +188,48 @@ function Stories() {
                           </button>
                         </div>
 
-                        {story.video && (
-                          <video
-                            autoPlay
-                            className="absolute -z-50 top-0 left-0 w-full h-full object-cover"
-                            ref={videoRef}
-                            muted={isMutedVideo}
-                            onMouseDown={() => {
-                              videoRef.current?.pause();
-                            }}
-                            onMouseUp={() => {
-                              videoRef.current?.play();
-                            }}
-                          >
-                            <source src={story.video} type="video/mp4" />
-                            Your browser does not support the video tag.
-                          </video>
-                        )}
+                        <div>
+                          {story.video ? (
+                            <video
+                              autoPlay
+                              ref={videoRef}
+                              className="absolute -z-50 top-0 left-0 w-full h-full object-cover"
+                              muted={isMutedVideo}
+                              onMouseDown={() => {
+                                videoRef.current?.pause();
+                              }}
+                              onMouseUp={() => {
+                                videoRef.current?.play();
+                              }}
+                            >
+                              <source
+                                src={`/images/stories/videos/${story.video}`}
+                                type="video/mp4"
+                              />
+                              Your browser does not support the video tag.
+                            </video>
+                          ) : (
+                            <img
+                              className="absolute -z-50 top-0 left-0 w-full h-full object-cover"
+                              src={`/images/stories/images/${story.img}`}
+                              alt=""
+                            />
+                          )}
+                        </div>
                       </div>
                     </SwiperSlide>
                   ))}
                 </Swiper>
-                <div className="hidden prev-next__content">
+                <Link
+                  to={`/stories/${user.id}`}
+                  className="hidden prev-next__content"
+                >
                   <div className="w-[100px] h-[100px] pointer-events-none">
                     <Story img={user.img} hasStory hasNewStory />
                   </div>
                   <span className="text-lg">{user.username}</span>
                   <span className="text-lg">2h</span>
-                </div>
+                </Link>
               </SwiperSlide>
             </>
           ))}

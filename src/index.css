@@ -273,8 +273,7 @@
   }
 
   .story-user-swiper .swiper-pagination-bullet.swiper-pagination-bullet-active {
-    background-color: rgba(255, 255, 255, .1);
-
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   .story-content-swiper
@@ -289,6 +288,14 @@
         opacity: 0;
         animation-play-state: paused;
       }
+    }
+  }
+  .story-content-swiper
+    .swiper-slide-active
+    .story-user-swiper.swiper-paused
+    .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    &::before {
+      animation-play-state: paused;
     }
   }
 

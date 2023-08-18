@@ -5,9 +5,10 @@ type StoryPropsTypes = {
   img: string;
   hasNewStory?: boolean;
   hasStory: boolean;
+  id?: number;
 };
 
-const Story = ({ img, hasStory, hasNewStory }: StoryPropsTypes) => {
+const Story = ({ img, hasStory, hasNewStory, id }: StoryPropsTypes) => {
   const [isShowLoading, setIsShowLoading] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const navigate = useNavigate();
@@ -91,7 +92,7 @@ const Story = ({ img, hasStory, hasNewStory }: StoryPropsTypes) => {
 
         setTimeout(() => {
           setIsShowLoading(false); // Stop the loading animation
-          navigate("/stories");
+          navigate(`/stories/${id}`);
         }, 5500); // Total animation duration
       }
     }
@@ -99,7 +100,7 @@ const Story = ({ img, hasStory, hasNewStory }: StoryPropsTypes) => {
 
   return (
     <Link
-      to={"/stories"}
+      to={`/stories/${id}`}
       className="w-full h-full relative flex items-center justify-center rounded-full"
       onClick={(e) => {
         e.preventDefault();
