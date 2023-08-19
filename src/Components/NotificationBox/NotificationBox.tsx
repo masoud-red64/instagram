@@ -165,6 +165,7 @@ function NotificationBox() {
             </div>
             <div className="w-9 h-9 xs:w-11 xs:h-11 shrink-0">
               <img
+                loading="lazy"
                 src="images/notifs/notif1.jpg"
                 alt=""
                 className="w-full h-full"
@@ -184,6 +185,7 @@ function NotificationBox() {
             </div>
             <div className="w-9 h-9 xs:w-11 xs:h-11 shrink-0">
               <img
+                loading="lazy"
                 src="images/notifs/notif2.jpg"
                 alt=""
                 className="w-full h-full"
@@ -202,6 +204,7 @@ function NotificationBox() {
             </div>
             <div className="w-9 h-9 xs:w-11 xs:h-11 shrink-0">
               <img
+                loading="lazy"
                 src="images/notifs/notif3.jfif"
                 alt=""
                 className="w-full h-full"

@@ -320,6 +320,7 @@ function CreateNewPost() {
                               <div className="h-[29rem] flex items-center justify-center">
                                 {newPost.img ? (
                                   <img
+                                    loading="lazy"
                                     src={newPost.img}
                                     alt=""
                                     style={{
@@ -544,6 +545,7 @@ function CreateNewPost() {
                                         </button>
                                         {newPost.img ? (
                                           <img
+                                            loading="lazy"
                                             src={newPost.img}
                                             alt=""
                                             className="h-full"
@@ -623,6 +625,7 @@ function CreateNewPost() {
                                 onClick={() => setFilterValue(filter.filter)}
                               >
                                 <img
+                                  loading="lazy"
                                   src={`images/filters/${filter.name}.jpg`}
                                   alt=""
                                   className={`w-[88px] h-[88px] ${
@@ -967,6 +970,7 @@ function CreateNewPost() {
                                     <div className="w-11 h-11">
                                       {newPost.img ? (
                                         <img
+                                          loading="lazy"
                                           src={newPost.img}
                                           alt=""
                                           className="w-full h-full object-cover"

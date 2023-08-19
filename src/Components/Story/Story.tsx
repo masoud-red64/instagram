@@ -118,6 +118,7 @@ const Story = ({ img, hasStory, hasNewStory, id }: StoryPropsTypes) => {
         />
       )}
       <img
+        loading="lazy"
         className="w-[95%] rounded-full"
         src={`/images/users/${img}`}
         alt=""

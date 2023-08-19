@@ -302,6 +302,7 @@ function Sidebar() {
           >
             <a href="#" className="inline-flex gap-x-4 p-3 -m-3">
               <img
+                loading="lazy"
                 src="/images/users/user1.jpg"
                 alt=""
                 className="w-6 h-6 rounded-full group-hover:scale-105 transition-transform"

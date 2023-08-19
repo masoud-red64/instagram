@@ -183,7 +183,7 @@ function Stories() {
                   }`}
                   watchSlidesProgress={true}
                   onSlidePrevTransitionEnd={(swiper) => {
-                    parentSwiper &&  parentSwiper.slideNext();
+                    parentSwiper && parentSwiper.slideNext();
                   }}
                 >
                   {user.stories.map((story, index) => (
@@ -346,6 +346,7 @@ function Stories() {
                             </video>
                           ) : (
                             <img
+                              loading="lazy"
                               className="absolute -z-50 top-0 left-0 w-full h-full object-cover"
                               src={`/images/stories/images/${story.img}`}
                               alt=""
