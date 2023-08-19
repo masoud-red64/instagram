@@ -36,6 +36,7 @@ function Stories() {
     [key: number]: boolean;
   }>({});
   const [isShowReportBox, setIsShowReportBox] = useState(false);
+  const [isShowShareBox, setIsShowShareBox] = useState(false);
   const [isCheckedInput, setIsCheckedInput] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -274,7 +275,7 @@ function Stories() {
                                   </svg>
                                 )}
                               </button>
-                              <button>
+                              <button onClick={() => setIsShowShareBox(true)}>
                                 <svg className="w-6 h-6 text-white">
                                   <use href="#messages"></use>
                                 </svg>
@@ -338,10 +339,13 @@ function Stories() {
 
       {/* overlay */}
       {isShowReportBox ||
-        (true && (
+        (isShowShareBox && (
           <div
             className="absolute inset-0 flex items-center justify-center bg-black/60 z-10"
-            onClick={() => setIsShowReportBox(false)}
+            onClick={() => {
+              setIsShowReportBox(false);
+              setIsShowShareBox(false);
+            }}
           >
             {/* ReportBox */}
             {isShowReportBox && (
@@ -372,7 +376,10 @@ function Stories() {
               {/* Top */}
               <div className="flex items-center justify-between text-neutral-100 py-2 border-b border-[#363636]">
                 <h4 className="font-[700] grow text-center">Share</h4>
-                <button className="pr-4">
+                <button
+                  className="pr-4"
+                  onClick={() => setIsShowShareBox(false)}
+                >
                   <svg className="w-[18px] h-[18px]">
                     <use href="#close"></use>
                   </svg>
