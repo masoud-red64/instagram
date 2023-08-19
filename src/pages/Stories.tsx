@@ -36,6 +36,7 @@ function Stories() {
     [key: number]: boolean;
   }>({});
   const [isShowReportBox, setIsShowReportBox] = useState(false);
+  const [isCheckedInput, setIsCheckedInput] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [activeVideoRef, setActiveVideoRef] = useState<HTMLVideoElement | null>(
@@ -336,36 +337,266 @@ function Stories() {
       </div>
 
       {/* overlay */}
-      {isShowReportBox && (
-        <div
-          className="absolute inset-0 flex items-center justify-center bg-black/60 z-10"
-          onClick={() => setIsShowReportBox(false)}
-        >
-          {/* ReportBox */}
-          {isShowReportBox && (
-            <div
-              className="w-[260px] md:w-[400px] bg-neutral-800 rounded-xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ul className="text-sm divide-y divide-[#363636]">
-                <li className="h-12 flex items-center justify-center font-[700] text-[#ed4956]">
-                  <button className="w-full h-full">
-                    Report Inappropriate
-                  </button>
-                </li>
-                <li className="h-12 flex items-center justify-center text-neutral-100">
-                  <button
-                    className="w-full h-full"
-                    onClick={() => setIsShowReportBox(false)}
-                  >
-                    Cancel
-                  </button>
-                </li>
-              </ul>
+      {isShowReportBox ||
+        (true && (
+          <div
+            className="absolute inset-0 flex items-center justify-center bg-black/60 z-10"
+            onClick={() => setIsShowReportBox(false)}
+          >
+            {/* ReportBox */}
+            {isShowReportBox && (
+              <div
+                className="w-[260px] md:w-[400px] bg-neutral-800 rounded-xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ul className="text-sm divide-y divide-[#363636]">
+                  <li className="h-12 flex items-center justify-center font-[700] text-[#ed4956]">
+                    <button className="w-full h-full">
+                      Report Inappropriate
+                    </button>
+                  </li>
+                  <li className="h-12 flex items-center justify-center text-neutral-100">
+                    <button
+                      className="w-full h-full"
+                      onClick={() => setIsShowReportBox(false)}
+                    >
+                      Cancel
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
+
+            {/* ShareBox */}
+            <div className="w-[548px] h-[65vh] bg-neutral-800 rounded-xl">
+              {/* Top */}
+              <div className="flex items-center justify-between text-neutral-100 py-2 border-b border-[#363636]">
+                <h4 className="font-[700] grow text-center">Share</h4>
+                <button className="pr-4">
+                  <svg className="w-[18px] h-[18px]">
+                    <use href="#close"></use>
+                  </svg>
+                </button>
+              </div>
+              {/* Center => To: */}
+              <div className="flex items-center flex-wrap gap-4 px-4 pt-1 pb-2 border-b border-[#363636]">
+                <div className="flex gap-x-1">
+                  <span className="text-neutral-100 font-[600]">To:</span>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center h-[26px] gap-x-2 bg-[#e0f1ff] text-sm/[18px] font-[600] text-[#0095f6] px-3 rounded-full">
+                      <span>amenej</span>
+                      <svg className="w-3 h-3">
+                        <use href="#close"></use>
+                      </svg>
+                    </div>
+                    <div className="flex items-center h-[26px] gap-x-2 bg-[#e0f1ff] text-sm/[18px] font-[600] text-[#0095f6] px-3 rounded-full">
+                      <span>amenej</span>
+                      <svg className="w-3 h-3">
+                        <use href="#close"></use>
+                      </svg>
+                    </div>
+                    <div className="flex items-center h-[26px] gap-x-2 bg-[#e0f1ff] text-sm/[18px] font-[600] text-[#0095f6] px-3 rounded-full">
+                      <span>amenej</span>
+                      <svg className="w-3 h-3">
+                        <use href="#close"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="grow text-sm text-neutral-100 bg-transparent outline-none border-0 caret-neutral-100"
+                />
+              </div>
+
+              {/* Center => Suggested */}
+              {/* 330 */}
+              <div className="h-[280px] overflow-y-auto scrollbar">
+                <h4 className="font-[600] text-sm text-neutral-100 px-4 py-2">
+                  Suggested
+                </h4>
+                <div>
+                  <div className="flex items-center justify-between px-4 py-2">
+                    <div className="flex items-center gap-x-3">
+                      <div className="w-11 h-11">
+                        <Story img="user1.jpg" hasStory={false} />
+                      </div>
+                      <div className="flex flex-col text-sm">
+                        <span className="text-neutral-100">amenej</span>
+                        <span className="text-[#a8a8a8]">amenej90</span>
+                      </div>
+                    </div>
+                    <div className="w-[22.5px] h-[22.5px]">
+                      {isCheckedInput ? (
+                        <button>
+                          <svg
+                            className="w-[22.5px] h-[22.5px]"
+                            onClick={() => setIsCheckedInput(false)}
+                          >
+                            <use href="#fill-checkbox"></use>
+                          </svg>
+                        </button>
+                      ) : (
+                        <button>
+                          <svg
+                            className="w-[22.5px] h-[22.5px]"
+                            onClick={() => setIsCheckedInput(true)}
+                          >
+                            <use href="#empty-checkbox"></use>
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between px-4 py-2">
+                    <div className="flex items-center gap-x-3">
+                      <div className="w-11 h-11">
+                        <Story img="user1.jpg" hasStory={false} />
+                      </div>
+                      <div className="flex flex-col text-sm">
+                        <span className="text-neutral-100">amenej</span>
+                        <span className="text-[#a8a8a8]">amenej90</span>
+                      </div>
+                    </div>
+                    <div className="w-[22.5px] h-[22.5px]">
+                      {isCheckedInput ? (
+                        <button>
+                          <svg
+                            className="w-[22.5px] h-[22.5px]"
+                            onClick={() => setIsCheckedInput(false)}
+                          >
+                            <use href="#fill-checkbox"></use>
+                          </svg>
+                        </button>
+                      ) : (
+                        <button>
+                          <svg
+                            className="w-[22.5px] h-[22.5px]"
+                            onClick={() => setIsCheckedInput(true)}
+                          >
+                            <use href="#empty-checkbox"></use>
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between px-4 py-2">
+                    <div className="flex items-center gap-x-3">
+                      <div className="w-11 h-11">
+                        <Story img="user1.jpg" hasStory={false} />
+                      </div>
+                      <div className="flex flex-col text-sm">
+                        <span className="text-neutral-100">amenej</span>
+                        <span className="text-[#a8a8a8]">amenej90</span>
+                      </div>
+                    </div>
+                    <div className="w-[22.5px] h-[22.5px]">
+                      {isCheckedInput ? (
+                        <button>
+                          <svg
+                            className="w-[22.5px] h-[22.5px]"
+                            onClick={() => setIsCheckedInput(false)}
+                          >
+                            <use href="#fill-checkbox"></use>
+                          </svg>
+                        </button>
+                      ) : (
+                        <button>
+                          <svg
+                            className="w-[22.5px] h-[22.5px]"
+                            onClick={() => setIsCheckedInput(true)}
+                          >
+                            <use href="#empty-checkbox"></use>
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between px-4 py-2">
+                    <div className="flex items-center gap-x-3">
+                      <div className="w-11 h-11">
+                        <Story img="user1.jpg" hasStory={false} />
+                      </div>
+                      <div className="flex flex-col text-sm">
+                        <span className="text-neutral-100">amenej</span>
+                        <span className="text-[#a8a8a8]">amenej90</span>
+                      </div>
+                    </div>
+                    <div className="w-[22.5px] h-[22.5px]">
+                      {isCheckedInput ? (
+                        <button>
+                          <svg
+                            className="w-[22.5px] h-[22.5px]"
+                            onClick={() => setIsCheckedInput(false)}
+                          >
+                            <use href="#fill-checkbox"></use>
+                          </svg>
+                        </button>
+                      ) : (
+                        <button>
+                          <svg
+                            className="w-[22.5px] h-[22.5px]"
+                            onClick={() => setIsCheckedInput(true)}
+                          >
+                            <use href="#empty-checkbox"></use>
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between px-4 py-2">
+                    <div className="flex items-center gap-x-3">
+                      <div className="w-11 h-11">
+                        <Story img="user1.jpg" hasStory={false} />
+                      </div>
+                      <div className="flex flex-col text-sm">
+                        <span className="text-neutral-100">amenej</span>
+                        <span className="text-[#a8a8a8]">amenej90</span>
+                      </div>
+                    </div>
+                    <div className="w-[22.5px] h-[22.5px]">
+                      {isCheckedInput ? (
+                        <button>
+                          <svg
+                            className="w-[22.5px] h-[22.5px]"
+                            onClick={() => setIsCheckedInput(false)}
+                          >
+                            <use href="#fill-checkbox"></use>
+                          </svg>
+                        </button>
+                      ) : (
+                        <button>
+                          <svg
+                            className="w-[22.5px] h-[22.5px]"
+                            onClick={() => setIsCheckedInput(true)}
+                          >
+                            <use href="#empty-checkbox"></use>
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom */}
+              {/* h-[45px] */}
+              <div className="relative h-24 border-t border-[#363636]">
+                <div>
+                  <input
+                    type="text"
+                    className="h-[58px] text-sm bg-transparent bottom-0 outline-none pl-5 py-2 pr-3"
+                    placeholder="Write a message..."
+                  />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 px-4">
+                  <button className="w-full primary-btn">Send</button>
+                </div>
+              </div>
             </div>
-          )}
-        </div>
-      )}
+          </div>
+        ))}
     </div>
   );
 }
