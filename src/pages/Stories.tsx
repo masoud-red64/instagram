@@ -15,7 +15,7 @@ import {
   Navigation,
 } from "swiper/modules";
 import Story from "../Components/Story/Story";
-import { usersList } from "../Data/users";
+import { userListTypes, usersList } from "../Data/users";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 type sendStoryToUsersTypes = {
@@ -49,6 +49,9 @@ function Stories() {
     sendStoryToUsersTypes[]
   >([]);
 
+  const [shareInputValue, setShareInputValue] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState<userListTypes[]>([]);
+
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [activeVideoRef, setActiveVideoRef] = useState<HTMLVideoElement | null>(
     null
@@ -61,6 +64,10 @@ function Stories() {
   useEffect(() => {
     parentSwiper && parentSwiper.slideTo(Number(userID) - 1);
   }, [userID]);
+
+  useEffect(() => {
+    filteredUsersList();
+  }, [shareInputValue]);
 
   const handleLikeClick = (userID: number) => {
     setStoryLikeStatus((prevStatus) => ({
@@ -108,6 +115,16 @@ function Stories() {
       newStatus[key] = false;
     }
     setIsCheckedInputStatus(newStatus);
+  };
+
+  const filteredUsersList = () => {
+    let filtered = usersList.filter((user) =>
+      (user.name + user.username)
+        .toLowerCase()
+        .includes(shareInputValue.toLowerCase())
+    );
+
+    setFilteredUsers(filtered);
   };
 
   return (
@@ -445,6 +462,8 @@ function Stories() {
                     type="text"
                     placeholder="Search..."
                     className="grow text-sm text-neutral-100 bg-transparent outline-none border-0 caret-neutral-100"
+                    value={shareInputValue}
+                    onChange={(e) => setShareInputValue(e.target.value)}
                   />
                 </div>
                 <div className="grow overflow-y-scroll scrollbar">
@@ -452,7 +471,7 @@ function Stories() {
                     Suggested
                   </h4>
                   <div>
-                    {usersList.map((user) => (
+                    {filteredUsers.map((user) => (
                       <div
                         key={user.id}
                         className="flex items-center justify-between px-4 py-2"
