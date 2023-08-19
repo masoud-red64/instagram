@@ -368,7 +368,7 @@ function Stories() {
             )}
 
             {/* ShareBox */}
-            <div className="w-[548px] h-[65vh] bg-neutral-800 rounded-xl">
+            <div className="w-full h-full md:w-[548px] md:h-[65vh] bg-neutral-800 md:rounded-xl">
               {/* Top */}
               <div className="flex items-center justify-between text-neutral-100 py-2 border-b border-[#363636]">
                 <h4 className="font-[700] grow text-center">Share</h4>
@@ -412,7 +412,7 @@ function Stories() {
 
               {/* Center => Suggested */}
               {/* 330 */}
-              <div className="h-[280px] overflow-y-auto scrollbar">
+              <div className="h-[520px] md:h-[280px] overflow-y-auto scrollbar">
                 <h4 className="font-[600] text-sm text-neutral-100 px-4 py-2">
                   Suggested
                 </h4>
