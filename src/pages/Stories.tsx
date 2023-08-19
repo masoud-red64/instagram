@@ -377,40 +377,40 @@ function Stories() {
       </div>
 
       {/* overlay */}
-      {isShowReportBox ||
-        (isShowShareBox && (
-          <div
-            className="absolute inset-0 flex items-center justify-center bg-black/60 z-10"
-            onClick={() => {
-              setIsShowReportBox(false);
-              setIsShowShareBox(false);
-            }}
-          >
-            {/* ReportBox */}
-            {isShowReportBox && (
-              <div
-                className="w-[260px] md:w-[400px] bg-neutral-800 rounded-xl"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ul className="text-sm divide-y divide-[#363636]">
-                  <li className="h-12 flex items-center justify-center font-[700] text-[#ed4956]">
-                    <button className="w-full h-full">
-                      Report Inappropriate
-                    </button>
-                  </li>
-                  <li className="h-12 flex items-center justify-center text-neutral-100">
-                    <button
-                      className="w-full h-full"
-                      onClick={() => setIsShowReportBox(false)}
-                    >
-                      Cancel
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            )}
+      {(isShowReportBox || isShowShareBox) && (
+        <div
+          className="absolute inset-0 flex items-center justify-center bg-black/60 z-10"
+          onClick={() => {
+            setIsShowReportBox(false);
+            setIsShowShareBox(false);
+          }}
+        >
+          {/* ReportBox */}
+          {isShowReportBox && (
+            <div
+              className="w-[260px] md:w-[400px] bg-neutral-800 rounded-xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ul className="text-sm divide-y divide-[#363636]">
+                <li className="h-12 flex items-center justify-center font-[700] text-[#ed4956]">
+                  <button className="w-full h-full">
+                    Report Inappropriate
+                  </button>
+                </li>
+                <li className="h-12 flex items-center justify-center text-neutral-100">
+                  <button
+                    className="w-full h-full"
+                    onClick={() => setIsShowReportBox(false)}
+                  >
+                    Cancel
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
 
-            {/* ShareBox */}
+          {/* ShareBox */}
+          {isShowShareBox && (
             <div
               className="w-full h-full md:w-[548px] md:h-[65vh] bg-neutral-800 md:rounded-xl"
               onClick={(e) => e.stopPropagation()}
@@ -553,8 +553,9 @@ function Stories() {
                 </button>
               </div>
             </div>
-          </div>
-        ))}
+          )}
+        </div>
+      )}
     </div>
   );
 }
