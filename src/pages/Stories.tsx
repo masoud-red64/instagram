@@ -1,5 +1,6 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperType from "swiper";
 
 // Import Swiper styles
 import "swiper/css";
@@ -26,7 +27,7 @@ type sendStoryToUsersTypes = {
 function Stories() {
   const [isMutedVideo, setIsMutedVideo] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [parentSwiper, setParentSwiper] = useState();
+  const [parentSwiper, setParentSwiper] = useState<SwiperType | undefined>();
   const [isPauseSwiper, setIsPauseSwiper] = useState(false);
   const [storyLikeStatus, setStoryLikeStatus] = useState<{
     [key: number]: boolean;
@@ -182,7 +183,7 @@ function Stories() {
                   }`}
                   watchSlidesProgress={true}
                   onSlidePrevTransitionEnd={(swiper) => {
-                    parentSwiper.slideNext();
+                    parentSwiper &&  parentSwiper.slideNext();
                   }}
                 >
                   {user.stories.map((story, index) => (
