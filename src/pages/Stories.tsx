@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -26,6 +26,15 @@ function Stories() {
   const [storyLikeStatus, setStoryLikeStatus] = useState<{
     [key: number]: boolean;
   }>({});
+  const [boxEmojiStatus, setBoxEmojiStatusStatus] = useState<{
+    [key: number]: boolean;
+  }>({});
+  const [reactionInputValue, setReactionInputValue] = useState<{
+    [key: number]: string;
+  }>({});
+  const [showOverlayOnStoryStatus, setShowOverlayOnStoryStatus] = useState<{
+    [key: number]: boolean;
+  }>({});
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [activeVideoRef, setActiveVideoRef] = useState<HTMLVideoElement | null>(
@@ -44,6 +53,35 @@ function Stories() {
     setStoryLikeStatus((prevStatus) => ({
       ...prevStatus,
       [userID]: !prevStatus[userID],
+    }));
+  };
+
+  const handleShowBoxEmojiClick = (userID: number) => {
+    setBoxEmojiStatusStatus((prevStatus) => ({
+      ...prevStatus,
+      [userID]: true,
+    }));
+    setShowOverlayOnStoryStatus((prevStatus) => ({
+      ...prevStatus,
+      [userID]: true,
+    }));
+  };
+
+  const handleHideBoxEmojiClick = (userID: number) => {
+    setBoxEmojiStatusStatus((prevStatus) => ({
+      ...prevStatus,
+      [userID]: false,
+    }));
+    setShowOverlayOnStoryStatus((prevStatus) => ({
+      ...prevStatus,
+      [userID]: false,
+    }));
+  };
+
+  const handleChangeInputValue = (userID: number, inputValue: string) => {
+    setReactionInputValue((prevValue) => ({
+      ...prevValue,
+      [userID]: inputValue,
     }));
   };
 
@@ -178,27 +216,69 @@ function Stories() {
 
                         {/* Bottom */}
                         <div className="absolute bottom-0 right-0 left-0 p-4 flex items-center justify-between gap-x-4 bg-gradient-to-t from-[rgba(38,38,38,.6)] to-[rgba(38, 38, 38,0)]">
-                          <input
-                            type="text"
-                            placeholder={`Reply to ${user.username}`}
-                            className="py-2 px-4 grow bg-transparent border rounded-full text-[#dbdbdb] outline-none placeholder:text-[#dbdbdb]"
-                          />
-                          <button onClick={() => handleLikeClick(user.id)}>
-                            {storyLikeStatus[user.id] ? (
-                              <svg className="w-6 h-6 text-white">
-                                <use href="#fill-heart"></use>
-                              </svg>
-                            ) : (
-                              <svg className="w-6 h-6 text-white">
-                                <use href="#notifications"></use>
-                              </svg>
-                            )}
-                          </button>
-                          <button>
-                            <svg className="w-6 h-6 text-white">
-                              <use href="#messages"></use>
-                            </svg>
-                          </button>
+                          <div className="relative grow">
+                            <div className="flex border rounded-full">
+                              <input
+                                type="text"
+                                placeholder={`Reply to ${user.username}`}
+                                className="py-2 px-4 w-full bg-transparent text-[#dbdbdb] outline-none placeholder:text-[#dbdbdb]"
+                                onFocus={() => handleShowBoxEmojiClick(user.id)}
+                                onBlur={() => handleHideBoxEmojiClick(user.id)}
+                                value={reactionInputValue[user.id]}
+                                onChange={(e) =>
+                                  handleChangeInputValue(
+                                    user.id,
+                                    e.target.value
+                                  )
+                                }
+                              />
+                              {reactionInputValue[user.id] && (
+                                <button className="text-white mr-3">
+                                  send
+                                </button>
+                              )}
+                            </div>
+
+                            {/* Emojis */}
+                            {boxEmojiStatus[user.id] &&
+                              !reactionInputValue[user.id] && (
+                                <div className="absolute -top-32 w-full flex flex-col items-center px-16">
+                                  <h5 className="text-white">
+                                    Quick Reactions
+                                  </h5>
+                                  <div className="flex flex-wrap justify-center text-2xl gap-2.5 mt-3">
+                                    <span>😀</span>
+                                    <span>😎</span>
+                                    <span>😍</span>
+                                    <span>😑</span>
+                                    <span>🤩</span>
+                                    <span>😅</span>
+                                    <span>😂</span>
+                                    <span>😛</span>
+                                  </div>
+                                </div>
+                              )}
+                          </div>
+                          {!boxEmojiStatus[user.id] && (
+                            <>
+                              <button onClick={() => handleLikeClick(user.id)}>
+                                {storyLikeStatus[user.id] ? (
+                                  <svg className="w-6 h-6 text-white">
+                                    <use href="#fill-heart"></use>
+                                  </svg>
+                                ) : (
+                                  <svg className="w-6 h-6 text-white">
+                                    <use href="#notifications"></use>
+                                  </svg>
+                                )}
+                              </button>
+                              <button>
+                                <svg className="w-6 h-6 text-white">
+                                  <use href="#messages"></use>
+                                </svg>
+                              </button>
+                            </>
+                          )}
                         </div>
 
                         <div>
@@ -229,6 +309,11 @@ function Stories() {
                             />
                           )}
                         </div>
+
+                        {/* overlay */}
+                        {showOverlayOnStoryStatus[user.id] && (
+                          <div className="absolute inset-0 bg-black/30 -z-10"></div>
+                        )}
                       </div>
                     </SwiperSlide>
                   ))}
