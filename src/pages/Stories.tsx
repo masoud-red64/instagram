@@ -424,166 +424,45 @@ function Stories() {
                   Suggested
                 </h4>
                 <div>
-                  <div className="flex items-center justify-between px-4 py-2">
-                    <div className="flex items-center gap-x-3">
-                      <div className="w-11 h-11">
-                        <Story img="user1.jpg" hasStory={false} />
+                  {usersList.map((user) => (
+                    <div
+                      key={user.id}
+                      className="flex items-center justify-between px-4 py-2"
+                    >
+                      <div className="flex items-center gap-x-3">
+                        <div className="w-11 h-11">
+                          <Story img={user.img} hasStory={false} />
+                        </div>
+                        <div className="flex flex-col text-sm">
+                          <span className="text-neutral-100">{user.name}</span>
+                          <span className="text-[#a8a8a8]">
+                            {user.username}
+                          </span>
+                        </div>
                       </div>
-                      <div className="flex flex-col text-sm">
-                        <span className="text-neutral-100">amenej</span>
-                        <span className="text-[#a8a8a8]">amenej90</span>
-                      </div>
-                    </div>
-                    <div className="w-[22.5px] h-[22.5px]">
-                      {isCheckedInput ? (
-                        <button>
-                          <svg
-                            className="w-[22.5px] h-[22.5px]"
-                            onClick={() => setIsCheckedInput(false)}
-                          >
-                            <use href="#fill-checkbox"></use>
-                          </svg>
-                        </button>
-                      ) : (
-                        <button>
-                          <svg
-                            className="w-[22.5px] h-[22.5px]"
-                            onClick={() => setIsCheckedInput(true)}
-                          >
-                            <use href="#empty-checkbox"></use>
-                          </svg>
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between px-4 py-2">
-                    <div className="flex items-center gap-x-3">
-                      <div className="w-11 h-11">
-                        <Story img="user1.jpg" hasStory={false} />
-                      </div>
-                      <div className="flex flex-col text-sm">
-                        <span className="text-neutral-100">amenej</span>
-                        <span className="text-[#a8a8a8]">amenej90</span>
+                      <div className="w-[22.5px] h-[22.5px]">
+                        {isCheckedInput ? (
+                          <button>
+                            <svg
+                              className="w-[22.5px] h-[22.5px]"
+                              onClick={() => setIsCheckedInput(false)}
+                            >
+                              <use href="#fill-checkbox"></use>
+                            </svg>
+                          </button>
+                        ) : (
+                          <button>
+                            <svg
+                              className="w-[22.5px] h-[22.5px]"
+                              onClick={() => setIsCheckedInput(true)}
+                            >
+                              <use href="#empty-checkbox"></use>
+                            </svg>
+                          </button>
+                        )}
                       </div>
                     </div>
-                    <div className="w-[22.5px] h-[22.5px]">
-                      {isCheckedInput ? (
-                        <button>
-                          <svg
-                            className="w-[22.5px] h-[22.5px]"
-                            onClick={() => setIsCheckedInput(false)}
-                          >
-                            <use href="#fill-checkbox"></use>
-                          </svg>
-                        </button>
-                      ) : (
-                        <button>
-                          <svg
-                            className="w-[22.5px] h-[22.5px]"
-                            onClick={() => setIsCheckedInput(true)}
-                          >
-                            <use href="#empty-checkbox"></use>
-                          </svg>
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between px-4 py-2">
-                    <div className="flex items-center gap-x-3">
-                      <div className="w-11 h-11">
-                        <Story img="user1.jpg" hasStory={false} />
-                      </div>
-                      <div className="flex flex-col text-sm">
-                        <span className="text-neutral-100">amenej</span>
-                        <span className="text-[#a8a8a8]">amenej90</span>
-                      </div>
-                    </div>
-                    <div className="w-[22.5px] h-[22.5px]">
-                      {isCheckedInput ? (
-                        <button>
-                          <svg
-                            className="w-[22.5px] h-[22.5px]"
-                            onClick={() => setIsCheckedInput(false)}
-                          >
-                            <use href="#fill-checkbox"></use>
-                          </svg>
-                        </button>
-                      ) : (
-                        <button>
-                          <svg
-                            className="w-[22.5px] h-[22.5px]"
-                            onClick={() => setIsCheckedInput(true)}
-                          >
-                            <use href="#empty-checkbox"></use>
-                          </svg>
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between px-4 py-2">
-                    <div className="flex items-center gap-x-3">
-                      <div className="w-11 h-11">
-                        <Story img="user1.jpg" hasStory={false} />
-                      </div>
-                      <div className="flex flex-col text-sm">
-                        <span className="text-neutral-100">amenej</span>
-                        <span className="text-[#a8a8a8]">amenej90</span>
-                      </div>
-                    </div>
-                    <div className="w-[22.5px] h-[22.5px]">
-                      {isCheckedInput ? (
-                        <button>
-                          <svg
-                            className="w-[22.5px] h-[22.5px]"
-                            onClick={() => setIsCheckedInput(false)}
-                          >
-                            <use href="#fill-checkbox"></use>
-                          </svg>
-                        </button>
-                      ) : (
-                        <button>
-                          <svg
-                            className="w-[22.5px] h-[22.5px]"
-                            onClick={() => setIsCheckedInput(true)}
-                          >
-                            <use href="#empty-checkbox"></use>
-                          </svg>
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between px-4 py-2">
-                    <div className="flex items-center gap-x-3">
-                      <div className="w-11 h-11">
-                        <Story img="user1.jpg" hasStory={false} />
-                      </div>
-                      <div className="flex flex-col text-sm">
-                        <span className="text-neutral-100">amenej</span>
-                        <span className="text-[#a8a8a8]">amenej90</span>
-                      </div>
-                    </div>
-                    <div className="w-[22.5px] h-[22.5px]">
-                      {isCheckedInput ? (
-                        <button>
-                          <svg
-                            className="w-[22.5px] h-[22.5px]"
-                            onClick={() => setIsCheckedInput(false)}
-                          >
-                            <use href="#fill-checkbox"></use>
-                          </svg>
-                        </button>
-                      ) : (
-                        <button>
-                          <svg
-                            className="w-[22.5px] h-[22.5px]"
-                            onClick={() => setIsCheckedInput(true)}
-                          >
-                            <use href="#empty-checkbox"></use>
-                          </svg>
-                        </button>
-                      )}
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
 
