@@ -50,7 +50,7 @@ function Home() {
         </div>
       </header>
 
-      <div className="grid grid-cols-2 lg:grid-cols-3 w-full h-10 mt-[90px] md:mt-[46px]">
+      <div className="grid grid-cols-2 lg:grid-cols-3 w-full mt-[90px] md:mt-[46px]">
         <div className="col-span-2 sm:container sm:mx-auto px-3 sm:p-0">
           {/* Stories */}
           <div>
