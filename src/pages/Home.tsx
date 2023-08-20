@@ -143,13 +143,8 @@ function Home() {
                               className="h-full w-full object-contain"
                             />
                           ) : (
-                            <div className="relative">
-                              <video
-                                autoPlay
-                                muted
-                                loop
-                                className="w-full h-full object-contain"
-                              >
+                            <div className="relative w-full h-full">
+                              <video autoPlay muted loop>
                                 <source
                                   src={`/images/stories/videos/${post.video}`}
                                 />
