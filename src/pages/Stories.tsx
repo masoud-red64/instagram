@@ -25,7 +25,9 @@ type sendStoryToUsersTypes = {
 };
 
 function Stories() {
-  const [isMutedVideo, setIsMutedVideo] = useState(true);
+  const [isMutedVideos, setIsMutedVideos] = useState<{
+    [key: number]: boolean;
+  }>({});
   const [activeIndex, setActiveIndex] = useState(0);
   const [parentSwiper, setParentSwiper] = useState<SwiperType | undefined>();
   const [isPauseSwiper, setIsPauseSwiper] = useState(false);
@@ -128,6 +130,19 @@ function Stories() {
     setFilteredUsers(filtered);
   };
 
+  const handleMuteVideo = (postID: number, video: string) => {
+    if (video) {
+      setIsMutedVideos((prevStatus) => {
+        const updatedStatus: { [index: number]: boolean } = {};
+        for (const id in prevStatus) {
+          updatedStatus[id] = false; // Mute all videos
+        }
+        updatedStatus[postID] = !prevStatus[postID]; // Toggle the clicked video
+        return updatedStatus;
+      });
+    }
+  };
+
   return (
     <div className="relative w-screen h-screen flex items-center justify-center bg-[#1a1a1a] overflow-hidden">
       <div className="absolute top-5 left-5 right-5 flex items-center justify-between text-white">
@@ -160,6 +175,14 @@ function Stories() {
           // slideToClickedSlide={true}
           onSlideChange={(swiper) => {
             setActiveIndex(swiper.activeIndex);
+
+            setIsMutedVideos((prevStatus) => {
+              const updatedStatus: { [index: number]: boolean } = {};
+              for (const id in prevStatus) {
+                updatedStatus[id] = false; // Mute all videos
+              }
+              return updatedStatus;
+            });
           }}
           onSwiper={(swiper) => {
             setParentSwiper(swiper);
@@ -184,6 +207,15 @@ function Stories() {
                   watchSlidesProgress={true}
                   onSlidePrevTransitionEnd={(swiper) => {
                     parentSwiper && parentSwiper.slideNext();
+                  }}
+                  onSlideChange={() => {
+                    setIsMutedVideos((prevStatus) => {
+                      const updatedStatus: { [index: number]: boolean } = {};
+                      for (const id in prevStatus) {
+                        updatedStatus[id] = false; // Mute all videos
+                      }
+                      return updatedStatus;
+                    });
                   }}
                 >
                   {user.stories.map((story, index) => (
@@ -231,20 +263,17 @@ function Stories() {
                               )}
                             </div>
                             <button
-                            // onClick={() => {
-                            //   if (story.video) {
-                            //     videoRef.current!.muted = !isMutedVideo;
-                            //     setIsMutedVideo(!isMutedVideo);
-                            //   }
-                            // }}
+                              onClick={() =>
+                                handleMuteVideo(story.id, story.video)
+                              }
                             >
-                              {isMutedVideo || story.img ? (
+                              {isMutedVideos[story.id] && !story.img ? (
                                 <svg className="w-4 h-4">
-                                  <use href="#muted"></use>
+                                  <use href="#not-muted"></use>
                                 </svg>
                               ) : (
                                 <svg className="w-4 h-4">
-                                  <use href="#not-muted"></use>
+                                  <use href="#muted"></use>
                                 </svg>
                               )}
                             </button>
@@ -330,7 +359,7 @@ function Stories() {
                               autoPlay
                               ref={videoRef}
                               className="absolute -z-50 top-0 left-0 w-full h-full object-cover"
-                              muted={isMutedVideo}
+                              muted={!isMutedVideos[story.id]}
                               onMouseDown={() => {
                                 videoRef.current?.pause();
                               }}
