@@ -390,16 +390,16 @@ function Stories() {
           {/* ReportBox */}
           {isShowReportBox && (
             <div
-              className="w-[260px] md:w-[400px] bg-neutral-800 rounded-xl"
+              className="w-[260px] md:w-[400px] bg-white dark:bg-neutral-800 rounded-xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <ul className="text-sm divide-y divide-[#363636]">
+              <ul className="text-sm divide-y divide-[#dbdbdb] dark:divide-[#363636]">
                 <li className="h-12 flex items-center justify-center font-[700] text-[#ed4956]">
                   <button className="w-full h-full">
                     Report Inappropriate
                   </button>
                 </li>
-                <li className="h-12 flex items-center justify-center text-neutral-100">
+                <li className="h-12 flex items-center justify-center text-black dark:text-neutral-100">
                   <button
                     className="w-full h-full"
                     onClick={() => setIsShowReportBox(false)}
@@ -414,11 +414,11 @@ function Stories() {
           {/* ShareBox */}
           {isShowShareBox && (
             <div
-              className="w-full h-full md:w-[548px] md:h-[65vh] bg-neutral-800 md:rounded-xl"
+              className="w-full h-full md:w-[548px] md:h-[65vh] bg-white dark:bg-neutral-800 md:rounded-xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Top */}
-              <div className="flex items-center justify-between text-neutral-100 py-2 border-b border-[#363636]">
+              <div className="flex items-center justify-between dark:text-neutral-100 py-2 border-b border-[#dbdbdb] dark:border-[#363636]">
                 <h4 className="font-[700] grow text-center">Share</h4>
                 <button
                   className="pr-4"
@@ -436,9 +436,11 @@ function Stories() {
 
               {/* Center */}
               <div className="h-[87vh] md:h-[370px] flex flex-col">
-                <div className="flex items-center flex-wrap gap-4 px-4 pt-1 pb-2 border-b border-[#363636]">
+                <div className="flex items-center flex-wrap gap-4 px-4 pt-1 pb-2 border-b border-[#dbdbdb] dark:border-[#363636]">
                   <div className="flex gap-x-1">
-                    <span className="text-neutral-100 font-[600]">To:</span>
+                    <span className="dark:text-neutral-100 font-[600]">
+                      To:
+                    </span>
                     <div className="flex items-center gap-2 flex-wrap">
                       {sendStoryToUsers.map((user) => (
                         <div className="flex items-center h-[26px] gap-x-2 bg-[#e0f1ff] text-sm/[18px] font-[600] text-[#0095f6] px-3 rounded-full">
@@ -463,13 +465,13 @@ function Stories() {
                   <input
                     type="text"
                     placeholder="Search..."
-                    className="grow text-sm text-neutral-100 bg-transparent outline-none border-0 caret-neutral-100"
+                    className="grow text-sm dark:text-neutral-100 bg-transparent outline-none border-0 dark:caret-neutral-100"
                     value={shareInputValue}
                     onChange={(e) => setShareInputValue(e.target.value)}
                   />
                 </div>
                 <div className="grow overflow-y-scroll scrollbar">
-                  <h4 className="font-[600] text-sm text-neutral-100 px-4 py-2">
+                  <h4 className="font-[600] text-sm dark:text-neutral-100 px-4 py-2">
                     Suggested
                   </h4>
                   <div>
@@ -483,10 +485,10 @@ function Stories() {
                             <Story img={user.img} hasStory={false} />
                           </div>
                           <div className="flex flex-col text-sm">
-                            <span className="text-neutral-100">
+                            <span className="dark:text-neutral-100">
                               {user.name}
                             </span>
-                            <span className="text-[#a8a8a8]">
+                            <span className="text-neutral-500 dark:text-[#a8a8a8]">
                               {user.username}
                             </span>
                           </div>
@@ -521,7 +523,7 @@ function Stories() {
                                 ]);
                               }}
                             >
-                              <svg className="w-[22.5px] h-[22.5px]">
+                              <svg className="w-[22.5px] h-[22.5px] text-black dark:text-neutral-100">
                                 <use href="#empty-checkbox"></use>
                               </svg>
                             </button>
@@ -531,11 +533,11 @@ function Stories() {
                     ))}
                   </div>
                 </div>
-                <div className="border-t border-[#363636]">
+                <div className="border-t border-neutral-100 dark:border-[#363636]">
                   {sendStoryToUsers.length !== 0 && (
                     <input
                       type="text"
-                      className="h-[50px] text-sm bg-transparent bottom-0 outline-none pl-5 py-2 pr-3"
+                      className="h-[50px] text-sm dark:text-neutral-100 bg-transparent bottom-0 outline-none pl-5 py-2 pr-3"
                       placeholder="Write a message..."
                     />
                   )}
@@ -551,7 +553,7 @@ function Stories() {
                   }`}
                   disabled={sendStoryToUsers.length === 0}
                 >
-                  Send
+                  {sendStoryToUsers.length > 1 ? "Send separately" : "Send"}
                 </button>
               </div>
             </div>

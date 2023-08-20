@@ -826,8 +826,6 @@ function SvgSymbol() {
         id="empty-checkbox"
         aria-label="Toggle selection"
         className="x1lliihq x1n2onr6"
-        color="rgb(245, 245, 245)"
-        fill="rgb(245, 245, 245)"
         role="img"
         viewBox="0 0 24 24"
       >
