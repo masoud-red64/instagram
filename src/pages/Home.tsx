@@ -51,7 +51,7 @@ function Home() {
       </header>
 
       <div className="grid grid-cols-2 lg:grid-cols-3 w-full h-10 mt-[90px] md:mt-[46px]">
-        <div className="col-span-2 sm:container sm:mx-auto">
+        <div className="col-span-2 sm:container sm:mx-auto px-3 sm:p-0">
           {/* Stories */}
           <div>
             <Swiper
@@ -95,7 +95,7 @@ function Home() {
 
           {/* Posts */}
           <div className="w-full">
-            <div className="w-[470px] mx-auto mt-10">
+            <div className="max-w-[470px] mx-auto mt-10">
               {/* Post */}
               <div className="bg-white pb-4 mb-6 border-b border-[#dbdbdb]">
                 {/* Top */}
