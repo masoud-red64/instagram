@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import SearchInput from "../Components/SearchInput/SearchInput";
 import SearchBox from "../Components/SearchBox/SearchBox";
 import { useSelector } from "react-redux";
@@ -11,8 +11,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 // import required modules
-import { Navigation } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import { usersList } from "../Data/users";
 
 function Home() {
@@ -119,171 +120,41 @@ function Home() {
 
                 {/* Content */}
                 <div className="w-full h-[585px] my-3 border border-[#dbdbdb] rounded-md overflow-hidden">
-                  <img
-                    src="/images/stories/images/img10.jpg"
-                    alt=""
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Bottom */}
-                <div className="text-sm">
-                  {/* Buttons */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-x-4">
-                      <button>
-                        <svg className="w-6 h-6">
-                          <use href="#notifications"></use>
-                        </svg>
-                      </button>
-                      <button>
-                        <svg className="w-6 h-6">
-                          <use href="#comments"></use>
-                        </svg>
-                      </button>
-                      <button>
-                        <svg className="w-6 h-6">
-                          <use href="#messages"></use>
-                        </svg>
-                      </button>
-                    </div>
-                    <button>
-                      <svg className="w-6 h-6">
-                        <use href="#save"></use>
-                      </svg>
-                    </button>
-                  </div>
-
-                  {/* Likes */}
-                  <span className="inline-block font-[600] my-1">
-                    10,297 likes
-                  </span>
-
-                  {/* Description */}
-                  <div>
-                    <a href="#" className="font-[600]">
-                      sadhguru.ir
-                    </a>
-                    <p className="flex flex-col h-10 overflow-hidden">
-                      <span>با صحبتهاش موافقی؟</span>
-                      <span> Spoken by Jordan Peterson</span>
-                      <span>یکی از سرشناس‌ترین روانشناسان دنیا</span>
-                      <span>
-                        اگه علاقه‌مندید که بیشتر از این نوع ویدیوها بذاریم این
-                        ویدیو رو برای بهترین دوستت بفرست و یه قلب بنفش رو این
-                        زیر کامنت کنید 💜
-                      </span>
-                      <span>.</span>
-                      <span>.</span>
-                      <span>
-                        {" "}
-                        "I do not own the rights to this music and movie. All
-                        credits and copyright belong to their respective owners.
-                        This video is for entertainment purposes only."
-                      </span>
-                      <span>.</span>
-                      <span>.</span>
-                      <span>
-                        برای دریافت ویدیوها و مطالب بیشتر، شاه انگیزه رو دنبال
-                        کنید
-                      </span>
-                      <a href="#">@SHAHANGIZE</a>
-                      <a href="#">@SHAHANGIZE</a>
-                      <a href="#">@SHAHANGIZE</a>
-                      <span>.</span>
-                      <span>.</span>
-                      <span>
-                        DM for credit or removal request (no copyright intended)
-                        ©️ All rights and credits reserved to the respective
-                        owner(s)
-                      </span>
-                      <a href="#">#خودشناسی</a>
-                      <a href="#">#روانشناسی_شخصیت</a>
-                      <a href="#">#قدرت</a>
-                      <a href="#">#قوی_باش</a>
-                      <a href="#">#ضعیف</a>
-                    </p>
-                    <div className="flex flex-col items-start gap-y-0.5">
-                      <button className="text-neutral-500">more</button>
-                      <button className="text-xs font-[600]">
-                        See translation
-                      </button>
-                      <button className="text-neutral-500">
-                        View all 332 comments
-                      </button>
-                    </div>
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-x-1">
-                          <span className="font-[600]">
-                            programadordesignerpro
-                          </span>
-                          <span>Excelente 🔥🔥</span>
-                        </div>
-                        <button>
-                          <svg className="w-3 h-3 text-neutral-500">
-                            <use href="#notifications"></use>
-                          </svg>
-                        </button>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-x-1">
-                          <span className="font-[600]">
-                            programadordesignerpro
-                          </span>
-                          <span>Excelente 🔥🔥</span>
-                        </div>
-                        <button>
-                          <svg className="w-3 h-3 text-neutral-500">
-                            <use href="#notifications"></use>
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                    {/* Input */}
-                    <div className="flex items-center gap-x-2 justify-between mt-3">
-                      <input
-                        className="grow border-0 outline-none"
-                        type="text"
-                        placeholder="Add a comment..."
+                  <Swiper
+                    slidesPerView={1}
+                    spaceBetween={10}
+                    navigation={true}
+                    pagination={true}
+                    modules={[Navigation, Pagination]}
+                    className="posts-swiper h-full w-full"
+                  >
+                    <SwiperSlide>
+                      <img
+                        src="/images/stories/images/img10.jpg"
+                        alt=""
+                        className="h-full w-full object-contain"
                       />
-                      <button className="text-[#0096f6] font-[600]">
-                        Post
-                      </button>
-                      <svg className="w-3 h-3 text-neutral-500">
-                        <use href="#emoji"></use>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-white pb-4 mb-6 border-b border-[#dbdbdb]">
-                {/* Top */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-x-3">
-                    <div className="w-9 h-9">
-                      <Story img="user1.jpg" hasStory hasNewStory />
-                    </div>
-                    <div className="flex items-center gap-x-1 text-sm">
-                      <span className="font-[600]">hamed_raeisy_org</span>
-                      <span className="text-neutral-500">•</span>
-                      <span className="text-neutral-500">50m</span>
-                    </div>
-                  </div>
-                  <button>
-                    <svg className="w-6 h-6">
-                      <use href="#more-options"></use>
-                    </svg>
-                  </button>
-                </div>
-
-                {/* Content */}
-                <div className="w-full h-[585px] my-3 border border-[#dbdbdb] rounded-md overflow-hidden">
-                  <img
-                    src="/images/stories/images/img10.jpg"
-                    alt=""
-                    className="w-full h-full object-cover"
-                  />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="relative">
+                        <video
+                          autoPlay
+                          muted
+                          className="w-full h-full object-contain"
+                        >
+                          <source src="/images/stories/videos/video1.mp4" />
+                        </video>
+                        <button className="absolute bottom-4 right-4 w-7 h-7 flex items-center justify-center bg-neutral-800 rounded-full">
+                          <svg className="w-3 h-3 text-white">
+                            <use href="#muted"></use>
+                          </svg>
+                          {/* <svg>
+                          <use href="#"></use>
+                        </svg> */}
+                        </button>
+                      </div>
+                    </SwiperSlide>
+                  </Swiper>
                 </div>
 
                 {/* Bottom */}

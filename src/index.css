@@ -310,4 +310,16 @@
       width: 100%;
     }
   }
+
+  .posts-swiper .swiper-button-next,
+  .posts-swiper .swiper-button-prev {
+    @apply w-6 h-6 text-black bg-neutral-100 rounded-full;
+  }
+  .posts-swiper .swiper-button-next::after,
+  .posts-swiper .swiper-button-prev::after {
+    @apply text-xs;
+  }
+  .posts-swiper .swiper-button-disabled {
+    @apply opacity-0;
+  }
 }
