@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SearchInput from "../Components/SearchInput/SearchInput";
 import SearchBox from "../Components/SearchBox/SearchBox";
 import { useSelector } from "react-redux";
@@ -20,6 +20,21 @@ function Home() {
   const serachBoxSelector = useSelector(
     (state: RootState) => state.searchBoxReducer
   );
+
+  const [isMutedVideos, setIsMutedVideos] = useState<{
+    [key: number]: boolean;
+  }>({});
+
+  const handleMuteVideo = (postID: number) => {
+    setIsMutedVideos((prevStatus) => {
+      const updatedStatus: { [index: number]: boolean } = {};
+      for (const id in prevStatus) {
+        updatedStatus[id] = false; // Mute all videos
+      }
+      updatedStatus[postID] = !prevStatus[postID]; // Toggle the clicked video
+      return updatedStatus;
+    });
+  };
 
   return (
     <div>
@@ -133,6 +148,16 @@ function Home() {
                       pagination={true}
                       modules={[Navigation, Pagination]}
                       className="posts-swiper h-full w-full"
+                      onSlideChange={() => {
+                        setIsMutedVideos((prevStatus) => {
+                          const updatedStatus: { [index: number]: boolean } =
+                            {};
+                          for (const id in prevStatus) {
+                            updatedStatus[id] = false; // Mute all videos
+                          }
+                          return updatedStatus;
+                        });
+                      }}
                     >
                       {user.stories.map((post) => (
                         <SwiperSlide>
@@ -144,18 +169,28 @@ function Home() {
                             />
                           ) : (
                             <div className="relative w-full h-full">
-                              <video autoPlay muted loop>
+                              <video
+                                autoPlay
+                                muted={!isMutedVideos[post.id]}
+                                loop
+                              >
                                 <source
                                   src={`/images/stories/videos/${post.video}`}
                                 />
                               </video>
-                              <button className="absolute bottom-4 right-4 w-7 h-7 flex items-center justify-center bg-neutral-800 rounded-full">
-                                <svg className="w-3 h-3 text-white">
-                                  <use href="#muted"></use>
-                                </svg>
-                                {/* <svg>
-                            <use href="#"></use>
-                          </svg> */}
+                              <button
+                                className="absolute bottom-7 right-4 p-2 flex items-center justify-center bg-neutral-800 rounded-full"
+                                onClick={() => handleMuteVideo(post.id)}
+                              >
+                                {isMutedVideos[post.id] ? (
+                                  <svg className="w-3 h-3 text-white">
+                                    <use href="#not-muted"></use>
+                                  </svg>
+                                ) : (
+                                  <svg className="w-3 h-3 text-white">
+                                    <use href="#muted"></use>
+                                  </svg>
+                                )}
                               </button>
                             </div>
                           )}
