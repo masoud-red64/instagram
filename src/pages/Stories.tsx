@@ -435,7 +435,7 @@ function Stories() {
               </div>
 
               {/* Center */}
-              <div className="h-[370px] flex flex-col">
+              <div className="h-[87vh] md:h-[370px] flex flex-col">
                 <div className="flex items-center flex-wrap gap-4 px-4 pt-1 pb-2 border-b border-[#363636]">
                   <div className="flex gap-x-1">
                     <span className="text-neutral-100 font-[600]">To:</span>
