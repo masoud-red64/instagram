@@ -29,6 +29,9 @@ function Home() {
   const [isLikedComments, setIsLikedComments] = useState<{
     [key: number]: boolean;
   }>({});
+  const [isShowMoreDescription, setIsShowMoreDescription] = useState<{
+    [key: number]: boolean;
+  }>({});
 
   const handleMuteVideo = (postID: number) => {
     setIsMutedVideos((prevStatus) => {
@@ -270,7 +273,11 @@ function Home() {
                       <a href="#" className="font-[600]">
                         {user.username}
                       </a>
-                      <p className="flex flex-col h-10 overflow-hidden">
+                      <p
+                        className={`flex flex-col ${
+                          isShowMoreDescription[user.id] ? "h-auto" : "h-10"
+                        } overflow-hidden`}
+                      >
                         <span>با صحبتهاش موافقی؟</span>
                         <span> Spoken by Jordan Peterson</span>
                         <span>یکی از سرشناس‌ترین روانشناسان دنیا</span>
@@ -311,7 +318,17 @@ function Home() {
                         <a href="#">#ضعیف</a>
                       </p>
                       <div className="flex flex-col items-start gap-y-0.5">
-                        <button className="text-neutral-500">more</button>
+                        <button
+                          className="text-neutral-500"
+                          onClick={() =>
+                            setIsShowMoreDescription((prevStatus) => ({
+                              ...prevStatus,
+                              [user.id]: true,
+                            }))
+                          }
+                        >
+                          more
+                        </button>
                         <button className="text-xs font-[600]">
                           See translation
                         </button>
