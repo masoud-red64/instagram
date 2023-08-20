@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 // import required modules
 import { Navigation, Pagination } from "swiper/modules";
 import { usersList } from "../Data/users";
+import ShareBox from "../Components/ShareBox/ShareBox";
 
 function Home() {
   const serachBoxSelector = useSelector(
@@ -32,6 +33,13 @@ function Home() {
   const [isShowMoreDescription, setIsShowMoreDescription] = useState<{
     [key: number]: boolean;
   }>({});
+  const [isShowShareBox, setIsShowShareBox] = useState(false);
+
+  useEffect(() => {
+    isShowShareBox
+      ? document.body.classList.add("overflow-hidden")
+      : document.body.classList.remove("overflow-hidden");
+  }, [isShowShareBox]);
 
   const handleMuteVideo = (postID: number) => {
     setIsMutedVideos((prevStatus) => {
@@ -45,7 +53,7 @@ function Home() {
   };
 
   return (
-    <div>
+    <div className="relative">
       {/* Header */}
       <header className="md:hidden fixed top-0 right-0 left-0 h-[60px] flex justify-between items-center bg-white dark:bg-black border-b border-[#DBDBDB] dark:border-[#363636] z-50">
         {/* Logo */}
@@ -235,7 +243,7 @@ function Home() {
                             <use href="#comments"></use>
                           </svg>
                         </button>
-                        <button>
+                        <button onClick={() => setIsShowShareBox(true)}>
                           <svg className="w-6 h-6">
                             <use href="#messages"></use>
                           </svg>
@@ -389,6 +397,22 @@ function Home() {
         </div>
         <div className="hidden lg:block col-span-1"></div>
       </div>
+
+      {/* overlay */}
+      {isShowShareBox && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black/60 z-50"
+          onClick={() => {
+            setIsShowShareBox(false);
+          }}
+        >
+          {/* ReportBox */}
+          {false && <div></div>}
+
+          {/* ShareBox */}
+          {isShowShareBox && <ShareBox setIsShowShareBox={setIsShowShareBox} />}
+        </div>
+      )}
     </div>
   );
 }
