@@ -852,6 +852,56 @@ function SvgSymbol() {
         <title>Toggle selection</title>
         <path d="M12.001.504a11.5 11.5 0 1 0 11.5 11.5 11.513 11.513 0 0 0-11.5-11.5Zm5.706 9.21-6.5 6.495a1 1 0 0 1-1.414-.001l-3.5-3.503a1 1 0 1 1 1.414-1.414l2.794 2.796L16.293 8.3a1 1 0 0 1 1.414 1.415Z"></path>
       </symbol>
+      <symbol
+        id="more-options"
+        aria-label="More options"
+        className="_ab6-"
+        color="currentColor"
+        fill="currentColor"
+        role="img"
+        viewBox="0 0 24 24"
+      >
+        <circle cx="12" cy="12" r="1.5"></circle>
+        <circle cx="6" cy="12" r="1.5"></circle>
+        <circle cx="18" cy="12" r="1.5"></circle>
+      </symbol>
+      <symbol
+        id="comments"
+        aria-label="Comment"
+        className="x1lliihq x1n2onr6"
+        color="currentColor"
+        fill="currentColor"
+        role="img"
+        viewBox="0 0 24 24"
+      >
+        <title>Comment</title>
+        <path
+          d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z"
+          fill="none"
+          stroke="currentColor"
+          stroke-linejoin="round"
+          stroke-width="2"
+        ></path>
+      </symbol>
+      <symbol
+        id="save"
+        aria-label="Save"
+        className="x1lliihq x1n2onr6"
+        color="currentColor"
+        fill="currentColor"
+        role="img"
+        viewBox="0 0 24 24"
+      >
+        <title>Save</title>
+        <polygon
+          fill="none"
+          points="20 21 12 13.44 4 21 4 3 20 3 20 21"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        ></polygon>
+      </symbol>
     </svg>
   );
 }
