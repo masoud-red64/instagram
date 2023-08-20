@@ -34,12 +34,13 @@ function Home() {
     [key: number]: boolean;
   }>({});
   const [isShowShareBox, setIsShowShareBox] = useState(false);
+  const [isShowMoreOptionBox, setIsShowMoreOptionBox] = useState(false);
 
   useEffect(() => {
-    isShowShareBox
+    isShowShareBox || isShowMoreOptionBox
       ? document.body.classList.add("overflow-hidden")
       : document.body.classList.remove("overflow-hidden");
-  }, [isShowShareBox]);
+  }, [isShowShareBox, isShowMoreOptionBox]);
 
   const handleMuteVideo = (postID: number) => {
     setIsMutedVideos((prevStatus) => {
@@ -148,7 +149,7 @@ function Home() {
                         <span className="text-neutral-500">50m</span>
                       </div>
                     </div>
-                    <button>
+                    <button onClick={() => setIsShowMoreOptionBox(true)}>
                       <svg className="w-6 h-6">
                         <use href="#more-options"></use>
                       </svg>
@@ -399,15 +400,56 @@ function Home() {
       </div>
 
       {/* overlay */}
-      {isShowShareBox && (
+      {(isShowShareBox || isShowMoreOptionBox) && (
         <div
           className="fixed inset-0 flex items-center justify-center bg-black/60 z-50"
           onClick={() => {
             setIsShowShareBox(false);
+            setIsShowMoreOptionBox(false);
           }}
         >
           {/* ReportBox */}
-          {false && <div></div>}
+          {isShowMoreOptionBox && (
+            <div className="w-[260px] md:w-[400px] bg-white rounded-xl">
+              <ul className="text-sm child:py-1 divide-y divide-[#dbdbdb]">
+                <li className="h-12">
+                  <button className="w-full h-full font-[700] text-[#ed4956]">
+                    Report
+                  </button>
+                </li>
+                <li className="h-12">
+                  <button className="w-full h-full font-[700] text-[#ed4956]">
+                    Unfollow
+                  </button>
+                </li>
+                <li className="h-12">
+                  <button className="w-full h-full">Add to favorites</button>
+                </li>
+                <li className="h-12">
+                  <button className="w-full h-full">
+                    <a href="#">Go to post</a>
+                  </button>
+                </li>
+                <li className="h-12">
+                  <button className="w-full h-full">Share to...</button>
+                </li>
+                <li className="h-12">
+                  <button className="w-full h-full">Share to...</button>
+                </li>
+                <li className="h-12">
+                  <button className="w-full h-full">Embed</button>
+                </li>
+                <li className="h-12">
+                  <button
+                    className="w-full h-full"
+                    onClick={setIsShowMoreOptionBox(false)}
+                  >
+                    Cancel
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
 
           {/* ShareBox */}
           {isShowShareBox && <ShareBox setIsShowShareBox={setIsShowShareBox} />}
