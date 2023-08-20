@@ -24,6 +24,11 @@ function Home() {
   const [isMutedVideos, setIsMutedVideos] = useState<{
     [key: number]: boolean;
   }>({});
+  const [isSaved, setIsSaved] = useState<{ [key: number]: boolean }>({});
+  const [isLiked, setIsLiked] = useState<{ [key: number]: boolean }>({});
+  const [isLikedComments, setIsLikedComments] = useState<{
+    [key: number]: boolean;
+  }>({});
 
   const handleMuteVideo = (postID: number) => {
     setIsMutedVideos((prevStatus) => {
@@ -204,10 +209,23 @@ function Home() {
                     {/* Buttons */}
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-x-4">
-                        <button>
-                          <svg className="w-6 h-6">
-                            <use href="#notifications"></use>
-                          </svg>
+                        <button
+                          onClick={() =>
+                            setIsLiked((prevStatus) => ({
+                              ...prevStatus,
+                              [user.id]: !prevStatus[user.id],
+                            }))
+                          }
+                        >
+                          {isLiked[user.id] ? (
+                            <svg className="w-6 h-6">
+                              <use href="#fill-heart"></use>
+                            </svg>
+                          ) : (
+                            <svg className="w-6 h-6">
+                              <use href="#notifications"></use>
+                            </svg>
+                          )}
                         </button>
                         <button>
                           <svg className="w-6 h-6">
@@ -220,10 +238,25 @@ function Home() {
                           </svg>
                         </button>
                       </div>
-                      <button>
-                        <svg className="w-6 h-6">
-                          <use href="#save"></use>
-                        </svg>
+                      <button
+                        onClick={() =>
+                          setIsSaved((prevStatus) => {
+                            return {
+                              ...prevStatus,
+                              [user.id]: !prevStatus[user.id],
+                            };
+                          })
+                        }
+                      >
+                        {isSaved[user.id] ? (
+                          <svg className="w-6 h-6">
+                            <use href="#save-fill"></use>
+                          </svg>
+                        ) : (
+                          <svg className="w-6 h-6">
+                            <use href="#save"></use>
+                          </svg>
+                        )}
                       </button>
                     </div>
 
@@ -287,32 +320,34 @@ function Home() {
                         </button>
                       </div>
                       <div>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-x-1">
-                            <span className="font-[600]">
-                              programadordesignerpro
-                            </span>
-                            <span>Excelente 🔥🔥</span>
+                        {user.posts.comments.map((comment) => (
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-x-1">
+                              <span className="font-[600]">
+                                programadordesignerpro
+                              </span>
+                              <span>{comment.text}</span>
+                            </div>
+                            <button
+                              onClick={() =>
+                                setIsLikedComments((prevStatus) => ({
+                                  ...prevStatus,
+                                  [comment.id]: !prevStatus[comment.id],
+                                }))
+                              }
+                            >
+                              {isLikedComments[comment.id] ? (
+                                <svg className="w-3 h-3 text-neutral-500">
+                                  <use href="#fill-heart"></use>
+                                </svg>
+                              ) : (
+                                <svg className="w-3 h-3 text-neutral-500">
+                                  <use href="#notifications"></use>
+                                </svg>
+                              )}
+                            </button>
                           </div>
-                          <button>
-                            <svg className="w-3 h-3 text-neutral-500">
-                              <use href="#notifications"></use>
-                            </svg>
-                          </button>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-x-1">
-                            <span className="font-[600]">
-                              programadordesignerpro
-                            </span>
-                            <span>Excelente 🔥🔥</span>
-                          </div>
-                          <button>
-                            <svg className="w-3 h-3 text-neutral-500">
-                              <use href="#notifications"></use>
-                            </svg>
-                          </button>
-                        </div>
+                        ))}
                       </div>
                       {/* Input */}
                       <div className="flex items-center gap-x-2 justify-between mt-3">

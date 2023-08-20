@@ -8,6 +8,7 @@ export type userListTypes = {
     stories: {
         id: number, img: string, video: string,
     }[];
+    posts: { comments: { id: number, text: string }[] }
 }
 
 
@@ -23,7 +24,13 @@ export const usersList: userListTypes[] = [
             { id: 1, img: 'img1.jfif', video: '' },
             { id: 2, img: '', video: 'video1.mp4' },
             { id: 3, img: 'img2.jfif', video: '' },
-        ]
+        ],
+        posts: {
+            comments: [
+                { id: 1, text: 'nice😍😎' },
+                { id: 2, text: 'محتوای مناسبی بود😋' }
+            ]
+        }
 
     },
     {
@@ -37,7 +44,13 @@ export const usersList: userListTypes[] = [
             { id: 4, img: 'img3.jfif', video: '' },
             { id: 5, img: '', video: 'video2.mp4' },
             { id: 6, img: 'img4.jfif', video: '' },
-        ]
+        ],
+        posts: {
+            comments: [
+                { id: 3, text: 'nice😍😎' },
+                { id: 4, text: 'محتوای مناسبی بود😋' }
+            ]
+        }
     },
     {
         id: 3,
@@ -50,7 +63,13 @@ export const usersList: userListTypes[] = [
             { id: 7, img: 'img5.jfif', video: '' },
             { id: 8, img: '', video: 'video3.mp4' },
             { id: 9, img: 'img6.jpg', video: '' },
-        ]
+        ],
+        posts: {
+            comments: [
+                { id: 5, text: 'nice😍😎' },
+                { id: 6, text: 'محتوای مناسبی بود😋' }
+            ]
+        }
     },
     {
         id: 4,
@@ -63,7 +82,13 @@ export const usersList: userListTypes[] = [
             { id: 10, img: 'img7.jpg', video: '' },
             { id: 11, img: '', video: 'video4.mp4' },
             { id: 12, img: 'img8.jpg', video: '' },
-        ]
+        ],
+        posts: {
+            comments: [
+                { id: 7, text: 'nice😍😎' },
+                { id: 8, text: 'محتوای مناسبی بود😋' }
+            ]
+        }
     },
     {
         id: 5,
@@ -76,7 +101,13 @@ export const usersList: userListTypes[] = [
             { id: 13, img: 'img9.jpg', video: '' },
             { id: 14, img: '', video: 'video5.mp4' },
             { id: 15, img: 'img10.jpg', video: '' },
-        ]
+        ],
+        posts: {
+            comments: [
+                { id: 9, text: 'nice😍😎' },
+                { id: 10, text: 'محتوای مناسبی بود😋' }
+            ]
+        }
     },
     {
         id: 6,
@@ -89,7 +120,13 @@ export const usersList: userListTypes[] = [
             { id: 16, img: 'img11.jpg', video: '' },
             { id: 17, img: '', video: 'video6.mp4' },
             { id: 18, img: 'img12.jpg', video: '' },
-        ]
+        ],
+        posts: {
+            comments: [
+                { id: 11, text: 'nice😍😎' },
+                { id: 12, text: 'محتوای مناسبی بود😋' }
+            ]
+        }
     },
     {
         id: 7,
@@ -102,7 +139,13 @@ export const usersList: userListTypes[] = [
             { id: 19, img: 'img13.jpg', video: '' },
             { id: 20, img: '', video: 'video7.mp4' },
             { id: 21, img: 'img14.jpg', video: '' },
-        ]
+        ],
+        posts: {
+            comments: [
+                { id: 13, text: 'nice😍😎' },
+                { id: 14, text: 'محتوای مناسبی بود😋' }
+            ]
+        }
     },
     {
         id: 8,
@@ -115,7 +158,13 @@ export const usersList: userListTypes[] = [
             { id: 22, img: 'img15.jpg', video: '' },
             { id: 23, img: '', video: 'video8.mp4' },
             { id: 24, img: 'img16.jpg', video: '' },
-        ]
+        ],
+        posts: {
+            comments: [
+                { id: 15, text: 'nice😍😎' },
+                { id: 16, text: 'محتوای مناسبی بود😋' }
+            ]
+        }
     },
     {
         id: 9,
@@ -128,7 +177,13 @@ export const usersList: userListTypes[] = [
             { id: 25, img: 'img17.jpg', video: '' },
             { id: 26, img: '', video: 'video9.mp4' },
             { id: 27, img: 'img18.jpg', video: '' },
-        ]
+        ],
+        posts: {
+            comments: [
+                { id: 17, text: 'nice😍😎' },
+                { id: 18, text: 'محتوای مناسبی بود😋' }
+            ]
+        }
     },
     {
         id: 10,
@@ -141,7 +196,13 @@ export const usersList: userListTypes[] = [
             { id: 28, img: 'img19.jpg', video: '' },
             { id: 29, img: '', video: 'video10.mp4' },
             { id: 30, img: 'img20.jpg', video: '' },
-        ]
+        ],
+        posts: {
+            comments: [
+                { id: 19, text: 'nice😍😎' },
+                { id: 20, text: 'محتوای مناسبی بود😋' }
+            ]
+        }
     },
     {
         id: 11,
@@ -154,7 +215,13 @@ export const usersList: userListTypes[] = [
             { id: 31, img: 'img21.jpg', video: '' },
             { id: 32, img: '', video: 'video11.mp4' },
             { id: 33, img: 'img22.jpg', video: '' },
-        ]
+        ],
+        posts: {
+            comments: [
+                { id: 21, text: 'nice😍😎' },
+                { id: 22, text: 'محتوای مناسبی بود😋' }
+            ]
+        }
     },
     {
         id: 12,
@@ -167,6 +234,12 @@ export const usersList: userListTypes[] = [
             { id: 34, img: 'img23.jpg', video: '' },
             { id: 35, img: '', video: 'video12.mp4' },
             { id: 36, img: 'img24.jpg', video: '' },
-        ]
+        ],
+        posts: {
+            comments: [
+                { id: 23, text: 'nice😍😎' },
+                { id: 24, text: 'محتوای مناسبی بود😋' }
+            ]
+        }
     },
 ];
