@@ -205,7 +205,7 @@ function CreateNewPost() {
   return (
     createNewPostSelector.isShowCreateNewPost && (
       <>
-        <div className="absolute select-none top-1/2 right-1/2 w-fit h-[496px] translate-x-1/2 -translate-y-1/2 z-[55] bg-white dark:bg-neutral-800 rounded-xl overflow-hidden">
+        <div className="fixed select-none top-1/2 right-1/2 w-fit h-[496px] translate-x-1/2 -translate-y-1/2 z-[55] bg-white dark:bg-neutral-800 rounded-xl overflow-hidden">
           {/* Top */}
           <div className="p-3 border-b border-[#dbdbdb] dark:border-[#363636]">
             {createNewPostSelector.step === "first" && (
