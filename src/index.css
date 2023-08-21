@@ -312,14 +312,23 @@
   }
 
   .posts-swiper .swiper-button-next,
-  .posts-swiper .swiper-button-prev {
+  .posts-swiper .swiper-button-prev,
+  .comment-posts-swiper .swiper-button-next,
+  .comment-posts-swiper .swiper-button-prev {
     @apply w-6 h-6 text-black bg-neutral-100 rounded-full;
   }
   .posts-swiper .swiper-button-next::after,
-  .posts-swiper .swiper-button-prev::after {
+  .posts-swiper .swiper-button-prev::after,
+  .comment-posts-swiper .swiper-button-next::after,
+  .comment-posts-swiper .swiper-button-prev::after {
     @apply text-xs;
   }
-  .posts-swiper .swiper-button-disabled {
+  .posts-swiper .swiper-button-disabled,
+  .comment-posts-swiper .swiper-button-disabled {
     @apply opacity-0;
+  }
+
+  .comment-posts-swiper .swiper-slide {
+    @apply m-auto;
   }
 }

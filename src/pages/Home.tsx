@@ -14,7 +14,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import required modules
 import { Navigation, Pagination } from "swiper/modules";
-import { usersList } from "../Data/users";
+import { userListTypes, usersList } from "../Data/users";
 import ShareBox from "../Components/ShareBox/ShareBox";
 
 function Home() {
@@ -35,6 +35,8 @@ function Home() {
   }>({});
   const [isShowShareBox, setIsShowShareBox] = useState(false);
   const [isShowMoreOptionBox, setIsShowMoreOptionBox] = useState(false);
+  const [mainUser, setMainUser] = useState({} as userListTypes);
+  const [isShowCommentBox, setIsShowCommentBox] = useState(false);
 
   useEffect(() => {
     isShowShareBox || isShowMoreOptionBox
@@ -51,6 +53,12 @@ function Home() {
       updatedStatus[postID] = !prevStatus[postID]; // Toggle the clicked video
       return updatedStatus;
     });
+  };
+
+  const handleCommentIconClick = (userID: number) => {
+    let mainUserList = usersList.filter((user) => user.id === userID);
+    setMainUser(mainUserList[0]);
+    setIsShowCommentBox(true);
   };
 
   return (
@@ -239,7 +247,7 @@ function Home() {
                             </svg>
                           )}
                         </button>
-                        <button>
+                        <button onClick={() => handleCommentIconClick(user.id)}>
                           <svg className="w-6 h-6">
                             <use href="#comments"></use>
                           </svg>
@@ -455,6 +463,73 @@ function Home() {
 
           {/* ShareBox */}
           {isShowShareBox && <ShareBox setIsShowShareBox={setIsShowShareBox} />}
+        </div>
+      )}
+
+      {/* overlay show comments */}
+      {isShowCommentBox && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
+          <button
+            className="absolute right-4 top-4"
+            onClick={() => setIsShowCommentBox(false)}
+          >
+            <svg className="w-[18px] h-[18px] text-white">
+              <use href="#close"></use>
+            </svg>
+          </button>
+
+          <div className="max-w-[calc(100%-64px-64px)] max-h-[calc(100vh-40px)] flex items-center rounded-[4px] overflow-hidden">
+            <div className="w-[50%] max-h-[calc(100vh-40px)] border border-[#a9a9a9]">
+              <Swiper
+                slidesPerView={1}
+                spaceBetween={10}
+                navigation={true}
+                pagination={true}
+                modules={[Navigation, Pagination]}
+                className="comment-posts-swiper"
+                onSlideChange={() => {
+                  setIsMutedVideos((prevStatus) => {
+                    const updatedStatus: { [index: number]: boolean } = {};
+                    for (const id in prevStatus) {
+                      updatedStatus[id] = false; // Mute all videos
+                    }
+                    return updatedStatus;
+                  });
+                }}
+              >
+                {mainUser.stories.map((post) => (
+                  <SwiperSlide>
+                    {post.img ? (
+                      <img src={`/images/stories/images/${post.img}`} alt="" />
+                    ) : (
+                      <div className="relative max-h-[calc(100vh-40px)]">
+                        <video autoPlay muted={!isMutedVideos[post.id]} loop>
+                          <source
+                            src={`/images/stories/videos/${post.video}`}
+                          />
+                        </video>
+                        <button
+                          className="absolute bottom-7 right-4 p-2 flex items-center justify-center bg-neutral-800 rounded-full"
+                          onClick={() => handleMuteVideo(post.id)}
+                        >
+                          {isMutedVideos[post.id] ? (
+                            <svg className="w-3 h-3 text-white">
+                              <use href="#not-muted"></use>
+                            </svg>
+                          ) : (
+                            <svg className="w-3 h-3 text-white">
+                              <use href="#muted"></use>
+                            </svg>
+                          )}
+                        </button>
+                      </div>
+                    )}
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+            <div></div>
+          </div>
         </div>
       )}
     </div>
