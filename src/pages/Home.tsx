@@ -483,7 +483,7 @@ function Home() {
           </button>
 
           <div
-            className="max-w-[calc(100%-10px)] md:max-w-[calc(100%-64px-64px)] max-h-[calc(100vh-100px)] md:max-h-[calc(100vh-40px)] flex flex-col md:flex-row  bg-white rounded-[4px] overflow-y-auto"
+            className="max-w-[calc(100%-10px)] md:max-w-[calc(100%-64px-64px)] max-h-[calc(100vh-100px)] md:max-h-[calc(100vh-40px)] flex flex-col md:flex-row  bg-white rounded-[4px] overflow-y-auto md:overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-full md:w-[50%] border border-[#a9a9a9]">
@@ -493,7 +493,7 @@ function Home() {
                 navigation={true}
                 pagination={true}
                 modules={[Navigation, Pagination]}
-                className="comment-posts-swiper max-h-[calc(100vh-40px)]"
+                className="comment-posts-swiper h-full"
                 onSlideChange={() => {
                   setIsMutedVideos((prevStatus) => {
                     const updatedStatus: { [index: number]: boolean } = {};
@@ -510,11 +510,16 @@ function Home() {
                       <img
                         src={`/images/stories/images/${post.img}`}
                         alt=""
-                        className="w-full max-h-[calc(100vh-40px)]"
+                        className="w-full h-full"
                       />
                     ) : (
-                      <div className="relative max-h-[calc(100vh-40px)]">
-                        <video autoPlay muted={!isMutedVideos[post.id]} loop>
+                      <div className="relative h-full">
+                        <video
+                          autoPlay
+                          muted={!isMutedVideos[post.id]}
+                          loop
+                          className="h-full w-full"
+                        >
                           <source
                             src={`/images/stories/videos/${post.video}`}
                           />
@@ -539,7 +544,7 @@ function Home() {
                 ))}
               </Swiper>
             </div>
-            <div className="w-full md:w-[50%] max-h-[calc(100vh-40px)] flex flex-col">
+            <div className="w-full md:w-[50%] flex flex-col">
               {/* Top */}
 
               <div className="flex items-center justify-between border-b border-[#efefef] p-4">
