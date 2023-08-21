@@ -413,7 +413,7 @@ function Home() {
       {/* overlay */}
       {(isShowShareBox || isShowMoreOptionBox) && (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-black/60 z-50"
+          className="fixed inset-0 flex items-center justify-center bg-black/60 z-[60]"
           onClick={() => {
             setIsShowShareBox(false);
             setIsShowMoreOptionBox(false);
@@ -469,7 +469,7 @@ function Home() {
 
       {/* overlay show comments */}
       {isShowCommentBox && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-40">
+        <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
           <button
             className="absolute right-4 top-4"
             onClick={() => setIsShowCommentBox(false)}
