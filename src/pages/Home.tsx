@@ -274,7 +274,7 @@ function Home() {
 
                     {/* Likes */}
                     <span className="inline-block font-[600] my-1">
-                      10,297 likes
+                      {isLiked[user.id] ? "10,297" : "10,296"} likes
                     </span>
 
                     {/* Description */}
@@ -327,17 +327,19 @@ function Home() {
                         <a href="#">#ضعیف</a>
                       </p>
                       <div className="flex flex-col items-start gap-y-0.5">
-                        <button
-                          className="text-neutral-500"
-                          onClick={() =>
-                            setIsShowMoreDescription((prevStatus) => ({
-                              ...prevStatus,
-                              [user.id]: true,
-                            }))
-                          }
-                        >
-                          more
-                        </button>
+                        {!isShowMoreDescription[user.id] && (
+                          <button
+                            className="text-neutral-500"
+                            onClick={() =>
+                              setIsShowMoreDescription((prevStatus) => ({
+                                ...prevStatus,
+                                [user.id]: true,
+                              }))
+                            }
+                          >
+                            more
+                          </button>
+                        )}
                         <button className="text-xs font-[600]">
                           See translation
                         </button>
@@ -442,7 +444,7 @@ function Home() {
                 <li className="h-12">
                   <button
                     className="w-full h-full"
-                    onClick={()=>setIsShowMoreOptionBox(false)}
+                    onClick={() => setIsShowMoreOptionBox(false)}
                   >
                     Cancel
                   </button>
