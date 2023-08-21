@@ -18,6 +18,7 @@ import { userListTypes, usersList } from "../Data/users";
 import ShareBox from "../Components/ShareBox/ShareBox";
 import Comment from "../Components/Comment/Comment";
 import EmojiBox from "../Components/EmojiBox/EmojiBox";
+import Footer from "../Components/Footer/Footer";
 
 function Home() {
   const serachBoxSelector = useSelector(
@@ -447,7 +448,50 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="hidden lg:block col-span-1"></div>
+        <div className="hidden lg:block col-span-1 pl-10 pr-4 pt-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-x-3">
+              <div className="h-11 w-11">
+                <Story img="user1.jpg" hasStory={false} />
+              </div>
+              <div className="flex flex-col text-sm">
+                <span className="font-[600]">masoud_red64</span>
+                <span className="text-neutral-500">M҉a҉s҉o҉u҉d</span>
+              </div>
+            </div>
+            <button className="text-xs font-[600] text-[#0095f6]">
+              Switch
+            </button>
+          </div>
+          <div className="font-[600] flex items-center justify-between mt-5">
+            <span className="text-sm  text-neutral-500">Suggested for you</span>
+            <span className="text-xs">See All</span>
+          </div>
+          <div>
+            {usersList.slice(0, 5).map((user) => (
+              <div className="flex items-center justify-between py-1.5">
+                <div className="flex items-center gap-x-3">
+                  <div className="h-11 w-11">
+                    <Story img={user.img} hasStory={false} />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-[600] text-sm">{user.username}</span>
+                    <span className="text-neutral-500 text-xs line-clamp-1">
+                      Followed by mahdifallah80 + 8 more
+                    </span>
+                  </div>
+                </div>
+                <button className="text-xs font-[600] text-[#0095f6]">
+                  Follow
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6">
+            <Footer />
+          </div>
+        </div>
       </div>
 
       {/* overlay */}
