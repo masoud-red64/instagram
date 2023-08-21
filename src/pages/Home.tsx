@@ -38,12 +38,15 @@ function Home() {
   const [isShowMoreOptionBox, setIsShowMoreOptionBox] = useState(false);
   const [mainUser, setMainUser] = useState({} as userListTypes);
   const [isShowCommentBox, setIsShowCommentBox] = useState(false);
+  const [isShowReply, setIsShowReply] = useState<{
+    [key: number]: boolean;
+  }>({});
 
   useEffect(() => {
-    isShowShareBox || isShowMoreOptionBox
+    isShowShareBox || isShowMoreOptionBox || isShowCommentBox
       ? document.body.classList.add("overflow-hidden")
       : document.body.classList.remove("overflow-hidden");
-  }, [isShowShareBox, isShowMoreOptionBox]);
+  }, [isShowShareBox, isShowMoreOptionBox, isShowCommentBox]);
 
   const handleMuteVideo = (postID: number) => {
     setIsMutedVideos((prevStatus) => {
@@ -628,19 +631,40 @@ function Home() {
 
                 {/* Comments */}
                 <div>
-                  <div>
-                    <Comment />
-                  </div>
-                  <div>
-                    <Comment />
-                    <div className="ml-8 sm:ml-[54px] mt-4 text-xs text-neutral-500">
-                      <button className="flex items-center gap-x-3">
-                        <div className="w-6 border-b border-neutral-500"></div>
-                        View replies (1)
-                      </button>
-                      <Comment />
+                  {mainUser.posts.comments.map((comment) => (
+                    <div>
+                      <Comment
+                        id={comment.id}
+                        isLikedComments={isLikedComments}
+                        setIsLikedComments={setIsLikedComments}
+                      />
+                      {true && (
+                        <div className="ml-8 sm:ml-[54px] mt-4 text-xs text-neutral-500">
+                          <button
+                            className="flex items-center gap-x-3"
+                            onClick={() =>
+                              setIsShowReply((prevStatus) => ({
+                                ...prevStatus,
+                                [comment.id]: !prevStatus[comment.id],
+                              }))
+                            }
+                          >
+                            <div className="w-6 border-b border-neutral-500"></div>
+                            {isShowReply[comment.id]
+                              ? "Hide replies (1)"
+                              : "View replies (1)"}
+                          </button>
+                          {isShowReply[comment.id] && (
+                            <Comment
+                              id={comment.id}
+                              isLikedComments={isLikedComments}
+                              setIsLikedComments={setIsLikedComments}
+                            />
+                          )}
+                        </div>
+                      )}
                     </div>
-                  </div>
+                  ))}
                 </div>
               </div>
 

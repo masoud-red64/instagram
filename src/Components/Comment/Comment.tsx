@@ -1,7 +1,15 @@
 import React from "react";
 import Story from "../Story/Story";
 
-export default function Comment() {
+export default function Comment({
+  id,
+  isLikedComments,
+  setIsLikedComments,
+}: {
+  id: number;
+  isLikedComments: { [key: number]: boolean };
+  setIsLikedComments: (param: any) => void;
+}) {
   return (
     <div className="flex items-center justify-between pt-3">
       <div className="flex items-center gap-x-3">
@@ -21,13 +29,24 @@ export default function Comment() {
           </div>
         </div>
       </div>
-      <button className="text-neutral-500">
-        <svg className="w-3 h-3">
-          <use href="#notifications"></use>
-        </svg>
-        {/* <svg className="w-3 h-3">
-        <use href="#fill-heart"></use>
-      </svg> */}
+      <button
+        className="text-neutral-500"
+        onClick={() =>
+          setIsLikedComments((prevStatus: any) => ({
+            ...prevStatus,
+            [id]: !prevStatus[id],
+          }))
+        }
+      >
+        {isLikedComments[id] ? (
+          <svg className="w-3 h-3">
+            <use href="#fill-heart"></use>
+          </svg>
+        ) : (
+          <svg className="w-3 h-3">
+            <use href="#notifications"></use>
+          </svg>
+        )}
       </button>
     </div>
   );
