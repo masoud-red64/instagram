@@ -327,8 +327,4 @@
   .comment-posts-swiper .swiper-button-disabled {
     @apply opacity-0;
   }
-
-  .comment-posts-swiper .swiper-slide {
-    @apply m-auto max-h-[calc(100vh-40px)];
-  }
 }
