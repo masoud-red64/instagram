@@ -479,8 +479,8 @@ function Home() {
             </svg>
           </button>
 
-          <div className="max-w-[calc(100%-64px-64px)] max-h-[calc(100vh-40px)] flex  bg-white rounded-[4px] overflow-hidden">
-            <div className="w-[50%] border border-[#a9a9a9]">
+          <div className="max-w-[calc(100%-10px)] md:max-w-[calc(100%-64px-64px)] max-h-[calc(100vh-100px)] md:max-h-[calc(100vh-40px)] flex flex-col md:flex-row  bg-white rounded-[4px] overflow-y-auto">
+            <div className="w-full md:w-[50%] border border-[#a9a9a9]">
               <Swiper
                 slidesPerView={1}
                 spaceBetween={10}
@@ -533,7 +533,7 @@ function Home() {
                 ))}
               </Swiper>
             </div>
-            <div className="w-[50%] max-h-[calc(100vh-40px)] flex flex-col">
+            <div className="w-full md:w-[50%] max-h-[calc(100vh-40px)] flex flex-col">
               {/* Top */}
 
               <div className="flex items-center justify-between border-b border-[#efefef] p-4">
@@ -622,7 +622,7 @@ function Home() {
                   </div>
                   <div>
                     <Comment />
-                    <div className="ml-[54px] mt-4 text-xs text-neutral-500">
+                    <div className="ml-8 sm:ml-[54px] mt-4 text-xs text-neutral-500">
                       <button className="flex items-center gap-x-3">
                         <div className="w-6 border-b border-neutral-500"></div>
                         View replies (1)
