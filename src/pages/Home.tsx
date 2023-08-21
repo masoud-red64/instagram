@@ -469,7 +469,10 @@ function Home() {
 
       {/* overlay show comments */}
       {isShowCommentBox && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/60 z-50">
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black/60 z-50"
+          onClick={() => setIsShowCommentBox(false)}
+        >
           <button
             className="absolute right-4 top-4"
             onClick={() => setIsShowCommentBox(false)}
@@ -479,7 +482,10 @@ function Home() {
             </svg>
           </button>
 
-          <div className="max-w-[calc(100%-10px)] md:max-w-[calc(100%-64px-64px)] max-h-[calc(100vh-100px)] md:max-h-[calc(100vh-40px)] flex flex-col md:flex-row  bg-white rounded-[4px] overflow-y-auto">
+          <div
+            className="max-w-[calc(100%-10px)] md:max-w-[calc(100%-64px-64px)] max-h-[calc(100vh-100px)] md:max-h-[calc(100vh-40px)] flex flex-col md:flex-row  bg-white rounded-[4px] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="w-full md:w-[50%] border border-[#a9a9a9]">
               <Swiper
                 slidesPerView={1}
