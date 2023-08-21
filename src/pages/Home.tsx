@@ -507,7 +507,7 @@ function Home() {
                         className="w-full max-h-[calc(100vh-40px)]"
                       />
                     ) : (
-                      <div className="relative">
+                      <div className="relative max-h-[calc(100vh-40px)]">
                         <video autoPlay muted={!isMutedVideos[post.id]} loop>
                           <source
                             src={`/images/stories/videos/${post.video}`}
