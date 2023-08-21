@@ -17,6 +17,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import { userListTypes, usersList } from "../Data/users";
 import ShareBox from "../Components/ShareBox/ShareBox";
 import Comment from "../Components/Comment/Comment";
+import EmojiBox from "../Components/EmojiBox/EmojiBox";
 
 function Home() {
   const serachBoxSelector = useSelector(
@@ -41,6 +42,15 @@ function Home() {
   const [isShowReply, setIsShowReply] = useState<{
     [key: number]: boolean;
   }>({});
+  const [inputComment1Value, setInputComment1Value] = useState("");
+  const [inputComment2Value, setInputComment2Value] = useState("");
+  const [isShowEmojiBox, setIsShowEmojiBox] = useState(false);
+  const [isShowEmojiBoxObject, setIsShowEmojiBoxObject] = useState<{
+    [key: number]: boolean;
+  }>({});
+
+  const inputCommentRef1 = useRef<HTMLInputElement>(null);
+  const inputCommentRef2 = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     isShowShareBox || isShowMoreOptionBox || isShowCommentBox
@@ -395,13 +405,40 @@ function Home() {
                           className="grow border-0 outline-none"
                           type="text"
                           placeholder="Add a comment..."
+                          ref={inputCommentRef1}
+                          value={inputComment1Value}
+                          onChange={(e) =>
+                            setInputComment1Value(e.target.value)
+                          }
                         />
                         <button className="text-[#0096f6] font-[600]">
                           Post
                         </button>
-                        <svg className="w-3 h-3 text-neutral-500">
-                          <use href="#emoji"></use>
-                        </svg>
+                        <div className="relative">
+                          <button
+                            onClick={() => {
+                              setIsShowEmojiBoxObject((prevStatus) => ({
+                                ...prevStatus,
+                                [user.id]: !prevStatus[user.id],
+                              }));
+                              setIsShowEmojiBox(true);
+                            }}
+                          >
+                            <svg className="w-3 h-3 text-neutral-500">
+                              <use href="#emoji"></use>
+                            </svg>
+                          </button>
+                          {isShowEmojiBox && isShowEmojiBoxObject[user.id] && (
+                            <div className="absolute top-5 right-0 w-[200px] h-[140px] bg-white dark:bg-neutral-800 text-neutral-500 text-sm font-[600] rounded-md drop-shadow-[0_0_5px_rgba(0,0,0,.0975)] overflow-y-auto scrollbar z-10">
+                              <EmojiBox
+                                textAreaRef={inputCommentRef1}
+                                captionTextAreaValue={inputComment1Value}
+                                setCaptionTextAreaValue={setInputComment1Value}
+                                setIsShowEmojiBox={setIsShowEmojiBox}
+                              />
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -744,13 +781,38 @@ function Home() {
 
                 {/* Input */}
                 <div className="flex items-center gap-x-2 justify-between mt-1 -mx-4 pt-3 px-4 border-t border-[#efefef]">
-                  <svg className="w-6 h-6">
-                    <use href="#emoji"></use>
-                  </svg>
+                  <div className="relative">
+                    <button
+                      onClick={() => {
+                        setIsShowEmojiBox(true);
+                        setIsShowEmojiBoxObject((prevStatus) => ({
+                          ...prevStatus,
+                          [mainUser.id]: !prevStatus[mainUser.id],
+                        }));
+                      }}
+                    >
+                      <svg className="w-6 h-6">
+                        <use href="#emoji"></use>
+                      </svg>
+                    </button>
+                    {isShowEmojiBox && isShowEmojiBoxObject[mainUser.id] && (
+                      <div className="absolute bottom-10 left-0 w-[200px] h-[140px] bg-white dark:bg-neutral-800 text-neutral-500 text-sm font-[600] rounded-md drop-shadow-[0_0_5px_rgba(0,0,0,.0975)] overflow-y-auto scrollbar z-10">
+                        <EmojiBox
+                          textAreaRef={inputCommentRef2}
+                          captionTextAreaValue={inputComment2Value}
+                          setCaptionTextAreaValue={setInputComment2Value}
+                          setIsShowEmojiBox={setIsShowEmojiBox}
+                        />
+                      </div>
+                    )}
+                  </div>
                   <input
                     className="grow border-0 outline-none"
                     type="text"
                     placeholder="Add a comment..."
+                    ref={inputCommentRef2}
+                    value={inputComment2Value}
+                    onChange={(e) => setInputComment2Value(e.target.value)}
                   />
                   <button className="text-[#0096f6] font-[600]">Post</button>
                 </div>

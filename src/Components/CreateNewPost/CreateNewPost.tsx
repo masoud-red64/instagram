@@ -21,6 +21,7 @@ import TransparentOverlay from "../TransparentOverlay/TransparentOverlay";
 import Story from "../Story/Story";
 import locations from "countries-list";
 import SwitchInput from "../SwitchInput/SwitchInput";
+import EmojiBox from "../EmojiBox/EmojiBox";
 
 type NewPostsType = {
   id: string;
@@ -173,15 +174,6 @@ function CreateNewPost() {
       })
     );
   }
-
-  const handleEmojiClick = (emoji: string) => {
-    const cursorPosition = textAreaRef.current?.selectionStart;
-    const newValue =
-      captionTextAreaValue.substring(0, cursorPosition) +
-      emoji +
-      captionTextAreaValue.substring(cursorPosition as number);
-    setCaptionTextAreaValue(newValue);
-  };
 
   const handleChangeLocationInputValue = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -825,44 +817,14 @@ function CreateNewPost() {
                             <>
                               <div className="absolute top-6 left-0.5 w-3 h-3 bg-white dark:bg-neutral-800 rotate-[225deg] drop-shadow-[1px_1px_1px_rgba(0,0,0,.09)] z-20"></div>
                               <div className="absolute top-7 -left-2 w-[265px] h-[140px] bg-white dark:bg-neutral-800 text-neutral-500 text-sm font-[600] rounded-md drop-shadow-[0_0_5px_rgba(0,0,0,.0975)] overflow-y-auto scrollbar z-10">
-                                <div className="p-3">
-                                  <span className="dark:text-neutral-400">
-                                    Most Popular
-                                  </span>
-                                  <div className="flex gap-2 flex-wrap pt-2">
-                                    {createNewPostSelector.emojis.popular.map(
-                                      (emoji) => (
-                                        <div
-                                          onClick={() => {
-                                            handleEmojiClick(emoji.emoji);
-                                            setIsShowEmojiBox(false);
-                                          }}
-                                        >
-                                          {emoji.emoji}
-                                        </div>
-                                      )
-                                    )}
-                                  </div>
-                                </div>
-                                <div className="p-3">
-                                  <span className="dark:text-neutral-400">
-                                    Activities
-                                  </span>
-                                  <div className="flex flex-wrap gap-2 pt-2">
-                                    {createNewPostSelector.emojis.activities.map(
-                                      (emoji) => (
-                                        <div
-                                          onClick={() => {
-                                            handleEmojiClick(emoji.emoji);
-                                            setIsShowEmojiBox(false);
-                                          }}
-                                        >
-                                          {emoji.emoji}
-                                        </div>
-                                      )
-                                    )}
-                                  </div>
-                                </div>
+                                <EmojiBox
+                                  textAreaRef={textAreaRef}
+                                  captionTextAreaValue={captionTextAreaValue}
+                                  setCaptionTextAreaValue={
+                                    setCaptionTextAreaValue
+                                  }
+                                  setIsShowEmojiBox={setIsShowEmojiBox}
+                                />
                               </div>
                             </>
                           )}
