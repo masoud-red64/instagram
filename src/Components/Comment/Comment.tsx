@@ -17,20 +17,23 @@ export default function Comment({
           <Story img="user4.jpg" hasStory hasNewStory />
         </div>
         <div>
-          <div className="flex items-center gap-x-1 text-sm">
-            <a href="#" className="text-[#1a1a1a] font-[600]">
+          <div className="flex items-center gap-x-1 text-sm dark:text-neutral-100">
+            <a
+              href="#"
+              className="text-[#1a1a1a] dark:text-neutral-100 font-[600]"
+            >
               mohaddese_younesi
             </a>
             <span>مرسی👏👏</span>
           </div>
-          <div className="text-xs text-neutral-500 flex items-center gap-x-3 mt-1">
+          <div className="text-xs text-neutral-500 dark:text-[#a8a8a8] flex items-center gap-x-3 mt-1">
             <span>30m</span>
             <span className="font-[600]">Reply</span>
           </div>
         </div>
       </div>
       <button
-        className="text-neutral-500"
+        className="text-neutral-500 dark:text-[#a8a8a8]"
         onClick={() =>
           setIsLikedComments((prevStatus: any) => ({
             ...prevStatus,

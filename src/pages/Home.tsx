@@ -140,7 +140,7 @@ function Home() {
                     <div className="w-[66px] h-[66px]">
                       <Story id={user.id} img={user.img} hasStory hasNewStory />
                     </div>
-                    <span className="block max-w-[66px] text-xs overflow-hidden overflow-ellipsis">
+                    <span className="block max-w-[66px] text-xs dark:text-neutral-100 overflow-hidden overflow-ellipsis">
                       {user.username}
                     </span>
                   </div>
@@ -151,10 +151,10 @@ function Home() {
 
           {/* Posts */}
           <div className="w-full">
-            <div className="max-w-[470px] mx-auto mt-10">
+            <div className="max-w-[470px] mx-auto mt-10 ">
               {/* Post */}
               {usersList.map((user) => (
-                <div className="bg-white pb-4 mb-6 border-b border-[#dbdbdb]">
+                <div className="bg-white pb-4 mb-6 border-b border-[#dbdbdb] dark:border-[#363636] dark:bg-black">
                   {/* Top */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-x-3">
@@ -167,20 +167,26 @@ function Home() {
                         />
                       </div>
                       <div className="flex items-center gap-x-1 text-sm">
-                        <span className="font-[600]">{user.username}</span>
-                        <span className="text-neutral-500">•</span>
-                        <span className="text-neutral-500">50m</span>
+                        <span className="font-[600] dark:text-neutral-100">
+                          {user.username}
+                        </span>
+                        <span className="text-neutral-500 dark:[#a8a8a8]">
+                          •
+                        </span>
+                        <span className="text-neutral-500 dark:[#a8a8a8]">
+                          50m
+                        </span>
                       </div>
                     </div>
                     <button onClick={() => setIsShowMoreOptionBox(true)}>
-                      <svg className="w-6 h-6">
+                      <svg className="w-6 h-6 dark:text-neutral-100">
                         <use href="#more-options"></use>
                       </svg>
                     </button>
                   </div>
 
                   {/* Content */}
-                  <div className="w-full h-[585px] my-3 border border-[#dbdbdb] rounded-md overflow-hidden">
+                  <div className="w-full h-[585px] my-3 border border-[#dbdbdb] dark:border-[#363636] rounded-md overflow-hidden">
                     <Swiper
                       slidesPerView={1}
                       spaceBetween={10}
@@ -242,7 +248,7 @@ function Home() {
                   {/* Bottom */}
                   <div className="text-sm">
                     {/* Buttons */}
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between dark:text-neutral-100">
                       <div className="flex items-center gap-x-4">
                         <button
                           onClick={() =>
@@ -296,12 +302,12 @@ function Home() {
                     </div>
 
                     {/* Likes */}
-                    <span className="inline-block font-[600] my-1">
+                    <span className="inline-block font-[600] dark:text-neutral-100 my-1">
                       {isLiked[user.id] ? "10,297" : "10,296"} likes
                     </span>
 
                     {/* Description */}
-                    <div>
+                    <div className="dark:text-neutral-100">
                       <a href="#" className="font-[600]">
                         {user.username}
                       </a>
@@ -352,7 +358,7 @@ function Home() {
                       <div className="flex flex-col items-start gap-y-0.5">
                         {!isShowMoreDescription[user.id] && (
                           <button
-                            className="text-neutral-500"
+                            className="text-neutral-500 dark:text-[#a8a8a8]"
                             onClick={() =>
                               setIsShowMoreDescription((prevStatus) => ({
                                 ...prevStatus,
@@ -366,7 +372,7 @@ function Home() {
                         <button className="text-xs font-[600]">
                           See translation
                         </button>
-                        <button className="text-neutral-500">
+                        <button className="text-neutral-500 dark:text-[#a8a8a8]">
                           View all 332 comments
                         </button>
                       </div>
@@ -388,11 +394,11 @@ function Home() {
                               }
                             >
                               {isLikedComments[comment.id] ? (
-                                <svg className="w-3 h-3 text-neutral-500">
+                                <svg className="w-3 h-3 text-neutral-500 dark:text-[#a8a8a8]">
                                   <use href="#fill-heart"></use>
                                 </svg>
                               ) : (
-                                <svg className="w-3 h-3 text-neutral-500">
+                                <svg className="w-3 h-3 text-neutral-500 dark:text-[#a8a8a8]">
                                   <use href="#notifications"></use>
                                 </svg>
                               )}
@@ -403,7 +409,7 @@ function Home() {
                       {/* Input */}
                       <div className="flex items-center gap-x-2 justify-between mt-3">
                         <input
-                          className="grow border-0 outline-none"
+                          className="grow border-0 outline-none bg-transparent"
                           type="text"
                           placeholder="Add a comment..."
                           ref={inputCommentRef1}
@@ -449,47 +455,57 @@ function Home() {
           </div>
         </div>
         <div className="hidden lg:block col-span-1 pl-10 pr-4 pt-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-x-3">
-              <div className="h-11 w-11">
-                <Story img="user1.jpg" hasStory={false} />
-              </div>
-              <div className="flex flex-col text-sm">
-                <span className="font-[600]">masoud_red64</span>
-                <span className="text-neutral-500">M҉a҉s҉o҉u҉d</span>
-              </div>
-            </div>
-            <button className="text-xs font-[600] text-[#0095f6]">
-              Switch
-            </button>
-          </div>
-          <div className="font-[600] flex items-center justify-between mt-5">
-            <span className="text-sm  text-neutral-500">Suggested for you</span>
-            <span className="text-xs">See All</span>
-          </div>
-          <div>
-            {usersList.slice(0, 5).map((user) => (
-              <div className="flex items-center justify-between py-1.5">
-                <div className="flex items-center gap-x-3">
-                  <div className="h-11 w-11">
-                    <Story img={user.img} hasStory={false} />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-[600] text-sm">{user.username}</span>
-                    <span className="text-neutral-500 text-xs line-clamp-1">
-                      Followed by mahdifallah80 + 8 more
-                    </span>
-                  </div>
+          <div className="sticky top-8">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-x-3">
+                <div className="h-11 w-11">
+                  <Story img="user1.jpg" hasStory={false} />
                 </div>
-                <button className="text-xs font-[600] text-[#0095f6]">
-                  Follow
-                </button>
+                <div className="flex flex-col text-sm">
+                  <span className="font-[600] dark:text-neutral-100">
+                    masoud_red64
+                  </span>
+                  <span className="text-neutral-500 dark:text-[#a8a8a8]">
+                    M҉a҉s҉o҉u҉d
+                  </span>
+                </div>
               </div>
-            ))}
-          </div>
+              <button className="text-xs font-[600] text-[#0095f6]">
+                Switch
+              </button>
+            </div>
+            <div className="font-[600] flex items-center justify-between mt-5 mb-2">
+              <span className="text-sm  text-neutral-500 dark:text-[#a8a8a8]">
+                Suggested for you
+              </span>
+              <span className="text-xs text-neutral-100">See All</span>
+            </div>
+            <div>
+              {usersList.slice(0, 5).map((user) => (
+                <div className="flex items-center justify-between py-1.5">
+                  <div className="flex items-center gap-x-3">
+                    <div className="h-11 w-11">
+                      <Story img={user.img} hasStory={false} />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-[600] text-sm dark:text-neutral-100">
+                        {user.username}
+                      </span>
+                      <span className="text-neutral-500 dark:text-[#a8a8a8] text-xs line-clamp-1">
+                        Followed by mahdifallah80 + 8 more
+                      </span>
+                    </div>
+                  </div>
+                  <button className="text-xs font-[600] text-[#0095f6]">
+                    Follow
+                  </button>
+                </div>
+              ))}
+            </div>
 
-          <div className="mt-6">
-            <Footer />
+            <div className="mt-6">
+              <Footer />
+            </div>
           </div>
         </div>
       </div>
@@ -567,10 +583,10 @@ function Home() {
           </button>
 
           <div
-            className="max-w-[calc(100%-10px)] md:max-w-[calc(100%-64px-64px)] max-h-[calc(100vh-100px)] md:max-h-[calc(100vh-40px)] flex flex-col md:flex-row  bg-white rounded-[4px] overflow-y-auto md:overflow-hidden"
+            className="max-w-[calc(100%-10px)] md:max-w-[calc(100%-64px-64px)] max-h-[calc(100vh-100px)] md:max-h-[calc(100vh-40px)] flex flex-col md:flex-row  bg-white dark:bg-black rounded-[4px] overflow-y-auto scrollbar md:overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-full md:w-[50%] border border-[#a9a9a9]">
+            <div className="w-full md:w-[50%] border border-[#a9a9a9] dark:border-[#363636]">
               <Swiper
                 slidesPerView={1}
                 spaceBetween={10}
@@ -628,10 +644,10 @@ function Home() {
                 ))}
               </Swiper>
             </div>
-            <div className="w-full md:w-[50%] flex flex-col">
+            <div className="w-full md:w-[50%] flex flex-col dark:bg-black">
               {/* Top */}
 
-              <div className="flex items-center justify-between border-b border-[#efefef] p-4">
+              <div className="flex items-center justify-between border-b border-[#efefef] dark:border-[#363636] p-4">
                 <div className="flex items-center gap-x-3">
                   <div className="w-9 h-9">
                     <Story
@@ -641,19 +657,19 @@ function Home() {
                       hasNewStory={mainUser.hasNewStory}
                     />
                   </div>
-                  <span className="font-[600] text-sm">
+                  <span className="font-[600] text-sm dark:text-neutral-100">
                     {mainUser.username}
                   </span>
                 </div>
                 <button onClick={() => setIsShowMoreOptionBox(true)}>
-                  <svg className="w-6 h-6">
+                  <svg className="w-6 h-6 dark:text-neutral-100">
                     <use href="#more-options"></use>
                   </svg>
                 </button>
               </div>
 
               {/* Center */}
-              <div className="p-4 overflow-y-auto">
+              <div className="p-4 overflow-y-auto scrollbar">
                 <div className="flex gap-x-3">
                   <div className="w-9 h-9 shrink-0">
                     <Story
@@ -663,7 +679,7 @@ function Home() {
                       hasNewStory={mainUser.hasNewStory}
                     />
                   </div>
-                  <p className="flex flex-col text-sm">
+                  <p className="flex flex-col text-sm dark:text-neutral-100">
                     <span>
                       <span className="font-[600] text-sm">
                         {mainUser.username}
@@ -722,7 +738,7 @@ function Home() {
                       {true && (
                         <div className="ml-8 sm:ml-[54px] mt-4 text-xs text-neutral-500">
                           <button
-                            className="flex items-center gap-x-3"
+                            className="flex items-center gap-x-3 dark:text-[#a8a8a8]"
                             onClick={() =>
                               setIsShowReply((prevStatus) => ({
                                 ...prevStatus,
@@ -730,7 +746,7 @@ function Home() {
                               }))
                             }
                           >
-                            <div className="w-6 border-b border-neutral-500"></div>
+                            <div className="w-6 border-b border-neutral-500 dark:border-[#a8a8a8]"></div>
                             {isShowReply[comment.id]
                               ? "Hide replies (1)"
                               : "View replies (1)"}
@@ -750,9 +766,9 @@ function Home() {
               </div>
 
               {/* Bottom */}
-              <div className="text-sm p-4 border-t border-[#efefef]">
+              <div className="text-sm p-4 border-t border-[#efefef] dark:border-[#363636]">
                 {/* Buttons */}
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between dark:text-neutral-100">
                   <div className="flex items-center gap-x-4">
                     <button
                       onClick={() =>
@@ -810,7 +826,7 @@ function Home() {
                   <div className="w-5 h-5">
                     <Story img="user9.jpg" hasStory={false} />
                   </div>
-                  <p className="text-sm">
+                  <p className="text-sm dark:text-neutral-100">
                     Liked by{" "}
                     <a href="#" className="font-[600]">
                       mohaddese_younesi
@@ -821,10 +837,12 @@ function Home() {
                     </button>
                   </p>
                 </div>
-                <span className="text-[10px] text-neutral-500">2 DAYS AGO</span>
+                <span className="text-[10px] text-neutral-500 dark:text-[#a8a8a8]">
+                  2 DAYS AGO
+                </span>
 
                 {/* Input */}
-                <div className="flex items-center gap-x-2 justify-between mt-1 -mx-4 pt-3 px-4 border-t border-[#efefef]">
+                <div className="flex items-center gap-x-2 justify-between mt-1 -mx-4 pt-3 px-4 border-t border-[#efefef] border-[#363636]">
                   <div className="relative">
                     <button
                       onClick={() => {
@@ -835,7 +853,7 @@ function Home() {
                         }));
                       }}
                     >
-                      <svg className="w-6 h-6">
+                      <svg className="w-6 h-6 dark:text-neutral-100">
                         <use href="#emoji"></use>
                       </svg>
                     </button>
@@ -851,7 +869,7 @@ function Home() {
                     )}
                   </div>
                   <input
-                    className="grow border-0 outline-none"
+                    className="grow border-0 outline-none bg-transparent dark:text-neutral-100"
                     type="text"
                     placeholder="Add a comment..."
                     ref={inputCommentRef2}

@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="text-xs text-[#c7c7c7]">
+    <div className="text-xs text-[#c7c7c7] dark:text-neutral-500">
       <ul className="flex flex-wrap mb-4">
         <li className="before:content-['\00B7'] before:mx-[3px]">About</li>
         <li className="before:content-['\00B7'] before:mx-[3px]">Help</li>
