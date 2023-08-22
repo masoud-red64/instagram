@@ -5,13 +5,13 @@ function Explore() {
   console.log(usersList.length);
 
   return (
-    <div className="pt-6 mb-6">
-      <div className="grid grid-cols-3 gap-1 mx-8 mb-1 px-5">
+    <div className="pt-6 mb-12 md:mb-6 max-w-[975px] mx-auto">
+      <div className="grid grid-cols-3 gap-1 sm:mx-8 mb-1 px-1 sm:px-5">
         {usersList.map((user, index) => (
           <div
             className={`relative group cursor-pointer col-span-1 row-span-${
               (index - 2) % 10 === 0 || (index - 5) % 10 === 0 ? "2" : "1"
-            } max-h-${
+            } max-w-[300px] max-h-${
               (index - 2) % 10 === 0 || (index - 5) % 10 === 0
                 ? "[608px]"
                 : "[300px]"
@@ -42,15 +42,15 @@ function Explore() {
 
             {/* Hover */}
             <div className="absolute hidden group-hover:flex inset-0 items-center justify-center bg-black/40">
-              <div className="flex items-center gap-x-8 text-neutral-100 text-sm font-[600]">
+              <div className="flex flex-col md:flex-row items-center gap-y-2 gap-x-8 text-neutral-100 text-xs md:text-sm font-[600]">
                 <span className="flex items-center gap-x-1">
-                  <svg className="w-6 h-6">
+                  <svg className="w-3 h-3 md:w-6 md:h-6">
                     <use href="#notifications"></use>
                   </svg>
                   652
                 </span>
                 <span className="flex items-center gap-x-1">
-                  <svg className="w-6 h-6 fill-white">
+                  <svg className="w-3 h-3 md:w-6 md:h-6 fill-white">
                     <use href="#comments"></use>
                   </svg>
                   48
@@ -74,4 +74,3 @@ function Explore() {
 }
 
 export default Explore;
-
