@@ -2,7 +2,8 @@ import Home from "./pages/Home";
 import Index from "./pages/Index";
 import Notifications from "./pages/Notifications";
 import Stories from "./pages/Stories";
-import Explore from "./pages/explore";
+import Explore from "./pages/Explore";
+import Reels from "./pages/Reels";
 
 const routes = [
   {
@@ -12,6 +13,7 @@ const routes = [
       { path: "", element: <Home /> },
       { path: "notifications", element: <Notifications /> },
       { path: "explore", element: <Explore /> },
+      { path: "reels", element: <Reels /> },
     ],
   },
   {
