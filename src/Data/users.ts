@@ -60,9 +60,7 @@ export const usersList: userListTypes[] = [
         username: "nikolausofpersia",
         name: "Nikolaus",
         stories: [
-            { id: 7, img: 'img5.jfif', video: '' },
-            { id: 8, img: '', video: 'video3.mp4' },
-            { id: 9, img: 'img6.jpg', video: '' },
+            { id: 8, img: '', video: 'video21.mp4' },
         ],
         posts: {
             comments: [
