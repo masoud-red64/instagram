@@ -19,6 +19,7 @@ import ShareBox from "../Components/ShareBox/ShareBox";
 import EmojiBox from "../Components/EmojiBox/EmojiBox";
 import Footer from "../Components/Footer/Footer";
 import PostWithCommentBox from "../Components/PostWithCommentBox/PostWithCommentBox";
+import MoreOptionPostBox from "../Components/MoreOptionPostBox/MoreOptionPostBox";
 
 function Home() {
   const serachBoxSelector = useSelector(
@@ -517,45 +518,9 @@ function Home() {
         >
           {/* ReportBox */}
           {isShowMoreOptionBox && (
-            <div className="w-[260px] md:w-[400px] bg-white rounded-xl">
-              <ul className="text-sm child:py-1 divide-y divide-[#dbdbdb]">
-                <li className="h-12">
-                  <button className="w-full h-full font-[700] text-[#ed4956]">
-                    Report
-                  </button>
-                </li>
-                <li className="h-12">
-                  <button className="w-full h-full font-[700] text-[#ed4956]">
-                    Unfollow
-                  </button>
-                </li>
-                <li className="h-12">
-                  <button className="w-full h-full">Add to favorites</button>
-                </li>
-                <li className="h-12">
-                  <button className="w-full h-full">
-                    <a href="#">Go to post</a>
-                  </button>
-                </li>
-                <li className="h-12">
-                  <button className="w-full h-full">Share to...</button>
-                </li>
-                <li className="h-12">
-                  <button className="w-full h-full">Share to...</button>
-                </li>
-                <li className="h-12">
-                  <button className="w-full h-full">Embed</button>
-                </li>
-                <li className="h-12">
-                  <button
-                    className="w-full h-full"
-                    onClick={() => setIsShowMoreOptionBox(false)}
-                  >
-                    Cancel
-                  </button>
-                </li>
-              </ul>
-            </div>
+            <MoreOptionPostBox
+              setIsShowMoreOptionBox={setIsShowMoreOptionBox}
+            />
           )}
 
           {/* ShareBox */}
