@@ -926,6 +926,8 @@ function SvgSymbol() {
         <title>Carousel</title>
         <path d="M34.8 29.7V11c0-2.9-2.3-5.2-5.2-5.2H11c-2.9 0-5.2 2.3-5.2 5.2v18.7c0 2.9 2.3 5.2 5.2 5.2h18.7c2.8-.1 5.1-2.4 5.1-5.2zM39.2 15v16.1c0 4.5-3.7 8.2-8.2 8.2H14.9c-.6 0-.9.7-.5 1.1 1 1.1 2.4 1.8 4.1 1.8h13.4c5.7 0 10.3-4.6 10.3-10.3V18.5c0-1.6-.7-3.1-1.8-4.1-.5-.4-1.2 0-1.2.6z"></path>
       </symbol>
+      <symbol id="audio" aria-label="Audio image" className="x1lliihq x1n2onr6" color="currentColor" fill="currentColor" role="img" viewBox="0 0 24 24"><title>Audio image</title><path d="M21.002 16.972V2.044a.999.999 0 0 0-.36-.769 1.012 1.012 0 0 0-.823-.214L6.816 3.479A1 1 0 0 0 6 4.462v10.864A3.75 3.75 0 1 0 9 19V9.56l9.003-1.675v5.442A3.75 3.75 0 1 0 21.005 17c0-.01-.003-.02-.003-.029Z"></path></symbol>
+      <symbol id="location" aria-label="Location" className="x1lliihq x1n2onr6" color="currentColor" fill="currentColor" role="img" viewBox="0 0 24 24"><title>Location</title><path d="M12.053 1a8.684 8.684 0 0 0-8.708 8.66c0 5.699 6.14 11.495 8.108 13.123a.939.939 0 0 0 1.2 0c1.969-1.628 8.109-7.424 8.109-13.123A8.684 8.684 0 0 0 12.053 1Zm0 10.313a1.604 1.604 0 1 1 1.604-1.604 1.604 1.604 0 0 1-1.604 1.604Z"></path></symbol>
     </svg>
   );
 }

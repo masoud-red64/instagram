@@ -327,4 +327,18 @@
   .comment-posts-swiper .swiper-button-disabled {
     @apply opacity-0;
   }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .marquee-text {
+    white-space: nowrap;
+    animation: marquee 5s linear infinite; /* Adjust duration as needed */
+  }
 }
