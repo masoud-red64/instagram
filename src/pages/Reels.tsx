@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Story from "../Components/Story/Story";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,6 +11,20 @@ import { Mousewheel, Keyboard } from "swiper/modules";
 import { usersList } from "../Data/users";
 
 function Reels() {
+  const [isMutedVideos, setIsMutedVideos] = useState<{
+    [key: number]: boolean;
+  }>({});
+
+  const handleMuteVideo = (postID: number) => {
+    setIsMutedVideos((prevStatus) => {
+      const updatedStatus: { [index: number]: boolean } = {};
+      for (const id in prevStatus) {
+        updatedStatus[id] = false; // Mute all videos
+      }
+      updatedStatus[postID] = !prevStatus[postID]; // Toggle the clicked video
+      return updatedStatus;
+    });
+  };
   return (
     <div className="overflow-y-scroll pt-4">
       <Swiper
@@ -26,6 +40,15 @@ function Reels() {
           enabled: true,
           pageUpDown: true,
         }}
+        onSlideChange={() => {
+          setIsMutedVideos((prevStatus) => {
+            const updatedStatus: { [index: number]: boolean } = {};
+            for (const id in prevStatus) {
+              updatedStatus[id] = false; // Mute all videos
+            }
+            return updatedStatus;
+          });
+        }}
       >
         {usersList.map((user) =>
           user.stories.map(
@@ -36,14 +59,26 @@ function Reels() {
                     <div className="mx-auto flex items-end justify-between">
                       <div className="relative max-w-[360px] max-h-[610px] rounded-sm overflow-hidden">
                         <video
+                          muted={!isMutedVideos[reel.id]}
+                          autoPlay
+                          loop
                           className="h-full object-cover"
                           src={`/images/stories/videos/${reel.video}`}
                         ></video>
                         {/* Mute Icon */}
-                        <button className="absolute top-4 right-4 bg-[#dbdbdb]/30 p-2 rounded-full">
-                          <svg className="w-4 h-4 text-white">
-                            <use href="#muted"></use>
-                          </svg>
+                        <button
+                          className="absolute top-4 right-4 bg-[#dbdbdb]/30 p-2 rounded-full"
+                          onClick={() => handleMuteVideo(reel.id)}
+                        >
+                          {isMutedVideos[reel.id] ? (
+                            <svg className="w-4 h-4 text-white">
+                              <use href="#not-muted"></use>
+                            </svg>
+                          ) : (
+                            <svg className="w-4 h-4 text-white">
+                              <use href="#muted"></use>
+                            </svg>
+                          )}
                         </button>
 
                         {/* Play Icon */}
