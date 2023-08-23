@@ -17,6 +17,12 @@ function Reels() {
   const [isPauseVideos, setIsPauseVideos] = useState<{
     [key: number]: boolean;
   }>({});
+  const [isLikedReel, setIsLikedReel] = useState<{
+    [key: number]: boolean;
+  }>({});
+  const [isSavedReel, setIsSavedReel] = useState<{
+    [key: number]: boolean;
+  }>({});
 
   const videoRefs: { [key: number]: React.RefObject<HTMLVideoElement> } = {};
 
@@ -192,10 +198,24 @@ function Reels() {
                         </div>
                       </div>
                       <div className="flex flex-col gap-y-5">
-                        <button className="hover:opacity-50 transition-opacity">
-                          <svg className="w-6 h-6 text-black dark:text-neutral-100">
-                            <use href="#notifications"></use>
-                          </svg>
+                        <button
+                          className="hover:opacity-50 transition-opacity"
+                          onClick={() =>
+                            setIsLikedReel((prevStatus) => ({
+                              ...prevStatus,
+                              [reel.id]: !prevStatus[reel.id],
+                            }))
+                          }
+                        >
+                          {isLikedReel[reel.id] ? (
+                            <svg className="w-6 h-6 text-black dark:text-neutral-100">
+                              <use href="#fill-heart"></use>
+                            </svg>
+                          ) : (
+                            <svg className="w-6 h-6 text-black dark:text-neutral-100">
+                              <use href="#notifications"></use>
+                            </svg>
+                          )}
                           <span className="text-xs">28k</span>
                         </button>
                         <button className="hover:opacity-50 transition-opacity">
@@ -209,10 +229,24 @@ function Reels() {
                             <use href="#messages"></use>
                           </svg>
                         </button>
-                        <button className="hover:opacity-50 transition-opacity">
-                          <svg className="w-6 h-6 text-black dark:text-neutral-100">
-                            <use href="#save"></use>
-                          </svg>
+                        <button
+                          className="hover:opacity-50 transition-opacity"
+                          onClick={() =>
+                            setIsSavedReel((prevStatus) => ({
+                              ...prevStatus,
+                              [reel.id]: !prevStatus[reel.id],
+                            }))
+                          }
+                        >
+                          {isSavedReel[reel.id] ? (
+                            <svg className="w-6 h-6 text-black dark:text-neutral-100">
+                              <use href="#save-fill"></use>
+                            </svg>
+                          ) : (
+                            <svg className="w-6 h-6 text-black dark:text-neutral-100">
+                              <use href="#save"></use>
+                            </svg>
+                          )}
                         </button>
                         <button className="hover:opacity-50 transition-opacity">
                           <svg className="w-6 h-6 text-black dark:text-neutral-100">
