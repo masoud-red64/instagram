@@ -8,7 +8,7 @@ function MoreOptionPostBox({
   setIsShowMoreOptionBox,
 }: MoreOptionPostBoxPropsType) {
   return (
-    <div className="w-[260px] md:w-[400px] bg-white rounded-xl">
+    <div className=" bg-white rounded-xl">
       <ul className="text-sm child:py-1 divide-y divide-[#dbdbdb]">
         <li className="h-12">
           <button className="w-full h-full font-[700] text-[#ed4956]">

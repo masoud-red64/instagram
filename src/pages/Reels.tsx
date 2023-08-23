@@ -10,6 +10,7 @@ import "swiper/css/pagination";
 import { Mousewheel, Keyboard } from "swiper/modules";
 import { usersList } from "../Data/users";
 import ShareBox from "../Components/ShareBox/ShareBox";
+import MoreOptionPostBox from "../Components/MoreOptionPostBox/MoreOptionPostBox";
 
 function Reels() {
   const [isMutedVideos, setIsMutedVideos] = useState<{
@@ -28,6 +29,7 @@ function Reels() {
     [key: number]: boolean;
   }>({});
   const [isShowShareBox, setIsShowShareBox] = useState(false);
+  const [isShowMoreOptionBox, setIsShowMoreOptionBox] = useState(false);
 
   const videoRefs: { [key: number]: React.RefObject<HTMLVideoElement> } = {};
 
@@ -35,8 +37,12 @@ function Reels() {
     const windowClickHandler = (event: MouseEvent) => {
       // Check if the click occurred outside the share box
       const targetElement = event.target as Element;
-      if (isShowShareBox && !targetElement.closest(".share-box")) {
+      if (
+        (isShowShareBox && !targetElement.closest(".share-box")) ||
+        (isShowMoreOptionBox && !targetElement.closest(".more-option-box"))
+      ) {
         setIsShowShareBox(false);
+        setIsShowMoreOptionBox(false);
       }
     };
 
@@ -46,7 +52,7 @@ function Reels() {
     return () => {
       window.removeEventListener("click", windowClickHandler);
     };
-  }, [isShowShareBox]);
+  }, [isShowShareBox, isShowMoreOptionBox]);
 
   const handleMuteVideo = (postID: number) => {
     setIsMutedVideos((prevStatus) => {
@@ -91,6 +97,7 @@ function Reels() {
           });
 
           setIsShowShareBox(false);
+          setIsShowMoreOptionBox(false);
         }}
       >
         {usersList.map((user) =>
@@ -271,11 +278,15 @@ function Reels() {
                               <use href="#messages"></use>
                             </svg>
                           </button>
-                          <div className="absolute right-7 bottom-3 sm:z-20 w-3 h-3 bg-white rotate-45"></div>
                           {isShowShareBox && isShowShareBoxOneReel[reel.id] && (
-                            <div className="absolute right-8 -bottom-20 sm:bottom-0 z-10 w-[280px] sm:w-[340px] h-[460px] md:h-[460px] bg-white drop-shadow-[0_4px_12px_rgba(0,0,0,.15)] rounded-md overflow-hidden">
-                              <ShareBox setIsShowShareBox={setIsShowShareBox} />
-                            </div>
+                            <>
+                              <div className="absolute right-7 bottom-3 sm:z-20 w-3 h-3 bg-white rotate-45"></div>
+                              <div className="absolute right-8 -bottom-20 sm:bottom-0 z-10 w-[280px] sm:w-[340px] h-[460px] md:h-[460px] bg-white drop-shadow-[0_4px_12px_rgba(0,0,0,.15)] rounded-md overflow-hidden">
+                                <ShareBox
+                                  setIsShowShareBox={setIsShowShareBox}
+                                />
+                              </div>
+                            </>
                           )}
                         </div>
                         <button
@@ -297,11 +308,25 @@ function Reels() {
                             </svg>
                           )}
                         </button>
-                        <button className="hover:opacity-50 transition-opacity">
-                          <svg className="w-6 h-6 text-black dark:text-neutral-100">
-                            <use href="#more-options"></use>
-                          </svg>
-                        </button>
+                        <div className="relative more-option-box">
+                          <button
+                            className="hover:opacity-50 transition-opacity"
+                            onClick={() =>
+                              setIsShowMoreOptionBox(!isShowMoreOptionBox)
+                            }
+                          >
+                            <svg className="w-6 h-6 text-black dark:text-neutral-100">
+                              <use href="#more-options"></use>
+                            </svg>
+                          </button>
+                          {isShowMoreOptionBox && (
+                            <div className="absolute bottom-5 right-10 w-[250px] sm:w-[295px] h-[366px] bg-white drop-shadow-[0_4px_12px_rgba(0,0,0,.15)] rounded-md">
+                              <MoreOptionPostBox
+                                setIsShowMoreOptionBox={setIsShowMoreOptionBox}
+                              />
+                            </div>
+                          )}
+                        </div>
                         <button className="w-6 h-6 rounded-md overflow-hidden hover:opacity-50 transition-opacity">
                           <img src={`/images/users/${user.img}`} alt="" />
                         </button>

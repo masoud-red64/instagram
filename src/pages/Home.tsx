@@ -518,9 +518,11 @@ function Home() {
         >
           {/* ReportBox */}
           {isShowMoreOptionBox && (
-            <MoreOptionPostBox
-              setIsShowMoreOptionBox={setIsShowMoreOptionBox}
-            />
+            <div className="w-[260px] md:w-[400px]">
+              <MoreOptionPostBox
+                setIsShowMoreOptionBox={setIsShowMoreOptionBox}
+              />
+            </div>
           )}
 
           {/* ShareBox */}
