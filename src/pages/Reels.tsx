@@ -24,6 +24,9 @@ function Reels() {
   const [isSavedReel, setIsSavedReel] = useState<{
     [key: number]: boolean;
   }>({});
+  const [isShowShareBoxOneReel, setIsShowShareBoxOneReel] = useState<{
+    [key: number]: boolean;
+  }>({});
   const [isShowShareBox, setIsShowShareBox] = useState(false);
 
   const videoRefs: { [key: number]: React.RefObject<HTMLVideoElement> } = {};
@@ -256,15 +259,21 @@ function Reels() {
                         <div className="relative share-box">
                           <button
                             className="hover:opacity-50 transition-opacity"
-                            onClick={() => setIsShowShareBox(!isShowShareBox)}
+                            onClick={() => {
+                              setIsShowShareBox(!isShowShareBox);
+                              setIsShowShareBoxOneReel((prevStatus) => ({
+                                ...prevStatus,
+                                [reel.id]: true,
+                              }));
+                            }}
                           >
                             <svg className="w-6 h-6 text-black dark:text-neutral-100">
                               <use href="#messages"></use>
                             </svg>
                           </button>
-                          <div className="absolute right-7 bottom-3 z-20 w-3 h-3 bg-white rotate-45"></div>
-                          {isShowShareBox && (
-                            <div className="absolute right-8 bottom-0 z-10 w-[340px] h-[460px] bg-white drop-shadow-[0_4px_12px_rgba(0,0,0,.15)] rounded-md overflow-hidden">
+                          <div className="absolute right-7 bottom-3 sm:z-20 w-3 h-3 bg-white rotate-45"></div>
+                          {isShowShareBox && isShowShareBoxOneReel[reel.id] && (
+                            <div className="absolute right-8 -bottom-20 sm:bottom-0 z-10 w-[280px] sm:w-[340px] h-[460px] md:h-[460px] bg-white drop-shadow-[0_4px_12px_rgba(0,0,0,.15)] rounded-md overflow-hidden">
                               <ShareBox setIsShowShareBox={setIsShowShareBox} />
                             </div>
                           )}
