@@ -43,6 +43,9 @@ function Reels() {
   }>({});
   const [isShowEmojiBox, setIsShowEmojiBox] = useState(false);
   const [commentInputValue, setCommentInputValue] = useState("");
+  const [isShowMoreDescription, setIsShowMoreDescription] = useState<{
+    [key: number]: boolean;
+  }>({});
 
   const videoRefs: { [key: number]: React.RefObject<HTMLVideoElement> } = {};
   const commentInputRef = useRef<HTMLTextAreaElement | null>(null);
@@ -207,8 +210,17 @@ function Reels() {
                             </div>
                           </div>
 
-                          <div className=" overflow-y-auto text-right mt-4 mb-2">
-                            <span className="text-sm text-white text-right line-clamp-1">
+                          <div
+                            className={`${
+                              isShowMoreDescription[reel.id] && "h-32"
+                            } overflow-y-auto scrollbar text-right mt-4 mb-2`}
+                          >
+                            <span
+                              className={`text-sm text-white text-right ${
+                                !isShowMoreDescription[reel.id] &&
+                                "line-clamp-1"
+                              }`}
+                            >
                               👀 سیو کن لازمت میشه
                               <br />
                               <br />
@@ -239,14 +251,20 @@ function Reels() {
                               <a>#تغییر_سبک_زندگی</a> <a>#زندگی</a>{" "}
                               <a>#موفقیت</a> <a>#معلم</a>
                             </span>
-                            <span
-                              className="text-sm text-white/70"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                              }}
-                            >
-                              more...
-                            </span>
+                            {!isShowMoreDescription[reel.id] && (
+                              <span
+                                className="text-sm text-white/70"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setIsShowMoreDescription((prevStatus) => ({
+                                    ...prevStatus,
+                                    [reel.id]: true,
+                                  }));
+                                }}
+                              >
+                                more...
+                              </span>
+                            )}
                           </div>
 
                           <div className="flex items-center gap-x-2 text-white text-sm dir-rtl">
