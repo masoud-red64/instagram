@@ -290,7 +290,9 @@ function Reels() {
                               <use href="#notifications"></use>
                             </svg>
                           )}
-                          <span className="text-xs">28k</span>
+                          <span className="text-xs dark:text-neutral-100">
+                            28k
+                          </span>
                         </button>
                         <div className="relative comment-box">
                           <button
@@ -305,12 +307,14 @@ function Reels() {
                             <svg className="w-6 h-6 text-black dark:text-neutral-100">
                               <use href="#comments"></use>
                             </svg>
-                            <span className="text-xs">344</span>
+                            <span className="text-xs dark:text-neutral-100">
+                              344
+                            </span>
                           </button>
                           {isShowCommentBox[reel.id] && (
                             <>
-                              <div className="hidden sm:block absolute right-8 bottom-7 sm:z-20 w-4 h-4 bg-white rotate-45"></div>
-                              <div className="absolute right-10 -bottom-10 sm:bottom-0 w-[280px] sm:w-[340px] h-[400px] bg-white drop-shadow-[0_4px_12px_rgba(0,0,0,.15)] rounded-md">
+                              <div className="hidden sm:block absolute right-8 bottom-7 sm:z-20 w-4 h-4 bg-white dark:bg-neutral-800 rotate-45"></div>
+                              <div className="absolute right-10 -bottom-10 sm:bottom-0 w-[280px] sm:w-[340px] h-[400px] bg-white dark:bg-neutral-800 drop-shadow-[0_4px_12px_rgba(0,0,0,.15)] rounded-md">
                                 <div className="flex items-center p-6">
                                   <button
                                     onClick={() =>
@@ -320,15 +324,15 @@ function Reels() {
                                       }))
                                     }
                                   >
-                                    <svg className="w-4 h-4">
+                                    <svg className="w-4 h-4 dark:text-neutral-100">
                                       <use href="#close"></use>
                                     </svg>
                                   </button>
-                                  <span className="font-[700] grow text-center">
+                                  <span className="font-[700] grow text-center dark:text-neutral-100">
                                     Comments
                                   </span>
                                 </div>
-                                <div className="h-[260px] px-8 overflow-y-scroll">
+                                <div className="h-[260px] px-8 overflow-y-scroll scrollbar">
                                   {user.posts.comments.map((comment) => (
                                     <div>
                                       <Comment
@@ -368,14 +372,14 @@ function Reels() {
                                   ))}
                                 </div>
                                 <div className="my-3 px-7">
-                                  <div className="flex items-center p-1 border border-[#dbdbdb] rounded-full">
+                                  <div className="flex items-center p-1 border border-[#dbdbdb] dark:border-[#363636] rounded-full">
                                     <div className="w-8 h-8">
                                       <Story img="user1.jpg" hasStory={false} />
                                     </div>
                                     <textarea
                                       ref={commentInputRef}
                                       rows={1}
-                                      className="px-3 text-sm border-0 outline-none bg-transparent resize-none"
+                                      className="px-3 text-sm border-0 outline-none bg-transparent dark:text-neutral-100 resize-none"
                                       placeholder="Add a comment..."
                                       value={commentInputValue}
                                       onChange={(e) =>
@@ -385,7 +389,7 @@ function Reels() {
                                     <button className="text-sm text-[#0095f6] font-[600]">
                                       Post
                                     </button>
-                                    <div className="relative emoji-box">
+                                    <div className="relative emoji-box flex items-center justify-center">
                                       <button
                                         className="px-2 ml-auto"
                                         onClick={() =>
@@ -397,7 +401,7 @@ function Reels() {
                                         </svg>
                                       </button>
                                       {isShowEmojiBox && (
-                                        <div className="absolute -right-16 bottom-10 w-[300px] h-[300px] overflow-y-auto bg-white rounded-md  drop-shadow-[0_4px_12px_rgba(0,0,0,.15)]">
+                                        <div className="absolute -right-16 bottom-10 w-[300px] h-[300px] overflow-y-auto scrollbar bg-white dark:bg-neutral-800 rounded-md  drop-shadow-[0_4px_12px_rgba(0,0,0,.15)]">
                                           <EmojiBox
                                             textAreaRef={commentInputRef}
                                             setIsShowEmojiBox={
@@ -476,7 +480,7 @@ function Reels() {
                             </svg>
                           </button>
                           {isShowMoreOptionBox && (
-                            <div className="absolute bottom-5 right-10 w-[250px] sm:w-[295px] h-[366px] bg-white drop-shadow-[0_4px_12px_rgba(0,0,0,.15)] rounded-md">
+                            <div className="absolute bottom-5 right-10 w-[250px] sm:w-[295px] h-[366px] bg-white dark:bg-neutral-800 drop-shadow-[0_4px_12px_rgba(0,0,0,.15)] rounded-md">
                               <MoreOptionPostBox
                                 setIsShowMoreOptionBox={setIsShowMoreOptionBox}
                               />

@@ -30,7 +30,7 @@ export default function EmojiBox({
 
   return (
     <>
-      <div className="p-3 emoji-box">
+      <div className="p-3 emoji-box bg-white dark:bg-neutral-800">
         <span className="dark:text-neutral-400">Most Popular</span>
         <div className="flex gap-2 flex-wrap pt-2">
           {createNewPostSelector.emojis.popular.map((emoji) => (
@@ -46,7 +46,7 @@ export default function EmojiBox({
           ))}
         </div>
       </div>
-      <div className="p-3">
+      <div className="p-3 bg-white dark:bg-neutral-800">
         <span className="dark:text-neutral-400">Activities</span>
         <div className="flex flex-wrap gap-2 pt-2">
           {createNewPostSelector.emojis.activities.map((emoji) => (
