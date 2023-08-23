@@ -56,14 +56,22 @@ function Reels() {
     });
   };
   return (
-    <div className="overflow-y-scroll pt-4">
+    <div className="md:pt-4 container mx-auto px-3">
       <Swiper
         direction={"vertical"}
-        slidesPerView={1.1}
+        slidesPerView={1.6}
         spaceBetween={10}
+        breakpoints={{
+          640: {
+            slidesPerView: 1.1,
+          },
+          300: {
+            slidesPerView: 1.3,
+          },
+        }}
         mousewheel={true}
         modules={[Mousewheel, Keyboard]}
-        className="reel-swiper h-[94vh]  w-[410px]"
+        className="reel-swiper max-h-[94vh]  max-w-[410px]"
         slideToClickedSlide={true}
         centeredSlides={true}
         keyboard={{
@@ -88,7 +96,7 @@ function Reels() {
               reel.video && (
                 <SwiperSlide>
                   <>
-                    <div className="mx-auto flex items-end justify-between">
+                    <div className="flex items-end gap-x-4 justify-between">
                       <div
                         className="relative max-w-[360px] max-h-[610px] rounded-sm overflow-hidden cursor-pointer"
                         onClick={() => {
