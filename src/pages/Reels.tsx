@@ -11,6 +11,7 @@ import { Mousewheel, Keyboard } from "swiper/modules";
 import { usersList } from "../Data/users";
 import ShareBox from "../Components/ShareBox/ShareBox";
 import MoreOptionPostBox from "../Components/MoreOptionPostBox/MoreOptionPostBox";
+import Comment from "../Components/Comment/Comment";
 
 function Reels() {
   const [isMutedVideos, setIsMutedVideos] = useState<{
@@ -30,20 +31,42 @@ function Reels() {
   }>({});
   const [isShowShareBox, setIsShowShareBox] = useState(false);
   const [isShowMoreOptionBox, setIsShowMoreOptionBox] = useState(false);
+  const [isShowReply, setIsShowReply] = useState<{
+    [key: number]: boolean;
+  }>({});
+  const [isLikedComments, setIsLikedComments] = useState<{
+    [key: number]: boolean;
+  }>({});
+  const [isShowCommentBox, setIsShowCommentBox] = useState<{
+    [key: number]: boolean;
+  }>({});
 
   const videoRefs: { [key: number]: React.RefObject<HTMLVideoElement> } = {};
 
   useEffect(() => {
     const windowClickHandler = (event: MouseEvent) => {
-      // Check if the click occurred outside the share box
       const targetElement = event.target as Element;
-      if (
-        (isShowShareBox && !targetElement.closest(".share-box")) ||
-        (isShowMoreOptionBox && !targetElement.closest(".more-option-box"))
-      ) {
+
+      // Close Share Box When Click OutSide
+      isShowShareBox &&
+        !targetElement.closest(".share-box") &&
         setIsShowShareBox(false);
+
+      // Close More Option Box When Click OutSide
+      isShowMoreOptionBox &&
+        !targetElement.closest(".more-option-box") &&
         setIsShowMoreOptionBox(false);
-      }
+
+      // Close Comment Box When Click OutSide
+      isShowCommentBox &&
+        !targetElement.closest(".comment-box") &&
+        setIsShowCommentBox((prevStatus) => {
+          const updatedStatus: { [key: number]: boolean } = {};
+          for (const id in prevStatus) {
+            updatedStatus[id] = false;
+          }
+          return updatedStatus;
+        });
     };
 
     window.addEventListener("click", windowClickHandler);
@@ -52,7 +75,7 @@ function Reels() {
     return () => {
       window.removeEventListener("click", windowClickHandler);
     };
-  }, [isShowShareBox, isShowMoreOptionBox]);
+  }, [isShowShareBox, isShowMoreOptionBox, isShowCommentBox]);
 
   const handleMuteVideo = (postID: number) => {
     setIsMutedVideos((prevStatus) => {
@@ -257,12 +280,105 @@ function Reels() {
                           )}
                           <span className="text-xs">28k</span>
                         </button>
-                        <button className="hover:opacity-50 transition-opacity">
-                          <svg className="w-6 h-6 text-black dark:text-neutral-100">
-                            <use href="#comments"></use>
-                          </svg>
-                          <span className="text-xs">344</span>
-                        </button>
+                        <div className="relative comment-box">
+                          <button
+                            className="hover:opacity-50 transition-opacity"
+                            onClick={() =>
+                              setIsShowCommentBox((prevStatus) => ({
+                                ...prevStatus,
+                                [reel.id]: !prevStatus[reel.id],
+                              }))
+                            }
+                          >
+                            <svg className="w-6 h-6 text-black dark:text-neutral-100">
+                              <use href="#comments"></use>
+                            </svg>
+                            <span className="text-xs">344</span>
+                          </button>
+                          {isShowCommentBox[reel.id] && (
+                            <>
+                              <div className="hidden sm:block absolute right-8 bottom-7 sm:z-20 w-4 h-4 bg-white rotate-45"></div>
+                              <div className="absolute right-10 -bottom-10 sm:bottom-0 w-[280px] sm:w-[340px] h-[400px] bg-white drop-shadow-[0_4px_12px_rgba(0,0,0,.15)] rounded-md">
+                                <div className="flex items-center p-6">
+                                  <button
+                                    onClick={() =>
+                                      setIsShowCommentBox((prevStatus) => ({
+                                        ...prevStatus,
+                                        [reel.id]: false,
+                                      }))
+                                    }
+                                  >
+                                    <svg className="w-4 h-4">
+                                      <use href="#close"></use>
+                                    </svg>
+                                  </button>
+                                  <span className="font-[700] grow text-center">
+                                    Comments
+                                  </span>
+                                </div>
+                                <div className="h-[260px] px-8 overflow-y-scroll">
+                                  {user.posts.comments.map((comment) => (
+                                    <div>
+                                      <Comment
+                                        id={comment.id}
+                                        isLikedComments={isLikedComments}
+                                        setIsLikedComments={setIsLikedComments}
+                                      />
+                                      {true && (
+                                        <div className="ml-1 sm:ml-8 mt-4 text-xs text-neutral-500">
+                                          <button
+                                            className="flex items-center gap-x-3 dark:text-[#a8a8a8]"
+                                            onClick={() =>
+                                              setIsShowReply((prevStatus) => ({
+                                                ...prevStatus,
+                                                [comment.id]:
+                                                  !prevStatus[comment.id],
+                                              }))
+                                            }
+                                          >
+                                            <div className="w-6 border-b border-neutral-500 dark:border-[#a8a8a8]"></div>
+                                            {isShowReply[comment.id]
+                                              ? "Hide replies (1)"
+                                              : "View replies (1)"}
+                                          </button>
+                                          {isShowReply[comment.id] && (
+                                            <Comment
+                                              id={comment.id}
+                                              isLikedComments={isLikedComments}
+                                              setIsLikedComments={
+                                                setIsLikedComments
+                                              }
+                                            />
+                                          )}
+                                        </div>
+                                      )}
+                                    </div>
+                                  ))}
+                                </div>
+                                <div className="my-3 px-7">
+                                  <div className="flex items-center p-1 border border-[#dbdbdb] rounded-full">
+                                    <div className="w-8 h-8">
+                                      <Story img="user1.jpg" hasStory={false} />
+                                    </div>
+                                    <textarea
+                                      rows={1}
+                                      className="px-3 text-sm border-0 outline-none bg-transparent resize-none"
+                                      placeholder="Add a comment..."
+                                    ></textarea>
+                                    <button className="text-sm text-[#0095f6] font-[600]">
+                                      Post
+                                    </button>
+                                    <button className="px-2 ml-auto">
+                                      <svg className="w-6 h-6 text-neutral-500">
+                                        <use href="#emoji"></use>
+                                      </svg>
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </>
+                          )}
+                        </div>
                         <div className="relative share-box">
                           <button
                             className="hover:opacity-50 transition-opacity"
