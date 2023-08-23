@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Story from "../Components/Story/Story";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 // import required modules
 import { Mousewheel, Keyboard } from "swiper/modules";
 import { usersList } from "../Data/users";
+import ShareBox from "../Components/ShareBox/ShareBox";
 
 function Reels() {
   const [isMutedVideos, setIsMutedVideos] = useState<{
@@ -23,8 +24,26 @@ function Reels() {
   const [isSavedReel, setIsSavedReel] = useState<{
     [key: number]: boolean;
   }>({});
+  const [isShowShareBox, setIsShowShareBox] = useState(false);
 
   const videoRefs: { [key: number]: React.RefObject<HTMLVideoElement> } = {};
+
+  useEffect(() => {
+    const windowClickHandler = (event: MouseEvent) => {
+      // Check if the click occurred outside the share box
+      const targetElement = event.target as Element;
+      if (isShowShareBox && !targetElement.closest(".share-box")) {
+        setIsShowShareBox(false);
+      }
+    };
+
+    window.addEventListener("click", windowClickHandler);
+
+    // Cleanup function to remove the event listener when component unmounts
+    return () => {
+      window.removeEventListener("click", windowClickHandler);
+    };
+  }, [isShowShareBox]);
 
   const handleMuteVideo = (postID: number) => {
     setIsMutedVideos((prevStatus) => {
@@ -59,6 +78,8 @@ function Reels() {
             }
             return updatedStatus;
           });
+
+          setIsShowShareBox(false);
         }}
       >
         {usersList.map((user) =>
@@ -224,11 +245,22 @@ function Reels() {
                           </svg>
                           <span className="text-xs">344</span>
                         </button>
-                        <button className="hover:opacity-50 transition-opacity">
-                          <svg className="w-6 h-6 text-black dark:text-neutral-100">
-                            <use href="#messages"></use>
-                          </svg>
-                        </button>
+                        <div className="relative share-box">
+                          <button
+                            className="hover:opacity-50 transition-opacity"
+                            onClick={() => setIsShowShareBox(!isShowShareBox)}
+                          >
+                            <svg className="w-6 h-6 text-black dark:text-neutral-100">
+                              <use href="#messages"></use>
+                            </svg>
+                          </button>
+                          <div className="absolute right-7 bottom-3 z-20 w-3 h-3 bg-white rotate-45"></div>
+                          {isShowShareBox && (
+                            <div className="absolute right-8 bottom-0 z-10 w-[340px] h-[460px] bg-white drop-shadow-[0_4px_12px_rgba(0,0,0,.15)] rounded-md overflow-hidden">
+                              <ShareBox setIsShowShareBox={setIsShowShareBox} />
+                            </div>
+                          )}
+                        </div>
                         <button
                           className="hover:opacity-50 transition-opacity"
                           onClick={() =>

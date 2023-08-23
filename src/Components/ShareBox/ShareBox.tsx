@@ -46,10 +46,9 @@ export default function ShareBox({
 
     setFilteredUsers(filtered);
   };
-
   return (
     <div
-      className="w-full h-full md:w-[548px] md:h-[65vh] bg-white dark:bg-neutral-800 md:rounded-xl"
+      className="w-full h-full flex flex-col pb-2 bg-white dark:bg-neutral-800"
       onClick={(e) => e.stopPropagation()}
     >
       {/* Top */}
@@ -70,7 +69,7 @@ export default function ShareBox({
       </div>
 
       {/* Center */}
-      <div className="h-[87vh] md:h-[370px] flex flex-col">
+      <div className="h-[370px] grow flex flex-col">
         <div className="flex items-center flex-wrap gap-4 px-4 pt-1 pb-2 border-b border-[#dbdbdb] dark:border-[#363636]">
           <div className="flex gap-x-1">
             <span className="dark:text-neutral-100 font-[600]">To:</span>
