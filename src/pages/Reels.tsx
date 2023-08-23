@@ -12,6 +12,7 @@ import { usersList } from "../Data/users";
 import ShareBox from "../Components/ShareBox/ShareBox";
 import MoreOptionPostBox from "../Components/MoreOptionPostBox/MoreOptionPostBox";
 import Comment from "../Components/Comment/Comment";
+import EmojiBox from "../Components/EmojiBox/EmojiBox";
 
 function Reels() {
   const [isMutedVideos, setIsMutedVideos] = useState<{
@@ -40,8 +41,11 @@ function Reels() {
   const [isShowCommentBox, setIsShowCommentBox] = useState<{
     [key: number]: boolean;
   }>({});
+  const [isShowEmojiBox, setIsShowEmojiBox] = useState(false);
+  const [commentInputValue, setCommentInputValue] = useState("");
 
   const videoRefs: { [key: number]: React.RefObject<HTMLVideoElement> } = {};
+  const commentInputRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
     const windowClickHandler = (event: MouseEvent) => {
@@ -57,9 +61,13 @@ function Reels() {
         !targetElement.closest(".more-option-box") &&
         setIsShowMoreOptionBox(false);
 
-      // Close Comment Box When Click OutSide
-      isShowCommentBox &&
+      // Close Comment Box When Click OutSide;
+
+      if (
+        isShowCommentBox &&
         !targetElement.closest(".comment-box") &&
+        !targetElement.closest(".emoji")
+      ) {
         setIsShowCommentBox((prevStatus) => {
           const updatedStatus: { [key: number]: boolean } = {};
           for (const id in prevStatus) {
@@ -67,6 +75,10 @@ function Reels() {
           }
           return updatedStatus;
         });
+
+        setIsShowEmojiBox(false);
+        setCommentInputValue("");
+      }
     };
 
     window.addEventListener("click", windowClickHandler);
@@ -361,18 +373,46 @@ function Reels() {
                                       <Story img="user1.jpg" hasStory={false} />
                                     </div>
                                     <textarea
+                                      ref={commentInputRef}
                                       rows={1}
                                       className="px-3 text-sm border-0 outline-none bg-transparent resize-none"
                                       placeholder="Add a comment..."
+                                      value={commentInputValue}
+                                      onChange={(e) =>
+                                        setCommentInputValue(e.target.value)
+                                      }
                                     ></textarea>
                                     <button className="text-sm text-[#0095f6] font-[600]">
                                       Post
                                     </button>
-                                    <button className="px-2 ml-auto">
-                                      <svg className="w-6 h-6 text-neutral-500">
-                                        <use href="#emoji"></use>
-                                      </svg>
-                                    </button>
+                                    <div className="relative emoji-box">
+                                      <button
+                                        className="px-2 ml-auto"
+                                        onClick={() =>
+                                          setIsShowEmojiBox(!isShowEmojiBox)
+                                        }
+                                      >
+                                        <svg className="w-6 h-6 text-neutral-500">
+                                          <use href="#emoji"></use>
+                                        </svg>
+                                      </button>
+                                      {isShowEmojiBox && (
+                                        <div className="absolute -right-16 bottom-10 w-[300px] h-[300px] overflow-y-auto bg-white rounded-md  drop-shadow-[0_4px_12px_rgba(0,0,0,.15)]">
+                                          <EmojiBox
+                                            textAreaRef={commentInputRef}
+                                            setIsShowEmojiBox={
+                                              setIsShowEmojiBox
+                                            }
+                                            captionTextAreaValue={
+                                              commentInputValue
+                                            }
+                                            setCaptionTextAreaValue={
+                                              setCommentInputValue
+                                            }
+                                          />
+                                        </div>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
                               </div>

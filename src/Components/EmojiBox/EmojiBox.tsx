@@ -55,6 +55,7 @@ export default function EmojiBox({
                 handleEmojiClick(emoji.emoji);
                 setIsShowEmojiBox(false);
               }}
+              className="emoji cursor-pointer"
             >
               {emoji.emoji}
             </div>
