@@ -22,7 +22,7 @@ export const usersList: userListTypes[] = [
         name: "Masoud",
         stories: [
             { id: 1, img: 'img1.jfif', video: '' },
-            { id: 2, img: '', video: 'video1.mp4' },
+            { id: 2, img: '', video: 'video18.mp4' },
             { id: 3, img: 'img2.jfif', video: '' },
         ],
         posts: {
@@ -173,7 +173,7 @@ export const usersList: userListTypes[] = [
         name: "mahdieh_123  ",
         stories: [
             { id: 25, img: 'img17.jpg', video: '' },
-            { id: 26, img: '', video: 'video9.mp4' },
+            { id: 26, img: '', video: 'video15.mp4' },
             { id: 27, img: 'img18.jpg', video: '' },
         ],
         posts: {
@@ -192,7 +192,7 @@ export const usersList: userListTypes[] = [
         name: "movie | فیلم ",
         stories: [
             { id: 28, img: 'img19.jpg', video: '' },
-            { id: 29, img: '', video: 'video10.mp4' },
+            { id: 29, img: '', video: 'video13.mp4' },
             { id: 30, img: 'img20.jpg', video: '' },
         ],
         posts: {
@@ -230,7 +230,7 @@ export const usersList: userListTypes[] = [
         name: "ali_2312",
         stories: [
             { id: 34, img: 'img23.jpg', video: '' },
-            { id: 35, img: '', video: 'video12.mp4' },
+            { id: 35, img: '', video: 'video19.mp4' },
             { id: 36, img: 'img24.jpg', video: '' },
         ],
         posts: {
