@@ -198,7 +198,16 @@ function Reels() {
                         )}
 
                         {/* Description */}
-                        <div className="absolute bottom-0 max-h-1/2 w-full p-4">
+                        <div
+                          className="absolute z-10 bottom-0 max-h-1/2 w-full p-4"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setIsShowMoreDescription((prevStatus) => ({
+                              ...prevStatus,
+                              [reel.id]: false,
+                            }));
+                          }}
+                        >
                           <div className="flex items-center gap-x-3">
                             <div className="w-8 h-8">
                               <Story img={user.img} hasStory={false} />
@@ -288,6 +297,10 @@ function Reels() {
                             </div>
                           </div>
                         </div>
+                        {/* Overlay For Description */}
+                        {isShowMoreDescription[reel.id] && (
+                          <div className="absolute bottom-0 h-1/2 w-full bg-gradient-to-t from-black/30 to-black/0"></div>
+                        )}
                       </div>
                       <div className="flex flex-col gap-y-5">
                         <button
