@@ -45,7 +45,9 @@ function Sidebar() {
     <>
       <div
         className={`fixed md:sticky md:top-0 bottom-0 right-0 md:bottom-auto md:right-auto left-0 z-40 h-12 md:h-screen w-full md:w-[72px] ${
-          slideShowSelector.isShowNotif || slideShowSelector.isShowSearch
+          slideShowSelector.isShowNotif ||
+          slideShowSelector.isShowSearch ||
+          location.pathname === "/direct"
             ? "xl:w-[72px]"
             : ""
         } xl:w-[244px] transition-[width] duration-500 md:flex flex-col text-black dark:text-[#f5f5f5] bg-white dark:bg-black md:px-3 md:pt-2 md:pb-5 border-t border-t-[#DBDBDB] dark:border-t-[#363636] md:border-r border-r-[#dbdbdb] dark:border-r-[#262626]`}
@@ -54,7 +56,9 @@ function Sidebar() {
         <button className="hidden md:flex pt-[25px] px-3 pb-4 mb-[19px]">
           <svg
             className={`${
-              slideShowSelector.isShowNotif || slideShowSelector.isShowSearch
+              slideShowSelector.isShowNotif ||
+              slideShowSelector.isShowSearch ||
+              location.pathname === "/direct"
                 ? "hidden"
                 : "hidden xl:inline"
             } w-[103px] h-[29px]`}
@@ -63,7 +67,9 @@ function Sidebar() {
           </svg>
           <span
             className={`${
-              slideShowSelector.isShowNotif || slideShowSelector.isShowSearch
+              slideShowSelector.isShowNotif ||
+              slideShowSelector.isShowSearch ||
+              location.pathname === "/direct"
                 ? "inline-block"
                 : "inline-block xl:hidden"
             } hover:hover-item rounded-lg p-3 -m-3`}
@@ -101,7 +107,8 @@ function Sidebar() {
               <span
                 className={`${
                   slideShowSelector.isShowNotif ||
-                  slideShowSelector.isShowSearch
+                  slideShowSelector.isShowSearch ||
+                  location.pathname === "/direct"
                     ? "hidden"
                     : "hidden xl:block"
                 }`}
@@ -135,7 +142,8 @@ function Sidebar() {
               <span
                 className={`${
                   slideShowSelector.isShowSearch ||
-                  slideShowSelector.isShowNotif
+                  slideShowSelector.isShowNotif ||
+                  location.pathname === "/direct"
                     ? "hidden"
                     : "hidden xl:block"
                 }`}
@@ -161,7 +169,8 @@ function Sidebar() {
               <span
                 className={`${
                   slideShowSelector.isShowNotif ||
-                  slideShowSelector.isShowSearch
+                  slideShowSelector.isShowSearch ||
+                  location.pathname === "/direct"
                     ? "hidden"
                     : "hidden xl:block"
                 }`}
@@ -187,7 +196,8 @@ function Sidebar() {
               <span
                 className={`${
                   slideShowSelector.isShowNotif ||
-                  slideShowSelector.isShowSearch
+                  slideShowSelector.isShowSearch ||
+                  location.pathname === "/direct"
                     ? "hidden"
                     : "hidden xl:block"
                 }`}
@@ -213,7 +223,8 @@ function Sidebar() {
               <span
                 className={`${
                   slideShowSelector.isShowNotif ||
-                  slideShowSelector.isShowSearch
+                  slideShowSelector.isShowSearch ||
+                  location.pathname === "/direct"
                     ? "hidden"
                     : "hidden xl:block"
                 }`}
@@ -246,7 +257,8 @@ function Sidebar() {
               <span
                 className={`${
                   slideShowSelector.isShowNotif ||
-                  slideShowSelector.isShowSearch
+                  slideShowSelector.isShowSearch ||
+                  location.pathname === "/direct"
                     ? "hidden"
                     : "hidden xl:block"
                 }`}
@@ -284,7 +296,8 @@ function Sidebar() {
               <span
                 className={`${
                   slideShowSelector.isShowNotif ||
-                  slideShowSelector.isShowSearch
+                  slideShowSelector.isShowSearch ||
+                  location.pathname === "/direct"
                     ? "hidden"
                     : "hidden xl:block"
                 }`}
@@ -310,7 +323,8 @@ function Sidebar() {
               <span
                 className={`${
                   slideShowSelector.isShowNotif ||
-                  slideShowSelector.isShowSearch
+                  slideShowSelector.isShowSearch ||
+                  location.pathname === "/direct"
                     ? "hidden"
                     : "hidden xl:block"
                 }`}
@@ -340,7 +354,9 @@ function Sidebar() {
 
             <span
               className={`pointer-events-none ${
-                slideShowSelector.isShowNotif || slideShowSelector.isShowSearch
+                slideShowSelector.isShowNotif ||
+                slideShowSelector.isShowSearch ||
+                location.pathname === "/direct"
                   ? "hidden"
                   : "hidden xl:block"
               }`}
