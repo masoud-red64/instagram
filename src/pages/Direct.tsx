@@ -12,7 +12,7 @@ function Direct() {
 
   return (
     <div className="flex h-[calc(100vh-48px)] md:h-screen">
-      <div className="max-w-[397px] flex flex-col bg-white dark:bg-black pt-2 border-r border-[#dbdbdb] dark:border-[#262626]">
+      <div className="md:w-[397px] flex flex-col bg-white dark:bg-black pt-2 border-r border-[#dbdbdb] dark:border-[#262626]">
         {/* Header */}
         <div className="flex items-center justify-center md:justify-between pt-7 pb-3 px-6">
           <div className="hidden md:flex items-center gap-x-2">
@@ -90,7 +90,7 @@ function Direct() {
           </ul>
         </div>
       </div>
-      <div className="w-full grow">
+      <div className="grow">
         {Object.keys(mainUser).length ? (
           <>
             {/* Messages Box */}
