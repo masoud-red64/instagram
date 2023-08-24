@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Story from "../Components/Story/Story";
 import { usersList } from "../Data/users";
 
 function Direct() {
+  const [mainUser, setMainUser] = useState({});
+
+  const getMainUserHandle = (userID: number) => {
+    const filterUser = usersList.filter((user) => user.id === userID);
+    setMainUser(filterUser);
+  };
+
   return (
     <div className="flex h-[calc(100vh-48px)] md:h-screen">
       <div className="max-w-[397px] flex flex-col bg-white dark:bg-black pt-2 border-r border-[#dbdbdb] dark:border-[#262626]">
@@ -35,7 +42,10 @@ function Direct() {
         <div className="h-full overflow-y-auto scrollbar">
           <ul>
             {usersList.map((user, index) => (
-              <li className="flex items-center justify-center sm:justify-between py-2 px-1 sm:px-6 hover:bg-neutral-100 transition-colors cursor-pointer">
+              <li
+                className="flex items-center justify-center sm:justify-between py-2 px-1 sm:px-6 hover:bg-neutral-100 transition-colors cursor-pointer"
+                onClick={() => getMainUserHandle(user.id)}
+              >
                 <div className="flex items-center justify-center gap-x-3">
                   <div className="w-10 h-10 sm:w-14 sm:h-14">
                     <Story img={user.img} hasStory={false} />
