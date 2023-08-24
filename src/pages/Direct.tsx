@@ -5,7 +5,7 @@ import { usersList } from "../Data/users";
 function Direct() {
   return (
     <div className="flex">
-      <div className="w-[397px] h-screen overflow-y-auto scrollbar bg-white dark:bg-black pt-2 border-r border-[#dbdbdb] dark:border-[#262626]">
+      <div className="w-[397px] flex flex-col h-screen bg-white dark:bg-black pt-2 border-r border-[#dbdbdb] dark:border-[#262626]">
         {/* Header */}
         <div className="flex items-center justify-between pt-7 pb-3 px-6">
           <div className="flex items-center gap-x-2">
@@ -26,13 +26,13 @@ function Direct() {
         </div>
 
         {/* Main */}
-        <div className="flex items-center justify-between pt-[14px] pb-2.5 px-6">
+        <div className="flex items-center justify-between pt-[14px] pb-2.5 px-6 ">
           <span className="font-[700]">Messages</span>
           <button className="font-[600] text-sm text-neutral-500">
             Requests
           </button>
         </div>
-        <div>
+        <div className="h-full overflow-y-auto scrollbar">
           <ul>
             {usersList.map((user, index) => (
               <li className="flex items-center justify-between py-2 px-6 hover:bg-neutral-100 transition-colors cursor-pointer">
