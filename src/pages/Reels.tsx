@@ -471,7 +471,7 @@ function Reels() {
                           </button>
                           {isShowShareBox && isShowShareBoxOneReel[reel.id] && (
                             <>
-                              <div className="absolute right-7 bottom-3 sm:z-20 w-3 h-3 bg-white rotate-45"></div>
+                              <div className="absolute right-7 bottom-3 sm:z-20 w-3 h-3 bg-white dark:bg-neutral-800 rotate-45"></div>
                               <div className="absolute right-8 -bottom-20 sm:bottom-0 z-10 w-[280px] sm:w-[340px] h-[460px] md:h-[460px] bg-white drop-shadow-[0_4px_12px_rgba(0,0,0,.15)] rounded-md overflow-hidden">
                                 <ShareBox
                                   setIsShowShareBox={setIsShowShareBox}
@@ -511,7 +511,7 @@ function Reels() {
                             </svg>
                           </button>
                           {isShowMoreOptionBox && (
-                            <div className="absolute bottom-5 right-10 w-[250px] sm:w-[295px] h-[366px] bg-white dark:bg-neutral-800 drop-shadow-[0_4px_12px_rgba(0,0,0,.15)] rounded-md">
+                            <div className="absolute bottom-5 z-10 right-10 w-[250px] sm:w-[295px] h-[366px] bg-white dark:bg-neutral-800 drop-shadow-[0_4px_12px_rgba(0,0,0,.15)] rounded-md">
                               <MoreOptionPostBox
                                 setIsShowMoreOptionBox={setIsShowMoreOptionBox}
                               />
