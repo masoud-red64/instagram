@@ -20,13 +20,13 @@ function Direct() {
               masoud_red64
             </h2>
             <button>
-              <svg className="w-3 h-3 rotate-180">
+              <svg className="w-3 h-3 dark:text-neutral-100 rotate-180">
                 <use href="#chevron-top"></use>
               </svg>
             </button>
           </div>
           <button className="">
-            <svg className="w-6 h-6">
+            <svg className="w-6 h-6 dark:text-neutral-100">
               <use href="#new-message"></use>
             </svg>
           </button>
@@ -34,8 +34,8 @@ function Direct() {
 
         {/* Main */}
         <div className="hidden md:flex items-center justify-between pt-[14px] pb-2.5 px-6 ">
-          <span className="font-[700]">Messages</span>
-          <button className="font-[600] text-sm text-neutral-500">
+          <span className="font-[700] dark:text-neutral-100">Messages</span>
+          <button className="font-[600] text-sm text-neutral-500 dark:text-[#a8a8a8]">
             Requests
           </button>
         </div>
@@ -44,8 +44,9 @@ function Direct() {
             {usersList.map((user, index) => (
               <li
                 className={`flex items-center justify-center sm:justify-between py-2 px-1 sm:px-6 ${
-                  mainUser.id === user.id && "bg-neutral-100"
-                } hover:bg-neutral-100 transition-colors cursor-pointer`}
+                  mainUser.id === user.id &&
+                  "bg-neutral-100 dark:bg-neutral-800"
+                } hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer`}
                 onClick={() => getMainUserHandle(user.id)}
               >
                 <div className="flex items-center justify-center gap-x-3">
@@ -53,15 +54,19 @@ function Direct() {
                     <Story img={user.img} hasStory={false} />
                   </div>
                   <div className="hidden md:block">
-                    <span className={`text-sm ${index === 0 && "font-[600]"}`}>
+                    <span
+                      className={`text-sm dark:text-neutral-100 ${
+                        index === 0 && "font-[600]"
+                      }`}
+                    >
                       {user.name}
                     </span>
-                    <div className="text-xs text-neutral-500 mt-1">
+                    <div className="text-xs text-neutral-500 dark:text-[#a8a8a8] mt-1">
                       <span
                         className={`${
                           index === 0
-                            ? "text-black font-[700]"
-                            : "text-neutral-500"
+                            ? "text-black dark:text-neutral-100 font-[700]"
+                            : "text-neutral-500 dark:text-[#a8a8a8]"
                         }`}
                       >
                         {index % 5 === 0
@@ -77,7 +82,7 @@ function Direct() {
                 </div>
                 <div className="flex items-center gap-x-2">
                   {index % 5 === 0 && (
-                    <svg className="hidden md:inline-block w-[15px] h-[15px] text-neutral-500">
+                    <svg className="hidden md:inline-block w-[15px] h-[15px] text-neutral-500 dark:text-[#a8a8a8]">
                       <use href="#muted-message"></use>
                     </svg>
                   )}
@@ -96,14 +101,16 @@ function Direct() {
             {/* Messages Box */}
             <div className="w-full h-full flex flex-col">
               {/* Top */}
-              <div className="h-[75px] flex items-center justify-between px-4 border-b border-[#dbdbdb]">
+              <div className="h-[75px] flex items-center justify-between px-4 border-b border-[#dbdbdb] dark:border-[#363636]">
                 <div className="flex items-center gap-x-3">
                   <div className="w-11 h-11">
                     <Story img={mainUser.img} hasStory={false} />
                   </div>
-                  <span className="font-[600]">{mainUser?.name}</span>
+                  <span className="font-[600] dark:text-neutral-100">
+                    {mainUser?.name}
+                  </span>
                 </div>
-                <div className="flex items-center gap-x-4">
+                <div className="flex items-center dark:text-neutral-100 gap-x-4">
                   <button>
                     <svg className="w-6 h-6">
                       <use href="#audio-call"></use>
@@ -154,7 +161,7 @@ function Direct() {
                         <use href="#reels-active"></use>
                       </svg>
                     </div>
-                    <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap  opacity-50">
+                    <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100  opacity-50">
                       <button>
                         <svg className="w-4 h-4">
                           <use href="#more-options"></use>
@@ -199,7 +206,7 @@ function Direct() {
                         <use href="#reels-active"></use>
                       </svg>
                     </div>
-                    <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap  opacity-50">
+                    <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100 opacity-50">
                       <button>
                         <svg className="w-4 h-4">
                           <use href="#emoji"></use>
@@ -217,7 +224,7 @@ function Direct() {
 
               {/* Bottom */}
               <div className="flex items-center justify-center grow px-4">
-                <div className="w-full h-11 flex items-center pr-4 pl-3  border border-[#dbdbdb] rounded-full">
+                <div className="w-full h-11 flex items-center pr-4 pl-3 dark:text-neutral-100  border border-[#dbdbdb] dark:border-[#363636] rounded-full">
                   <button>
                     <svg className="w-6 h-6">
                       <use href="#emoji"></use>
@@ -226,7 +233,7 @@ function Direct() {
                   <input
                     type="text"
                     placeholder="Message..."
-                    className="w-full grow mx-3 border-0 outline-none"
+                    className="w-full grow mx-3 bg-transparent dark:text-neutral-100 border-0 outline-none"
                   />
                   <div className="flex items-center gap-x-4">
                     <button>
@@ -254,11 +261,13 @@ function Direct() {
           <>
             {/* Empty Box */}
             <div className="h-full w-full flex flex-col items-center justify-center">
-              <svg className="w-24 h-24">
+              <svg className="w-24 h-24 dark:text-neutral-100">
                 <use href="#empty-message-box"></use>
               </svg>
-              <span className="text-xl pt-4">Your messages</span>
-              <span className="text-sm text-neutral-500 text-center pt-2">
+              <span className="text-xl pt-4 dark:text-neutral-100">
+                Your messages
+              </span>
+              <span className="text-sm text-neutral-500 dark:text-[#a8a8a8] text-center pt-2">
                 Send private photos and messages to a friend or group
               </span>
               <button className="primary-btn mt-4">Send message</button>
