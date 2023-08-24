@@ -43,7 +43,9 @@ function Direct() {
           <ul>
             {usersList.map((user, index) => (
               <li
-                className="flex items-center justify-center sm:justify-between py-2 px-1 sm:px-6 hover:bg-neutral-100 transition-colors cursor-pointer"
+                className={`flex items-center justify-center sm:justify-between py-2 px-1 sm:px-6 ${
+                  mainUser.id === user.id && "bg-neutral-100"
+                } hover:bg-neutral-100 transition-colors cursor-pointer`}
                 onClick={() => getMainUserHandle(user.id)}
               >
                 <div className="flex items-center justify-center gap-x-3">
