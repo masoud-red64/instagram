@@ -4,11 +4,11 @@ import { usersList } from "../Data/users";
 
 function Direct() {
   return (
-    <div className="flex">
-      <div className="w-[397px] flex flex-col h-screen bg-white dark:bg-black pt-2 border-r border-[#dbdbdb] dark:border-[#262626]">
+    <div className="flex h-[calc(100vh-48px)] md:h-screen">
+      <div className="max-w-[397px] flex flex-col bg-white dark:bg-black pt-2 border-r border-[#dbdbdb] dark:border-[#262626]">
         {/* Header */}
-        <div className="flex items-center justify-between pt-7 pb-3 px-6">
-          <div className="flex items-center gap-x-2">
+        <div className="flex items-center justify-center md:justify-between pt-7 pb-3 px-6">
+          <div className="hidden md:flex items-center gap-x-2">
             <h2 className="text-black dark:text-neutral-100 text-xl font-[700]">
               masoud_red64
             </h2>
@@ -18,7 +18,7 @@ function Direct() {
               </svg>
             </button>
           </div>
-          <button>
+          <button className="">
             <svg className="w-6 h-6">
               <use href="#new-message"></use>
             </svg>
@@ -26,7 +26,7 @@ function Direct() {
         </div>
 
         {/* Main */}
-        <div className="flex items-center justify-between pt-[14px] pb-2.5 px-6 ">
+        <div className="hidden md:flex items-center justify-between pt-[14px] pb-2.5 px-6 ">
           <span className="font-[700]">Messages</span>
           <button className="font-[600] text-sm text-neutral-500">
             Requests
@@ -40,7 +40,7 @@ function Direct() {
                   <div className="w-14 h-14">
                     <Story img={user.img} hasStory={false} />
                   </div>
-                  <div>
+                  <div className="hidden md:block">
                     <span className="text-sm">{user.name}</span>
                     <div className="text-xs text-neutral-500 mt-1">
                       <span>
@@ -56,7 +56,7 @@ function Direct() {
                   </div>
                 </div>
                 {index % 5 === 0 && (
-                  <svg className="w-[15px] h-[15px] text-neutral-500">
+                  <svg className="hidden md:inline-block w-[15px] h-[15px] text-neutral-500">
                     <use href="#muted-message"></use>
                   </svg>
                 )}
