@@ -35,9 +35,9 @@ function Direct() {
         <div className="h-full overflow-y-auto scrollbar">
           <ul>
             {usersList.map((user, index) => (
-              <li className="flex items-center justify-between py-2 px-6 hover:bg-neutral-100 transition-colors cursor-pointer">
-                <div className="flex items-center gap-x-3">
-                  <div className="w-14 h-14">
+              <li className="flex items-center justify-center sm:justify-between py-2 px-1 sm:px-6 hover:bg-neutral-100 transition-colors cursor-pointer">
+                <div className="flex items-center justify-center gap-x-3">
+                  <div className="w-10 h-10 sm:w-14 sm:h-14">
                     <Story img={user.img} hasStory={false} />
                   </div>
                   <div className="hidden md:block">
@@ -65,7 +65,7 @@ function Direct() {
           </ul>
         </div>
       </div>
-      <div className="grow">
+      <div className="w-full grow">
         {/* Empty Box */}
         {/* <div className="h-full w-full flex flex-col items-center justify-center">
           <svg className="w-24 h-24">
@@ -108,7 +108,7 @@ function Direct() {
           </div>
 
           {/* Center => Messages */}
-          <div className="h-[calc(100vh-150px)] overflow-y-auto scrollbar px-4">
+          <div className="h-[calc(100vh-150px)] overflow-y-auto scrollbar px-1 sm:px-4">
             {/* Date */}
             <div className="text-xs text-[#8a8d91] font-[500] py-4 text-center">
               Wed 10:28
@@ -118,8 +118,11 @@ function Direct() {
             <div className="flex flex-col gap-y-3">
               {/*Send Post */}
               <div className="flex items-center flex-row-reverse gap-x-4">
-                <div className="relative w-[198px] h-[352px] rounded-2xl overflow-hidden">
-                  <video src="/images/stories/videos/video21.mp4"></video>
+                <div className="relative w-[150px] sm:w-[198px] sm:h-[352px] rounded-2xl overflow-hidden">
+                  <video
+                    src="/images/stories/videos/video21.mp4"
+                    className="h-full object-cover"
+                  ></video>
 
                   {/* Top */}
                   <div className="absolute top-3 left-3 right-3 flex items-center gap-x-2">
@@ -136,7 +139,7 @@ function Direct() {
                     <use href="#reels-active"></use>
                   </svg>
                 </div>
-                <div className="flex items-center gap-x-4  opacity-50">
+                <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap  opacity-50">
                   <button>
                     <svg className="w-4 h-4">
                       <use href="#more-options"></use>
@@ -160,8 +163,11 @@ function Direct() {
                 <div className="w-7 h-7 mt-auto">
                   <Story img="user1.jpg" hasStory={false} />
                 </div>
-                <div className="relative w-[198px] h-[352px] ml-2 mr-4 rounded-2xl overflow-hidden">
-                  <video src="/images/stories/videos/video21.mp4"></video>
+                <div className="relative w-[150px] sm:w-[198px] sm:h-[352px] ml-2 mr-4 rounded-2xl overflow-hidden">
+                  <video
+                    src="/images/stories/videos/video21.mp4"
+                    className="h-full object-cover"
+                  ></video>
 
                   {/* Top */}
                   <div className="absolute top-3 left-3 right-3 flex items-center gap-x-2">
@@ -178,7 +184,7 @@ function Direct() {
                     <use href="#reels-active"></use>
                   </svg>
                 </div>
-                <div className="flex items-center gap-x-4  opacity-50">
+                <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap  opacity-50">
                   <button>
                     <svg className="w-4 h-4">
                       <use href="#emoji"></use>
@@ -205,7 +211,7 @@ function Direct() {
               <input
                 type="text"
                 placeholder="Message..."
-                className="grow mx-3 border-0 outline-none"
+                className="w-full grow mx-3 border-0 outline-none"
               />
               <div className="flex items-center gap-x-4">
                 <button>
