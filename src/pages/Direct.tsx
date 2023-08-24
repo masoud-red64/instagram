@@ -65,7 +65,19 @@ function Direct() {
           </ul>
         </div>
       </div>
-      <div className="grow"></div>
+      <div className="grow">
+        {/* Empty Box */}
+        <div className="h-full w-full flex flex-col items-center justify-center">
+          <svg className="w-24 h-24">
+            <use href="#empty-message-box"></use>
+          </svg>
+          <span className="text-xl pt-4">Your messages</span>
+          <span className="text-sm text-neutral-500 text-center pt-2">
+            Send private photos and messages to a friend or group
+          </span>
+          <button className="primary-btn mt-4">Send message</button>
+        </div>
+      </div>
     </div>
   );
 }
