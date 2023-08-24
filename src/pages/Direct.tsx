@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Story from "../Components/Story/Story";
-import { usersList } from "../Data/users";
+import { userListTypes, usersList } from "../Data/users";
 
 function Direct() {
-  const [mainUser, setMainUser] = useState({});
+  const [mainUser, setMainUser] = useState({} as userListTypes);
 
   const getMainUserHandle = (userID: number) => {
     const filterUser = usersList.filter((user) => user.id === userID);
-    setMainUser(filterUser);
+    setMainUser(filterUser[0]);
   };
 
   return (
@@ -84,9 +84,9 @@ function Direct() {
               <div className="h-[75px] flex items-center justify-between px-4 border-b border-[#dbdbdb]">
                 <div className="flex items-center gap-x-3">
                   <div className="w-11 h-11">
-                    <Story img="user1.jpg" hasStory={false} />
+                    <Story img={mainUser.img} hasStory={false} />
                   </div>
-                  <span>amenej</span>
+                  <span className="font-[600]">{mainUser?.name}</span>
                 </div>
                 <div className="flex items-center gap-x-4">
                   <button>
@@ -161,7 +161,7 @@ function Direct() {
                   {/* Receive Post */}
                   <div className="flex items-center">
                     <div className="w-7 h-7 mt-auto">
-                      <Story img="user1.jpg" hasStory={false} />
+                      <Story img={mainUser.img} hasStory={false} />
                     </div>
                     <div className="relative w-[150px] sm:w-[198px] sm:h-[352px] ml-2 mr-4 rounded-2xl overflow-hidden">
                       <video
