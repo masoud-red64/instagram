@@ -53,9 +53,17 @@ function Direct() {
                     <Story img={user.img} hasStory={false} />
                   </div>
                   <div className="hidden md:block">
-                    <span className="text-sm">{user.name}</span>
+                    <span className={`text-sm ${index === 0 && "font-[600]"}`}>
+                      {user.name}
+                    </span>
                     <div className="text-xs text-neutral-500 mt-1">
-                      <span>
+                      <span
+                        className={`${
+                          index === 0
+                            ? "text-black font-[700]"
+                            : "text-neutral-500"
+                        }`}
+                      >
                         {index % 5 === 0
                           ? "You sent an attachment."
                           : index % 3 === 0
@@ -67,11 +75,16 @@ function Direct() {
                     </div>
                   </div>
                 </div>
-                {index % 5 === 0 && (
-                  <svg className="hidden md:inline-block w-[15px] h-[15px] text-neutral-500">
-                    <use href="#muted-message"></use>
-                  </svg>
-                )}
+                <div className="flex items-center gap-x-2">
+                  {index % 5 === 0 && (
+                    <svg className="hidden md:inline-block w-[15px] h-[15px] text-neutral-500">
+                      <use href="#muted-message"></use>
+                    </svg>
+                  )}
+                  {index === 0 && (
+                    <div className="w-2 h-2 bg-[#0095f6] rounded-full"></div>
+                  )}
+                </div>
               </li>
             ))}
           </ul>
