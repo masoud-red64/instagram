@@ -926,9 +926,79 @@ function SvgSymbol() {
         <title>Carousel</title>
         <path d="M34.8 29.7V11c0-2.9-2.3-5.2-5.2-5.2H11c-2.9 0-5.2 2.3-5.2 5.2v18.7c0 2.9 2.3 5.2 5.2 5.2h18.7c2.8-.1 5.1-2.4 5.1-5.2zM39.2 15v16.1c0 4.5-3.7 8.2-8.2 8.2H14.9c-.6 0-.9.7-.5 1.1 1 1.1 2.4 1.8 4.1 1.8h13.4c5.7 0 10.3-4.6 10.3-10.3V18.5c0-1.6-.7-3.1-1.8-4.1-.5-.4-1.2 0-1.2.6z"></path>
       </symbol>
-      <symbol id="audio" aria-label="Audio image" className="x1lliihq x1n2onr6" color="currentColor" fill="currentColor" role="img" viewBox="0 0 24 24"><title>Audio image</title><path d="M21.002 16.972V2.044a.999.999 0 0 0-.36-.769 1.012 1.012 0 0 0-.823-.214L6.816 3.479A1 1 0 0 0 6 4.462v10.864A3.75 3.75 0 1 0 9 19V9.56l9.003-1.675v5.442A3.75 3.75 0 1 0 21.005 17c0-.01-.003-.02-.003-.029Z"></path></symbol>
-      <symbol id="location" aria-label="Location" className="x1lliihq x1n2onr6" color="currentColor" fill="currentColor" role="img" viewBox="0 0 24 24"><title>Location</title><path d="M12.053 1a8.684 8.684 0 0 0-8.708 8.66c0 5.699 6.14 11.495 8.108 13.123a.939.939 0 0 0 1.2 0c1.969-1.628 8.109-7.424 8.109-13.123A8.684 8.684 0 0 0 12.053 1Zm0 10.313a1.604 1.604 0 1 1 1.604-1.604 1.604 1.604 0 0 1-1.604 1.604Z"></path></symbol>
-      <symbol id="new-message" aria-label="New message" className="x1lliihq x1n2onr6" color="currentColor" fill="currentColor" role="img" viewBox="0 0 24 24"><title>New message</title><path d="M12.202 3.203H5.25a3 3 0 0 0-3 3V18.75a3 3 0 0 0 3 3h12.547a3 3 0 0 0 3-3v-6.952" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M10.002 17.226H6.774v-3.228L18.607 2.165a1.417 1.417 0 0 1 2.004 0l1.224 1.225a1.417 1.417 0 0 1 0 2.004Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="16.848" x2="20.076" y1="3.924" y2="7.153"></line></symbol>
+      <symbol
+        id="audio"
+        aria-label="Audio image"
+        className="x1lliihq x1n2onr6"
+        color="currentColor"
+        fill="currentColor"
+        role="img"
+        viewBox="0 0 24 24"
+      >
+        <title>Audio image</title>
+        <path d="M21.002 16.972V2.044a.999.999 0 0 0-.36-.769 1.012 1.012 0 0 0-.823-.214L6.816 3.479A1 1 0 0 0 6 4.462v10.864A3.75 3.75 0 1 0 9 19V9.56l9.003-1.675v5.442A3.75 3.75 0 1 0 21.005 17c0-.01-.003-.02-.003-.029Z"></path>
+      </symbol>
+      <symbol
+        id="location"
+        aria-label="Location"
+        className="x1lliihq x1n2onr6"
+        color="currentColor"
+        fill="currentColor"
+        role="img"
+        viewBox="0 0 24 24"
+      >
+        <title>Location</title>
+        <path d="M12.053 1a8.684 8.684 0 0 0-8.708 8.66c0 5.699 6.14 11.495 8.108 13.123a.939.939 0 0 0 1.2 0c1.969-1.628 8.109-7.424 8.109-13.123A8.684 8.684 0 0 0 12.053 1Zm0 10.313a1.604 1.604 0 1 1 1.604-1.604 1.604 1.604 0 0 1-1.604 1.604Z"></path>
+      </symbol>
+      <symbol
+        id="new-message"
+        aria-label="New message"
+        className="x1lliihq x1n2onr6"
+        color="currentColor"
+        fill="currentColor"
+        role="img"
+        viewBox="0 0 24 24"
+      >
+        <title>New message</title>
+        <path
+          d="M12.202 3.203H5.25a3 3 0 0 0-3 3V18.75a3 3 0 0 0 3 3h12.547a3 3 0 0 0 3-3v-6.952"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        ></path>
+        <path
+          d="M10.002 17.226H6.774v-3.228L18.607 2.165a1.417 1.417 0 0 1 2.004 0l1.224 1.225a1.417 1.417 0 0 1 0 2.004Z"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        ></path>
+        <line
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          x1="16.848"
+          x2="20.076"
+          y1="3.924"
+          y2="7.153"
+        ></line>
+      </symbol>
+      <symbol
+        id="muted-message"
+        aria-label="Muted"
+        className="_ab6-"
+        color="currentColor"
+        fill="currentColor"
+        role="img"
+        viewBox="0 0 24 24"
+      >
+        <path d="M15.209 18.294a1 1 0 0 0-.707-.293H6.184a2.002 2.002 0 0 1-1.74-2.993l.47-.822a8.34 8.34 0 0 0 1.093-4.174c0-.159.005-.316.017-.471a1 1 0 1 0-1.994-.15 8.093 8.093 0 0 0-.023.63 6.341 6.341 0 0 1-.83 3.175l-.47.822a4.001 4.001 0 0 0 3.477 5.983h1.944a4 4 0 0 0 7.827-.382 1 1 0 0 0-.282-.86Zm-3.207 2.708a2 2 0 0 1-1.732-1.001h3.463a2.017 2.017 0 0 1-1.731 1.001Zm11.205.291-2.521-2.521a4.04 4.04 0 0 0 .976-1.629 3.957 3.957 0 0 0-.356-3.123l-.484-.853A6.358 6.358 0 0 1 20 9.997a7.953 7.953 0 0 0-4.745-7.302 3.972 3.972 0 0 0-6.51.002 8.011 8.011 0 0 0-2.438 1.697L2.707.793a1 1 0 0 0-1.414 1.414l20.5 20.5a1 1 0 0 0 1.414-1.414Zm-3.46-4.728a2.042 2.042 0 0 1-.468.8L7.72 5.805a6.004 6.004 0 0 1 2.068-1.377.998.998 0 0 0 .494-.426 1.976 1.976 0 0 1 3.439 0 1 1 0 0 0 .494.425 5.989 5.989 0 0 1 3.786 5.634 8.303 8.303 0 0 0 1.082 4.094l.483.852a1.975 1.975 0 0 1 .181 1.558Z"></path>
+      </symbol>
     </svg>
   );
 }
