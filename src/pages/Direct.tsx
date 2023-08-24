@@ -67,7 +67,7 @@ function Direct() {
       </div>
       <div className="grow">
         {/* Empty Box */}
-        <div className="h-full w-full flex flex-col items-center justify-center">
+        {/* <div className="h-full w-full flex flex-col items-center justify-center">
           <svg className="w-24 h-24">
             <use href="#empty-message-box"></use>
           </svg>
@@ -76,6 +76,157 @@ function Direct() {
             Send private photos and messages to a friend or group
           </span>
           <button className="primary-btn mt-4">Send message</button>
+        </div> */}
+
+        {/* Messages Box */}
+        <div className="w-full h-full flex flex-col">
+          {/* Top */}
+          <div className="h-[75px] flex items-center justify-between px-4 border-b border-[#dbdbdb]">
+            <div className="flex items-center gap-x-3">
+              <div className="w-11 h-11">
+                <Story img="user1.jpg" hasStory={false} />
+              </div>
+              <span>amenej</span>
+            </div>
+            <div className="flex items-center gap-x-4">
+              <button>
+                <svg className="w-6 h-6">
+                  <use href="#audio-call"></use>
+                </svg>
+              </button>
+              <button>
+                <svg className="w-6 h-6">
+                  <use href="#video-call"></use>
+                </svg>
+              </button>
+              <button>
+                <svg className="w-6 h-6">
+                  <use href="#information"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Center => Messages */}
+          <div className="h-[calc(100vh-150px)] overflow-y-auto scrollbar px-4">
+            {/* Date */}
+            <div className="text-xs text-[#8a8d91] font-[500] py-4 text-center">
+              Wed 10:28
+            </div>
+
+            {/* Message */}
+            <div className="flex flex-col gap-y-3">
+              {/*Send Post */}
+              <div className="flex items-center flex-row-reverse gap-x-4">
+                <div className="relative w-[198px] h-[352px] rounded-2xl overflow-hidden">
+                  <video src="/images/stories/videos/video21.mp4"></video>
+
+                  {/* Top */}
+                  <div className="absolute top-3 left-3 right-3 flex items-center gap-x-2">
+                    <div className="w-8 h-8">
+                      <Story img="user3.jpg" hasStory={false} />
+                    </div>
+                    <span className="text-white text-sm font-[600]">
+                      tarafdar.football
+                    </span>
+                  </div>
+
+                  {/* Video Icon */}
+                  <svg className="absolute w-6 h-6 bottom-3 left-3 text-white">
+                    <use href="#reels-active"></use>
+                  </svg>
+                </div>
+                <div className="flex items-center gap-x-4  opacity-50">
+                  <button>
+                    <svg className="w-4 h-4">
+                      <use href="#more-options"></use>
+                    </svg>
+                  </button>
+                  <button>
+                    <svg className="w-4 h-4">
+                      <use href="#reply"></use>
+                    </svg>
+                  </button>
+                  <button>
+                    <svg className="w-4 h-4">
+                      <use href="#emoji"></use>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              {/* Receive Post */}
+              <div className="flex items-center">
+                <div className="w-7 h-7 mt-auto">
+                  <Story img="user1.jpg" hasStory={false} />
+                </div>
+                <div className="relative w-[198px] h-[352px] ml-2 mr-4 rounded-2xl overflow-hidden">
+                  <video src="/images/stories/videos/video21.mp4"></video>
+
+                  {/* Top */}
+                  <div className="absolute top-3 left-3 right-3 flex items-center gap-x-2">
+                    <div className="w-8 h-8">
+                      <Story img="user3.jpg" hasStory={false} />
+                    </div>
+                    <span className="text-white text-sm font-[600]">
+                      tarafdar.football
+                    </span>
+                  </div>
+
+                  {/* Video Icon */}
+                  <svg className="absolute w-6 h-6 bottom-3 left-3 text-white">
+                    <use href="#reels-active"></use>
+                  </svg>
+                </div>
+                <div className="flex items-center gap-x-4  opacity-50">
+                  <button>
+                    <svg className="w-4 h-4">
+                      <use href="#emoji"></use>
+                    </svg>
+                  </button>
+                  <button>
+                    <svg className="w-4 h-4">
+                      <use href="#reply"></use>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom */}
+          <div className="flex items-center justify-center grow px-4">
+            <div className="w-full h-11 flex items-center pr-4 pl-3  border border-[#dbdbdb] rounded-full">
+              <button>
+                <svg className="w-6 h-6">
+                  <use href="#emoji"></use>
+                </svg>
+              </button>
+              <input
+                type="text"
+                placeholder="Message..."
+                className="grow mx-3 border-0 outline-none"
+              />
+              <div className="flex items-center gap-x-4">
+                <button>
+                  <svg className="w-6 h-6">
+                    <use href="#voice"></use>
+                  </svg>
+                </button>
+                <button>
+                  <svg className="w-6 h-6">
+                    <use href="#gallery"></use>
+                  </svg>
+                </button>
+                <button>
+                  <svg className="w-6 h-6">
+                    <use href="#notifications"></use>
+                  </svg>
+                </button>
+              </div>
+              {/* <button className="font-[600] text-sm text-[#0095f6]">Send</button> */}
+            </div>
+          </div>
         </div>
       </div>
     </div>
