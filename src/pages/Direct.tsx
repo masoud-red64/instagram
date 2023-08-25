@@ -139,86 +139,106 @@ function Direct() {
                 {/* Message */}
                 <div className="flex flex-col gap-y-3">
                   {/*Send Post */}
-                  <div className="flex items-center flex-row-reverse gap-x-4">
-                    <div className="relative w-[150px] sm:w-[198px] sm:h-[352px] rounded-2xl overflow-hidden">
-                      <video
-                        src="/images/stories/videos/video21.mp4"
-                        className="h-full object-cover"
-                      ></video>
+                  {mainUser.stories.slice(0, 1).map((post) => (
+                    <div className="flex items-center flex-row-reverse gap-x-4">
+                      <div className="relative w-[150px] sm:w-[198px] sm:h-[352px] rounded-2xl overflow-hidden">
+                        {post.video ? (
+                          <video
+                            src={`/images/stories/videos/${post.video}`}
+                            className="h-full object-cover"
+                          ></video>
+                        ) : (
+                          <img
+                            src={`/images/stories/images/${post.img}`}
+                            alt=""
+                            className="h-full object-cover"
+                          />
+                        )}
 
-                      {/* Top */}
-                      <div className="absolute top-3 left-3 right-3 flex items-center gap-x-2">
-                        <div className="w-8 h-8">
-                          <Story img="user3.jpg" hasStory={false} />
+                        {/* Top */}
+                        <div className="absolute top-3 left-3 right-3 flex items-center gap-x-2">
+                          <div className="w-8 h-8">
+                            <Story img="user3.jpg" hasStory={false} />
+                          </div>
+                          <span className="text-white text-sm font-[600]">
+                            tarafdar.football
+                          </span>
                         </div>
-                        <span className="text-white text-sm font-[600]">
-                          tarafdar.football
-                        </span>
-                      </div>
 
-                      {/* Video Icon */}
-                      <svg className="absolute w-6 h-6 bottom-3 left-3 text-white">
-                        <use href="#reels-active"></use>
-                      </svg>
+                        {/* Video Icon */}
+                        <svg className="absolute w-6 h-6 bottom-3 left-3 text-white">
+                          <use href="#reels-active"></use>
+                        </svg>
+                      </div>
+                      <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100  opacity-50">
+                        <button>
+                          <svg className="w-4 h-4">
+                            <use href="#more-options"></use>
+                          </svg>
+                        </button>
+                        <button>
+                          <svg className="w-4 h-4">
+                            <use href="#reply"></use>
+                          </svg>
+                        </button>
+                        <button>
+                          <svg className="w-4 h-4">
+                            <use href="#emoji"></use>
+                          </svg>
+                        </button>
+                      </div>
                     </div>
-                    <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100  opacity-50">
-                      <button>
-                        <svg className="w-4 h-4">
-                          <use href="#more-options"></use>
-                        </svg>
-                      </button>
-                      <button>
-                        <svg className="w-4 h-4">
-                          <use href="#reply"></use>
-                        </svg>
-                      </button>
-                      <button>
-                        <svg className="w-4 h-4">
-                          <use href="#emoji"></use>
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
+                  ))}
 
                   {/* Receive Post */}
-                  <div className="flex items-center">
-                    <div className="w-7 h-7 mt-auto">
-                      <Story img={mainUser.img} hasStory={false} />
-                    </div>
-                    <div className="relative w-[150px] sm:w-[198px] sm:h-[352px] ml-2 mr-4 rounded-2xl overflow-hidden">
-                      <video
-                        src="/images/stories/videos/video21.mp4"
-                        className="h-full object-cover"
-                      ></video>
-
-                      {/* Top */}
-                      <div className="absolute top-3 left-3 right-3 flex items-center gap-x-2">
-                        <div className="w-8 h-8">
-                          <Story img="user3.jpg" hasStory={false} />
-                        </div>
-                        <span className="text-white text-sm font-[600]">
-                          tarafdar.football
-                        </span>
+                  {mainUser.stories.slice(1, 2).map((post) => (
+                    <div className="flex items-center">
+                      <div className="w-7 h-7 mt-auto">
+                        <Story img={mainUser.img} hasStory={false} />
                       </div>
+                      <div className="relative w-[150px] sm:w-[198px] sm:h-[352px] ml-2 mr-4 rounded-2xl overflow-hidden">
+                        {post.video ? (
+                          <video
+                            src={`/images/stories/videos/${post.video}`}
+                            className="h-full object-cover"
+                          ></video>
+                        ) : (
+                          <img
+                            src={`/images/stories/images/${post.img}`}
+                            alt=""
+                            className="h-full object-cover"
+                          />
+                        )}
 
-                      {/* Video Icon */}
-                      <svg className="absolute w-6 h-6 bottom-3 left-3 text-white">
-                        <use href="#reels-active"></use>
-                      </svg>
-                    </div>
-                    <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100 opacity-50">
-                      <button>
-                        <svg className="w-4 h-4">
-                          <use href="#emoji"></use>
+                        {/* Top */}
+                        <div className="absolute top-3 left-3 right-3 flex items-center gap-x-2">
+                          <div className="w-8 h-8">
+                            <Story img="user3.jpg" hasStory={false} />
+                          </div>
+                          <span className="text-white text-sm font-[600]">
+                            tarafdar.football
+                          </span>
+                        </div>
+
+                        {/* Video Icon */}
+                        <svg className="absolute w-6 h-6 bottom-3 left-3 text-white">
+                          <use href="#reels-active"></use>
                         </svg>
-                      </button>
-                      <button>
-                        <svg className="w-4 h-4">
-                          <use href="#reply"></use>
-                        </svg>
-                      </button>
+                      </div>
+                      <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100 opacity-50">
+                        <button>
+                          <svg className="w-4 h-4">
+                            <use href="#emoji"></use>
+                          </svg>
+                        </button>
+                        <button>
+                          <svg className="w-4 h-4">
+                            <use href="#reply"></use>
+                          </svg>
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  ))}
                 </div>
               </div>
 
