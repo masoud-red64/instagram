@@ -5,8 +5,15 @@ import PostWithCommentBox from "../Components/PostWithCommentBox/PostWithComment
 import ShareBox from "../Components/ShareBox/ShareBox";
 import MoreOptionPostBox from "../Components/MoreOptionPostBox/MoreOptionPostBox";
 import EmojiBox from "../Components/EmojiBox/EmojiBox";
+import VoiceMessageRecorder from "../Components/VoiceMessageRecorder/VoiceMessageRecorder";
 
-type userMessage = { id: string; text: string; img: string; video: string };
+type userMessage = {
+  id: string;
+  text: string;
+  img: string;
+  video: string;
+  audio: any;
+};
 
 function Direct() {
   const [mainUser, setMainUser] = useState({} as userListTypes);
@@ -23,15 +30,19 @@ function Direct() {
     {} as userMessage
   );
   const [isShowMainImgOrVideo, setIsShowMainImgOrVideo] = useState(false);
+  const [isShowRecording, setIsShowRecording] = useState(false);
+  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+  const [isRecording, setIsRecording] = useState(false);
 
   const messagesContainerRef = useRef(null);
   const inputMessageRef = useRef(null);
   const inputFileRef = useRef<HTMLInputElement>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
 
   // Send Message With Enter Keyboard
   useEffect(() => {
     const documentKeyDownHandler = (e: KeyboardEvent) => {
-      e.key === "Enter" && sendMessageHandler(inputMessageValue, "", "");
+      e.key === "Enter" && sendMessageHandler(inputMessageValue, "", "", "");
     };
 
     document.addEventListener("keydown", documentKeyDownHandler);
@@ -42,7 +53,7 @@ function Direct() {
   // Scroll Down Automaticly
   useEffect(() => {
     scrollToBottom();
-  }, [userMessages,mainUser]);
+  }, [userMessages, mainUser]);
 
   const getMainUserHandle = (userID: number) => {
     const filterUser = usersList.filter((user) => user.id === userID);
@@ -56,7 +67,12 @@ function Direct() {
     }
   };
 
-  const sendMessageHandler = (text: string, img: string, video: string) => {
+  const sendMessageHandler = (
+    text: string,
+    img: string,
+    video: string,
+    audio: any
+  ) => {
     setUserMessages((prevMessages) => ({
       ...prevMessages,
       [mainUser.id]: [
@@ -66,6 +82,7 @@ function Direct() {
           text,
           img,
           video,
+          audio,
         },
       ],
     }));
@@ -84,9 +101,9 @@ function Direct() {
         selectedFile.type.startsWith("video/")
       ) {
         if (selectedFile.type.startsWith("image/")) {
-          sendMessageHandler("", URL.createObjectURL(selectedFile), "");
+          sendMessageHandler("", URL.createObjectURL(selectedFile), "", "");
         } else if (selectedFile.type.startsWith("video/")) {
-          sendMessageHandler("", "", URL.createObjectURL(selectedFile));
+          sendMessageHandler("", "", URL.createObjectURL(selectedFile), "");
         }
         setFile(selectedFile);
       } else {
@@ -106,6 +123,14 @@ function Direct() {
 
     return date.toLocaleString("en-US", options);
   }
+
+  const stopRecording = () => {
+    const mediaRecorder = mediaRecorderRef.current;
+    if (mediaRecorder && isRecording) {
+      mediaRecorder.stop();
+      setIsRecording(false);
+    }
+  };
 
   return (
     <>
@@ -401,6 +426,13 @@ function Direct() {
                                 )}
                               </div>
                             )}
+
+                            {message.audio && audioBlob && (
+                              <audio
+                                controls
+                                src={URL.createObjectURL(audioBlob)}
+                              ></audio>
+                            )}
                           </div>
                           <div className="hidden group-hover:flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100  opacity-50">
                             <button>
@@ -427,46 +459,73 @@ function Direct() {
 
                 {/* Bottom */}
                 <div className="flex items-center justify-center grow px-4">
-                  <div className="w-full h-11 flex items-center pr-4 pl-3 dark:text-neutral-100  border border-[#dbdbdb] dark:border-[#363636] rounded-full">
-                    <div className="relative">
-                      <button
-                        onClick={() => setIsShowEmojiBox(!isShowEmojiBox)}
-                      >
-                        <svg className="w-6 h-6">
-                          <use href="#emoji"></use>
-                        </svg>
-                      </button>
-                      {isShowEmojiBox && (
-                        <div className="absolute bottom-10 w-[340px] h-[340px] bg-white dark:bg-neutral-800 rounded-md drop-shadow-[0_4px_12px_rgba(0,0,0,.15)]">
-                          <EmojiBox
-                            textAreaRef={inputMessageRef}
-                            captionTextAreaValue={inputMessageValue}
-                            setCaptionTextAreaValue={setInputMessageValue}
-                            setIsShowEmojiBox={setIsShowEmojiBox}
-                          />
-                        </div>
-                      )}
-                    </div>
-                    <input
-                      ref={inputMessageRef}
-                      type="text"
-                      placeholder="Message..."
-                      className="w-full grow mx-3 bg-transparent dark:text-neutral-100 border-0 outline-none"
-                      value={inputMessageValue}
-                      onChange={(e) => setInputMessageValue(e.target.value)}
-                    />
-                    {inputMessageValue ? (
+                  <div
+                    className={`w-full h-11 flex items-center ${
+                      isShowRecording && "gap-x-3"
+                    } pr-4 pl-3 dark:text-neutral-100  border border-[#dbdbdb] dark:border-[#363636] rounded-full`}
+                  >
+                    {!isShowRecording && (
+                      <div className="relative">
+                        <button
+                          onClick={() => setIsShowEmojiBox(!isShowEmojiBox)}
+                        >
+                          <svg className="w-6 h-6">
+                            <use href="#emoji"></use>
+                          </svg>
+                        </button>
+                        {isShowEmojiBox && (
+                          <div className="absolute bottom-10 w-[340px] h-[340px] bg-white dark:bg-neutral-800 rounded-md drop-shadow-[0_4px_12px_rgba(0,0,0,.15)]">
+                            <EmojiBox
+                              textAreaRef={inputMessageRef}
+                              captionTextAreaValue={inputMessageValue}
+                              setCaptionTextAreaValue={setInputMessageValue}
+                              setIsShowEmojiBox={setIsShowEmojiBox}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    {!isShowRecording && (
+                      <input
+                        ref={inputMessageRef}
+                        type="text"
+                        placeholder="Message..."
+                        className="w-full grow mx-3 bg-transparent dark:text-neutral-100 border-0 outline-none"
+                        value={inputMessageValue}
+                        onChange={(e) => setInputMessageValue(e.target.value)}
+                      />
+                    )}
+                    {isShowRecording && (
+                      <VoiceMessageRecorder
+                        isShowRecoding={isShowRecording}
+                        setIsShowRecoding={setIsShowRecording}
+                        audioBlob={audioBlob}
+                        setAudioBlob={setAudioBlob}
+                        isRecording={isRecording}
+                        setIsRecording={setIsRecording}
+                        mediaRecorderRef={mediaRecorderRef}
+                        stopRecording={stopRecording}
+                      />
+                    )}
+                    {inputMessageValue || isShowRecording ? (
                       <button
                         className="font-[600] text-sm text-[#0095f6]"
-                        onClick={() =>
-                          sendMessageHandler(inputMessageValue, "", "")
-                        }
+                        onClick={() => {
+                          if (inputMessageValue) {
+                            sendMessageHandler(inputMessageValue, "", "", "");
+                          } else {
+                            sendMessageHandler("", "", "", audioBlob);
+                          }
+
+                          setIsShowRecording(false);
+                          stopRecording();
+                        }}
                       >
                         Send
                       </button>
                     ) : (
                       <div className="flex items-center gap-x-4">
-                        <button>
+                        <button onClick={() => setIsShowRecording(true)}>
                           <svg className="w-6 h-6">
                             <use href="#voice"></use>
                           </svg>
@@ -496,6 +555,7 @@ function Direct() {
                                   text: "❤️",
                                   img: "",
                                   video: "",
+                                  audio: "",
                                 },
                               ],
                             }))

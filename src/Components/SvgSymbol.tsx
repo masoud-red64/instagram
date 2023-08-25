@@ -1182,6 +1182,8 @@ function SvgSymbol() {
           stroke-width="2"
         ></path>
       </symbol>
+      <symbol id="stop" aria-hidden="true" viewBox="0 0 36 36"><rect fill="currentColor" height="18" rx="2" width="18" x="9" y="9"></rect></symbol>
+
     </svg>
   );
 }
