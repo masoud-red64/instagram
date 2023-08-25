@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Story from "../Components/Story/Story";
 import { userListTypes, usersList } from "../Data/users";
 import PostWithCommentBox from "../Components/PostWithCommentBox/PostWithCommentBox";
@@ -15,6 +15,15 @@ function Direct() {
   }>({});
 
   const [inputMessageValue, setInputMessageValue] = useState("");
+
+  const messagesContainerRef = useRef(null);
+
+  useEffect(() => {
+    const messageContainer: any = messagesContainerRef.current;
+    if (messageContainer) {
+      messageContainer.scrollTop = messageContainer.scrollHeight;
+    }
+  }, [userMessages]);
 
   const getMainUserHandle = (userID: number) => {
     const filterUser = usersList.filter((user) => user.id === userID);
@@ -142,7 +151,10 @@ function Direct() {
                 </div>
 
                 {/* Center => Messages */}
-                <div className="h-[calc(100vh-150px)] overflow-y-auto scrollbar px-1 sm:px-4">
+                <div
+                  ref={messagesContainerRef}
+                  className="h-[calc(100vh-150px)] overflow-y-auto scrollbar px-1 sm:px-4"
+                >
                   {/* Date */}
                   <div className="text-xs text-[#8a8d91] font-[500] py-4 text-center">
                     Wed 10:28
