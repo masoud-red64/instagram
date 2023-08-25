@@ -18,6 +18,19 @@ function Direct() {
 
   const messagesContainerRef = useRef(null);
 
+
+  // Send Message With Enter Keyboard
+  useEffect(() => {
+    const documentKeyDownHandler = (e: KeyboardEvent) => {
+      e.key === "Enter" && sendMessageHandler();
+    };
+
+    document.addEventListener("keydown", documentKeyDownHandler);
+    return () =>
+      document.removeEventListener("keydown", documentKeyDownHandler);
+  }, [inputMessageValue]);
+
+  // Scroll Down Automaticly
   useEffect(() => {
     const messageContainer: any = messagesContainerRef.current;
     if (messageContainer) {
@@ -28,6 +41,20 @@ function Direct() {
   const getMainUserHandle = (userID: number) => {
     const filterUser = usersList.filter((user) => user.id === userID);
     setMainUser(filterUser[0]);
+  };
+
+  const sendMessageHandler = () => {
+    setUserMessages((prevMessages) => ({
+      ...prevMessages,
+      [mainUser.id]: [
+        ...(prevMessages[mainUser.id] || []),
+        {
+          id: crypto.randomUUID(),
+          text: inputMessageValue,
+        },
+      ],
+    }));
+    setInputMessageValue("");
   };
 
   return (
@@ -336,19 +363,7 @@ function Direct() {
                     {inputMessageValue ? (
                       <button
                         className="font-[600] text-sm text-[#0095f6]"
-                        onClick={() => {
-                          setUserMessages((prevMessages) => ({
-                            ...prevMessages,
-                            [mainUser.id]: [
-                              ...(prevMessages[mainUser.id] || []),
-                              {
-                                id: crypto.randomUUID(),
-                                text: inputMessageValue,
-                              },
-                            ],
-                          }));
-                          setInputMessageValue("");
-                        }}
+                        onClick={sendMessageHandler}
                       >
                         Send
                       </button>
