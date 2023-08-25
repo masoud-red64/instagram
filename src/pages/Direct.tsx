@@ -41,15 +41,19 @@ function Direct() {
 
   // Scroll Down Automaticly
   useEffect(() => {
-    const messageContainer: any = messagesContainerRef.current;
-    if (messageContainer) {
-      messageContainer.scrollTop = messageContainer.scrollHeight;
-    }
+    scrollToBottom();
   }, [userMessages]);
 
   const getMainUserHandle = (userID: number) => {
     const filterUser = usersList.filter((user) => user.id === userID);
     setMainUser(filterUser[0]);
+  };
+
+  const scrollToBottom = () => {
+    const messageContainer: any = messagesContainerRef.current;
+    if (messageContainer) {
+      messageContainer.scrollTop = messageContainer.scrollHeight;
+    }
   };
 
   const sendMessageHandler = (text: string, img: string, video: string) => {
@@ -367,9 +371,16 @@ function Direct() {
                                 }}
                               >
                                 {message.img ? (
-                                  <img src={message.img} alt="" />
+                                  <img
+                                    src={message.img}
+                                    alt=""
+                                    onLoad={() => scrollToBottom()}
+                                  />
                                 ) : (
-                                  <video src={message.video}></video>
+                                  <video
+                                    src={message.video}
+                                    onLoad={() => scrollToBottom()}
+                                  ></video>
                                 )}
                               </div>
                             )}
