@@ -284,12 +284,16 @@ function Direct() {
 
                     {/* Text Messages */}
                     <ul className="flex flex-col gap-y-2">
-                      {(userMessages[mainUser.id] || []).map((messages) => (
+                      {(userMessages[mainUser.id] || []).map((message) => (
                         <li className="flex items-center flex-row-reverse gap-x-4 pb-1">
                           <div>
-                            <span className="text-white bg-[#0095f6] py-1 px-3 rounded-full">
-                              {messages.text}
-                            </span>
+                            {message.text === "❤️" ? (
+                              <span className="text-5xl">{message.text}</span>
+                            ) : (
+                              <span className="text-white bg-[#0095f6] py-1 px-3 rounded-full">
+                                {message.text}
+                              </span>
+                            )}
                           </div>
                           <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100  opacity-50">
                             <button>
@@ -360,7 +364,20 @@ function Direct() {
                             <use href="#gallery"></use>
                           </svg>
                         </button>
-                        <button>
+                        <button
+                          onClick={() =>
+                            setUserMessages((prevMessages) => ({
+                              ...prevMessages,
+                              [mainUser.id]: [
+                                ...(prevMessages[mainUser.id] || []),
+                                {
+                                  id: crypto.randomUUID(),
+                                  text: "❤️",
+                                },
+                              ],
+                            }))
+                          }
+                        >
                           <svg className="w-6 h-6">
                             <use href="#notifications"></use>
                           </svg>
