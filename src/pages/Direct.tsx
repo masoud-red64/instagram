@@ -6,17 +6,23 @@ import ShareBox from "../Components/ShareBox/ShareBox";
 import MoreOptionPostBox from "../Components/MoreOptionPostBox/MoreOptionPostBox";
 import EmojiBox from "../Components/EmojiBox/EmojiBox";
 
+type userMessage = { id: string; text: string; img: string; video: string };
+
 function Direct() {
   const [mainUser, setMainUser] = useState({} as userListTypes);
   const [isShowShareBox, setIsShowShareBox] = useState(false);
   const [isShowMoreOptionBox, setIsShowMoreOptionBox] = useState(false);
   const [isShowCommentBox, setIsShowCommentBox] = useState(false);
   const [userMessages, setUserMessages] = useState<{
-    [key: number]: { id: string; text: string; img: string; video: string }[];
+    [key: number]: userMessage[];
   }>({});
   const [inputMessageValue, setInputMessageValue] = useState("");
   const [isShowEmojiBox, setIsShowEmojiBox] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [mainMessageVideoOrImg, setMainMessageVideoOrImg] = useState(
+    {} as userMessage
+  );
+  const [isShowMainImgOrVideo, setIsShowMainImgOrVideo] = useState(false);
 
   const messagesContainerRef = useRef(null);
   const inputMessageRef = useRef(null);
@@ -353,7 +359,13 @@ function Direct() {
                               ))}
 
                             {(message.img || message.video) && (
-                              <div className="w-[150px] sm:w-[198px] ml-2 mr-4 rounded-2xl overflow-hidden">
+                              <div
+                                className="w-[150px] sm:w-[198px] ml-2 mr-4 rounded-2xl overflow-hidden"
+                                onClick={() => {
+                                  setMainMessageVideoOrImg(message);
+                                  setIsShowMainImgOrVideo(true);
+                                }}
+                              >
                                 {message.img ? (
                                   <img src={message.img} alt="" />
                                 ) : (
@@ -492,12 +504,13 @@ function Direct() {
       </div>
 
       {/* overlay */}
-      {(isShowShareBox || isShowMoreOptionBox) && (
+      {(isShowShareBox || isShowMoreOptionBox || isShowMainImgOrVideo) && (
         <div
           className="fixed inset-0 flex items-center justify-center bg-black/60 z-[60]"
           onClick={() => {
             setIsShowShareBox(false);
             setIsShowMoreOptionBox(false);
+            setIsShowMainImgOrVideo(false);
           }}
         >
           {/* ReportBox */}
@@ -515,6 +528,15 @@ function Direct() {
               <ShareBox setIsShowShareBox={setIsShowShareBox} />
             </div>
           )}
+
+          {/* ImgOrVideo */}
+          <div className="max-h-[80vh] max-w-[90vw] flex items-center justify-center p-10 rounded-md ">
+            {mainMessageVideoOrImg.img ? (
+              <img src={mainMessageVideoOrImg.img} alt="" />
+            ) : (
+              <video controls src={mainMessageVideoOrImg.video}></video>
+            )}
+          </div>
         </div>
       )}
 
