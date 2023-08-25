@@ -42,7 +42,7 @@ function Direct() {
   // Scroll Down Automaticly
   useEffect(() => {
     scrollToBottom();
-  }, [userMessages]);
+  }, [userMessages,mainUser]);
 
   const getMainUserHandle = (userID: number) => {
     const filterUser = usersList.filter((user) => user.id === userID);
