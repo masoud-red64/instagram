@@ -176,9 +176,15 @@ function Direct() {
                           </div>
 
                           {/* Video Icon */}
-                          <svg className="absolute w-6 h-6 bottom-3 left-3 text-white">
-                            <use href="#reels-active"></use>
-                          </svg>
+                          {post.video ? (
+                            <svg className="absolute w-6 h-6 bottom-3 left-3 text-white">
+                              <use href="#reels-active"></use>
+                            </svg>
+                          ) : (
+                            <svg className="absolute w-6 h-6 bottom-3 left-3 text-white">
+                              <use href="#gallery"></use>
+                            </svg>
+                          )}
                         </div>
                         <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100  opacity-50">
                           <button>
@@ -234,9 +240,15 @@ function Direct() {
                           </div>
 
                           {/* Video Icon */}
-                          <svg className="absolute w-6 h-6 bottom-3 left-3 text-white">
-                            <use href="#reels-active"></use>
-                          </svg>
+                          {post.video ? (
+                            <svg className="absolute w-6 h-6 bottom-3 left-3 text-white">
+                              <use href="#reels-active"></use>
+                            </svg>
+                          ) : (
+                            <svg className="absolute w-6 h-6 bottom-3 left-3 text-white">
+                              <use href="#gallery"></use>
+                            </svg>
+                          )}
                         </div>
                         <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100 opacity-50">
                           <button>
