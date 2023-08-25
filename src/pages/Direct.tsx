@@ -96,6 +96,17 @@ function Direct() {
     }
   };
 
+  function formatDate(date: Date) {
+    const options = {
+      weekday: "short" as const, // Short weekday name (e.g., "Wed")
+      hour: "numeric" as const, // Numeric hour (e.g., "10")
+      minute: "2-digit" as const, // Two-digit minute (e.g., "23")
+      hour12: false, // Use 24-hour format
+    };
+
+    return date.toLocaleString("en-US", options);
+  }
+
   return (
     <>
       <div className="flex h-[calc(100vh-48px)] md:h-screen">
@@ -350,6 +361,12 @@ function Direct() {
 
                     {/* Text Messages */}
                     <ul className="flex flex-col gap-y-2">
+                      {/* Date */}
+                      {(userMessages[mainUser.id] || []).length !== 0 && (
+                        <div className="text-xs text-[#8a8d91] font-[500] py-4 text-center">
+                          {formatDate(new Date())}
+                        </div>
+                      )}
                       {(userMessages[mainUser.id] || []).map((message) => (
                         <li className="flex items-center flex-row-reverse gap-x-4 pb-1 group">
                           <div>
