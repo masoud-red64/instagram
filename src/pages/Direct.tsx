@@ -18,7 +18,6 @@ function Direct() {
 
   const messagesContainerRef = useRef(null);
 
-
   // Send Message With Enter Keyboard
   useEffect(() => {
     const documentKeyDownHandler = (e: KeyboardEvent) => {
@@ -191,7 +190,7 @@ function Direct() {
                   <div className="flex flex-col gap-y-3">
                     {/*Send Post */}
                     {mainUser.stories.slice(0, 1).map((post) => (
-                      <div className="flex items-center flex-row-reverse gap-x-4">
+                      <div className="flex items-center flex-row-reverse gap-x-4 group">
                         <div
                           className="relative w-[150px] sm:w-[198px] sm:h-[352px] rounded-2xl overflow-hidden cursor-pointer"
                           onClick={() => setIsShowCommentBox(true)}
@@ -230,7 +229,7 @@ function Direct() {
                             </svg>
                           )}
                         </div>
-                        <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100  opacity-50">
+                        <div className="hidden group-hover:flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100  opacity-50">
                           <button>
                             <svg className="w-4 h-4">
                               <use href="#more-options"></use>
@@ -252,7 +251,7 @@ function Direct() {
 
                     {/* Receive Post */}
                     {mainUser.stories.slice(1, 2).map((post) => (
-                      <div className="flex items-center">
+                      <div className="flex items-center group">
                         <div className="w-7 h-7 mt-auto">
                           <Story img={mainUser.img} hasStory={false} />
                         </div>
@@ -294,7 +293,7 @@ function Direct() {
                             </svg>
                           )}
                         </div>
-                        <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100 opacity-50">
+                        <div className="hidden group-hover:flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100 opacity-50">
                           <button>
                             <svg className="w-4 h-4">
                               <use href="#emoji"></use>
@@ -312,7 +311,7 @@ function Direct() {
                     {/* Text Messages */}
                     <ul className="flex flex-col gap-y-2">
                       {(userMessages[mainUser.id] || []).map((message) => (
-                        <li className="flex items-center flex-row-reverse gap-x-4 pb-1">
+                        <li className="flex items-center flex-row-reverse gap-x-4 pb-1 group">
                           <div>
                             {message.text === "❤️" ? (
                               <span className="text-5xl">{message.text}</span>
@@ -322,7 +321,7 @@ function Direct() {
                               </span>
                             )}
                           </div>
-                          <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100  opacity-50">
+                          <div className="hidden group-hover:flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100  opacity-50">
                             <button>
                               <svg className="w-4 h-4">
                                 <use href="#more-options"></use>
