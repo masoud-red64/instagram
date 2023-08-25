@@ -10,12 +10,10 @@ function Direct() {
   const [isShowShareBox, setIsShowShareBox] = useState(false);
   const [isShowMoreOptionBox, setIsShowMoreOptionBox] = useState(false);
   const [isShowCommentBox, setIsShowCommentBox] = useState(false);
-  const [textMessages, setTextMessages] = useState<
-    {
-      id: string;
-      text: string;
-    }[]
-  >([]);
+  const [userMessages, setUserMessages] = useState<{
+    [key: number]: { id: string; text: string }[];
+  }>({});
+
   const [inputMessageValue, setInputMessageValue] = useState("");
 
   const getMainUserHandle = (userID: number) => {
@@ -274,7 +272,7 @@ function Direct() {
 
                     {/* Text Messages */}
                     <ul className="flex flex-col gap-y-2">
-                      {textMessages.map((messages) => (
+                      {(userMessages[mainUser.id] || []).map((messages) => (
                         <li className="flex items-center flex-row-reverse gap-x-4 pb-1">
                           <div>
                             <span className="text-white bg-[#0095f6] py-1 px-3 rounded-full">
@@ -322,15 +320,19 @@ function Direct() {
                     {inputMessageValue ? (
                       <button
                         className="font-[600] text-sm text-[#0095f6]"
-                        onClick={() =>
-                          setTextMessages((prevMessages) => [
+                        onClick={() => {
+                          setUserMessages((prevMessages) => ({
                             ...prevMessages,
-                            {
-                              id: crypto.randomUUID(),
-                              text: inputMessageValue,
-                            },
-                          ])
-                        }
+                            [mainUser.id]: [
+                              ...(prevMessages[mainUser.id] || []),
+                              {
+                                id: crypto.randomUUID(),
+                                text: inputMessageValue,
+                              },
+                            ],
+                          }));
+                          setInputMessageValue("");
+                        }}
                       >
                         Send
                       </button>
