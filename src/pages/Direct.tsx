@@ -4,6 +4,7 @@ import { userListTypes, usersList } from "../Data/users";
 import PostWithCommentBox from "../Components/PostWithCommentBox/PostWithCommentBox";
 import ShareBox from "../Components/ShareBox/ShareBox";
 import MoreOptionPostBox from "../Components/MoreOptionPostBox/MoreOptionPostBox";
+import EmojiBox from "../Components/EmojiBox/EmojiBox";
 
 function Direct() {
   const [mainUser, setMainUser] = useState({} as userListTypes);
@@ -13,10 +14,11 @@ function Direct() {
   const [userMessages, setUserMessages] = useState<{
     [key: number]: { id: string; text: string }[];
   }>({});
-
   const [inputMessageValue, setInputMessageValue] = useState("");
+  const [isShowEmojiBox, setIsShowEmojiBox] = useState(false);
 
   const messagesContainerRef = useRef(null);
+  const inputMessageRef = useRef(null);
 
   // Send Message With Enter Keyboard
   useEffect(() => {
@@ -347,12 +349,27 @@ function Direct() {
                 {/* Bottom */}
                 <div className="flex items-center justify-center grow px-4">
                   <div className="w-full h-11 flex items-center pr-4 pl-3 dark:text-neutral-100  border border-[#dbdbdb] dark:border-[#363636] rounded-full">
-                    <button>
-                      <svg className="w-6 h-6">
-                        <use href="#emoji"></use>
-                      </svg>
-                    </button>
+                    <div className="relative">
+                      <button
+                        onClick={() => setIsShowEmojiBox(!isShowEmojiBox)}
+                      >
+                        <svg className="w-6 h-6">
+                          <use href="#emoji"></use>
+                        </svg>
+                      </button>
+                      {isShowEmojiBox && (
+                        <div className="absolute bottom-10 w-[340px] h-[340px] bg-white dark:bg-neutral-800 rounded-md drop-shadow-[0_4px_12px_rgba(0,0,0,.15)]">
+                          <EmojiBox
+                            textAreaRef={inputMessageRef}
+                            captionTextAreaValue={inputMessageValue}
+                            setCaptionTextAreaValue={setInputMessageValue}
+                            setIsShowEmojiBox={setIsShowEmojiBox}
+                          />
+                        </div>
+                      )}
+                    </div>
                     <input
+                      ref={inputMessageRef}
                       type="text"
                       placeholder="Message..."
                       className="w-full grow mx-3 bg-transparent dark:text-neutral-100 border-0 outline-none"
