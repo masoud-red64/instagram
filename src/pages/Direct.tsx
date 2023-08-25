@@ -12,18 +12,20 @@ function Direct() {
   const [isShowMoreOptionBox, setIsShowMoreOptionBox] = useState(false);
   const [isShowCommentBox, setIsShowCommentBox] = useState(false);
   const [userMessages, setUserMessages] = useState<{
-    [key: number]: { id: string; text: string }[];
+    [key: number]: { id: string; text: string; img: string; video: string }[];
   }>({});
   const [inputMessageValue, setInputMessageValue] = useState("");
   const [isShowEmojiBox, setIsShowEmojiBox] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
 
   const messagesContainerRef = useRef(null);
   const inputMessageRef = useRef(null);
+  const inputFileRef = useRef<HTMLInputElement>(null);
 
   // Send Message With Enter Keyboard
   useEffect(() => {
     const documentKeyDownHandler = (e: KeyboardEvent) => {
-      e.key === "Enter" && sendMessageHandler();
+      e.key === "Enter" && sendMessageHandler(inputMessageValue, "", "");
     };
 
     document.addEventListener("keydown", documentKeyDownHandler);
@@ -44,18 +46,44 @@ function Direct() {
     setMainUser(filterUser[0]);
   };
 
-  const sendMessageHandler = () => {
+  const sendMessageHandler = (text: string, img: string, video: string) => {
     setUserMessages((prevMessages) => ({
       ...prevMessages,
       [mainUser.id]: [
         ...(prevMessages[mainUser.id] || []),
         {
           id: crypto.randomUUID(),
-          text: inputMessageValue,
+          text,
+          img,
+          video,
         },
       ],
     }));
     setInputMessageValue("");
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const selectedFile = event.target.files[0];
+
+      // Clear the input value
+      event.target.value = "";
+
+      if (
+        selectedFile.type.startsWith("image/") ||
+        selectedFile.type.startsWith("video/")
+      ) {
+        if (selectedFile.type.startsWith("image/")) {
+          sendMessageHandler("", URL.createObjectURL(selectedFile), "");
+        } else if (selectedFile.type.startsWith("video/")) {
+          sendMessageHandler("", "", URL.createObjectURL(selectedFile));
+        }
+        setFile(selectedFile);
+      } else {
+        // Handle unsupported file type
+        alert("Unsupported file type. Please select an image or video.");
+      }
+    }
   };
 
   return (
@@ -315,12 +343,23 @@ function Direct() {
                       {(userMessages[mainUser.id] || []).map((message) => (
                         <li className="flex items-center flex-row-reverse gap-x-4 pb-1 group">
                           <div>
-                            {message.text === "❤️" ? (
-                              <span className="text-5xl">{message.text}</span>
-                            ) : (
-                              <span className="text-white bg-[#0095f6] py-1 px-3 rounded-full">
-                                {message.text}
-                              </span>
+                            {message.text &&
+                              (message.text === "❤️" ? (
+                                <span className="text-5xl">{message.text}</span>
+                              ) : (
+                                <span className="text-white bg-[#0095f6] py-1 px-3 rounded-full">
+                                  {message.text}
+                                </span>
+                              ))}
+
+                            {(message.img || message.video) && (
+                              <div className="w-[150px] sm:w-[198px] ml-2 mr-4 rounded-2xl overflow-hidden">
+                                {message.img ? (
+                                  <img src={message.img} alt="" />
+                                ) : (
+                                  <video src={message.video}></video>
+                                )}
+                              </div>
                             )}
                           </div>
                           <div className="hidden group-hover:flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100  opacity-50">
@@ -379,7 +418,9 @@ function Direct() {
                     {inputMessageValue ? (
                       <button
                         className="font-[600] text-sm text-[#0095f6]"
-                        onClick={sendMessageHandler}
+                        onClick={() =>
+                          sendMessageHandler(inputMessageValue, "", "")
+                        }
                       >
                         Send
                       </button>
@@ -390,11 +431,20 @@ function Direct() {
                             <use href="#voice"></use>
                           </svg>
                         </button>
-                        <button>
-                          <svg className="w-6 h-6">
-                            <use href="#gallery"></use>
-                          </svg>
-                        </button>
+                        <div>
+                          <button onClick={() => inputFileRef.current?.click()}>
+                            <svg className="w-6 h-6">
+                              <use href="#gallery"></use>
+                            </svg>
+                          </button>
+                          <input
+                            ref={inputFileRef}
+                            className="hidden"
+                            type="file"
+                            onChange={handleFileChange}
+                            accept="image/*,video/*"
+                          />
+                        </div>
                         <button
                           onClick={() =>
                             setUserMessages((prevMessages) => ({
@@ -404,6 +454,8 @@ function Direct() {
                                 {
                                   id: crypto.randomUUID(),
                                   text: "❤️",
+                                  img: "",
+                                  video: "",
                                 },
                               ],
                             }))
