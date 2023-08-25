@@ -10,6 +10,13 @@ function Direct() {
   const [isShowShareBox, setIsShowShareBox] = useState(false);
   const [isShowMoreOptionBox, setIsShowMoreOptionBox] = useState(false);
   const [isShowCommentBox, setIsShowCommentBox] = useState(false);
+  const [textMessages, setTextMessages] = useState<
+    {
+      id: string;
+      text: string;
+    }[]
+  >([]);
+  const [inputMessageValue, setInputMessageValue] = useState("");
 
   const getMainUserHandle = (userID: number) => {
     const filterUser = usersList.filter((user) => user.id === userID);
@@ -264,6 +271,36 @@ function Direct() {
                         </div>
                       </div>
                     ))}
+
+                    {/* Text Messages */}
+                    <ul className="flex flex-col gap-y-2">
+                      {textMessages.map((messages) => (
+                        <li className="flex items-center flex-row-reverse gap-x-4 pb-1">
+                          <div>
+                            <span className="text-white bg-[#0095f6] py-1 px-3 rounded-full">
+                              {messages.text}
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100  opacity-50">
+                            <button>
+                              <svg className="w-4 h-4">
+                                <use href="#more-options"></use>
+                              </svg>
+                            </button>
+                            <button>
+                              <svg className="w-4 h-4">
+                                <use href="#reply"></use>
+                              </svg>
+                            </button>
+                            <button>
+                              <svg className="w-4 h-4">
+                                <use href="#emoji"></use>
+                              </svg>
+                            </button>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
 
@@ -279,25 +316,43 @@ function Direct() {
                       type="text"
                       placeholder="Message..."
                       className="w-full grow mx-3 bg-transparent dark:text-neutral-100 border-0 outline-none"
+                      value={inputMessageValue}
+                      onChange={(e) => setInputMessageValue(e.target.value)}
                     />
-                    <div className="flex items-center gap-x-4">
-                      <button>
-                        <svg className="w-6 h-6">
-                          <use href="#voice"></use>
-                        </svg>
+                    {inputMessageValue ? (
+                      <button
+                        className="font-[600] text-sm text-[#0095f6]"
+                        onClick={() =>
+                          setTextMessages((prevMessages) => [
+                            ...prevMessages,
+                            {
+                              id: crypto.randomUUID(),
+                              text: inputMessageValue,
+                            },
+                          ])
+                        }
+                      >
+                        Send
                       </button>
-                      <button>
-                        <svg className="w-6 h-6">
-                          <use href="#gallery"></use>
-                        </svg>
-                      </button>
-                      <button>
-                        <svg className="w-6 h-6">
-                          <use href="#notifications"></use>
-                        </svg>
-                      </button>
-                    </div>
-                    {/* <button className="font-[600] text-sm text-[#0095f6]">Send</button> */}
+                    ) : (
+                      <div className="flex items-center gap-x-4">
+                        <button>
+                          <svg className="w-6 h-6">
+                            <use href="#voice"></use>
+                          </svg>
+                        </button>
+                        <button>
+                          <svg className="w-6 h-6">
+                            <use href="#gallery"></use>
+                          </svg>
+                        </button>
+                        <button>
+                          <svg className="w-6 h-6">
+                            <use href="#notifications"></use>
+                          </svg>
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
