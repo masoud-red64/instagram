@@ -85,7 +85,8 @@ function MyProfile() {
         </div>
 
         <main>
-          <section className="mb-11">
+          {/* Swiper */}
+          <section className="mb-5 md:mb-11">
             <Swiper
               slidesPerView={3}
               spaceBetween={10}
@@ -128,26 +129,51 @@ function MyProfile() {
             </Swiper>
           </section>
 
+          {/* Info Of Page */}
+          <section className="md:hidden py-3 border-t border-[#dbdbdb] dark:border-[#363636]">
+            <ul className="flex items-center justify-around text-sm">
+              <li className="flex w-full flex-col items-center">
+                <span className="font-[600]">0</span>
+                <span className="text-neutral-500">posts</span>
+              </li>
+              <li className="flex w-full flex-col items-center">
+                <span className="font-[600]">299</span>
+                <span className="text-neutral-500">followers</span>
+              </li>
+              <li className="flex w-full flex-col items-center">
+                <span className="font-[600]">151</span>
+                <span className="text-neutral-500">following</span>
+              </li>
+            </ul>
+          </section>
+
+          {/* Nav */}
           <section>
             <nav>
-              <ul className="flex items-center justify-center gap-x-[60px] tracking-wider border-t border-[#dbdbdb] dark:border-[#363636]">
-                <li className="flex items-center gap-x-1 text-black py-4 border-t border-black">
-                  <svg className="w-3 h-3">
+              <ul className="flex items-center justify-center md:gap-x-[60px] tracking-wider border-t border-[#dbdbdb] dark:border-[#363636]">
+                <li className="flex grow shrink basis-auto md:grow-0 items-center justify-center gap-x-1 text-[#0095f6] md:text-black py-4 border-t border-black">
+                  <svg className="w-6 h-6 md:w-3 md:h-3">
                     <use href="#posts"></use>
                   </svg>
-                  <span className="text-xs font-[600]">POSTS</span>
+                  <span className="hidden md:inline-block text-xs font-[600]">
+                    POSTS
+                  </span>
                 </li>
-                <li className="flex items-center gap-x-1 text-neutral-500 py-4">
-                  <svg className="w-3 h-3">
+                <li className="flex grow shrink basis-auto md:grow-0 items-center justify-center gap-x-1 text-neutral-500 py-4">
+                  <svg className="w-6 h-6 md:w-3 md:h-3">
                     <use href="#save"></use>
                   </svg>
-                  <span className="text-xs font-[600]">SAVED</span>
+                  <span className="hidden md:inline-block text-xs font-[600]">
+                    SAVED
+                  </span>
                 </li>
-                <li className="flex items-center gap-x-1 text-neutral-500 py-4">
-                  <svg className="w-3 h-3">
+                <li className="flex grow shrink basis-auto md:grow-0 items-center justify-center gap-x-1 text-neutral-500 py-4">
+                  <svg className="w-6 h-6 md:w-3 md:h-3">
                     <use href="#tagged"></use>
                   </svg>
-                  <span className="text-xs font-[600]">TAGGED</span>
+                  <span className="hidden md:inline-block text-xs font-[600]">
+                    TAGGED
+                  </span>
                 </li>
               </ul>
             </nav>
