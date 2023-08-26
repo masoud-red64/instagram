@@ -85,7 +85,7 @@ function MyProfile() {
         </div>
 
         <main>
-          <section>
+          <section className="mb-11">
             <Swiper
               slidesPerView={3}
               spaceBetween={10}
@@ -126,6 +126,31 @@ function MyProfile() {
                 </div>
               </SwiperSlide>
             </Swiper>
+          </section>
+
+          <section>
+            <nav>
+              <ul className="flex items-center justify-center gap-x-[60px] tracking-wider border-t border-[#dbdbdb] dark:border-[#363636]">
+                <li className="flex items-center gap-x-1 text-black py-4 border-t border-black">
+                  <svg className="w-3 h-3">
+                    <use href="#posts"></use>
+                  </svg>
+                  <span className="text-xs font-[600]">POSTS</span>
+                </li>
+                <li className="flex items-center gap-x-1 text-neutral-500 py-4">
+                  <svg className="w-3 h-3">
+                    <use href="#save"></use>
+                  </svg>
+                  <span className="text-xs font-[600]">SAVED</span>
+                </li>
+                <li className="flex items-center gap-x-1 text-neutral-500 py-4">
+                  <svg className="w-3 h-3">
+                    <use href="#tagged"></use>
+                  </svg>
+                  <span className="text-xs font-[600]">TAGGED</span>
+                </li>
+              </ul>
+            </nav>
           </section>
         </main>
       </div>
