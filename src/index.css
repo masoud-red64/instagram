@@ -341,4 +341,8 @@
     white-space: nowrap;
     animation: marquee 5s linear infinite; /* Adjust duration as needed */
   }
+
+  audio::-webkit-media-controls-panel {
+    @apply bg-neutral-400;
+  }
 }

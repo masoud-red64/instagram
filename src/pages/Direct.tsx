@@ -466,7 +466,7 @@ function Direct() {
                                 </svg>
                               </button>
                               {isShowMoreOptionMessage[message.id] && (
-                                <div className="absolute right-1 bottom-10 h-[34px] flex items-center gap-x-2 text-sm text-white font-[600] bg-black p-2 rounded">
+                                <div className="absolute right-1 bottom-10 h-[34px] flex items-center gap-x-2 text-sm text-white dark:text-black font-[600] bg-black dark:bg-white p-2 rounded">
                                   <button>Forward</button>
                                   <button
                                     onClick={() =>
@@ -483,7 +483,7 @@ function Direct() {
                                   >
                                     Unsend
                                   </button>
-                                  <svg className="absolute top-[calc(100%-2px)] -right-[0.2px] w-[21px] h-3 text-black scale-x-[-1] scale-y-[1]">
+                                  <svg className="absolute top-[calc(100%-2px)] -right-[0.2px] w-[21px] h-3 text-black dark:text-white scale-x-[-1] scale-y-[1]">
                                     <use href="#edge"></use>
                                   </svg>
                                 </div>
