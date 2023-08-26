@@ -22,7 +22,7 @@ function Direct() {
   const [isShowCommentBox, setIsShowCommentBox] = useState(false);
   const [userMessages, setUserMessages] = useState<{
     [key: number]: userMessage[];
-  }>({});
+  }>([]);
   const [inputMessageValue, setInputMessageValue] = useState("");
   const [isShowEmojiBox, setIsShowEmojiBox] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -33,6 +33,9 @@ function Direct() {
   const [isShowRecording, setIsShowRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [isRecording, setIsRecording] = useState(false);
+  const [isShowMoreOptionMessage, setIsShowMoreOptionMessage] = useState<{
+    [key: string]: boolean;
+  }>({});
 
   const messagesContainerRef = useRef(null);
   const inputMessageRef = useRef(null);
@@ -434,19 +437,65 @@ function Direct() {
                               ></audio>
                             )}
                           </div>
-                          <div className="hidden group-hover:flex items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100  opacity-50">
+                          <div
+                            className={`${
+                              isShowMoreOptionMessage[message.id]
+                                ? "flex"
+                                : "hidden group-hover:flex"
+                            } items-center justify-center gap-x-1 sm:gap-x-4 gap-y-2 flex-wrap dark:text-neutral-100`}
+                          >
+                            <div className="relative">
+                              <button
+                                onClick={() =>
+                                  setIsShowMoreOptionMessage((prevStatus) => {
+                                    const updateStatus: {
+                                      [key: string]: boolean;
+                                    } = {};
+                                    for (const id in prevStatus) {
+                                      updateStatus[id] = false;
+                                    }
+                                    return {
+                                      ...updateStatus,
+                                      [message.id]: !prevStatus[message.id],
+                                    };
+                                  })
+                                }
+                              >
+                                <svg className="w-4 h-4  opacity-50">
+                                  <use href="#more-options"></use>
+                                </svg>
+                              </button>
+                              {isShowMoreOptionMessage[message.id] && (
+                                <div className="absolute right-1 bottom-10 h-[34px] flex items-center gap-x-2 text-sm text-white font-[600] bg-black p-2 rounded">
+                                  <button>Forward</button>
+                                  <button
+                                    onClick={() =>
+                                      setUserMessages((prevMessages) => ({
+                                        ...prevMessages,
+                                        [mainUser.id]: prevMessages[
+                                          mainUser.id
+                                        ].filter(
+                                          (prevMessage) =>
+                                            prevMessage.id !== message.id
+                                        ),
+                                      }))
+                                    }
+                                  >
+                                    Unsend
+                                  </button>
+                                  <svg className="absolute top-[calc(100%-2px)] -right-[0.2px] w-[21px] h-3 text-black scale-x-[-1] scale-y-[1]">
+                                    <use href="#edge"></use>
+                                  </svg>
+                                </div>
+                              )}
+                            </div>
                             <button>
-                              <svg className="w-4 h-4">
-                                <use href="#more-options"></use>
-                              </svg>
-                            </button>
-                            <button>
-                              <svg className="w-4 h-4">
+                              <svg className="w-4 h-4  opacity-50">
                                 <use href="#reply"></use>
                               </svg>
                             </button>
                             <button>
-                              <svg className="w-4 h-4">
+                              <svg className="w-4 h-4  opacity-50">
                                 <use href="#emoji"></use>
                               </svg>
                             </button>

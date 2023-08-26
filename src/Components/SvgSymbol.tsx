@@ -1183,6 +1183,7 @@ function SvgSymbol() {
         ></path>
       </symbol>
       <symbol id="stop" aria-hidden="true" viewBox="0 0 36 36"><rect fill="currentColor" height="18" rx="2" width="18" x="9" y="9"></rect></symbol>
+      <symbol id="edge" viewBox="0 0 21 12" className="x10l6tqk x11k2h6o xds687c" fill="currentColor"><path d="M20.685.12c-2.229.424-4.278 1.914-6.181 3.403L5.4 10.94c-2.026 2.291-5.434.62-5.4-2.648V.12h20.684z"></path></symbol>
 
     </svg>
   );
