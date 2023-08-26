@@ -99,7 +99,7 @@ function MyProfile() {
               }}
               navigation={true}
               modules={[Navigation]}
-              className="w-64 container xs:w-full"
+              className="highlights-swiper w-64 container xs:w-full"
             >
               {userHighlights.map((highlight) => (
                 <SwiperSlide>

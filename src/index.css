@@ -345,4 +345,13 @@
   audio::-webkit-media-controls-panel {
     @apply bg-neutral-400;
   }
+
+  .highlights-swiper .swiper-button-next,
+  .highlights-swiper .swiper-button-prev {
+    @apply w-6 h-6 rounded-full bg-[#7F7F7F];
+  }
+  .highlights-swiper .swiper-button-next::after,
+  .highlights-swiper .swiper-button-prev::after {
+    @apply text-sm text-white  rounded-full;
+  }
 }
