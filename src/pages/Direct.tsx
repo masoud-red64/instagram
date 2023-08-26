@@ -558,16 +558,19 @@ function Direct() {
                     )}
                     {inputMessageValue || isShowRecording ? (
                       <button
-                        className="font-[600] text-sm text-[#0095f6]"
+                        className={`font-[600] text-sm text-[#0095f6] ${
+                          inputMessageValue || audioBlob ? "" : "opacity-50"
+                        }`}
                         onClick={() => {
                           if (inputMessageValue) {
                             sendMessageHandler(inputMessageValue, "", "", "");
                           } else {
-                            sendMessageHandler("", "", "", audioBlob);
+                            if (audioBlob) {
+                              sendMessageHandler("", "", "", audioBlob);
+                              setIsShowRecording(false);
+                              stopRecording();
+                            }
                           }
-
-                          setIsShowRecording(false);
-                          stopRecording();
                         }}
                       >
                         Send
