@@ -5,6 +5,7 @@ import Stories from "./pages/Stories";
 import Explore from "./pages/Explore";
 import Reels from "./pages/Reels";
 import Direct from "./pages/Direct";
+import MyProfile from "./pages/MyProfile";
 
 const routes = [
   {
@@ -16,6 +17,7 @@ const routes = [
       { path: "explore", element: <Explore /> },
       { path: "reels", element: <Reels /> },
       { path: "direct", element: <Direct /> },
+      { path: ":username", element: <MyProfile /> },
     ],
   },
   {
