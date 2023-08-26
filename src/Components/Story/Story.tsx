@@ -92,7 +92,7 @@ const Story = ({ img, hasStory, hasNewStory, id }: StoryPropsTypes) => {
 
         setTimeout(() => {
           setIsShowLoading(false); // Stop the loading animation
-          navigate(`/stories/${id}`);
+          navigate(`/stories/${id ? id : 1}`);
         }, 5500); // Total animation duration
       }
     }
