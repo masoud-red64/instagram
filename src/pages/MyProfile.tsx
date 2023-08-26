@@ -178,6 +178,17 @@ function MyProfile() {
               </ul>
             </nav>
           </section>
+
+          {/* Content */}
+          <section>
+            <div className="flex flex-col items-center justify-center my-[60px]">
+              <div className="w-[62px] h-[62px] bg-icons bg-no-repeat bg-[-256px_-269px]"></div>
+              <span className="text-[30px] font-[800] my-3">Photos of you</span>
+              <span className="text-sm">
+                When people tag you in photos, they'll appear here.
+              </span>
+            </div>
+          </section>
         </main>
       </div>
     );
