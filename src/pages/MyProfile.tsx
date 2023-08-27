@@ -24,7 +24,7 @@ function MyProfile() {
   const { username } = useParams();
   if (username === "masoud_red64") {
     return (
-      <div className="md:container md:mx-auto sm:pt-[30px] sm:px-5">
+      <div className="max-w-[975px] mx-auto sm:pt-[30px] sm:px-5">
         <header className="flex items-center gap-x-[30px] mt-4 mx-4 mb-6 md:m-0 md:mb-11">
           <div className="grow shrink-0">
             <div className="w-[77px] h-[77px] md:w-[150px] md:h-[150px] mx-auto">
@@ -100,7 +100,7 @@ function MyProfile() {
               }}
               navigation={true}
               modules={[Navigation]}
-              className="highlights-swiper w-64 container xs:w-full"
+              className="highlights-swiper w-64 xs:w-[350px] sm:w-[550px] md:w-[600px] lg:w-[850px]"
             >
               {userHighlights.map((highlight) => (
                 <SwiperSlide>
