@@ -181,13 +181,31 @@ function MyProfile() {
 
           {/* Content */}
           <section>
-            <div className="flex flex-col items-center justify-center my-[60px]">
+            {/* Tagged */}
+            {/* <div className="flex flex-col items-center justify-center my-[60px]">
               <div className="w-[62px] h-[62px] bg-icons bg-no-repeat bg-[-256px_-269px]"></div>
               <span className="text-[30px] font-[800] my-3">Photos of you</span>
               <span className="text-sm">
                 When people tag you in photos, they'll appear here.
               </span>
-            </div>
+            </div> */}
+
+            {/* Posts */}
+            {/* <div>
+              <div className="flex flex-col items-center justify-center my-[60px]">
+                <div className="w-[62px] h-[62px] bg-icons bg-no-repeat bg-[-128px_-269px]"></div>
+                <span className="text-[30px] font-[800] my-3">
+                  Share Photos
+                </span>
+                <span className="text-sm">
+                  When you share photos, they will appear on your profile.
+                </span>
+                <button className="text-[#0095f6] text-sm font-[600] mt-4">
+                  Share your first photo
+                </button>
+              </div>
+            </div> */}
+
           </section>
         </main>
       </div>
