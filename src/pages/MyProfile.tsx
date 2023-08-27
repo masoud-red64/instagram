@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import Footer from "../Components/Footer/Footer";
+import { useState } from "react";
 
 function MyProfile() {
   const userHighlights = [
@@ -21,6 +22,8 @@ function MyProfile() {
     { id: 6, img: "highlight6.jpg" },
     { id: 6, img: "highlight6.jpg" },
   ];
+
+  const [navActive, setNavActive] = useState("posts");
 
   const { username } = useParams();
   if (username === "masoud_red64") {
@@ -152,7 +155,14 @@ function MyProfile() {
           <section>
             <nav>
               <ul className="flex items-center justify-center md:gap-x-[60px] tracking-wider border-t border-[#dbdbdb] dark:border-[#363636]">
-                <li className="flex grow shrink basis-auto md:grow-0 items-center justify-center gap-x-1 text-[#0095f6] md:text-black py-4 border-t border-black">
+                <li
+                  className={`flex grow shrink basis-auto md:grow-0 items-center justify-center gap-x-1 ${
+                    navActive === "posts"
+                      ? "text-[#0095f6] md:text-black border-t border-black"
+                      : "text-neutral-500"
+                  } py-4 cursor-pointer`}
+                  onClick={() => setNavActive("posts")}
+                >
                   <svg className="w-6 h-6 md:w-3 md:h-3">
                     <use href="#posts"></use>
                   </svg>
@@ -160,7 +170,14 @@ function MyProfile() {
                     POSTS
                   </span>
                 </li>
-                <li className="flex grow shrink basis-auto md:grow-0 items-center justify-center gap-x-1 text-neutral-500 py-4">
+                <li
+                  className={`flex grow shrink basis-auto md:grow-0 items-center justify-center gap-x-1 ${
+                    navActive === "saved"
+                      ? "text-[#0095f6] md:text-black border-t border-black"
+                      : "text-neutral-500"
+                  } py-4 cursor-pointer`}
+                  onClick={() => setNavActive("saved")}
+                >
                   <svg className="w-6 h-6 md:w-3 md:h-3">
                     <use href="#save"></use>
                   </svg>
@@ -168,7 +185,14 @@ function MyProfile() {
                     SAVED
                   </span>
                 </li>
-                <li className="flex grow shrink basis-auto md:grow-0 items-center justify-center gap-x-1 text-neutral-500 py-4">
+                <li
+                  className={`flex grow shrink basis-auto md:grow-0 items-center justify-center gap-x-1 ${
+                    navActive === "tagged"
+                      ? "text-[#0095f6] md:text-black border-t border-black"
+                      : "text-neutral-500"
+                  } py-4 cursor-pointer`}
+                  onClick={() => setNavActive("tagged")}
+                >
                   <svg className="w-6 h-6 md:w-3 md:h-3">
                     <use href="#tagged"></use>
                   </svg>
@@ -182,78 +206,86 @@ function MyProfile() {
 
           {/* Content */}
           <section>
-            {/* Tagged */}
-            {/* <div className="flex flex-col items-center justify-center my-[60px]">
-              <div className="w-[62px] h-[62px] bg-icons bg-no-repeat bg-[-256px_-269px]"></div>
-              <span className="text-[30px] font-[800] my-3">Photos of you</span>
-              <span className="text-sm">
-                When people tag you in photos, they'll appear here.
-              </span>
-            </div> */}
-
             {/* Posts */}
-            {/* <div>
+            {navActive === "posts" && (
+              <div>
+                <div className="flex flex-col items-center justify-center my-[60px]">
+                  <div className="w-[62px] h-[62px] bg-icons bg-no-repeat bg-[-128px_-269px]"></div>
+                  <span className="text-[30px] font-[800] my-3">
+                    Share Photos
+                  </span>
+                  <span className="text-sm">
+                    When you share photos, they will appear on your profile.
+                  </span>
+                  <button className="text-[#0095f6] text-sm font-[600] mt-4">
+                    Share your first photo
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Tagged */}
+            {navActive === "tagged" && (
               <div className="flex flex-col items-center justify-center my-[60px]">
-                <div className="w-[62px] h-[62px] bg-icons bg-no-repeat bg-[-128px_-269px]"></div>
+                <div className="w-[62px] h-[62px] bg-icons bg-no-repeat bg-[-256px_-269px]"></div>
                 <span className="text-[30px] font-[800] my-3">
-                  Share Photos
+                  Photos of you
                 </span>
                 <span className="text-sm">
-                  When you share photos, they will appear on your profile.
+                  When people tag you in photos, they'll appear here.
                 </span>
-                <button className="text-[#0095f6] text-sm font-[600] mt-4">
-                  Share your first photo
-                </button>
               </div>
-            </div> */}
+            )}
 
             {/* Saved */}
-            <div>
-              <div className="flex items-center justify-between mt-8 mb-4">
-                <span className="text-xs text-neutral-500">
-                  Only you can see what you've saved
-                </span>
-                <span className="text-sm font-[600] text-[#0095f6]">
-                  + New Collection
-                </span>
-              </div>
-              <div className="relative group w-[300px] h-[300px] mx-auto rounded-md overflow-hidden cursor-pointer">
-                <div className="grid grid-cols-2 divide-x divide-y">
-                  <div>
-                    <img
-                      className="w-[150px] h-[150px] object-cover"
-                      src="/images/stories/images/img28.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div>
-                    <img
-                      className="w-[150px] h-[150px] object-cover"
-                      src="/images/stories/images/img19.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div>
-                    <img
-                      className="w-[150px] h-[150px] object-cover"
-                      src="/images/stories/images/img24.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div>
-                    <img
-                      className="w-[150px] h-[150px] object-cover"
-                      src="/images/stories/images/img25.jpg"
-                      alt=""
-                    />
-                  </div>
+            {navActive === "saved" && (
+              <div>
+                <div className="flex items-center justify-between mt-8 mb-4">
+                  <span className="text-xs text-neutral-500">
+                    Only you can see what you've saved
+                  </span>
+                  <span className="text-sm font-[600] text-[#0095f6]">
+                    + New Collection
+                  </span>
                 </div>
-                <div className="absolute inset-0 group-hover:bg-none bg-gradient-to-t from-[#262626]/50 to-white/0"></div>
-                <span className="absolute bottom-3 left-5 text-xl text-white">
-                  All Posts
-                </span>
+                <div className="relative group w-[300px] h-[300px] mx-auto rounded-md overflow-hidden cursor-pointer">
+                  <div className="grid grid-cols-2 divide-x divide-y">
+                    <div>
+                      <img
+                        className="w-[150px] h-[150px] object-cover"
+                        src="/images/stories/images/img28.jpg"
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <img
+                        className="w-[150px] h-[150px] object-cover"
+                        src="/images/stories/images/img19.jpg"
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <img
+                        className="w-[150px] h-[150px] object-cover"
+                        src="/images/stories/images/img24.jpg"
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <img
+                        className="w-[150px] h-[150px] object-cover"
+                        src="/images/stories/images/img25.jpg"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 group-hover:bg-none bg-gradient-to-t from-[#262626]/50 to-white/0"></div>
+                  <span className="absolute bottom-3 left-5 text-xl text-white">
+                    All Posts
+                  </span>
+                </div>
               </div>
-            </div>
+            )}
           </section>
         </main>
 
