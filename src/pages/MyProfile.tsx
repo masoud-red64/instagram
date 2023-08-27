@@ -206,6 +206,53 @@ function MyProfile() {
               </div>
             </div> */}
 
+            {/* Saved */}
+            <div>
+              <div className="flex items-center justify-between mt-8 mb-4">
+                <span className="text-xs text-neutral-500">
+                  Only you can see what you've saved
+                </span>
+                <span className="text-sm font-[600] text-[#0095f6]">
+                  + New Collection
+                </span>
+              </div>
+              <div className="relative group w-[300px] h-[300px] mx-auto rounded-md overflow-hidden cursor-pointer">
+                <div className="grid grid-cols-2 divide-x divide-y">
+                  <div>
+                    <img
+                      className="w-[150px] h-[150px] object-cover"
+                      src="/images/stories/images/img28.jpg"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <img
+                      className="w-[150px] h-[150px] object-cover"
+                      src="/images/stories/images/img19.jpg"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <img
+                      className="w-[150px] h-[150px] object-cover"
+                      src="/images/stories/images/img24.jpg"
+                      alt=""
+                    />
+                  </div>
+                  <div>
+                    <img
+                      className="w-[150px] h-[150px] object-cover"
+                      src="/images/stories/images/img25.jpg"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div className="absolute inset-0 group-hover:bg-none bg-gradient-to-t from-[#262626]/50 to-white/0"></div>
+                <span className="absolute bottom-3 left-5 text-xl text-white">
+                  All Posts
+                </span>
+              </div>
+            </div>
           </section>
         </main>
       </div>
