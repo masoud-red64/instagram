@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
+import Footer from "../Components/Footer/Footer";
 
 function MyProfile() {
   const userHighlights = [
@@ -24,7 +25,7 @@ function MyProfile() {
   const { username } = useParams();
   if (username === "masoud_red64") {
     return (
-      <div className="max-w-[975px] mx-auto sm:pt-[30px] sm:px-5">
+      <div className="max-w-[975px] mx-auto sm:pt-[30px] px-2 sm:px-5">
         <header className="flex items-center gap-x-[30px] mt-4 mx-4 mb-6 md:m-0 md:mb-11">
           <div className="grow shrink-0">
             <div className="w-[77px] h-[77px] md:w-[150px] md:h-[150px] mx-auto">
@@ -255,6 +256,10 @@ function MyProfile() {
             </div>
           </section>
         </main>
+
+        <footer className="flex justify-center text-center text-neutral-500 mt-6 mb-[52px]">
+          <Footer />
+        </footer>
       </div>
     );
   } else {
