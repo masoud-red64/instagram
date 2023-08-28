@@ -37,7 +37,9 @@ function MyProfile() {
           </div>
           <div className="grow-[2] flex flex-col gap-y-5">
             <div className="flex items-center">
-              <span className="text-xl mr-5">masoud_red64</span>
+              <span className="text-xl dark:text-neutral-100 mr-5">
+                masoud_red64
+              </span>
               <div className="hidden md:flex items-center gap-x-2">
                 <button className="secondary-btn">Edit profile</button>
                 <button className="secondary-btn mr-3">View Archive</button>
@@ -54,7 +56,7 @@ function MyProfile() {
               <button className="secondary-btn mr-3">View Archive</button>
             </div>
 
-            <div className="hidden md:flex items-center gap-x-10">
+            <div className="hidden md:flex items-center gap-x-10 dark:text-neutral-100">
               <div className="flex gap-x-1">
                 <span className="font-[600]">0</span>
                 <span>posts</span>
@@ -69,7 +71,7 @@ function MyProfile() {
               </div>
             </div>
 
-            <div className="hidden md:flex flex-col">
+            <div className="hidden md:flex flex-col dark:text-neutral-100">
               <span className="text-sm font-[600]">M҉a҉s҉o҉u҉d҉</span>
               <span className="leading-[18px]">
                 ▷ ●━━━━━━─────── ♪🖤
@@ -116,7 +118,9 @@ function MyProfile() {
                         hasNewStory={false}
                       />
                     </div>
-                    <span className="text-xs font-[600]">Highlights</span>
+                    <span className="text-xs font-[600] dark:text-neutral-100">
+                      Highlights
+                    </span>
                   </div>
                 </SwiperSlide>
               ))}
@@ -135,7 +139,7 @@ function MyProfile() {
 
           {/* Info Of Page */}
           <section className="md:hidden py-3 border-t border-[#dbdbdb] dark:border-[#363636]">
-            <ul className="flex items-center justify-around text-sm">
+            <ul className="flex items-center justify-around text-sm dark:text-neutral-100">
               <li className="flex w-full flex-col items-center">
                 <span className="font-[600]">0</span>
                 <span className="text-neutral-500">posts</span>
@@ -158,8 +162,8 @@ function MyProfile() {
                 <li
                   className={`flex grow shrink basis-auto md:grow-0 items-center justify-center gap-x-1 ${
                     navActive === "posts"
-                      ? "text-[#0095f6] md:text-black border-t border-black"
-                      : "text-neutral-500"
+                      ? "text-[#0095f6] md:text-black md:dark:text-neutral-100 border-t border-black dark:border-white"
+                      : "text-neutral-500 dark:text-[#a8a8a8]"
                   } py-4 cursor-pointer`}
                   onClick={() => setNavActive("posts")}
                 >
@@ -173,8 +177,8 @@ function MyProfile() {
                 <li
                   className={`flex grow shrink basis-auto md:grow-0 items-center justify-center gap-x-1 ${
                     navActive === "saved"
-                      ? "text-[#0095f6] md:text-black border-t border-black"
-                      : "text-neutral-500"
+                      ? "text-[#0095f6] md:text-black md:dark:text-neutral-100 border-t border-black dark:border-white"
+                      : "text-neutral-500 dark:text-[#a8a8a8]"
                   } py-4 cursor-pointer`}
                   onClick={() => setNavActive("saved")}
                 >
@@ -188,8 +192,8 @@ function MyProfile() {
                 <li
                   className={`flex grow shrink basis-auto md:grow-0 items-center justify-center gap-x-1 ${
                     navActive === "tagged"
-                      ? "text-[#0095f6] md:text-black border-t border-black"
-                      : "text-neutral-500"
+                      ? "text-[#0095f6] md:text-black md:dark:text-neutral-100 border-t border-black dark:border-white"
+                      : "text-neutral-500 dark:text-[#a8a8a8]"
                   } py-4 cursor-pointer`}
                   onClick={() => setNavActive("tagged")}
                 >
@@ -211,10 +215,10 @@ function MyProfile() {
               <div>
                 <div className="flex flex-col items-center justify-center my-[60px]">
                   <div className="w-[62px] h-[62px] bg-icons bg-no-repeat bg-[-128px_-269px]"></div>
-                  <span className="text-[30px] font-[800] my-3">
+                  <span className="text-[30px] font-[800] dark:text-neutral-100 my-3">
                     Share Photos
                   </span>
-                  <span className="text-sm">
+                  <span className="text-sm dark:text-neutral-100">
                     When you share photos, they will appear on your profile.
                   </span>
                   <button className="text-[#0095f6] text-sm font-[600] mt-4">
@@ -228,10 +232,10 @@ function MyProfile() {
             {navActive === "tagged" && (
               <div className="flex flex-col items-center justify-center my-[60px]">
                 <div className="w-[62px] h-[62px] bg-icons bg-no-repeat bg-[-256px_-269px]"></div>
-                <span className="text-[30px] font-[800] my-3">
+                <span className="text-[30px] font-[800] dark:text-neutral-100 my-3">
                   Photos of you
                 </span>
-                <span className="text-sm">
+                <span className="text-sm dark:text-neutral-100">
                   When people tag you in photos, they'll appear here.
                 </span>
               </div>
@@ -241,7 +245,7 @@ function MyProfile() {
             {navActive === "saved" && (
               <div>
                 <div className="flex items-center justify-between mt-8 mb-4">
-                  <span className="text-xs text-neutral-500">
+                  <span className="text-xs text-neutral-500 dark:text-[#a8a8a8]">
                     Only you can see what you've saved
                   </span>
                   <span className="text-sm font-[600] text-[#0095f6]">
@@ -289,7 +293,7 @@ function MyProfile() {
           </section>
         </main>
 
-        <footer className="flex justify-center text-center text-neutral-500 mt-6 mb-[52px]">
+        <footer className="flex justify-center text-center text-neutral-500 dark:text-[#a8a8a8] mt-6 mb-[52px]">
           <Footer />
         </footer>
       </div>

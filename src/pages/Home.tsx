@@ -500,7 +500,7 @@ function Home() {
               ))}
             </div>
 
-            <div className="mt-6">
+            <div className="mt-6  text-[#c7c7c7] dark:text-neutral-500">
               <Footer />
             </div>
           </div>
