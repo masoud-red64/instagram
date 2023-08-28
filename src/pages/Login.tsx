@@ -8,7 +8,7 @@ function Login() {
   return (
     <div>
       <div className="mx-auto max-w-[350px] mb-11">
-        <div className="border border-[#dbdbdb] mt-8 mb-2.5 py-2.5">
+        <div className="sm:border border-[#dbdbdb] mt-8 mb-2.5 py-2.5">
           <div className="mb-3 mt-9">
             <svg className="w-[175px] h-[50px] mx-auto">
               <use href="#logo-instagram"></use>
@@ -71,7 +71,7 @@ function Login() {
           </div>
         </div>
 
-        <div className="border border-[#dbdbdb] py-1 mb-2.5">
+        <div className="sm:border border-[#dbdbdb] py-1 mb-2.5">
           <p className="flex items-center justify-center gap-x-1 text-sm m-[15px]">
             <span>Don't have an account?</span>
             <a href="#" className="font-[600] text-[#0095f6]">
@@ -89,7 +89,7 @@ function Login() {
         </div>
       </div>
 
-      <footer className="flex items-center justify-center text-center text-neutral-500">
+      <footer className="flex items-center justify-center text-center text-neutral-500 px-4">
         <Footer />
       </footer>
     </div>
