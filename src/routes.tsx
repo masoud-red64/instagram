@@ -6,7 +6,8 @@ import Explore from "./pages/Explore";
 import Reels from "./pages/Reels";
 import Direct from "./pages/Direct";
 import MyProfile from "./pages/MyProfile";
-import Login from "./pages/login";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const routes = [
   {
@@ -28,6 +29,10 @@ const routes = [
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ];
 
