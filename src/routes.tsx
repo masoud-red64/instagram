@@ -6,6 +6,7 @@ import Explore from "./pages/Explore";
 import Reels from "./pages/Reels";
 import Direct from "./pages/Direct";
 import MyProfile from "./pages/MyProfile";
+import Login from "./pages/login";
 
 const routes = [
   {
@@ -23,6 +24,10 @@ const routes = [
   {
     path: "/stories/:userID",
     element: <Stories />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ];
 
