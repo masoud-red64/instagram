@@ -142,7 +142,7 @@ function Reels() {
           user.stories.map(
             (reel, index) =>
               reel.video && (
-                <SwiperSlide>
+                <SwiperSlide key={reel.id}>
                   <>
                     <div className="flex items-end gap-x-4 justify-between">
                       <div
@@ -365,7 +365,7 @@ function Reels() {
                                 </div>
                                 <div className="h-[260px] px-8 overflow-y-scroll scrollbar">
                                   {user.posts.comments.map((comment) => (
-                                    <div>
+                                    <div key={comment.id}>
                                       <Comment
                                         id={comment.id}
                                         isLikedComments={isLikedComments}

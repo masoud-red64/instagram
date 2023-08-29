@@ -48,7 +48,7 @@ function NotificationBox() {
       <div className="pb-2 border-b-2 border-[#dbdbdb] dark:border-[#262626]">
         <h4 className="notification-section-title">امروز</h4>
         <div>
-          <button className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
+          <div className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
             <div className="flex items-center gap-x-[14px]">
               <div className="w-9 h-9 xs:w-11 xs:h-11 shrink-0">
                 <Story img="user15.jpg" hasStory={true} hasNewStory />
@@ -64,7 +64,7 @@ function NotificationBox() {
             >
               {isFollow3 ? "Following" : "Follow"}
             </button>
-          </button>
+          </div>
         </div>
       </div>
 
@@ -72,7 +72,7 @@ function NotificationBox() {
       <div className="pb-2 border-b-2 border-[#dbdbdb] dark:border-[#262626]">
         <h4 className="notification-section-title">این هفته</h4>
         <div className="child-hover:bg-gray-100 dark:child-hover:bg-[#121212] child:transition-all">
-          <button className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
+          <div className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
             <div className="flex items-center gap-x-[14px]">
               <div className="w-9 h-9 xs:w-11 xs:h-11 shrink-0">
                 <Story img="user6.jpg" hasStory={false} />
@@ -90,8 +90,8 @@ function NotificationBox() {
             >
               {isFollow1 ? "Following" : "Follow"}
             </button>
-          </button>
-          <button className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
+          </div>
+          <div className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
             <div className="flex items-center gap-x-[14px]">
               <div className="w-9 h-9 xs:w-11 xs:h-11 shrink-0">
                 <Story img="user6.jpg" hasStory={false} />
@@ -104,7 +104,7 @@ function NotificationBox() {
               </span>
             </div>
             <button className="primary-btn">Follow</button>
-          </button>
+          </div>
         </div>
       </div>
 
@@ -112,7 +112,7 @@ function NotificationBox() {
       <div className="pb-2 border-b-2 border-[#dbdbdb] dark:border-[#262626]">
         <h4 className="notification-section-title">این ماه</h4>
         <div className="child-hover:bg-gray-100 dark:child-hover:bg-[#121212] child:transition-all">
-          <button className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
+          <div className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
             <div className="flex items-center gap-x-[14px]">
               <div className="w-9 h-9 xs:w-11 xs:h-11 shrink-0">
                 <Story img="user9.jpg" hasStory={true} hasNewStory />
@@ -129,7 +129,7 @@ function NotificationBox() {
             >
               {isFollow2 ? "Following" : "Follow"}
             </button>
-          </button>
+          </div>
         </div>
       </div>
 
@@ -137,7 +137,7 @@ function NotificationBox() {
       <div>
         <h4 className="notification-section-title">قدیمی تر</h4>
         <div className="child-hover:bg-gray-100 dark:child-hover:bg-[#121212] child:transition-all">
-          <button className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
+          <div className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
             <div className="flex items-center gap-x-[14px]">
               <div className="w-9 h-9 xs:w-11 xs:h-11 shrink-0">
                 <Story img="user10.jpg" hasStory={true} />
@@ -152,7 +152,7 @@ function NotificationBox() {
             Follow
           </button> */}
             <button className="secondary-btn">Following</button>
-          </button>
+          </div>
           <button className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
             <div className="flex items-center gap-x-[14px]">
               <TwoProfile img1="user12.jpg" img2="user13.jpg" />
@@ -211,7 +211,7 @@ function NotificationBox() {
               />
             </div>
           </button>
-          <button className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
+          <div className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
             <div className="flex items-center gap-x-[14px]">
               <div className="w-9 h-9 xs:w-11 xs:h-11 shrink-0">
                 <Story img="user14.jpg" hasStory={false} />
@@ -222,7 +222,7 @@ function NotificationBox() {
               </span>
             </div>
             <button className="primary-btn">Follow</button>
-          </button>
+          </div>
         </div>
       </div>
     </div>

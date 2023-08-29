@@ -322,7 +322,7 @@ function PostWithCommentBox({
             </span>
 
             {/* Input */}
-            <div className="flex items-center gap-x-2 justify-between mt-1 -mx-4 pt-3 px-4 border-t border-[#efefef] border-[#363636]">
+            <div className="flex items-center gap-x-2 justify-between mt-1 -mx-4 pt-3 px-4 border-t border-[#efefef] dark:border-[#363636]">
               <div className="relative">
                 <button
                   onClick={() => {

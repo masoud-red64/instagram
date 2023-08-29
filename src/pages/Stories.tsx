@@ -151,219 +151,209 @@ function Stories() {
           }}
         >
           {usersList.map((user, index) => (
-            <>
-              {console.log(activeIndex)}
-              <SwiperSlide key={user.id}>
-                <Swiper
-                  spaceBetween={30}
-                  centeredSlides={true}
-                  pagination={{
-                    clickable: true,
-                  }}
-                  navigation={activeIndex === index}
-                  modules={[Autoplay, Pagination, Navigation]}
-                  className={`story-user-swiper ${
-                    isPauseSwiper ? "swiper-paused" : ""
-                  }`}
-                  watchSlidesProgress={true}
-                  onSlidePrevTransitionEnd={(swiper) => {
-                    parentSwiper && parentSwiper.slideNext();
-                  }}
-                  onSlideChange={() => {
-                    setIsMutedVideos((prevStatus) => {
-                      const updatedStatus: { [index: number]: boolean } = {};
-                      for (const id in prevStatus) {
-                        updatedStatus[id] = false; // Mute all videos
-                      }
-                      return updatedStatus;
-                    });
-                  }}
-                >
-                  {user.stories.map((story, index) => (
-                    <SwiperSlide
-                      key={story.id}
-                      onMouseDown={() => {
-                        setIsPauseSwiper(true);
-                      }}
-                      onMouseUp={() => setIsPauseSwiper(false)}
-                    >
-                      <div className="relative -z-10 w-full h-full rounded-lg">
-                        {/* Top */}
-                        <div className="flex items-center justify-between bg-gradient-to-b from-[rgba(38,38,38,.8)] to-[rgba(38, 38, 38,0)] pt-5 px-4 pb-8">
-                          <div className="flex items-center gap-x-2">
-                            <div className="w-8 h-8">
-                              <Story img={user.img} hasStory={false} />
-                            </div>
-                            <span className="text-sm text-white">
-                              {user.username}
-                            </span>
-                            <span className="text-sm text-white/60">2h</span>
+            <SwiperSlide key={user.id}>
+              <Swiper
+                spaceBetween={30}
+                centeredSlides={true}
+                pagination={{
+                  clickable: true,
+                }}
+                navigation={activeIndex === index}
+                modules={[Autoplay, Pagination, Navigation]}
+                className={`story-user-swiper ${
+                  isPauseSwiper ? "swiper-paused" : ""
+                }`}
+                watchSlidesProgress={true}
+                onSlidePrevTransitionEnd={(swiper) => {
+                  parentSwiper && parentSwiper.slideNext();
+                }}
+                onSlideChange={() => {
+                  setIsMutedVideos((prevStatus) => {
+                    const updatedStatus: { [index: number]: boolean } = {};
+                    for (const id in prevStatus) {
+                      updatedStatus[id] = false; // Mute all videos
+                    }
+                    return updatedStatus;
+                  });
+                }}
+              >
+                {user.stories.map((story, index) => (
+                  <SwiperSlide
+                    key={story.id}
+                    onMouseDown={() => {
+                      setIsPauseSwiper(true);
+                    }}
+                    onMouseUp={() => setIsPauseSwiper(false)}
+                  >
+                    <div className="relative -z-10 w-full h-full rounded-lg">
+                      {/* Top */}
+                      <div className="flex items-center justify-between bg-gradient-to-b from-[rgba(38,38,38,.8)] to-[rgba(38, 38, 38,0)] pt-5 px-4 pb-8">
+                        <div className="flex items-center gap-x-2">
+                          <div className="w-8 h-8">
+                            <Story img={user.img} hasStory={false} />
                           </div>
-                          <div className="flex items-center gap-x-4 text-white">
-                            <div>
-                              {isPauseSwiper ? (
-                                <button
-                                  onClick={() => {
-                                    setIsPauseSwiper(false);
-                                  }}
-                                >
-                                  <svg className="w-4 h-4">
-                                    <use href="#play"></use>
-                                  </svg>
-                                </button>
-                              ) : (
-                                <button
-                                  onClick={() => {
-                                    setIsPauseSwiper(true);
-                                  }}
-                                >
-                                  <svg className="w-4 h-4">
-                                    <use href="#pause"></use>
-                                  </svg>
-                                </button>
-                              )}
-                            </div>
-                            <button
-                              onClick={() =>
-                                handleMuteVideo(story.id, story.video)
-                              }
-                            >
-                              {isMutedVideos[story.id] && !story.img ? (
+                          <span className="text-sm text-white">
+                            {user.username}
+                          </span>
+                          <span className="text-sm text-white/60">2h</span>
+                        </div>
+                        <div className="flex items-center gap-x-4 text-white">
+                          <div>
+                            {isPauseSwiper ? (
+                              <button
+                                onClick={() => {
+                                  setIsPauseSwiper(false);
+                                }}
+                              >
                                 <svg className="w-4 h-4">
-                                  <use href="#not-muted"></use>
+                                  <use href="#play"></use>
+                                </svg>
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => {
+                                  setIsPauseSwiper(true);
+                                }}
+                              >
+                                <svg className="w-4 h-4">
+                                  <use href="#pause"></use>
+                                </svg>
+                              </button>
+                            )}
+                          </div>
+                          <button
+                            onClick={() =>
+                              handleMuteVideo(story.id, story.video)
+                            }
+                          >
+                            {isMutedVideos[story.id] && !story.img ? (
+                              <svg className="w-4 h-4">
+                                <use href="#not-muted"></use>
+                              </svg>
+                            ) : (
+                              <svg className="w-4 h-4">
+                                <use href="#muted"></use>
+                              </svg>
+                            )}
+                          </button>
+
+                          <button onClick={() => setIsShowReportBox(true)}>
+                            <svg className="w-6 h-6">
+                              <use href="#three-points"></use>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Bottom */}
+                      <div className="absolute bottom-0 right-0 left-0 p-4 flex items-center justify-between gap-x-4 bg-gradient-to-t from-[rgba(38,38,38,.6)] to-[rgba(38, 38, 38,0)]">
+                        <div className="relative grow">
+                          <div className="flex border rounded-full">
+                            <input
+                              type="text"
+                              placeholder={`Reply to ${user.username}`}
+                              className="py-2 px-4 w-full bg-transparent text-[#dbdbdb] outline-none placeholder:text-[#dbdbdb]"
+                              onFocus={() => handleShowBoxEmojiClick(user.id)}
+                              onBlur={() => handleHideBoxEmojiClick(user.id)}
+                              value={reactionInputValue[user.id]}
+                              onChange={(e) =>
+                                handleChangeInputValue(user.id, e.target.value)
+                              }
+                            />
+                            {reactionInputValue[user.id] && (
+                              <button className="text-white mr-3">send</button>
+                            )}
+                          </div>
+
+                          {/* Emojis */}
+                          {boxEmojiStatus[user.id] &&
+                            !reactionInputValue[user.id] && (
+                              <div className="absolute -top-32 w-full flex flex-col items-center px-16">
+                                <h5 className="text-white">Quick Reactions</h5>
+                                <div className="flex flex-wrap justify-center text-2xl gap-2.5 mt-3">
+                                  <span>😀</span>
+                                  <span>😎</span>
+                                  <span>😍</span>
+                                  <span>😑</span>
+                                  <span>🤩</span>
+                                  <span>😅</span>
+                                  <span>😂</span>
+                                  <span>😛</span>
+                                </div>
+                              </div>
+                            )}
+                        </div>
+                        {!boxEmojiStatus[user.id] && (
+                          <>
+                            <button onClick={() => handleLikeClick(user.id)}>
+                              {storyLikeStatus[user.id] ? (
+                                <svg className="w-6 h-6 text-white">
+                                  <use href="#fill-heart"></use>
                                 </svg>
                               ) : (
-                                <svg className="w-4 h-4">
-                                  <use href="#muted"></use>
+                                <svg className="w-6 h-6 text-white">
+                                  <use href="#notifications"></use>
                                 </svg>
                               )}
                             </button>
-
-                            <button onClick={() => setIsShowReportBox(true)}>
-                              <svg className="w-6 h-6">
-                                <use href="#three-points"></use>
+                            <button onClick={() => setIsShowShareBox(true)}>
+                              <svg className="w-6 h-6 text-white">
+                                <use href="#messages"></use>
                               </svg>
                             </button>
-                          </div>
-                        </div>
-
-                        {/* Bottom */}
-                        <div className="absolute bottom-0 right-0 left-0 p-4 flex items-center justify-between gap-x-4 bg-gradient-to-t from-[rgba(38,38,38,.6)] to-[rgba(38, 38, 38,0)]">
-                          <div className="relative grow">
-                            <div className="flex border rounded-full">
-                              <input
-                                type="text"
-                                placeholder={`Reply to ${user.username}`}
-                                className="py-2 px-4 w-full bg-transparent text-[#dbdbdb] outline-none placeholder:text-[#dbdbdb]"
-                                onFocus={() => handleShowBoxEmojiClick(user.id)}
-                                onBlur={() => handleHideBoxEmojiClick(user.id)}
-                                value={reactionInputValue[user.id]}
-                                onChange={(e) =>
-                                  handleChangeInputValue(
-                                    user.id,
-                                    e.target.value
-                                  )
-                                }
-                              />
-                              {reactionInputValue[user.id] && (
-                                <button className="text-white mr-3">
-                                  send
-                                </button>
-                              )}
-                            </div>
-
-                            {/* Emojis */}
-                            {boxEmojiStatus[user.id] &&
-                              !reactionInputValue[user.id] && (
-                                <div className="absolute -top-32 w-full flex flex-col items-center px-16">
-                                  <h5 className="text-white">
-                                    Quick Reactions
-                                  </h5>
-                                  <div className="flex flex-wrap justify-center text-2xl gap-2.5 mt-3">
-                                    <span>😀</span>
-                                    <span>😎</span>
-                                    <span>😍</span>
-                                    <span>😑</span>
-                                    <span>🤩</span>
-                                    <span>😅</span>
-                                    <span>😂</span>
-                                    <span>😛</span>
-                                  </div>
-                                </div>
-                              )}
-                          </div>
-                          {!boxEmojiStatus[user.id] && (
-                            <>
-                              <button onClick={() => handleLikeClick(user.id)}>
-                                {storyLikeStatus[user.id] ? (
-                                  <svg className="w-6 h-6 text-white">
-                                    <use href="#fill-heart"></use>
-                                  </svg>
-                                ) : (
-                                  <svg className="w-6 h-6 text-white">
-                                    <use href="#notifications"></use>
-                                  </svg>
-                                )}
-                              </button>
-                              <button onClick={() => setIsShowShareBox(true)}>
-                                <svg className="w-6 h-6 text-white">
-                                  <use href="#messages"></use>
-                                </svg>
-                              </button>
-                            </>
-                          )}
-                        </div>
-
-                        <div>
-                          {story.video ? (
-                            <video
-                              autoPlay
-                              ref={videoRef}
-                              className="absolute -z-50 top-0 left-0 w-full h-full object-cover"
-                              muted={!isMutedVideos[story.id]}
-                              onMouseDown={() => {
-                                videoRef.current?.pause();
-                              }}
-                              onMouseUp={() => {
-                                videoRef.current?.play();
-                              }}
-                            >
-                              <source
-                                src={`/images/stories/videos/${story.video}`}
-                                type="video/mp4"
-                              />
-                              Your browser does not support the video tag.
-                            </video>
-                          ) : (
-                            <img
-                              loading="lazy"
-                              className="absolute -z-50 top-0 left-0 w-full h-full object-cover"
-                              src={`/images/stories/images/${story.img}`}
-                              alt=""
-                            />
-                          )}
-                        </div>
-
-                        {/* overlay */}
-                        {showOverlayOnStoryStatus[user.id] && (
-                          <div className="absolute inset-0 bg-black/30 -z-10"></div>
+                          </>
                         )}
                       </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-                <Link
-                  to={`/stories/${user.id}`}
-                  className="hidden prev-next__content"
-                >
-                  <div className="w-[100px] h-[100px] pointer-events-none">
-                    <Story img={user.img} hasStory hasNewStory />
-                  </div>
-                  <span className="text-lg">{user.username}</span>
-                  <span className="text-lg">2h</span>
-                </Link>
-              </SwiperSlide>
-            </>
+
+                      <div>
+                        {story.video ? (
+                          <video
+                            autoPlay
+                            ref={videoRef}
+                            className="absolute -z-50 top-0 left-0 w-full h-full object-cover"
+                            muted={!isMutedVideos[story.id]}
+                            onMouseDown={() => {
+                              videoRef.current?.pause();
+                            }}
+                            onMouseUp={() => {
+                              videoRef.current?.play();
+                            }}
+                          >
+                            <source
+                              src={`/images/stories/videos/${story.video}`}
+                              type="video/mp4"
+                            />
+                            Your browser does not support the video tag.
+                          </video>
+                        ) : (
+                          <img
+                            loading="lazy"
+                            className="absolute -z-50 top-0 left-0 w-full h-full object-cover"
+                            src={`/images/stories/images/${story.img}`}
+                            alt=""
+                          />
+                        )}
+                      </div>
+
+                      {/* overlay */}
+                      {showOverlayOnStoryStatus[user.id] && (
+                        <div className="absolute inset-0 bg-black/30 -z-10"></div>
+                      )}
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              <button
+                onClick={() => navigate(`/stories/${user.id}`)}
+                className="hidden prev-next__content"
+              >
+                <div className="w-[100px] h-[100px] pointer-events-none">
+                  <Story img={user.img} hasStory hasNewStory />
+                </div>
+                <span className="text-lg">{user.username}</span>
+                <span className="text-lg">2h</span>
+              </button>
+            </SwiperSlide>
           ))}
         </Swiper>
       </div>

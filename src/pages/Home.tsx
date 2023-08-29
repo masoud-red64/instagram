@@ -132,7 +132,7 @@ function Home() {
               className="stories-swiper"
             >
               {usersList.map((user) => (
-                <SwiperSlide>
+                <SwiperSlide key={user.id}>
                   <div className="flex flex-col items-center gap-y-1">
                     <div className="w-[66px] h-[66px]">
                       <Story id={user.id} img={user.img} hasStory hasNewStory />
@@ -151,7 +151,7 @@ function Home() {
             <div className="max-w-[470px] mx-auto mt-10 ">
               {/* Post */}
               {usersList.map((user) => (
-                <div className="bg-white pb-4 mb-6 border-b border-[#dbdbdb] dark:border-[#363636] dark:bg-black">
+                <div key={user.id} className="bg-white pb-4 mb-6 border-b border-[#dbdbdb] dark:border-[#363636] dark:bg-black">
                   {/* Top */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-x-3">
@@ -203,7 +203,7 @@ function Home() {
                       }}
                     >
                       {user.stories.map((post) => (
-                        <SwiperSlide>
+                        <SwiperSlide key={post.id}>
                           {post.img ? (
                             <img
                               src={`/images/stories/images/${post.img}`}
@@ -375,7 +375,7 @@ function Home() {
                       </div>
                       <div>
                         {user.posts.comments.map((comment) => (
-                          <div className="flex items-center justify-between">
+                          <div key={comment.id} className="flex items-center justify-between">
                             <div className="flex items-center gap-x-1">
                               <span className="font-[600]">
                                 programadordesignerpro
@@ -479,7 +479,7 @@ function Home() {
             </div>
             <div>
               {usersList.slice(0, 5).map((user) => (
-                <div className="flex items-center justify-between py-1.5">
+                <div key={user.id} className="flex items-center justify-between py-1.5">
                   <div className="flex items-center gap-x-3">
                     <div className="h-11 w-11">
                       <Story img={user.img} hasStory={false} />

@@ -169,6 +169,7 @@ function Direct() {
             <ul>
               {usersList.map((user, index) => (
                 <li
+                key={user.id}
                   className={`flex items-center justify-center sm:justify-between py-2 px-1 sm:px-6 ${
                     mainUser.id === user.id &&
                     "bg-neutral-100 dark:bg-neutral-800"

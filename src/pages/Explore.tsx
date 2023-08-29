@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { userListTypes, usersList } from "../Data/users";
 import ShareBox from "../Components/ShareBox/ShareBox";
 import PostWithCommentBox from "../Components/PostWithCommentBox/PostWithCommentBox";
@@ -28,6 +28,7 @@ function Explore() {
         <div className="grid grid-cols-3 gap-1 sm:mx-8 mb-1 px-1 sm:px-5">
           {usersList.map((user, index) => (
             <div
+              key={user.id}
               className={`relative group cursor-pointer col-span-1 row-span-${
                 (index - 2) % 10 === 0 || (index - 5) % 10 === 0 ? "2" : "1"
               } max-w-[300px] max-h-${
@@ -40,12 +41,13 @@ function Explore() {
               {user.stories.slice(0, 1).map((story) => {
                 return story.img ? (
                   <img
+                    key={story.id}
                     src={`/images/stories/images/${story.img}`}
                     className="h-full w-full object-cover"
                     alt=""
                   />
                 ) : (
-                  <>
+                  <div key={story.id}>
                     <video
                       src={`/images/stories/videos/${story.video}`}
                       className="h-full w-full object-cover"
@@ -56,7 +58,7 @@ function Explore() {
                         <use href="#reels"></use>
                       </svg>
                     </div>
-                  </>
+                  </div>
                 );
               })}
 

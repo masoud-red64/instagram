@@ -17,10 +17,6 @@ function MyProfile() {
     { id: 4, img: "highlight4.jpg" },
     { id: 5, img: "highlight5.jpg" },
     { id: 6, img: "highlight6.jpg" },
-    { id: 6, img: "highlight6.jpg" },
-    { id: 6, img: "highlight6.jpg" },
-    { id: 6, img: "highlight6.jpg" },
-    { id: 6, img: "highlight6.jpg" },
   ];
 
   const [navActive, setNavActive] = useState("posts");
@@ -109,7 +105,7 @@ function MyProfile() {
               className="highlights-swiper w-64 xs:w-[350px] sm:w-[550px] md:w-[600px] lg:w-[850px]"
             >
               {userHighlights.map((highlight) => (
-                <SwiperSlide>
+                <SwiperSlide key={highlight.id}>
                   <div className="flex flex-col items-center gap-y-3">
                     <div className="w-14 h-14 md:w-[77px] md:h-[77px]">
                       <Story
