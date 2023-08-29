@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Footer from "../Components/Footer/Footer";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [phoneNumberAndEmailInputValue, setPhoneNumberAndEmailInputValue] =
@@ -213,9 +214,9 @@ function Register() {
         <div className="sm:border border-[#dbdbdb] py-1 mb-2.5">
           <p className="flex items-center justify-center gap-x-1 text-sm m-[15px]">
             <span>Have an account?</span>
-            <a href="#" className="font-[600] text-[#0095f6]">
+            <Link to="/login" className="font-[600] text-[#0095f6]">
               Log in
-            </a>
+            </Link>
           </p>
         </div>
 

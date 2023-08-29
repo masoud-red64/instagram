@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Footer from "../Components/Footer/Footer";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   const [usernameInputValue, setUsernameInputValue] = useState<string>("");
@@ -111,9 +111,9 @@ function Login() {
         <div className="sm:border border-[#dbdbdb] py-1 mb-2.5">
           <p className="flex items-center justify-center gap-x-1 text-sm m-[15px]">
             <span>Don't have an account?</span>
-            <a href="#" className="font-[600] text-[#0095f6]">
+            <Link to="/register" className="font-[600] text-[#0095f6]">
               Sign up
-            </a>
+            </Link>
           </p>
         </div>
 

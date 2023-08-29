@@ -35,7 +35,7 @@ function NotificationSlideShow() {
         className={`hidden md:block fixed ${
           slideShowSelector.isShowNotif ? "left-[72px]" : "-left-[400px]"
         } transition-[left] duration-500 delay-100 top-0 bottom-0 w-[397px] overflow-y-auto scrollbar bg-white dark:bg-black pt-2 border-r border-[#dbdbdb] dark:border-[#262626] rounded-tr-2xl rounded-br-2xl shadow-[4px_0_24px_rgba(0,0,0,.15)] ${
-          isVisible ? "z-10" : "z-30"
+          isVisible ? "z-20" : "z-30"
         }`}
       >
         {followRequestsSelector.isShowFollowRequestsInSlide ? (

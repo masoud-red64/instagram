@@ -12,7 +12,7 @@ function TransparentOverlay({ className }: { className: string }) {
 
   return (
     <div
-      className={`absolute inset-0 bg-transparent ${className}`}
+      className={`absolute inset-0 z-10 bg-transparent ${className}`}
       onClick={() => {
         dispatch(hideSearchSlideShow());
         dispatch(hideNotificationSlideShow());

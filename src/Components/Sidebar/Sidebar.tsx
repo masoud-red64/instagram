@@ -10,7 +10,7 @@ import { RootState } from "../../store/store";
 import SearchSlideShow from "../SlideShow/SearchSlideShow";
 import NotificationSlideShow from "../SlideShow/NotificationSlideShow";
 import { showCreateNewPost } from "../../store/createNewPostSlice";
-import { useFetcher, useLocation } from "react-router-dom";
+import { Link, useFetcher, useLocation } from "react-router-dom";
 import SwitchInput from "../SwitchInput/SwitchInput";
 
 function Sidebar() {
@@ -89,7 +89,7 @@ function Sidebar() {
             } group`}
             onClick={() => setActiveItem("Home")}
           >
-            <a href="/" className="inline-flex gap-x-4 p-3 -m-3">
+            <Link to="/" className="inline-flex gap-x-4 p-3 -m-3">
               {activeItem === "Home" &&
               location.pathname === "/" &&
               !createNewPostSelector.isShowCreateNewPost &&
@@ -115,7 +115,7 @@ function Sidebar() {
               >
                 Home
               </span>
-            </a>
+            </Link>
           </li>
           {/* Search */}
           <li className="hidden md:inline-block xl:block group">
@@ -159,13 +159,21 @@ function Sidebar() {
             }`}
             onClick={() => setActiveItem("Explore")}
           >
-            <a href="#" className="inline-flex gap-x-4 p-3 -m-3">
-              <svg className="w-6 h-6 group-hover:scale-105 transition-transform">
-                <use href="#explore"></use>
-              </svg>
-              <svg className="hidden w-6 h-6 group-hover:scale-105 transition-transform">
-                <use href="#explore-active"></use>
-              </svg>
+            <Link to="explore" className="inline-flex gap-x-4 p-3 -m-3">
+              {activeItem === "Explore" &&
+              location.pathname === "/explore" &&
+              !createNewPostSelector.isShowCreateNewPost &&
+              !slideShowSelector.isShowNotif &&
+              !slideShowSelector.isShowSearch ? (
+                <svg className="w-6 h-6 group-hover:scale-105 transition-transform">
+                  <use href="#explore-active"></use>
+                </svg>
+              ) : (
+                <svg className="w-6 h-6 group-hover:scale-105 transition-transform">
+                  <use href="#explore"></use>
+                </svg>
+              )}
+
               <span
                 className={`${
                   slideShowSelector.isShowNotif ||
@@ -177,7 +185,7 @@ function Sidebar() {
               >
                 Explore
               </span>
-            </a>
+            </Link>
           </li>
           {/* Reels */}
           <li
@@ -186,13 +194,21 @@ function Sidebar() {
             }`}
             onClick={() => setActiveItem("Reels")}
           >
-            <a href="#" className="inline-flex gap-x-4 p-3 -m-3">
-              <svg className="w-6 h-6 group-hover:scale-105 transition-transform">
-                <use href="#reels"></use>
-              </svg>
-              <svg className="hidden w-6 h-6 group-hover:scale-105 transition-transform">
-                <use href="#reels-active"></use>
-              </svg>
+            <Link to="/reels" className="inline-flex gap-x-4 p-3 -m-3">
+              {activeItem === "Reels" &&
+              location.pathname === "/reels" &&
+              !createNewPostSelector.isShowCreateNewPost &&
+              !slideShowSelector.isShowNotif &&
+              !slideShowSelector.isShowSearch ? (
+                <svg className="w-6 h-6 group-hover:scale-105 transition-transform">
+                  <use href="#reels-active"></use>
+                </svg>
+              ) : (
+                <svg className="w-6 h-6 group-hover:scale-105 transition-transform">
+                  <use href="#reels"></use>
+                </svg>
+              )}
+
               <span
                 className={`${
                   slideShowSelector.isShowNotif ||
@@ -204,7 +220,7 @@ function Sidebar() {
               >
                 Reels
               </span>
-            </a>
+            </Link>
           </li>
           {/* Messages */}
           <li
@@ -213,13 +229,21 @@ function Sidebar() {
             }`}
             onClick={() => setActiveItem("Messages")}
           >
-            <a href="#" className="inline-flex gap-x-4 p-3 -m-3">
-              <svg className="w-6 h-6 group-hover:scale-105 transition-transform">
-                <use href="#messages"></use>
-              </svg>
-              <svg className="hidden w-6 h-6 group-hover:scale-105 transition-transform">
-                <use href="#home-active"></use>
-              </svg>
+            <Link to="direct" className="inline-flex gap-x-4 p-3 -m-3">
+              {activeItem === "Messages" &&
+              location.pathname === "/direct" &&
+              !createNewPostSelector.isShowCreateNewPost &&
+              !slideShowSelector.isShowNotif &&
+              !slideShowSelector.isShowSearch ? (
+                <svg className="w-6 h-6 group-hover:scale-105 transition-transform">
+                  <use href="#messages-active"></use>
+                </svg>
+              ) : (
+                <svg className="w-6 h-6 group-hover:scale-105 transition-transform">
+                  <use href="#messages"></use>
+                </svg>
+              )}
+
               <span
                 className={`${
                   slideShowSelector.isShowNotif ||
@@ -231,7 +255,7 @@ function Sidebar() {
               >
                 Messages
               </span>
-            </a>
+            </Link>
           </li>
           {/* Notifications */}
           <li className="hidden md:inline-block xl:block group">
@@ -313,7 +337,7 @@ function Sidebar() {
             }`}
             onClick={() => setActiveItem("Profile")}
           >
-            <a href="#" className="inline-flex gap-x-4 p-3 -m-3">
+            <Link to="masoud_red64" className="inline-flex gap-x-4 p-3 -m-3">
               <img
                 loading="lazy"
                 src="/images/users/user1.jpg"
@@ -331,7 +355,7 @@ function Sidebar() {
               >
                 Profile
               </span>
-            </a>
+            </Link>
           </li>
         </ul>
         {/* More */}
