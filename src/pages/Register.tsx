@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import Footer from "../Components/Footer/Footer";
 
 function Register() {
-  const [mobileInputValue, setMobileInputValue] = useState<string>("");
+  const [phoneNumberAndEmailInputValue, setPhoneNumberAndEmailInputValue] =
+    useState<string>("");
   const [fullNameInputValue, setFullNameInputValue] = useState<string>("");
   const [usernameInputValue, setUsernameInputValue] = useState<string>("");
   const [passwordInputValue, setPasswordInputValue] = useState<string>("");
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
+
+  const gmailEmailRegex: RegExp = /^[\w\.-]+@gmail\.com$/;
+
+  const phoneNumberRegex: RegExp = /^(\+98|0)?9\d{9}$/;
+
   return (
     <div>
       <div className="mx-auto max-w-[350px] mb-11">
@@ -28,21 +34,30 @@ function Register() {
                 <input
                   type="text"
                   className="w-full h-full pl-2 bg-transparent border-0 outline-none"
-                  value={mobileInputValue}
-                  onChange={(e) => setMobileInputValue(e.target.value)}
+                  value={phoneNumberAndEmailInputValue}
+                  onChange={(e) =>
+                    setPhoneNumberAndEmailInputValue(e.target.value)
+                  }
                 />
                 <span
                   className={`absolute inset-0 left-2 h-full leading-9 text-neutral-500 pointer-events-none ${
-                    mobileInputValue
+                    phoneNumberAndEmailInputValue
                       ? " -translate-y-2.5 text-[11px] transition-all"
                       : "text-xs"
                   }`}
                 >
                   Mobile Number or Email
                 </span>
-                <div className="absolute right-2 top-0 bottom-0 flex items-center">
-                  <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-225px_-333px]"></span>
-                </div>
+                {phoneNumberAndEmailInputValue && (
+                  <div className="absolute right-2 top-0 bottom-0 flex items-center">
+                    {phoneNumberRegex.test(phoneNumberAndEmailInputValue) ||
+                    gmailEmailRegex.test(phoneNumberAndEmailInputValue) ? (
+                      <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-225px_-333px]"></span>
+                    ) : (
+                      <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-249px_-333px]"></span>
+                    )}{" "}
+                  </div>
+                )}
               </label>
               <label className="relative block h-9 bg-zinc-50 mb-1.5 mx-10 border border-[#dbdbdb] rounded-[3px]">
                 <input
@@ -61,9 +76,15 @@ function Register() {
                   Full Name
                 </span>
 
-                <div className="absolute right-2 top-0 bottom-0 flex items-center">
-                  <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-249px_-333px]"></span>
-                </div>
+                {fullNameInputValue && (
+                  <div className="absolute right-2 top-0 bottom-0 flex items-center">
+                    {fullNameInputValue.length > 2 ? (
+                      <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-225px_-333px]"></span>
+                    ) : (
+                      <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-249px_-333px]"></span>
+                    )}{" "}
+                  </div>
+                )}
               </label>
               <label className="relative block h-9 bg-zinc-50 mb-1.5 mx-10 border border-[#dbdbdb] rounded-[3px]">
                 <input
@@ -82,10 +103,16 @@ function Register() {
                   Username
                 </span>
 
-                <div className="absolute right-2 top-0 bottom-0 flex items-center gap-x-2">
-                  <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-225px_-333px]"></span>
-                  <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-273px_-333px]"></span>
-                </div>
+                {usernameInputValue && (
+                  <div className="absolute right-2 top-0 bottom-0 flex items-center gap-x-2">
+                    {usernameInputValue.length > 5 ? (
+                      <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-225px_-333px]"></span>
+                    ) : (
+                      <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-249px_-333px]"></span>
+                    )}{" "}
+                    <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-273px_-333px]"></span>
+                  </div>
+                )}
               </label>
               <label className="relative block h-9 bg-zinc-50 mb-1.5 mx-10 border border-[#dbdbdb] rounded-[3px]">
                 <input
@@ -103,16 +130,22 @@ function Register() {
                 >
                   Password
                 </span>
-                <div className="absolute right-2 top-0 bottom-0 flex items-center gap-x-2">
-                  <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-225px_-333px]"></span>
-                  <button
-                    type="button"
-                    className="text-sm text-neutral-800 hover:opacity-50 transition-opacity font-[600]"
-                    onClick={() => setIsShowPassword(!isShowPassword)}
-                  >
-                    {isShowPassword ? "Hide" : "Show"}
-                  </button>
-                </div>
+                {passwordInputValue && (
+                  <div className="absolute right-2 top-0 bottom-0 flex items-center gap-x-2">
+                    {passwordInputValue.length > 7 ? (
+                      <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-225px_-333px]"></span>
+                    ) : (
+                      <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-249px_-333px]"></span>
+                    )}{" "}
+                    <button
+                      type="button"
+                      className="text-sm text-neutral-800 hover:opacity-50 transition-opacity font-[600]"
+                      onClick={() => setIsShowPassword(!isShowPassword)}
+                    >
+                      {isShowPassword ? "Hide" : "Show"}
+                    </button>
+                  </div>
+                )}
               </label>
 
               <div className="flex flex-col gap-y-4 mx-10 text-xs/4 text-neutral-500 text-center">
@@ -141,7 +174,26 @@ function Register() {
               </div>
 
               <div className="h-8 mx-10 my-3.5">
-                <button className="primary-btn w-full opacity-70">Next</button>
+                <button
+                  className={`primary-btn w-full ${
+                    (phoneNumberRegex.test(phoneNumberAndEmailInputValue) ||
+                      gmailEmailRegex.test(phoneNumberAndEmailInputValue)) &&
+                    fullNameInputValue.length > 2 &&
+                    usernameInputValue.length > 5 &&
+                    passwordInputValue.length > 7
+                      ? ""
+                      : "opacity-70"
+                  }`}
+                  disabled={
+                    (!phoneNumberRegex.test(phoneNumberAndEmailInputValue) &&
+                      !gmailEmailRegex.test(phoneNumberAndEmailInputValue)) ||
+                    fullNameInputValue.length < 2 ||
+                    usernameInputValue.length < 5 ||
+                    passwordInputValue.length < 7
+                  }
+                >
+                  Next
+                </button>
               </div>
             </form>
           </div>
