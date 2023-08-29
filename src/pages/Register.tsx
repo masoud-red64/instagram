@@ -10,8 +10,8 @@ function Register() {
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
 
   const gmailEmailRegex: RegExp = /^[\w\.-]+@gmail\.com$/;
-
   const phoneNumberRegex: RegExp = /^(\+98|0)?9\d{9}$/;
+  const randomNumber = Math.floor(Math.random() * 9999);
 
   return (
     <div>
@@ -110,7 +110,18 @@ function Register() {
                     ) : (
                       <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-249px_-333px]"></span>
                     )}{" "}
-                    <span className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-273px_-333px]"></span>
+                    {fullNameInputValue && (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setUsernameInputValue(
+                            fullNameInputValue.replace(/\d+$/, "") +
+                              String(randomNumber)
+                          )
+                        }
+                        className="block w-[22px] h-[22px] bg-icons bg-no-repeat bg-[-273px_-333px]"
+                      ></button>
+                    )}
                   </div>
                 )}
               </label>
