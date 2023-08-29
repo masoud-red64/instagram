@@ -1,10 +1,28 @@
 import React, { useState } from "react";
 import Footer from "../Components/Footer/Footer";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [usernameInputValue, setUsernameInputValue] = useState<string>("");
   const [passwordInputValue, setPasswordInputValue] = useState<string>("");
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
+  const [isShowError, setIsShowError] = useState<boolean>(false);
+
+  const navigate = useNavigate();
+
+  const loginHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (
+      usernameInputValue === "masoud_red64" &&
+      passwordInputValue === "123456"
+    ) {
+      navigate("/");
+    } else {
+      setIsShowError(true);
+    }
+  };
+
   return (
     <div>
       <div className="mx-auto max-w-[350px] mb-11">
@@ -16,7 +34,7 @@ function Login() {
           </div>
 
           <div className="mt-6">
-            <form>
+            <form onSubmit={loginHandler}>
               <label className="relative block h-9 bg-zinc-50 mb-1.5 mx-10 border border-[#dbdbdb] rounded-[3px]">
                 <input
                   type="text"
@@ -60,10 +78,29 @@ function Login() {
               </label>
 
               <div className="h-8 mx-10 my-3.5">
-                <button className="primary-btn w-full opacity-70">
+                <button
+                  className={`primary-btn w-full ${
+                    usernameInputValue && passwordInputValue.length > 5
+                      ? ""
+                      : "opacity-70"
+                  }`}
+                  disabled={
+                    usernameInputValue.length === 0 ||
+                    passwordInputValue.length < 5
+                  }
+                >
                   Log in
                 </button>
               </div>
+
+              {isShowError && (
+                <div className="mx-10 my-3.5 text-center leading-3">
+                  <span className="text-sm text-[#ed4956]">
+                    Sorry, your password was incorrect. Please double-check your
+                    password.
+                  </span>
+                </div>
+              )}
             </form>
             <span className="block text-center text-xs text-[#00376b] mt-4 mb-2">
               Forgot password?
