@@ -11,6 +11,7 @@ function FollowRequests() {
             <div className="flex items-center gap-x-3">
               <div className="w-11 h-11 shrink-0">
                 <Story
+                id={user.id}
                   img={user.img}
                   hasStory={user.hasStory}
                   hasNewStory={user.hasNewStory}

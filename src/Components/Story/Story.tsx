@@ -100,7 +100,7 @@ const Story = ({ img, hasStory, hasNewStory, id }: StoryPropsTypes) => {
 
   return (
     <Link
-      to={`${hasNewStory ? `/stories/${id}` : "#"}`}
+      to={`${hasStory ? `/stories/${id}` : "javascript(void)"}`}
       className="w-full h-full relative flex items-center justify-center rounded-full"
       onClick={(e) => {
         e.preventDefault();

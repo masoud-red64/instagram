@@ -169,8 +169,8 @@ export const usersList: userListTypes[] = [
         img: "user9.jpg",
         hasStory: true,
         hasNewStory: true,
-        username: "mahdeih",
-        name: "mahdieh_123  ",
+        username: "mahdieh_123",
+        name: "mahdieh",
         stories: [
             { id: 25, img: 'img17.jpg', video: '' },
             { id: 26, img: '', video: 'video15.mp4' },
@@ -188,7 +188,7 @@ export const usersList: userListTypes[] = [
         img: "user10.jpg",
         hasStory: true,
         hasNewStory: true,
-        username: "masoudr3423",
+        username: "movie_3",
         name: "movie | فیلم ",
         stories: [
             { id: 28, img: 'img19.jpg', video: '' },

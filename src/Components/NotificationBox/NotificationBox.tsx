@@ -51,10 +51,10 @@ function NotificationBox() {
           <div className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
             <div className="flex items-center gap-x-[14px]">
               <div className="w-9 h-9 xs:w-11 xs:h-11 shrink-0">
-                <Story img="user15.jpg" hasStory={true} hasNewStory />
+                <Story id={11} img="user11.jpg" hasStory={true} hasNewStory />
               </div>
               <span className="max-w-40 text-sm text-left dark:text-gray-100 dir-rtl line-clamp-3">
-                <span className="font-[600]">j_zare12</span> شما را دنبال کرد.{" "}
+                <span className="font-[600]">mohammad</span> شما را دنبال کرد.{" "}
                 <span className="text-gray-500 dark:text-[#a8a8a8]">39m</span>
               </span>
             </div>
@@ -115,10 +115,10 @@ function NotificationBox() {
           <div className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
             <div className="flex items-center gap-x-[14px]">
               <div className="w-9 h-9 xs:w-11 xs:h-11 shrink-0">
-                <Story img="user9.jpg" hasStory={true} hasNewStory />
+                <Story id={9} img="user9.jpg" hasStory={true} hasNewStory />
               </div>
               <span className="max-w-40 text-sm text-left dark:text-gray-100 dir-rtl line-clamp-3">
-                <span className="font-[600]">mohammad__dstg</span> شما را دنبال
+                <span className="font-[600]">mahdieh_123</span> شما را دنبال
                 کرد.{" "}
                 <span className="text-gray-500 dark:text-[#a8a8a8]">3w</span>
               </span>
@@ -140,11 +140,10 @@ function NotificationBox() {
           <div className="w-full flex items-center justify-between py-1 px-3 xs:py-2 xs:px-6">
             <div className="flex items-center gap-x-[14px]">
               <div className="w-9 h-9 xs:w-11 xs:h-11 shrink-0">
-                <Story img="user10.jpg" hasStory={true} />
+                <Story id={10} img="user10.jpg" hasStory={true} />
               </div>
               <span className="max-w-40 text-sm text-left dark:text-gray-100 dir-rtl line-clamp-3">
-                <span className="font-[600]">aliakbar_mhp80</span> شما را دنبال
-                کرد.{" "}
+                <span className="font-[600]">movie_3</span> شما را دنبال کرد.{" "}
                 <span className="text-gray-500 dark:text-[#a8a8a8]">4w</span>
               </span>
             </div>

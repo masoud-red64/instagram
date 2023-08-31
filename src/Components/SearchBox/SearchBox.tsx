@@ -100,6 +100,7 @@ function SearchBox({ className }: { className: string }) {
               <button className="flex items-center gap-x-3">
                 <div className="w-[54px] h-[54px]">
                   <Story
+                    id={item.id}
                     img={item.img}
                     hasStory={item.hasStory}
                     hasNewStory={item.hasNewStory}
