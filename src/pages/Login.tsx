@@ -19,6 +19,15 @@ function Login() {
   const loginHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (
+      usernameInputValue !== "masoud_red64" ||
+      passwordInputValue !== "123456"
+    ) {
+      setIsShowError(true);
+    } else {
+      setIsShowError(false);
+    }
+
     dispatch(
       login({ username: usernameInputValue, password: passwordInputValue })
     );
@@ -27,8 +36,6 @@ function Login() {
   useEffect(() => {
     if (authSelector.isLogin) {
       navigate("/");
-    } else {
-      setIsShowError(true);
     }
   }, [authSelector.isLogin]);
 
@@ -113,8 +120,8 @@ function Login() {
               {isShowError && (
                 <div className="mx-10 my-3.5 text-center leading-3">
                   <span className="text-sm text-[#ed4956]">
-                    Sorry, your password was incorrect. Please double-check your
-                    password.
+                    Sorry, your password or username was incorrect. Please
+                    double-check your information.
                   </span>
                 </div>
               )}
