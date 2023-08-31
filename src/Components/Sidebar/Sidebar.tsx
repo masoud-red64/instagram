@@ -12,6 +12,7 @@ import NotificationSlideShow from "../SlideShow/NotificationSlideShow";
 import { showCreateNewPost } from "../../store/createNewPostSlice";
 import { Link, useFetcher, useLocation } from "react-router-dom";
 import SwitchInput from "../SwitchInput/SwitchInput";
+import { logout } from "../../store/auth";
 
 function Sidebar() {
   const [activeItem, setActiveItem] = useState("Home");
@@ -460,7 +461,10 @@ function Sidebar() {
                       </div>
                       <div className="h-0.5 bg-[#dbdbdb]/30 -mx-2 my-2"></div>
                       <div className=" hover:bg-[#f8f8f8] dark:hover:bg-[#3c3c3c] transition-all rounded-lg">
-                        <button className="w-full text-left text-sm p-4">
+                        <button
+                          className="w-full text-left text-sm p-4"
+                          onClick={() => dispatch(logout())}
+                        >
                           Log out
                         </button>
                       </div>

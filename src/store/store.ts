@@ -5,6 +5,7 @@ import searchInputValueReducer from "./searchInputValueSlice";
 import searchBoxReducer from './searchBoxSlice'
 import followRequestsReducer from "./followRequestsSlice";
 import createNewPostReducer from "./createNewPostSlice";
+import authReducer from "./auth";
 
 
 export const store = configureStore({
@@ -13,7 +14,8 @@ export const store = configureStore({
         searchInputValueReducer,
         searchBoxReducer,
         followRequestsReducer,
-        createNewPostReducer
+        createNewPostReducer,
+        authReducer
     },
 });
 

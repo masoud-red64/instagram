@@ -1,19 +1,30 @@
-import { useRoutes } from "react-router-dom";
+import { useNavigate, useRoutes } from "react-router-dom";
 import "./App.css";
 import routes from "./routes";
 import SvgSymbol from "./Components/SvgSymbol";
-import { Provider } from "react-redux";
-import { store } from "./store/store";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { RootState } from "./store/store";
+import { getCookie } from "./store/auth";
 
 function App() {
   const router = useRoutes(routes);
+  const authSelector = useSelector((state: RootState) => state.authReducer);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!getCookie("user")) {
+      navigate("/login");
+    }
+  }, [authSelector.isLogin]);
 
   return (
-    <Provider store={store}>
+    <>
       <SvgSymbol />
 
       {router}
-    </Provider>
+    </>
   );
 }
 

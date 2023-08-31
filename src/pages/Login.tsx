@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../Components/Footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { login } from "../store/auth";
 
 function Login() {
   const [usernameInputValue, setUsernameInputValue] = useState<string>("");
@@ -8,20 +11,26 @@ function Login() {
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const [isShowError, setIsShowError] = useState<boolean>(false);
 
+  const authSelector = useSelector((state: RootState) => state.authReducer);
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
-  const loginHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const loginHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (
-      usernameInputValue === "masoud_red64" &&
-      passwordInputValue === "123456"
-    ) {
+    dispatch(
+      login({ username: usernameInputValue, password: passwordInputValue })
+    );
+  };
+
+  useEffect(() => {
+    if (authSelector.isLogin) {
       navigate("/");
     } else {
       setIsShowError(true);
     }
-  };
+  }, [authSelector.isLogin]);
 
   return (
     <div>
@@ -41,6 +50,14 @@ function Login() {
                   className="w-full h-full pl-2 bg-transparent border-0 outline-none"
                   value={usernameInputValue}
                   onChange={(e) => setUsernameInputValue(e.target.value)}
+                  onFocus={() => {
+                    const localStorageDate = localStorage.getItem("user");
+                    if (localStorageDate !== null) {
+                      const userInfo = JSON.parse(localStorageDate);
+                      setUsernameInputValue(userInfo.username);
+                      setPasswordInputValue(userInfo.password);
+                    }
+                  }}
                 />
                 <span
                   className={`absolute inset-0 left-2 h-full leading-9 text-neutral-500 pointer-events-none ${
