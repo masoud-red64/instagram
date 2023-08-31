@@ -244,6 +244,7 @@ function SvgSymbol() {
         id="messages-active"
         aria-label="Direct"
         className="_ab6-"
+        fill="currentColor"
         role="img"
         viewBox="0 0 24 24"
       >
