@@ -17,7 +17,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!getCookie("user")) {
+    if (!getCookie("user") || !localStorage.getItem("user")) {
       navigate("/login");
     }
   }, [authSelector.isLogin]);
