@@ -13,6 +13,7 @@ import { showCreateNewPost } from "../../store/createNewPostSlice";
 import { Link, useFetcher, useLocation } from "react-router-dom";
 import SwitchInput from "../SwitchInput/SwitchInput";
 import { logout } from "../../store/authSlice";
+import { toast } from "react-toastify";
 
 function Sidebar() {
   const [activeItem, setActiveItem] = useState("Home");
@@ -456,7 +457,17 @@ function Sidebar() {
                       <div className=" hover:bg-[#f8f8f8] dark:hover:bg-[#3c3c3c] transition-all rounded-lg">
                         <button
                           className="w-full text-left text-sm p-4"
-                          onClick={() => dispatch(logout())}
+                          onClick={() => {
+                            toast("logout successfully...", {
+                              type: "success",
+                              autoClose: 2000,
+                              pauseOnHover: false,
+                              theme: "light",
+                            });
+                            setTimeout(() => {
+                              dispatch(logout());
+                            }, 2000);
+                          }}
                         >
                           Log out
                         </button>
