@@ -11,6 +11,8 @@ function Login() {
   const [passwordInputValue, setPasswordInputValue] = useState<string>("");
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const [isShowError, setIsShowError] = useState<boolean>(false);
+  const [isShowSpinnerLoading, setIsShowSpinnerLoading] =
+    useState<boolean>(false);
 
   const authSelector = useSelector((state: RootState) => state.authReducer);
   const dispatch = useDispatch();
@@ -37,9 +39,11 @@ function Login() {
   useEffect(() => {
     if (authSelector.isLogin) {
       dispatch(setLoading(true));
+      setIsShowSpinnerLoading(true);
       setTimeout(() => {
         navigate("/");
         dispatch(setLoading(false));
+        setIsShowSpinnerLoading(false);
       }, 4000);
     }
   }, [authSelector.isLogin]);
@@ -118,7 +122,24 @@ function Login() {
                     passwordInputValue.length < 5
                   }
                 >
-                  Log in
+                  {isShowSpinnerLoading ? (
+                    <div className="lds-spinner">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  ) : (
+                    "Log in"
+                  )}
                 </button>
               </div>
 
