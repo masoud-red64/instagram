@@ -13,6 +13,9 @@ function App() {
   const darkModeSelector = useSelector(
     (state: RootState) => state.darkModeReducer
   );
+  const loadingSelector = useSelector(
+    (state: RootState) => state.loadingReducer
+  );
 
   const navigate = useNavigate();
 
@@ -33,7 +36,9 @@ function App() {
   return (
     <>
       <SvgSymbol />
-      <span className="backgroundAnimation loader"></span>
+      {loadingSelector.isShowLoading && (
+        <span className="backgroundAnimation loader"></span>
+      )}
 
       {router}
     </>

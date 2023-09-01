@@ -7,6 +7,7 @@ import followRequestsReducer from "./followRequestsSlice";
 import createNewPostReducer from "./createNewPostSlice";
 import authReducer from "./authSlice";
 import darkModeReducer from "./darkModeSlice";
+import loadingReducer from "./loadingSlice";
 
 
 export const store = configureStore({
@@ -17,7 +18,8 @@ export const store = configureStore({
         followRequestsReducer,
         createNewPostReducer,
         authReducer,
-        darkModeReducer
+        darkModeReducer,
+        loadingReducer
     },
 });
 
