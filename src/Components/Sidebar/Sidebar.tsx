@@ -35,14 +35,6 @@ function Sidebar() {
     (state: RootState) => state.darkModeReducer
   );
 
-  useEffect(() => {
-    const preferredTheme = darkModeSelector.isDarkMode ? "dark" : "";
-
-    localStorage.setItem("theme", preferredTheme);
-
-    document.documentElement.className = preferredTheme;
-  }, [darkModeSelector.isDarkMode]);
-
   return (
     <>
       <div
