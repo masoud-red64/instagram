@@ -33,6 +33,7 @@ function App() {
   return (
     <>
       <SvgSymbol />
+      <span className="backgroundAnimation loader"></span>
 
       {router}
     </>
