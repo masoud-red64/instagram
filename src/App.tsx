@@ -32,7 +32,7 @@ function App() {
 
     document.documentElement.className = preferredTheme;
   }, [darkModeSelector.isDarkMode]);
-
+  
   return (
     <>
       <SvgSymbol />

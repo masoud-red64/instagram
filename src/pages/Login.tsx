@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { login } from "../store/authSlice";
+import { setLoading } from "../store/loadingSlice";
 
 function Login() {
   const [usernameInputValue, setUsernameInputValue] = useState<string>("");
@@ -35,7 +36,11 @@ function Login() {
 
   useEffect(() => {
     if (authSelector.isLogin) {
-      navigate("/");
+      dispatch(setLoading(true));
+      setTimeout(() => {
+        navigate("/");
+        dispatch(setLoading(false));
+      }, 4000);
     }
   }, [authSelector.isLogin]);
 
@@ -134,7 +139,9 @@ function Login() {
 
         <div className="sm:border border-[#dbdbdb] dark:border-[#363636] py-1 mb-2.5">
           <p className="flex items-center justify-center gap-x-1 text-sm m-[15px]">
-            <span className="dark:text-neutral-100">Don't have an account?</span>
+            <span className="dark:text-neutral-100">
+              Don't have an account?
+            </span>
             <Link to="/register" className="font-[600] text-[#0095f6]">
               Sign up
             </Link>
