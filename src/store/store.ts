@@ -5,7 +5,8 @@ import searchInputValueReducer from "./searchInputValueSlice";
 import searchBoxReducer from './searchBoxSlice'
 import followRequestsReducer from "./followRequestsSlice";
 import createNewPostReducer from "./createNewPostSlice";
-import authReducer from "./auth";
+import authReducer from "./authSlice";
+import darkModeReducer from "./darkModeSlice";
 
 
 export const store = configureStore({
@@ -15,7 +16,8 @@ export const store = configureStore({
         searchBoxReducer,
         followRequestsReducer,
         createNewPostReducer,
-        authReducer
+        authReducer,
+        darkModeReducer
     },
 });
 

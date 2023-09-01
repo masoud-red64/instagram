@@ -5,11 +5,14 @@ import SvgSymbol from "./Components/SvgSymbol";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { RootState } from "./store/store";
-import { getCookie } from "./store/auth";
+import { getCookie } from "./store/authSlice";
 
 function App() {
   const router = useRoutes(routes);
   const authSelector = useSelector((state: RootState) => state.authReducer);
+  const darkModeSelector = useSelector(
+    (state: RootState) => state.darkModeReducer
+  );
 
   const navigate = useNavigate();
 
@@ -18,6 +21,14 @@ function App() {
       navigate("/login");
     }
   }, [authSelector.isLogin]);
+
+  useEffect(() => {
+    const preferredTheme = darkModeSelector.isDarkMode ? "dark" : "";
+
+    localStorage.setItem("theme", preferredTheme);
+
+    document.documentElement.className = preferredTheme;
+  }, [darkModeSelector.isDarkMode]);
 
   return (
     <>

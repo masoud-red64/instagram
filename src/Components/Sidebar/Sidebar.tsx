@@ -12,16 +12,13 @@ import NotificationSlideShow from "../SlideShow/NotificationSlideShow";
 import { showCreateNewPost } from "../../store/createNewPostSlice";
 import { Link, useFetcher, useLocation } from "react-router-dom";
 import SwitchInput from "../SwitchInput/SwitchInput";
-import { logout } from "../../store/auth";
+import { logout } from "../../store/authSlice";
 
 function Sidebar() {
   const [activeItem, setActiveItem] = useState("Home");
   const [isActiveMore, setIsActiveMore] = useState(false);
   const [isSwitchAppearanceActive, setIsSwitchAppearanceActive] =
     useState(false);
-  const [isSwitchInputChecked, setIsSwitchInputChecked] = useState(
-    localStorage.getItem("theme") === "dark" ? true : false
-  );
 
   const location = useLocation();
 
@@ -34,13 +31,17 @@ function Sidebar() {
     (state: RootState) => state.createNewPostReducer
   );
 
+  const darkModeSelector = useSelector(
+    (state: RootState) => state.darkModeReducer
+  );
+
   useEffect(() => {
-    const preferredTheme = isSwitchInputChecked ? "dark" : "";
+    const preferredTheme = darkModeSelector.isDarkMode ? "dark" : "";
 
     localStorage.setItem("theme", preferredTheme);
 
     document.documentElement.className = preferredTheme;
-  }, [isSwitchInputChecked]);
+  }, [darkModeSelector.isDarkMode]);
 
   return (
     <>
@@ -486,7 +487,7 @@ function Sidebar() {
                         </button>
                         <h5 className="font-[600]">Switch appearance</h5>
                       </div>
-                      {isSwitchInputChecked ? (
+                      {darkModeSelector.isDarkMode ? (
                         <svg className="w-[18px] h-[18px]">
                           <use href="#moon"></use>
                         </svg>
@@ -503,8 +504,6 @@ function Sidebar() {
                         <SwitchInput
                           switchClassName="w-[26px] h-4"
                           sliderClassName="slider2 bg-[#dbdbdb] before:left-0.5 before:bottom-0.5 before:bg-white before:w-3 before:h-3"
-                          setIsSwitchInputChecked={setIsSwitchInputChecked}
-                          isSwitchInputChecked={isSwitchInputChecked}
                         />
                       </button>
                     </div>
