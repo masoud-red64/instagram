@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { login } from "../store/authSlice";
 import { setLoading } from "../store/loadingSlice";
+import { toast } from "react-toastify";
 
 function Login() {
   const [usernameInputValue, setUsernameInputValue] = useState<string>("");
@@ -22,13 +23,36 @@ function Login() {
   const loginHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    dispatch(setLoading(true));
+    setIsShowSpinnerLoading(true);
+    setTimeout(() => {
+      dispatch(setLoading(false));
+      setIsShowSpinnerLoading(false);
+    }, 2000);
+
     if (
       usernameInputValue !== "masoud_red64" ||
       passwordInputValue !== "123456"
     ) {
-      setIsShowError(true);
+      setTimeout(() => {
+        setIsShowError(true);
+        toast("check password or username again...", {
+          type: "error",
+          autoClose: 2000,
+          pauseOnHover: false,
+          theme: "light",
+        });
+      }, 2000);
     } else {
-      setIsShowError(false);
+      setTimeout(() => {
+        setIsShowError(false);
+        toast("login successfully...", {
+          type: "success",
+          autoClose: 2000,
+          pauseOnHover: false,
+          theme: "light",
+        });
+      }, 2000);
     }
 
     dispatch(
@@ -38,13 +62,9 @@ function Login() {
 
   useEffect(() => {
     if (authSelector.isLogin) {
-      dispatch(setLoading(true));
-      setIsShowSpinnerLoading(true);
       setTimeout(() => {
         navigate("/");
-        dispatch(setLoading(false));
-        setIsShowSpinnerLoading(false);
-      }, 4000);
+      }, 3000);
     }
   }, [authSelector.isLogin]);
 
@@ -113,13 +133,16 @@ function Login() {
               <div className="h-8 mx-10 my-3.5">
                 <button
                   className={`primary-btn w-full ${
-                    usernameInputValue && passwordInputValue.length > 5
+                    usernameInputValue &&
+                    passwordInputValue.length > 5 &&
+                    !isShowSpinnerLoading
                       ? ""
                       : "opacity-70"
                   }`}
                   disabled={
                     usernameInputValue.length === 0 ||
-                    passwordInputValue.length < 5
+                    passwordInputValue.length < 5 ||
+                    isShowSpinnerLoading
                   }
                 >
                   {isShowSpinnerLoading ? (

@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { RootState } from "./store/store";
 import { getCookie } from "./store/authSlice";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const router = useRoutes(routes);
@@ -32,13 +34,15 @@ function App() {
 
     document.documentElement.className = preferredTheme;
   }, [darkModeSelector.isDarkMode]);
-  
+
   return (
     <>
       <SvgSymbol />
       {loadingSelector.isShowLoading && (
         <span className="backgroundAnimation loader"></span>
       )}
+
+      <ToastContainer />
 
       {router}
     </>
