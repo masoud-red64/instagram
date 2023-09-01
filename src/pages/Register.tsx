@@ -17,31 +17,31 @@ function Register() {
   return (
     <div>
       <div className="mx-auto max-w-[350px] mb-11">
-        <div className="sm:border border-[#dbdbdb] mt-8 mb-2.5 py-2.5">
+        <div className="sm:border border-[#dbdbdb] dark:border-[#363636] mt-8 mb-2.5 py-2.5">
           <div className="mb-3 mt-9">
-            <svg className="w-[175px] h-[50px] mx-auto">
+            <svg className="w-[175px] h-[50px] mx-auto dark:text-neutral-100">
               <use href="#logo-instagram"></use>
             </svg>
           </div>
 
           <div className="mt-6">
             <div className=" text-center mx-10 mb-2.5">
-              <span className="text-neutral-500 font-[600]">
+              <span className="text-neutral-500 dark:text-[#a8a8a8] font-[600]">
                 Sign up to see photos and videos from your friends.
               </span>
             </div>
             <form>
-              <label className="relative block h-9 bg-zinc-50 mb-1.5 mx-10 border border-[#dbdbdb] rounded-[3px]">
+              <label className="relative block h-9 bg-zinc-50 mb-1.5 mx-10 border border-[#dbdbdb] dark:border-[#363636] rounded-[3px]">
                 <input
                   type="text"
-                  className="w-full h-full pl-2 bg-transparent border-0 outline-none"
+                  className="w-full h-full dark:bg-neutral-800 dark:text-neutral-100 pl-2 bg-transparent border-0 outline-none"
                   value={phoneNumberAndEmailInputValue}
                   onChange={(e) =>
                     setPhoneNumberAndEmailInputValue(e.target.value)
                   }
                 />
                 <span
-                  className={`absolute inset-0 left-2 h-full leading-9 text-neutral-500 pointer-events-none ${
+                  className={`absolute inset-0 left-2 h-full leading-9 text-neutral-500 dark:text-[#a8a8a8] pointer-events-none ${
                     phoneNumberAndEmailInputValue
                       ? " -translate-y-2.5 text-[11px] transition-all"
                       : "text-xs"
@@ -60,15 +60,15 @@ function Register() {
                   </div>
                 )}
               </label>
-              <label className="relative block h-9 bg-zinc-50 mb-1.5 mx-10 border border-[#dbdbdb] rounded-[3px]">
+              <label className="relative block h-9 bg-zinc-50 mb-1.5 mx-10 border border-[#dbdbdb] dark:border-[#363636] rounded-[3px]">
                 <input
                   type="text"
-                  className="w-full h-full pl-2 bg-transparent border-0 outline-none"
+                  className="w-full h-full dark:bg-neutral-800 dark:text-neutral-100 pl-2 bg-transparent border-0 outline-none"
                   value={fullNameInputValue}
                   onChange={(e) => setFullNameInputValue(e.target.value)}
                 />
                 <span
-                  className={`absolute inset-0 left-2 h-full leading-9 text-neutral-500 pointer-events-none ${
+                  className={`absolute inset-0 left-2 h-full leading-9 text-neutral-500 dark:text-[#a8a8a8] pointer-events-none ${
                     fullNameInputValue
                       ? " -translate-y-2.5 text-[11px] transition-all"
                       : "text-xs"
@@ -87,15 +87,15 @@ function Register() {
                   </div>
                 )}
               </label>
-              <label className="relative block h-9 bg-zinc-50 mb-1.5 mx-10 border border-[#dbdbdb] rounded-[3px]">
+              <label className="relative block h-9 bg-zinc-50 mb-1.5 mx-10 border border-[#dbdbdb] dark:border-[#363636] rounded-[3px]">
                 <input
                   type="text"
-                  className="w-full h-full pl-2 bg-transparent border-0 outline-none"
+                  className="w-full h-full dark:bg-neutral-800 dark:text-neutral-100 pl-2 bg-transparent border-0 outline-none"
                   value={usernameInputValue}
                   onChange={(e) => setUsernameInputValue(e.target.value)}
                 />
                 <span
-                  className={`absolute inset-0 left-2 h-full leading-9 text-neutral-500 pointer-events-none ${
+                  className={`absolute inset-0 left-2 h-full leading-9 text-neutral-500 dark:text-[#a8a8a8] pointer-events-none ${
                     usernameInputValue
                       ? " -translate-y-2.5 text-[11px] transition-all"
                       : "text-xs"
@@ -126,15 +126,15 @@ function Register() {
                   </div>
                 )}
               </label>
-              <label className="relative block h-9 bg-zinc-50 mb-1.5 mx-10 border border-[#dbdbdb] rounded-[3px]">
+              <label className="relative block h-9 bg-zinc-50 mb-1.5 mx-10 border border-[#dbdbdb] dark:border-[#363636] rounded-[3px]">
                 <input
                   type={`${isShowPassword ? "text" : "password"}`}
-                  className="w-full h-full pl-2 bg-transparent border-0 outline-none"
+                  className="w-full h-full dark:bg-neutral-800 dark:text-neutral-100 pl-2 bg-transparent border-0 outline-none"
                   value={passwordInputValue}
                   onChange={(e) => setPasswordInputValue(e.target.value)}
                 />
                 <span
-                  className={`absolute inset-0 left-2 h-full leading-9 text-neutral-500 pointer-events-none ${
+                  className={`absolute inset-0 left-2 h-full leading-9 text-neutral-500 dark:text-[#a8a8a8] pointer-events-none ${
                     passwordInputValue
                       ? " -translate-y-2.5 text-[11px] transition-all"
                       : "text-xs"
@@ -160,25 +160,25 @@ function Register() {
                 )}
               </label>
 
-              <div className="flex flex-col gap-y-4 mx-10 text-xs/4 text-neutral-500 text-center">
+              <div className="flex flex-col gap-y-4 mx-10 text-xs/4 text-neutral-500 dark:text-[#a8a8a8] text-center">
                 <span>
                   People who use our service may have uploaded your contact
                   information to Instagram.{" "}
-                  <a href="#" className="text-[#00376b]">
+                  <a href="#" className="text-[#00376b] dark:text-[#0095f6]">
                     Learn More
                   </a>
                 </span>
                 <span>
                   By signing up, you agree to our{" "}
-                  <a href="#" className="text-[#00376b]">
+                  <a href="#" className="text-[#00376b] dark:text-[#0095f6]">
                     Terms
                   </a>
                   . Learn how we collect, use and share your data in our{" "}
-                  <a href="#" className="text-[#00376b]">
+                  <a href="#" className="text-[#00376b] dark:text-[#0095f6]">
                     Privacy Policy
                   </a>
                   and how we use cookies and similar technology in our{" "}
-                  <a href="#" className="text-[#00376b]">
+                  <a href="#" className="text-[#00376b] dark:text-[#0095f6]">
                     Cookies Policy
                   </a>
                   .
@@ -211,9 +211,9 @@ function Register() {
           </div>
         </div>
 
-        <div className="sm:border border-[#dbdbdb] py-1 mb-2.5">
+        <div className="sm:border border-[#dbdbdb] dark:border-[#363636] py-1 mb-2.5">
           <p className="flex items-center justify-center gap-x-1 text-sm m-[15px]">
-            <span>Have an account?</span>
+            <span className="dark:text-neutral-100">Have an account?</span>
             <Link to="/login" className="font-[600] text-[#0095f6]">
               Log in
             </Link>
@@ -229,7 +229,7 @@ function Register() {
         </div>
       </div>
 
-      <footer className="flex items-center justify-center text-center text-neutral-500 px-4 mb-5">
+      <footer className="flex items-center justify-center text-center text-neutral-500 dark:text-[#a8a8a8] px-4 mb-5">
         <Footer />
       </footer>
     </div>
