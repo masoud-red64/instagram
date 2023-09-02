@@ -110,7 +110,7 @@ function Stories() {
         <svg className="w-[102px] h-7">
           <use href="#logo-instagram"></use>
         </svg>
-        <button onClick={() => navigate(-1)}>
+        <button onClick={() => navigate("/")}>
           <svg className="w-6 h-6">
             <use href="#close"></use>
           </svg>
