@@ -151,7 +151,10 @@ function Home() {
             <div className="max-w-[470px] mx-auto mt-10 ">
               {/* Post */}
               {usersList.map((user) => (
-                <div key={user.id} className="bg-white pb-4 mb-6 border-b border-[#dbdbdb] dark:border-[#363636] dark:bg-black">
+                <div
+                  key={user.id}
+                  className="bg-white pb-4 mb-6 border-b border-[#dbdbdb] dark:border-[#363636] dark:bg-black"
+                >
                   {/* Top */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-x-3">
@@ -208,7 +211,7 @@ function Home() {
                             <img
                               src={`/images/stories/images/${post.img}`}
                               alt=""
-                              className="h-full w-full object-contain"
+                              className="h-full w-full object-cover"
                             />
                           ) : (
                             <div className="relative w-full h-full">
@@ -216,6 +219,7 @@ function Home() {
                                 autoPlay
                                 muted={!isMutedVideos[post.id]}
                                 loop
+                                className="h-full w-full object-cover"
                               >
                                 <source
                                   src={`/images/stories/videos/${post.video}`}
@@ -375,7 +379,10 @@ function Home() {
                       </div>
                       <div>
                         {user.posts.comments.map((comment) => (
-                          <div key={comment.id} className="flex items-center justify-between">
+                          <div
+                            key={comment.id}
+                            className="flex items-center justify-between"
+                          >
                             <div className="flex items-center gap-x-1">
                               <span className="font-[600]">
                                 programadordesignerpro
@@ -479,7 +486,10 @@ function Home() {
             </div>
             <div>
               {usersList.slice(0, 5).map((user) => (
-                <div key={user.id} className="flex items-center justify-between py-1.5">
+                <div
+                  key={user.id}
+                  className="flex items-center justify-between py-1.5"
+                >
                   <div className="flex items-center gap-x-3">
                     <div className="h-11 w-11">
                       <Story img={user.img} hasStory={false} />
