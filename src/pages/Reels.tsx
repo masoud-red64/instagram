@@ -125,7 +125,7 @@ function Reels() {
           enabled: true,
           pageUpDown: true,
         }}
-        onSlideChange={(swiper) => {
+        onSlideChange={() => {
           setIsMutedVideos((prevStatus) => {
             const updatedStatus: { [index: number]: boolean } = {};
             for (const id in prevStatus) {
@@ -140,7 +140,7 @@ function Reels() {
       >
         {usersList.map((user) =>
           user.stories.map(
-            (reel, index) =>
+            (reel) =>
               reel.video && (
                 <SwiperSlide key={reel.id}>
                   <>

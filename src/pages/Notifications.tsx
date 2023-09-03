@@ -1,4 +1,3 @@
-import React from "react";
 import NotificationBox from "../Components/NotificationBox/NotificationBox";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";

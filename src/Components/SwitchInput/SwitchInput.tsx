@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { toggleDarkMode } from "../../store/darkModeSlice";
@@ -6,15 +5,11 @@ import { toggleDarkMode } from "../../store/darkModeSlice";
 type SwitchInputPropsType = {
   switchClassName: string;
   sliderClassName: string;
-  setIsSwitchInputChecked?: (isSwitchInputChecked: boolean) => void;
-  isSwitchInputChecked?: boolean;
 };
 
 function SwitchInput({
   switchClassName,
   sliderClassName,
-  setIsSwitchInputChecked,
-  isSwitchInputChecked,
 }: SwitchInputPropsType) {
   const dispatch = useDispatch();
 

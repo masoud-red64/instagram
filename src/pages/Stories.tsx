@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperType from "swiper";
 
@@ -16,8 +16,8 @@ import {
   Navigation,
 } from "swiper/modules";
 import Story from "../Components/Story/Story";
-import { userListTypes, usersList } from "../Data/users";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { usersList } from "../Data/users";
+import { useNavigate, useParams } from "react-router-dom";
 import ShareBox from "../Components/ShareBox/ShareBox";
 
 function Stories() {
@@ -43,9 +43,6 @@ function Stories() {
   const [isShowShareBox, setIsShowShareBox] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [activeVideoRef, setActiveVideoRef] = useState<HTMLVideoElement | null>(
-    null
-  );
 
   const navigate = useNavigate();
 
@@ -164,7 +161,7 @@ function Stories() {
                   isPauseSwiper ? "swiper-paused" : ""
                 }`}
                 watchSlidesProgress={true}
-                onSlidePrevTransitionEnd={(swiper) => {
+                onSlidePrevTransitionEnd={() => {
                   parentSwiper && parentSwiper.slideNext();
                 }}
                 onSlideChange={() => {
@@ -177,7 +174,7 @@ function Stories() {
                   });
                 }}
               >
-                {user.stories.map((story, index) => (
+                {user.stories.map((story) => (
                   <SwiperSlide
                     key={story.id}
                     onMouseDown={() => {

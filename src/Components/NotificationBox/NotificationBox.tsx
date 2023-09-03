@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Story from "../Story/Story";
 import TwoProfile from "../TwoProfile/TwoProfile";
 import { useDispatch } from "react-redux";

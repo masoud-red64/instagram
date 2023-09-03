@@ -1,10 +1,8 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   hideNotificationSlideShow,
   hideSearchSlideShow,
 } from "../../store/slideShowSlice";
-import { RootState } from "../../store/store";
 import { hideSearchBox } from "../../store/searchBoxSlice";
 import { setIsOpenModal } from "../../store/createNewPostSlice";
 function TransparentOverlay({ className }: { className: string }) {

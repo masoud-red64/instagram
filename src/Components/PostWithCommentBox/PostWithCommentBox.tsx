@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import Comment from "../Comment/Comment";
 
 import { Swiper, SwiperSlide } from "swiper/react";

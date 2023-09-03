@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   hideNotificationSlideShow,
@@ -10,7 +10,7 @@ import { RootState } from "../../store/store";
 import SearchSlideShow from "../SlideShow/SearchSlideShow";
 import NotificationSlideShow from "../SlideShow/NotificationSlideShow";
 import { showCreateNewPost } from "../../store/createNewPostSlice";
-import { Link, useFetcher, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import SwitchInput from "../SwitchInput/SwitchInput";
 import { logout } from "../../store/authSlice";
 import { toast } from "react-toastify";

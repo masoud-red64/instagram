@@ -1,4 +1,3 @@
-import React from "react";
 import Story from "../Story/Story";
 
 function TwoProfile({ img1, img2 }: { img1: string; img2: string }) {

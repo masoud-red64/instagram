@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SearchInput from "../Components/SearchInput/SearchInput";
 import SearchBox from "../Components/SearchBox/SearchBox";
 import { useSelector } from "react-redux";

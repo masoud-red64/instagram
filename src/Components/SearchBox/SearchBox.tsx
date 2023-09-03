@@ -1,4 +1,3 @@
-import React from "react";
 import Story from "../Story/Story";
 import { RootState } from "../../store/store";
 import { useState, useEffect } from "react";

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { userListTypes, usersList } from "../Data/users";
 import ShareBox from "../Components/ShareBox/ShareBox";
 import PostWithCommentBox from "../Components/PostWithCommentBox/PostWithCommentBox";

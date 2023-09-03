@@ -25,7 +25,6 @@ function Direct() {
   }>([]);
   const [inputMessageValue, setInputMessageValue] = useState("");
   const [isShowEmojiBox, setIsShowEmojiBox] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
   const [mainMessageVideoOrImg, setMainMessageVideoOrImg] = useState(
     {} as userMessage
   );
@@ -108,7 +107,6 @@ function Direct() {
         } else if (selectedFile.type.startsWith("video/")) {
           sendMessageHandler("", "", URL.createObjectURL(selectedFile), "");
         }
-        setFile(selectedFile);
       } else {
         // Handle unsupported file type
         alert("Unsupported file type. Please select an image or video.");
@@ -169,7 +167,7 @@ function Direct() {
             <ul>
               {usersList.map((user, index) => (
                 <li
-                key={user.id}
+                  key={user.id}
                   className={`flex items-center justify-center sm:justify-between py-2 px-1 sm:px-6 ${
                     mainUser.id === user.id &&
                     "bg-neutral-100 dark:bg-neutral-800"

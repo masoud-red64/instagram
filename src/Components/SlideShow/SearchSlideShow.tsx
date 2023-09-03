@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import SearchInput from "../SearchInput/SearchInput";
 import TransparentOverlay from "../TransparentOverlay/TransparentOverlay";
