@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import Footer from "../Components/Footer/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function MyProfile() {
   const userHighlights = [
@@ -22,7 +22,17 @@ function MyProfile() {
   const [navActive, setNavActive] = useState("posts");
 
   const { username } = useParams();
+
   if (username === "masoud_red64") {
+    useEffect(() => {
+      document.title =
+        "M҉a҉s҉o҉u҉d҉ (@masoud_red64) • Instagram photos and videos";
+
+      return () => {
+        document.title = "Instagram";
+      };
+    }, []);
+
     return (
       <div className="max-w-[975px] mx-auto sm:pt-[30px] px-2 sm:px-5">
         <header className="flex items-center gap-x-[30px] mt-4 mx-4 mb-6 md:m-0 md:mb-11">

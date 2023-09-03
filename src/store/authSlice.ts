@@ -39,7 +39,7 @@ function getCookie(name: string) {
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        users: [{ id: 1, name: 'masoud', username: 'masoud_red64', phoneNumber: '09361290345', email: 'masoud@gmail.com', password: '123456' }],
+        users: [{ id: 1, name: 'M҉a҉s҉o҉u҉d҉', username: 'masoud_red64', phoneNumber: '09361290345', email: 'masoud@gmail.com', password: '123456' }],
         currentUser: null as User | null,  // This will hold the logged-in user's info
         isLogin: false
     },
