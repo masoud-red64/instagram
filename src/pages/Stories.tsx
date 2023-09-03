@@ -392,7 +392,11 @@ function Stories() {
           )}
 
           {/* ShareBox */}
-          {isShowShareBox && <ShareBox setIsShowShareBox={setIsShowShareBox} />}
+          {isShowShareBox && (
+            <div className="w-full h-full md:w-[548px] md:h-[65vh] md:rounded-xl overflow-hidden">
+              <ShareBox setIsShowShareBox={setIsShowShareBox} />
+            </div>
+          )}
         </div>
       )}
     </div>
