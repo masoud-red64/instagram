@@ -40,14 +40,25 @@ function SearchInput() {
       />
       {/* Close Search Icon */}
       {isFocus && (
-        <button
-          className="w-5 h-5 bg-icons bg-no-repeat bg-[-320px_-333px]"
-          aria-label="Close Searchbar"
-          onClick={() => {
-            dispatch(setInputValue(""));
-            dispatch(hideSearchBox());
-          }}
-        ></button>
+        <>
+          <button
+            className="hidden ms:block w-5 h-5 bg-icons bg-no-repeat bg-[-320px_-333px]"
+            aria-label="Close Searchbar"
+            onClick={() => {
+              dispatch(setInputValue(""));
+              dispatch(hideSearchBox());
+            }}
+          ></button>
+          <svg
+            className="sm:hidden w-3 h-3"
+            onClick={() => {
+              dispatch(setInputValue(""));
+              dispatch(hideSearchBox());
+            }}
+          >
+            <use href="#close"></use>
+          </svg>
+        </>
       )}
     </div>
   );
