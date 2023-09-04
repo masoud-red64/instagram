@@ -352,6 +352,12 @@ function Sidebar() {
               </span>
             </Link>
           </li>
+          <li className="md:hidden flex items-center justify-center order-last">
+            <SwitchInput
+              switchClassName="w-[26px] h-4"
+              sliderClassName="slider2 bg-[#dbdbdb] before:left-0.5 before:bottom-0.5 before:bg-white before:w-3 before:h-3"
+            />
+          </li>
         </ul>
         {/* More */}
         <div className="relative hidden md:block mt-auto leading-5 mb-1">
