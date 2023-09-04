@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import SearchInput from "../Components/SearchInput/SearchInput";
 import SearchBox from "../Components/SearchBox/SearchBox";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { Link } from "react-router-dom";
 import Story from "../Components/Story/Story";
@@ -20,11 +20,13 @@ import EmojiBox from "../Components/EmojiBox/EmojiBox";
 import Footer from "../Components/Footer/Footer";
 import PostWithCommentBox from "../Components/PostWithCommentBox/PostWithCommentBox";
 import MoreOptionPostBox from "../Components/MoreOptionPostBox/MoreOptionPostBox";
+import { hideSearchBox } from "../store/searchBoxSlice";
 
 function Home() {
-  const serachBoxSelector = useSelector(
+  const searchBoxSelector = useSelector(
     (state: RootState) => state.searchBoxReducer
   );
+  const dispatch = useDispatch();
 
   const [isMutedVideos, setIsMutedVideos] = useState<{
     [key: number]: boolean;
@@ -56,6 +58,25 @@ function Home() {
       : document.body.classList.remove("overflow-hidden");
   }, [isShowShareBox, isShowMoreOptionBox, isShowCommentBox]);
 
+  useEffect(() => {
+    const windowClickHandler = (event: MouseEvent) => {
+      const targetElement = event.target as Element;
+
+      // Close Share Box When Click OutSide
+      // Close Share Box When Click OutSide
+      searchBoxSelector.isShow &&
+        !targetElement.closest(".search-box") &&
+        dispatch(hideSearchBox());
+    };
+
+    window.addEventListener("click", windowClickHandler);
+
+    // Cleanup function to remove the event listener when component unmounts
+    return () => {
+      window.removeEventListener("click", windowClickHandler);
+    };
+  }, [searchBoxSelector.isShow]);
+
   const handleMuteVideo = (postID: number) => {
     setIsMutedVideos((prevStatus) => {
       const updatedStatus: { [index: number]: boolean } = {};
@@ -86,9 +107,9 @@ function Home() {
         {/* Search and Notifications */}
         <div className="z-10 absolute right-4 left-4 xs:left-auto flex items-center gap-x-5">
           {/* Search Box */}
-          <div className="relative">
+          <div className="relative search-box ">
             <SearchInput />
-            {serachBoxSelector.isShow && (
+            {searchBoxSelector.isShow && (
               <div className="absolute -left-2 xs:left-auto top-11 xs:-right-12 w-[320px] sm:w-[375px] h-screen bg-white dark:bg-[#262626] rounded-md overflow-hidden drop-shadow-[0_4px_12px_rgba(0,0,0,.15)]">
                 <SearchBox className="h-full" />
               </div>
