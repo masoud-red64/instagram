@@ -67,7 +67,7 @@ function PostWithCommentBox({
       </button>
 
       <div
-        className="max-w-[calc(100%-10px)] md:max-w-[calc(100%-64px-64px)] max-h-[calc(100vh-100px)] md:max-h-[calc(100vh-40px)] flex flex-col md:flex-row  bg-white dark:bg-black rounded-[4px] overflow-y-auto scrollbar md:overflow-hidden"
+        className="max-w-[calc(100%-10px)] md:max-w-[calc(100%-64px-64px)] max-h-[calc(100vh-150px)] md:max-h-[calc(100vh-40px)] flex flex-col md:flex-row  bg-white dark:bg-black rounded-[4px] overflow-y-auto scrollbar md:overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="w-full md:w-[50%] border border-[#a9a9a9] dark:border-[#363636]">
