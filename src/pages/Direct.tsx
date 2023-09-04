@@ -288,10 +288,10 @@ function Direct() {
 
                           {/* Top */}
                           <div className="absolute top-3 left-3 right-3 flex items-center gap-x-2">
-                            <div className="w-8 h-8">
+                            <div className="w-8 h-8 shrink-0">
                               <Story img={mainUser.img} hasStory={false} />
                             </div>
-                            <span className="text-white text-sm font-[600]">
+                            <span className="text-white text-sm font-[600] overflow-hidden text-ellipsis">
                               {mainUser.username}
                             </span>
                           </div>
@@ -352,10 +352,10 @@ function Direct() {
 
                           {/* Top */}
                           <div className="absolute top-3 left-3 right-3 flex items-center gap-x-2">
-                            <div className="w-8 h-8">
+                            <div className="w-8 h-8 shrink-0">
                               <Story img={mainUser.img} hasStory={false} />
                             </div>
-                            <span className="text-white text-sm font-[600]">
+                            <span className="text-white text-sm font-[600] overflow-hidden text-ellipsis">
                               {mainUser.username}
                             </span>
                           </div>
