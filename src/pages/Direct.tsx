@@ -231,7 +231,7 @@ function Direct() {
                     <div className="w-11 h-11">
                       <Story img={mainUser.img} hasStory={false} />
                     </div>
-                    <span className="font-[600] dark:text-neutral-100">
+                    <span className="font-[600] dark:text-neutral-100 line-clamp-1">
                       {mainUser?.name}
                     </span>
                   </div>
@@ -506,7 +506,7 @@ function Direct() {
                 </div>
 
                 {/* Bottom */}
-                <div className="flex items-center justify-center grow px-4">
+                <div className="flex items-center justify-center grow px-4 py-2">
                   <div
                     className={`w-full h-11 flex items-center ${
                       isShowRecording && "gap-x-3"
@@ -581,7 +581,7 @@ function Direct() {
                             <use href="#voice"></use>
                           </svg>
                         </button>
-                        <div>
+                        <div className="flex">
                           <button onClick={() => inputFileRef.current?.click()}>
                             <svg className="w-6 h-6">
                               <use href="#gallery"></use>
