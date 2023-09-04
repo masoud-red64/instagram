@@ -135,7 +135,7 @@ function Direct() {
 
   return (
     <>
-      <div className="flex h-[calc(100vh-48px)] md:h-screen">
+      <div className="flex h-screen pb-12 px-1 md:pb-0 md:px-0">
         <div className="md:w-[397px] flex flex-col bg-white dark:bg-black pt-2 border-r border-[#dbdbdb] dark:border-[#262626]">
           {/* Header */}
           <div className="flex items-center justify-center md:justify-between pt-7 pb-3 px-6">
